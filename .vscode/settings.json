@@ -1,0 +1,17 @@
+{
+  "files.insertFinalNewline": true,
+  "editor.formatOnSave": true,
+  "editor.codeActionsOnSave": {
+    "source.fixAll.eslint": "explicit"
+  },
+  "eslint.workingDirectories": [
+    {
+      "pattern": "./"
+    }
+  ],
+  "typescript.tsdk": "node_modules/typescript/lib",
+  "search.exclude": {
+    "**/.yarn": true,
+    "yarn.lock": true
+  }
+}

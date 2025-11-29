@@ -1,0 +1,101 @@
+{
+  "extends": [
+    "next/core-web-vitals",
+    "@sudolabs-io/eslint-config-sudolabs/typescript-react",
+    "@sudolabs-io/eslint-config-sudolabs/with/prettier",
+    "plugin:storybook/recommended",
+    "plugin:i18next/recommended",
+    "plugin:tailwindcss/recommended"
+  ],
+  "ignorePatterns": ["next.config.js", "mockServiceWorker.js"],
+  "plugins": ["i18next"],
+  "rules": {
+    "@typescript-eslint/no-use-before-define": ["error", { "functions": false }],
+    "react/function-component-definition": [
+      "error",
+      {
+        "namedComponents": ["function-declaration", "arrow-function"]
+      }
+    ],
+    "@typescript-eslint/naming-convention": [
+      "error",
+      {
+        "selector": "enum",
+        "format": ["PascalCase"]
+      },
+      {
+        "selector": "enumMember",
+        "format": ["PascalCase"]
+      },
+      {
+        "selector": "variable",
+        "modifiers": ["const", "global"],
+        "types": ["boolean", "string", "number"],
+        "format": ["UPPER_CASE"]
+      },
+      {
+        "selector": "variable",
+        "modifiers": ["const", "destructured", "global"],
+        "types": ["boolean", "string", "number"],
+        "format": ["camelCase", "PascalCase", "UPPER_CASE"]
+      },
+      {
+        "selector": "variable",
+        "modifiers": ["const", "destructured"],
+        "types": ["boolean", "string", "number"],
+        "format": ["camelCase", "PascalCase", "UPPER_CASE"]
+      },
+      {
+        "selector": "variable",
+        "modifiers": ["const"],
+        "format": ["camelCase", "PascalCase"]
+      },
+      {
+        "selector": "variable",
+        "modifiers": ["const"],
+        "types": ["function"],
+        "format": ["PascalCase", "camelCase"]
+      },
+      {
+        "selector": "variable",
+        "modifiers": ["const", "global"],
+        "format": ["PascalCase", "camelCase"]
+      },
+      {
+        "selector": "variable",
+        "types": ["boolean"],
+        "format": ["PascalCase", "camelCase"],
+        "prefix": ["is", "has", "does", "do", "are", "were", "can"]
+      }
+    ],
+    "arrow-body-style": ["error", "as-needed"],
+    "import/no-extraneous-dependencies": [
+      "error",
+      {
+        "devDependencies": [
+          "**/.storybook/**",
+          "**/stories.*",
+          "**/*.stories.*",
+          "**/*.test.*",
+          "**/*.spec.*",
+          "**/testing/**",
+          "vitestSetup.ts",
+          "vitest.config.ts",
+          "**/prisma/devSeed.ts"
+        ]
+      }
+    ],
+    "no-restricted-imports": [
+      "error",
+      {
+        "paths": [
+          {
+            "name": "react-i18next",
+            "importNames": ["useTranslation"],
+            "message": "Use `import { useTranslation } from 'next-i18next'` instead."
+          }
+        ]
+      }
+    ]
+  }
+}

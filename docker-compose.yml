@@ -1,0 +1,15 @@
+services:
+  postgres:
+    image: postgres:17.4
+    container_name: twitter-ep-database
+    environment:
+      POSTGRES_DB: ${DATABASE_NAME}
+      POSTGRES_USER: ${DATABASE_USER}
+      POSTGRES_PASSWORD: ${DATABASE_PASSWORD}
+    ports:
+      - '${DATABASE_PORT}:5432'
+    volumes:
+      - twitter-ep-pgdata:/var/lib/postgresql/data
+
+volumes:
+  twitter-ep-pgdata:
