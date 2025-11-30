@@ -10,8 +10,10 @@
     "lint": "eslint",
     "prisma:migrate:prod": "prisma migrate deploy",
     "prisma:migrate:dev": "prisma migrate dev",
+    "prisma:generate": "prisma generate",
     "prisma:format": "prisma format",
-    "typecheck": "tsc --noEmit"
+    "typecheck": "tsc --noEmit",
+    "postinstall": "yarn prisma:generate"
   },
   "dependencies": {
     "@langchain/core": "^1.1.0",
