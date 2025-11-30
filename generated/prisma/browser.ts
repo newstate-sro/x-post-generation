@@ -22,3 +22,33 @@ export * from './enums';
  * 
  */
 export type User = Prisma.UserModel
+/**
+ * Model SystemConfiguration
+ * 
+ */
+export type SystemConfiguration = Prisma.SystemConfigurationModel
+/**
+ * Model EntityOfInterest
+ * 
+ */
+export type EntityOfInterest = Prisma.EntityOfInterestModel
+/**
+ * Model FacebookPage
+ * 
+ */
+export type FacebookPage = Prisma.FacebookPageModel
+/**
+ * Model FacebookPost
+ * 
+ */
+export type FacebookPost = Prisma.FacebookPostModel
+/**
+ * Model FacebookPostReaction
+ * 
+ */
+export type FacebookPostReaction = Prisma.FacebookPostReactionModel
+/**
+ * Model Logs
+ * 
+ */
+export type Logs = Prisma.LogsModel

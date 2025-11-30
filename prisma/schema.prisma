@@ -13,4 +13,71 @@ model User {
   id    String @id @default(uuid())
   email String @unique
   name  String
+
+  facebookPostReactions FacebookPostReaction[]
+}
+
+model SystemConfiguration {
+  id                 String   @id @default(uuid())
+  lastGenerationTime DateTime @default(now())
+  createdAt          DateTime @default(now())
+  updatedAt          DateTime @updatedAt
+}
+
+model EntityOfInterest {
+  id             String  @id @default(uuid())
+  name           String
+  description    String
+  facebookPageId String?
+
+  facebookPage FacebookPage? @relation(fields: [facebookPageId], references: [id])
+
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+}
+
+model FacebookPage {
+  id   String @id @default(uuid())
+  url  String @unique
+  name String
+
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  posts             FacebookPost[]
+  entityOfInterests EntityOfInterest[]
+}
+
+model FacebookPost {
+  id     String @id @default(uuid())
+  pageId String
+  url    String @unique
+  name   String
+
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  page FacebookPage @relation(fields: [pageId], references: [id])
+  reaction FacebookPostReaction[]
+}
+
+model FacebookPostReaction {
+  id     String @id @default(uuid())
+  postId String
+  userId String
+  reaction String
+
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  post FacebookPost @relation(fields: [postId], references: [id])
+  user User @relation(fields: [userId], references: [id])
+}
+
+model Logs {
+  id String @id @default(uuid())
+  source String
+  message String
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
 }

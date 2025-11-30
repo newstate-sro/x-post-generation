@@ -9,4 +9,10 @@
  * 🟢 You can import this file directly.
  */
 export type * from './models/User'
+export type * from './models/SystemConfiguration'
+export type * from './models/EntityOfInterest'
+export type * from './models/FacebookPage'
+export type * from './models/FacebookPost'
+export type * from './models/FacebookPostReaction'
+export type * from './models/Logs'
 export type * from './commonInputTypes'

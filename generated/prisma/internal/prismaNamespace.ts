@@ -384,7 +384,13 @@ type FieldRefInputType<Model, FieldType> = Model extends never ? never : FieldRe
 
 
 export const ModelName = {
-  User: 'User'
+  User: 'User',
+  SystemConfiguration: 'SystemConfiguration',
+  EntityOfInterest: 'EntityOfInterest',
+  FacebookPage: 'FacebookPage',
+  FacebookPost: 'FacebookPost',
+  FacebookPostReaction: 'FacebookPostReaction',
+  Logs: 'Logs'
 } as const
 
 export type ModelName = (typeof ModelName)[keyof typeof ModelName]
@@ -400,7 +406,7 @@ export type TypeMap<ExtArgs extends runtime.Types.Extensions.InternalArgs = runt
     omit: GlobalOmitOptions
   }
   meta: {
-    modelProps: "user"
+    modelProps: "user" | "systemConfiguration" | "entityOfInterest" | "facebookPage" | "facebookPost" | "facebookPostReaction" | "logs"
     txIsolationLevel: TransactionIsolationLevel
   }
   model: {
@@ -478,6 +484,450 @@ export type TypeMap<ExtArgs extends runtime.Types.Extensions.InternalArgs = runt
         }
       }
     }
+    SystemConfiguration: {
+      payload: Prisma.$SystemConfigurationPayload<ExtArgs>
+      fields: Prisma.SystemConfigurationFieldRefs
+      operations: {
+        findUnique: {
+          args: Prisma.SystemConfigurationFindUniqueArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$SystemConfigurationPayload> | null
+        }
+        findUniqueOrThrow: {
+          args: Prisma.SystemConfigurationFindUniqueOrThrowArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$SystemConfigurationPayload>
+        }
+        findFirst: {
+          args: Prisma.SystemConfigurationFindFirstArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$SystemConfigurationPayload> | null
+        }
+        findFirstOrThrow: {
+          args: Prisma.SystemConfigurationFindFirstOrThrowArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$SystemConfigurationPayload>
+        }
+        findMany: {
+          args: Prisma.SystemConfigurationFindManyArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$SystemConfigurationPayload>[]
+        }
+        create: {
+          args: Prisma.SystemConfigurationCreateArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$SystemConfigurationPayload>
+        }
+        createMany: {
+          args: Prisma.SystemConfigurationCreateManyArgs<ExtArgs>
+          result: BatchPayload
+        }
+        createManyAndReturn: {
+          args: Prisma.SystemConfigurationCreateManyAndReturnArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$SystemConfigurationPayload>[]
+        }
+        delete: {
+          args: Prisma.SystemConfigurationDeleteArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$SystemConfigurationPayload>
+        }
+        update: {
+          args: Prisma.SystemConfigurationUpdateArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$SystemConfigurationPayload>
+        }
+        deleteMany: {
+          args: Prisma.SystemConfigurationDeleteManyArgs<ExtArgs>
+          result: BatchPayload
+        }
+        updateMany: {
+          args: Prisma.SystemConfigurationUpdateManyArgs<ExtArgs>
+          result: BatchPayload
+        }
+        updateManyAndReturn: {
+          args: Prisma.SystemConfigurationUpdateManyAndReturnArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$SystemConfigurationPayload>[]
+        }
+        upsert: {
+          args: Prisma.SystemConfigurationUpsertArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$SystemConfigurationPayload>
+        }
+        aggregate: {
+          args: Prisma.SystemConfigurationAggregateArgs<ExtArgs>
+          result: runtime.Types.Utils.Optional<Prisma.AggregateSystemConfiguration>
+        }
+        groupBy: {
+          args: Prisma.SystemConfigurationGroupByArgs<ExtArgs>
+          result: runtime.Types.Utils.Optional<Prisma.SystemConfigurationGroupByOutputType>[]
+        }
+        count: {
+          args: Prisma.SystemConfigurationCountArgs<ExtArgs>
+          result: runtime.Types.Utils.Optional<Prisma.SystemConfigurationCountAggregateOutputType> | number
+        }
+      }
+    }
+    EntityOfInterest: {
+      payload: Prisma.$EntityOfInterestPayload<ExtArgs>
+      fields: Prisma.EntityOfInterestFieldRefs
+      operations: {
+        findUnique: {
+          args: Prisma.EntityOfInterestFindUniqueArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$EntityOfInterestPayload> | null
+        }
+        findUniqueOrThrow: {
+          args: Prisma.EntityOfInterestFindUniqueOrThrowArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$EntityOfInterestPayload>
+        }
+        findFirst: {
+          args: Prisma.EntityOfInterestFindFirstArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$EntityOfInterestPayload> | null
+        }
+        findFirstOrThrow: {
+          args: Prisma.EntityOfInterestFindFirstOrThrowArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$EntityOfInterestPayload>
+        }
+        findMany: {
+          args: Prisma.EntityOfInterestFindManyArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$EntityOfInterestPayload>[]
+        }
+        create: {
+          args: Prisma.EntityOfInterestCreateArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$EntityOfInterestPayload>
+        }
+        createMany: {
+          args: Prisma.EntityOfInterestCreateManyArgs<ExtArgs>
+          result: BatchPayload
+        }
+        createManyAndReturn: {
+          args: Prisma.EntityOfInterestCreateManyAndReturnArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$EntityOfInterestPayload>[]
+        }
+        delete: {
+          args: Prisma.EntityOfInterestDeleteArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$EntityOfInterestPayload>
+        }
+        update: {
+          args: Prisma.EntityOfInterestUpdateArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$EntityOfInterestPayload>
+        }
+        deleteMany: {
+          args: Prisma.EntityOfInterestDeleteManyArgs<ExtArgs>
+          result: BatchPayload
+        }
+        updateMany: {
+          args: Prisma.EntityOfInterestUpdateManyArgs<ExtArgs>
+          result: BatchPayload
+        }
+        updateManyAndReturn: {
+          args: Prisma.EntityOfInterestUpdateManyAndReturnArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$EntityOfInterestPayload>[]
+        }
+        upsert: {
+          args: Prisma.EntityOfInterestUpsertArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$EntityOfInterestPayload>
+        }
+        aggregate: {
+          args: Prisma.EntityOfInterestAggregateArgs<ExtArgs>
+          result: runtime.Types.Utils.Optional<Prisma.AggregateEntityOfInterest>
+        }
+        groupBy: {
+          args: Prisma.EntityOfInterestGroupByArgs<ExtArgs>
+          result: runtime.Types.Utils.Optional<Prisma.EntityOfInterestGroupByOutputType>[]
+        }
+        count: {
+          args: Prisma.EntityOfInterestCountArgs<ExtArgs>
+          result: runtime.Types.Utils.Optional<Prisma.EntityOfInterestCountAggregateOutputType> | number
+        }
+      }
+    }
+    FacebookPage: {
+      payload: Prisma.$FacebookPagePayload<ExtArgs>
+      fields: Prisma.FacebookPageFieldRefs
+      operations: {
+        findUnique: {
+          args: Prisma.FacebookPageFindUniqueArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$FacebookPagePayload> | null
+        }
+        findUniqueOrThrow: {
+          args: Prisma.FacebookPageFindUniqueOrThrowArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$FacebookPagePayload>
+        }
+        findFirst: {
+          args: Prisma.FacebookPageFindFirstArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$FacebookPagePayload> | null
+        }
+        findFirstOrThrow: {
+          args: Prisma.FacebookPageFindFirstOrThrowArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$FacebookPagePayload>
+        }
+        findMany: {
+          args: Prisma.FacebookPageFindManyArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$FacebookPagePayload>[]
+        }
+        create: {
+          args: Prisma.FacebookPageCreateArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$FacebookPagePayload>
+        }
+        createMany: {
+          args: Prisma.FacebookPageCreateManyArgs<ExtArgs>
+          result: BatchPayload
+        }
+        createManyAndReturn: {
+          args: Prisma.FacebookPageCreateManyAndReturnArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$FacebookPagePayload>[]
+        }
+        delete: {
+          args: Prisma.FacebookPageDeleteArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$FacebookPagePayload>
+        }
+        update: {
+          args: Prisma.FacebookPageUpdateArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$FacebookPagePayload>
+        }
+        deleteMany: {
+          args: Prisma.FacebookPageDeleteManyArgs<ExtArgs>
+          result: BatchPayload
+        }
+        updateMany: {
+          args: Prisma.FacebookPageUpdateManyArgs<ExtArgs>
+          result: BatchPayload
+        }
+        updateManyAndReturn: {
+          args: Prisma.FacebookPageUpdateManyAndReturnArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$FacebookPagePayload>[]
+        }
+        upsert: {
+          args: Prisma.FacebookPageUpsertArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$FacebookPagePayload>
+        }
+        aggregate: {
+          args: Prisma.FacebookPageAggregateArgs<ExtArgs>
+          result: runtime.Types.Utils.Optional<Prisma.AggregateFacebookPage>
+        }
+        groupBy: {
+          args: Prisma.FacebookPageGroupByArgs<ExtArgs>
+          result: runtime.Types.Utils.Optional<Prisma.FacebookPageGroupByOutputType>[]
+        }
+        count: {
+          args: Prisma.FacebookPageCountArgs<ExtArgs>
+          result: runtime.Types.Utils.Optional<Prisma.FacebookPageCountAggregateOutputType> | number
+        }
+      }
+    }
+    FacebookPost: {
+      payload: Prisma.$FacebookPostPayload<ExtArgs>
+      fields: Prisma.FacebookPostFieldRefs
+      operations: {
+        findUnique: {
+          args: Prisma.FacebookPostFindUniqueArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$FacebookPostPayload> | null
+        }
+        findUniqueOrThrow: {
+          args: Prisma.FacebookPostFindUniqueOrThrowArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$FacebookPostPayload>
+        }
+        findFirst: {
+          args: Prisma.FacebookPostFindFirstArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$FacebookPostPayload> | null
+        }
+        findFirstOrThrow: {
+          args: Prisma.FacebookPostFindFirstOrThrowArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$FacebookPostPayload>
+        }
+        findMany: {
+          args: Prisma.FacebookPostFindManyArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$FacebookPostPayload>[]
+        }
+        create: {
+          args: Prisma.FacebookPostCreateArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$FacebookPostPayload>
+        }
+        createMany: {
+          args: Prisma.FacebookPostCreateManyArgs<ExtArgs>
+          result: BatchPayload
+        }
+        createManyAndReturn: {
+          args: Prisma.FacebookPostCreateManyAndReturnArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$FacebookPostPayload>[]
+        }
+        delete: {
+          args: Prisma.FacebookPostDeleteArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$FacebookPostPayload>
+        }
+        update: {
+          args: Prisma.FacebookPostUpdateArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$FacebookPostPayload>
+        }
+        deleteMany: {
+          args: Prisma.FacebookPostDeleteManyArgs<ExtArgs>
+          result: BatchPayload
+        }
+        updateMany: {
+          args: Prisma.FacebookPostUpdateManyArgs<ExtArgs>
+          result: BatchPayload
+        }
+        updateManyAndReturn: {
+          args: Prisma.FacebookPostUpdateManyAndReturnArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$FacebookPostPayload>[]
+        }
+        upsert: {
+          args: Prisma.FacebookPostUpsertArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$FacebookPostPayload>
+        }
+        aggregate: {
+          args: Prisma.FacebookPostAggregateArgs<ExtArgs>
+          result: runtime.Types.Utils.Optional<Prisma.AggregateFacebookPost>
+        }
+        groupBy: {
+          args: Prisma.FacebookPostGroupByArgs<ExtArgs>
+          result: runtime.Types.Utils.Optional<Prisma.FacebookPostGroupByOutputType>[]
+        }
+        count: {
+          args: Prisma.FacebookPostCountArgs<ExtArgs>
+          result: runtime.Types.Utils.Optional<Prisma.FacebookPostCountAggregateOutputType> | number
+        }
+      }
+    }
+    FacebookPostReaction: {
+      payload: Prisma.$FacebookPostReactionPayload<ExtArgs>
+      fields: Prisma.FacebookPostReactionFieldRefs
+      operations: {
+        findUnique: {
+          args: Prisma.FacebookPostReactionFindUniqueArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$FacebookPostReactionPayload> | null
+        }
+        findUniqueOrThrow: {
+          args: Prisma.FacebookPostReactionFindUniqueOrThrowArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$FacebookPostReactionPayload>
+        }
+        findFirst: {
+          args: Prisma.FacebookPostReactionFindFirstArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$FacebookPostReactionPayload> | null
+        }
+        findFirstOrThrow: {
+          args: Prisma.FacebookPostReactionFindFirstOrThrowArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$FacebookPostReactionPayload>
+        }
+        findMany: {
+          args: Prisma.FacebookPostReactionFindManyArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$FacebookPostReactionPayload>[]
+        }
+        create: {
+          args: Prisma.FacebookPostReactionCreateArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$FacebookPostReactionPayload>
+        }
+        createMany: {
+          args: Prisma.FacebookPostReactionCreateManyArgs<ExtArgs>
+          result: BatchPayload
+        }
+        createManyAndReturn: {
+          args: Prisma.FacebookPostReactionCreateManyAndReturnArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$FacebookPostReactionPayload>[]
+        }
+        delete: {
+          args: Prisma.FacebookPostReactionDeleteArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$FacebookPostReactionPayload>
+        }
+        update: {
+          args: Prisma.FacebookPostReactionUpdateArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$FacebookPostReactionPayload>
+        }
+        deleteMany: {
+          args: Prisma.FacebookPostReactionDeleteManyArgs<ExtArgs>
+          result: BatchPayload
+        }
+        updateMany: {
+          args: Prisma.FacebookPostReactionUpdateManyArgs<ExtArgs>
+          result: BatchPayload
+        }
+        updateManyAndReturn: {
+          args: Prisma.FacebookPostReactionUpdateManyAndReturnArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$FacebookPostReactionPayload>[]
+        }
+        upsert: {
+          args: Prisma.FacebookPostReactionUpsertArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$FacebookPostReactionPayload>
+        }
+        aggregate: {
+          args: Prisma.FacebookPostReactionAggregateArgs<ExtArgs>
+          result: runtime.Types.Utils.Optional<Prisma.AggregateFacebookPostReaction>
+        }
+        groupBy: {
+          args: Prisma.FacebookPostReactionGroupByArgs<ExtArgs>
+          result: runtime.Types.Utils.Optional<Prisma.FacebookPostReactionGroupByOutputType>[]
+        }
+        count: {
+          args: Prisma.FacebookPostReactionCountArgs<ExtArgs>
+          result: runtime.Types.Utils.Optional<Prisma.FacebookPostReactionCountAggregateOutputType> | number
+        }
+      }
+    }
+    Logs: {
+      payload: Prisma.$LogsPayload<ExtArgs>
+      fields: Prisma.LogsFieldRefs
+      operations: {
+        findUnique: {
+          args: Prisma.LogsFindUniqueArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$LogsPayload> | null
+        }
+        findUniqueOrThrow: {
+          args: Prisma.LogsFindUniqueOrThrowArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$LogsPayload>
+        }
+        findFirst: {
+          args: Prisma.LogsFindFirstArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$LogsPayload> | null
+        }
+        findFirstOrThrow: {
+          args: Prisma.LogsFindFirstOrThrowArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$LogsPayload>
+        }
+        findMany: {
+          args: Prisma.LogsFindManyArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$LogsPayload>[]
+        }
+        create: {
+          args: Prisma.LogsCreateArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$LogsPayload>
+        }
+        createMany: {
+          args: Prisma.LogsCreateManyArgs<ExtArgs>
+          result: BatchPayload
+        }
+        createManyAndReturn: {
+          args: Prisma.LogsCreateManyAndReturnArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$LogsPayload>[]
+        }
+        delete: {
+          args: Prisma.LogsDeleteArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$LogsPayload>
+        }
+        update: {
+          args: Prisma.LogsUpdateArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$LogsPayload>
+        }
+        deleteMany: {
+          args: Prisma.LogsDeleteManyArgs<ExtArgs>
+          result: BatchPayload
+        }
+        updateMany: {
+          args: Prisma.LogsUpdateManyArgs<ExtArgs>
+          result: BatchPayload
+        }
+        updateManyAndReturn: {
+          args: Prisma.LogsUpdateManyAndReturnArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$LogsPayload>[]
+        }
+        upsert: {
+          args: Prisma.LogsUpsertArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$LogsPayload>
+        }
+        aggregate: {
+          args: Prisma.LogsAggregateArgs<ExtArgs>
+          result: runtime.Types.Utils.Optional<Prisma.AggregateLogs>
+        }
+        groupBy: {
+          args: Prisma.LogsGroupByArgs<ExtArgs>
+          result: runtime.Types.Utils.Optional<Prisma.LogsGroupByOutputType>[]
+        }
+        count: {
+          args: Prisma.LogsCountArgs<ExtArgs>
+          result: runtime.Types.Utils.Optional<Prisma.LogsCountAggregateOutputType> | number
+        }
+      }
+    }
   }
 } & {
   other: {
@@ -526,6 +976,74 @@ export const UserScalarFieldEnum = {
 export type UserScalarFieldEnum = (typeof UserScalarFieldEnum)[keyof typeof UserScalarFieldEnum]
 
 
+export const SystemConfigurationScalarFieldEnum = {
+  id: 'id',
+  lastGenerationTime: 'lastGenerationTime',
+  createdAt: 'createdAt',
+  updatedAt: 'updatedAt'
+} as const
+
+export type SystemConfigurationScalarFieldEnum = (typeof SystemConfigurationScalarFieldEnum)[keyof typeof SystemConfigurationScalarFieldEnum]
+
+
+export const EntityOfInterestScalarFieldEnum = {
+  id: 'id',
+  name: 'name',
+  description: 'description',
+  facebookPageId: 'facebookPageId',
+  createdAt: 'createdAt',
+  updatedAt: 'updatedAt'
+} as const
+
+export type EntityOfInterestScalarFieldEnum = (typeof EntityOfInterestScalarFieldEnum)[keyof typeof EntityOfInterestScalarFieldEnum]
+
+
+export const FacebookPageScalarFieldEnum = {
+  id: 'id',
+  url: 'url',
+  name: 'name',
+  createdAt: 'createdAt',
+  updatedAt: 'updatedAt'
+} as const
+
+export type FacebookPageScalarFieldEnum = (typeof FacebookPageScalarFieldEnum)[keyof typeof FacebookPageScalarFieldEnum]
+
+
+export const FacebookPostScalarFieldEnum = {
+  id: 'id',
+  pageId: 'pageId',
+  url: 'url',
+  name: 'name',
+  createdAt: 'createdAt',
+  updatedAt: 'updatedAt'
+} as const
+
+export type FacebookPostScalarFieldEnum = (typeof FacebookPostScalarFieldEnum)[keyof typeof FacebookPostScalarFieldEnum]
+
+
+export const FacebookPostReactionScalarFieldEnum = {
+  id: 'id',
+  postId: 'postId',
+  userId: 'userId',
+  reaction: 'reaction',
+  createdAt: 'createdAt',
+  updatedAt: 'updatedAt'
+} as const
+
+export type FacebookPostReactionScalarFieldEnum = (typeof FacebookPostReactionScalarFieldEnum)[keyof typeof FacebookPostReactionScalarFieldEnum]
+
+
+export const LogsScalarFieldEnum = {
+  id: 'id',
+  source: 'source',
+  message: 'message',
+  createdAt: 'createdAt',
+  updatedAt: 'updatedAt'
+} as const
+
+export type LogsScalarFieldEnum = (typeof LogsScalarFieldEnum)[keyof typeof LogsScalarFieldEnum]
+
+
 export const SortOrder = {
   asc: 'asc',
   desc: 'desc'
@@ -540,6 +1058,14 @@ export const QueryMode = {
 } as const
 
 export type QueryMode = (typeof QueryMode)[keyof typeof QueryMode]
+
+
+export const NullsOrder = {
+  first: 'first',
+  last: 'last'
+} as const
+
+export type NullsOrder = (typeof NullsOrder)[keyof typeof NullsOrder]
 
 
 
@@ -559,6 +1085,20 @@ export type StringFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 
  * Reference to a field of type 'String[]'
  */
 export type ListStringFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'String[]'>
+    
+
+
+/**
+ * Reference to a field of type 'DateTime'
+ */
+export type DateTimeFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'DateTime'>
+    
+
+
+/**
+ * Reference to a field of type 'DateTime[]'
+ */
+export type ListDateTimeFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'DateTime[]'>
     
 
 
@@ -655,6 +1195,12 @@ export type PrismaClientOptions = ({
 }
 export type GlobalOmitConfig = {
   user?: Prisma.UserOmit
+  systemConfiguration?: Prisma.SystemConfigurationOmit
+  entityOfInterest?: Prisma.EntityOfInterestOmit
+  facebookPage?: Prisma.FacebookPageOmit
+  facebookPost?: Prisma.FacebookPostOmit
+  facebookPostReaction?: Prisma.FacebookPostReactionOmit
+  logs?: Prisma.LogsOmit
 }
 
 /* Types for Logging */
