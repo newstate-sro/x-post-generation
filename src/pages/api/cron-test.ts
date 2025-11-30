@@ -1,10 +1,10 @@
 import { NextApiRequest, NextApiResponse } from 'next'
 
 export default async function handler(req: NextApiRequest, res: NextApiResponse) {
-  const { method, query } = req
-  const { api_secret } = query
+  const { method, headers } = req
 
-  if (api_secret !== process.env.API_SECRET) {
+  const authHeader = headers.authorization
+  if (authHeader !== `Bearer ${process.env.CRON_SECRET}`) {
     return res.status(401).json({ error: 'Unauthorized' })
   }
 
