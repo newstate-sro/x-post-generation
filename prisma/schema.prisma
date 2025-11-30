@@ -30,7 +30,7 @@ model EntityOfInterest {
   description    String
   facebookPageId String?
 
-  facebookPage FacebookPage? @relation(fields: [facebookPageId], references: [id])
+  facebookPage FacebookPage? @relation(fields: [facebookPageId], references: [id], onDelete: SetNull)
 
   createdAt DateTime @default(now())
   updatedAt DateTime @updatedAt
@@ -57,7 +57,7 @@ model FacebookPost {
   createdAt DateTime @default(now())
   updatedAt DateTime @updatedAt
 
-  page FacebookPage @relation(fields: [pageId], references: [id])
+  page FacebookPage @relation(fields: [pageId], references: [id], onDelete: Cascade)
   reaction FacebookPostReaction[]
 }
 
@@ -70,8 +70,8 @@ model FacebookPostReaction {
   createdAt DateTime @default(now())
   updatedAt DateTime @updatedAt
 
-  post FacebookPost @relation(fields: [postId], references: [id])
-  user User @relation(fields: [userId], references: [id])
+  post FacebookPost @relation(fields: [postId], references: [id], onDelete: Cascade)
+  user User @relation(fields: [userId], references: [id], onDelete: Cascade)
 }
 
 model Logs {
