@@ -1,9 +1,10 @@
 import type { NextApiRequest, NextApiResponse } from 'next'
-import { prisma } from '../../../lib/PrismaClient'
-import { OpenAiService } from '../../services/OpenAiService/OpenAiService'
+import { prisma } from '@/lib/PrismaClient'
+import { OpenAiService } from '@/services/OpenAiService/OpenAiService'
 import { ApifyService } from '@/services/ApifyService/ApifyService'
 import type { ApifyPostSuccess } from '@/services/ApifyService/types'
 import { parseLlmPostsReactionsResponse } from '@/utils/parseLlmPostsReactionsResponse'
+// import { RESULTS_LIMIT } from '@/constants/facebook'
 
 type Data = {
   data?: unknown
@@ -48,11 +49,10 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse<
 
       const response = await apifyService.getPostsData({
         pagesUrls: pagesUrls,
+        // resultsLimit: RESULTS_LIMIT,
         onlyPostsNewerThan: systemConfiguration.lastGenerationTime,
         captionText: true,
       })
-
-      console.log('RESPONSE', JSON.stringify(response, null, 2))
 
       const extractedPosts = (
         response.filter(
@@ -99,7 +99,7 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse<
       }
 
       const openaiResponse = await openAiService.callLlm(
-        `Analyze the following Facebook posts from politicians: ${createdFacebookPosts.map((facebookPost, index) => `Post ${index + 1}: "${JSON.stringify(facebookPost)}"`).join('\n')}. Imagine you are in opposition to the politicians that made those posts. I want you to generate reactions for each of them. Use Slovak language. Return response in JSON format as array of objects with the following structure: { id: string, pageId: string, reaction: string }. Keep reactions in same order as posts were provided.`,
+        `Analyze the following Facebook posts from politicians: ${createdFacebookPosts.map((facebookPost, index) => `Post ${index + 1}: "${JSON.stringify(facebookPost)}"`).join('\n')}. Imagine you are in opposition to the politicians that made those posts. I want you to generate reactions for each of them. Use Slovak language. Return response in JSON format as array of objects with the following structure: { id: string, pageId: string, reaction: string }. Keep reactions in same order as posts were provided. Return just the array of JSON objects, no other text.`,
       )
 
       console.log('OPENAI RESPONSE', JSON.stringify(openaiResponse.content, null, 2))
@@ -119,6 +119,8 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse<
       return res.status(200).json({
         data: {
           newReactions: parsedResponses.length,
+          apifyResponse: response,
+          openaiResponse,
         },
       })
     } catch (error) {
