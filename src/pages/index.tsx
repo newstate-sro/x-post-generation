@@ -1,5 +1,8 @@
 import Image from 'next/image'
+import { useRouter } from 'next/router'
 import { Geist, Geist_Mono } from 'next/font/google'
+import { useAuth } from '../contexts/AuthContext'
+import Link from 'next/link'
 
 const geistSans = Geist({
   variable: '--font-geist-sans',
@@ -12,11 +15,57 @@ const geistMono = Geist_Mono({
 })
 
 export default function Home() {
+  const { user, loading, logout } = useAuth()
+  const router = useRouter()
+
+  const handleLogout = async () => {
+    await logout()
+    router.push('/login')
+  }
+
   return (
     <div
       className={`${geistSans.className} ${geistMono.className} flex min-h-screen items-center justify-center bg-zinc-50 font-sans dark:bg-black`}
     >
       <main className="flex min-h-screen w-full max-w-3xl flex-col items-center justify-between py-32 px-16 bg-white dark:bg-black sm:items-start">
+        <div className="flex w-full items-center justify-between">
+          <Image
+            className="dark:invert"
+            src="/next.svg"
+            alt="Next.js logo"
+            width={100}
+            height={20}
+            priority
+          />
+          {!loading && (
+            <div className="flex items-center gap-4">
+              {user ? (
+                <>
+                  <span className="text-sm text-zinc-600 dark:text-zinc-400">{user.email}</span>
+                  <Link
+                    href="/dashboard"
+                    className="rounded-md bg-zinc-100 px-4 py-2 text-sm font-medium text-black transition-colors hover:bg-zinc-200 dark:bg-zinc-800 dark:text-zinc-50 dark:hover:bg-zinc-700"
+                  >
+                    Dashboard
+                  </Link>
+                  <button
+                    onClick={handleLogout}
+                    className="rounded-md bg-black px-4 py-2 text-sm font-medium text-white transition-colors hover:bg-zinc-800 dark:bg-zinc-50 dark:text-black dark:hover:bg-zinc-200"
+                  >
+                    Logout
+                  </button>
+                </>
+              ) : (
+                <Link
+                  href="/login"
+                  className="rounded-md bg-black px-4 py-2 text-sm font-medium text-white transition-colors hover:bg-zinc-800 dark:bg-zinc-50 dark:text-black dark:hover:bg-zinc-200"
+                >
+                  Login
+                </Link>
+              )}
+            </div>
+          )}
+        </div>
         <Image
           className="dark:invert"
           src="/next.svg"
