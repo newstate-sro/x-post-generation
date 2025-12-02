@@ -9,75 +9,129 @@ datasource db {
   provider = "postgresql"
 }
 
+// User is the user of the app
+// uid is the unique identifier of the user in Supabase Auth
 model User {
-  id    String @id @default(uuid())
-  email String @unique
-  name  String
-
-  facebookPostReactions FacebookPostReaction[]
-}
-
-model SystemConfiguration {
-  id                 String   @id @default(uuid())
-  lastGenerationTime DateTime @default(now())
-  createdAt          DateTime @default(now())
-  updatedAt          DateTime @updatedAt
-}
-
-model EntityOfInterest {
-  id             String  @id @default(uuid())
-  name           String
-  description    String
-  facebookPageId String?
-
-  facebookPage FacebookPage? @relation(fields: [facebookPageId], references: [id], onDelete: SetNull)
-
-  createdAt DateTime @default(now())
-  updatedAt DateTime @updatedAt
-}
-
-model FacebookPage {
   id   String @id @default(uuid())
-  url  String @unique
+  uid  String @unique
   name String
 
   createdAt DateTime @default(now())
   updatedAt DateTime @updatedAt
-
-  posts             FacebookPost[]
-  entityOfInterests EntityOfInterest[]
 }
 
+// System configuration is used to store the state of the system
+model SystemConfiguration {
+  id                 String   @id @default(uuid())
+  lastProcessingTime DateTime @default(now())
+
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+}
+
+// OWN - the entities we just track
+// OTHER - the entities we track and create reactions based on their posts
+enum TrackedEntityType {
+  OWN
+  OTHER
+}
+
+// Entity like person, politician, party, etc.
+// We will fetch posts for each entity
+// systemPrompt is the prompt that will be used to generate reactions for the entity
+model TrackedEntity {
+  id              String            @id @default(uuid())
+  name            String
+  description     String
+  type            TrackedEntityType
+  facebookPageUrl String            @unique
+  systemPrompt    String?
+
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  facebookPosts               FacebookPost[]
+  trackedEntityConfigurations TrackedEntityConfiguration[]
+}
+
+// table to store Facebook posts data
+// base properties are stored as standalone columns
+// fullResponse property contains whole response from Apify
 model FacebookPost {
-  id     String @id @default(uuid())
-  pageId String
-  url    String @unique
-  name   String
+  id                String   @id @default(uuid())
+  trackedEntityId   String
+  postId            String   @unique
+  url               String
+  timestamp         DateTime
+  text              String
+  likes             Int
+  comments          Int
+  shares            Int
+  topReactionsCount Int
+  isVideo           Boolean
+  viewsCount        Int
+  fullResponse      Json
 
   createdAt DateTime @default(now())
   updatedAt DateTime @updatedAt
 
-  page FacebookPage @relation(fields: [pageId], references: [id], onDelete: Cascade)
-  reaction FacebookPostReaction[]
+  trackedEntity         TrackedEntity          @relation(fields: [trackedEntityId], references: [id], onDelete: Cascade)
+  facebookPostReactions FacebookPostReaction[]
+  postCategories        PostCategory[]
 }
 
+// table to store generated reactions based on Facebook posts
 model FacebookPostReaction {
-  id     String @id @default(uuid())
-  postId String
-  userId String
-  reaction String
+  id             String @id @default(uuid())
+  facebookPostId String
+  reaction       String
 
   createdAt DateTime @default(now())
   updatedAt DateTime @updatedAt
 
-  post FacebookPost @relation(fields: [postId], references: [id], onDelete: Cascade)
-  user User @relation(fields: [userId], references: [id], onDelete: Cascade)
+  post FacebookPost @relation(fields: [facebookPostId], references: [id], onDelete: Cascade)
 }
 
-model Logs {
+enum SystemEventType {
+  EMAIL_NOTIFICATION
+}
+
+// Events are the events that are tracked by the system, i.e. email notification sent
+model SystemEvent {
+  id          String          @id @default(uuid())
+  type        SystemEventType
+  description String
+
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+}
+
+// Post categories will be used to categorize posts and decide if post is relevant or not
+model PostCategory {
+  id          String @id @default(uuid())
+  name        String @unique
+  description String
+
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  facebookPosts FacebookPost[]
+}
+
+// politics will be used as input context for AI to generate reactions
+model Politics {
   id String @id @default(uuid())
-  source String
-  message String
+
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+}
+
+// table to store prompts and other configuration properties for tracked entities
+model TrackedEntityConfiguration {
+  id              String        @id @default(uuid())
+  trackedEntityId String
+  trackedEntity   TrackedEntity @relation(fields: [trackedEntityId], references: [id], onDelete: Cascade)
+
   createdAt DateTime @default(now())
   updatedAt DateTime @updatedAt
 }

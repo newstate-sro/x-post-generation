@@ -26,21 +26,21 @@ export type AggregateSystemConfiguration = {
 
 export type SystemConfigurationMinAggregateOutputType = {
   id: string | null
-  lastGenerationTime: Date | null
+  lastProcessingTime: Date | null
   createdAt: Date | null
   updatedAt: Date | null
 }
 
 export type SystemConfigurationMaxAggregateOutputType = {
   id: string | null
-  lastGenerationTime: Date | null
+  lastProcessingTime: Date | null
   createdAt: Date | null
   updatedAt: Date | null
 }
 
 export type SystemConfigurationCountAggregateOutputType = {
   id: number
-  lastGenerationTime: number
+  lastProcessingTime: number
   createdAt: number
   updatedAt: number
   _all: number
@@ -49,21 +49,21 @@ export type SystemConfigurationCountAggregateOutputType = {
 
 export type SystemConfigurationMinAggregateInputType = {
   id?: true
-  lastGenerationTime?: true
+  lastProcessingTime?: true
   createdAt?: true
   updatedAt?: true
 }
 
 export type SystemConfigurationMaxAggregateInputType = {
   id?: true
-  lastGenerationTime?: true
+  lastProcessingTime?: true
   createdAt?: true
   updatedAt?: true
 }
 
 export type SystemConfigurationCountAggregateInputType = {
   id?: true
-  lastGenerationTime?: true
+  lastProcessingTime?: true
   createdAt?: true
   updatedAt?: true
   _all?: true
@@ -143,7 +143,7 @@ export type SystemConfigurationGroupByArgs<ExtArgs extends runtime.Types.Extensi
 
 export type SystemConfigurationGroupByOutputType = {
   id: string
-  lastGenerationTime: Date
+  lastProcessingTime: Date
   createdAt: Date
   updatedAt: Date
   _count: SystemConfigurationCountAggregateOutputType | null
@@ -171,14 +171,14 @@ export type SystemConfigurationWhereInput = {
   OR?: Prisma.SystemConfigurationWhereInput[]
   NOT?: Prisma.SystemConfigurationWhereInput | Prisma.SystemConfigurationWhereInput[]
   id?: Prisma.StringFilter<"SystemConfiguration"> | string
-  lastGenerationTime?: Prisma.DateTimeFilter<"SystemConfiguration"> | Date | string
+  lastProcessingTime?: Prisma.DateTimeFilter<"SystemConfiguration"> | Date | string
   createdAt?: Prisma.DateTimeFilter<"SystemConfiguration"> | Date | string
   updatedAt?: Prisma.DateTimeFilter<"SystemConfiguration"> | Date | string
 }
 
 export type SystemConfigurationOrderByWithRelationInput = {
   id?: Prisma.SortOrder
-  lastGenerationTime?: Prisma.SortOrder
+  lastProcessingTime?: Prisma.SortOrder
   createdAt?: Prisma.SortOrder
   updatedAt?: Prisma.SortOrder
 }
@@ -188,14 +188,14 @@ export type SystemConfigurationWhereUniqueInput = Prisma.AtLeast<{
   AND?: Prisma.SystemConfigurationWhereInput | Prisma.SystemConfigurationWhereInput[]
   OR?: Prisma.SystemConfigurationWhereInput[]
   NOT?: Prisma.SystemConfigurationWhereInput | Prisma.SystemConfigurationWhereInput[]
-  lastGenerationTime?: Prisma.DateTimeFilter<"SystemConfiguration"> | Date | string
+  lastProcessingTime?: Prisma.DateTimeFilter<"SystemConfiguration"> | Date | string
   createdAt?: Prisma.DateTimeFilter<"SystemConfiguration"> | Date | string
   updatedAt?: Prisma.DateTimeFilter<"SystemConfiguration"> | Date | string
 }, "id">
 
 export type SystemConfigurationOrderByWithAggregationInput = {
   id?: Prisma.SortOrder
-  lastGenerationTime?: Prisma.SortOrder
+  lastProcessingTime?: Prisma.SortOrder
   createdAt?: Prisma.SortOrder
   updatedAt?: Prisma.SortOrder
   _count?: Prisma.SystemConfigurationCountOrderByAggregateInput
@@ -208,123 +208,119 @@ export type SystemConfigurationScalarWhereWithAggregatesInput = {
   OR?: Prisma.SystemConfigurationScalarWhereWithAggregatesInput[]
   NOT?: Prisma.SystemConfigurationScalarWhereWithAggregatesInput | Prisma.SystemConfigurationScalarWhereWithAggregatesInput[]
   id?: Prisma.StringWithAggregatesFilter<"SystemConfiguration"> | string
-  lastGenerationTime?: Prisma.DateTimeWithAggregatesFilter<"SystemConfiguration"> | Date | string
+  lastProcessingTime?: Prisma.DateTimeWithAggregatesFilter<"SystemConfiguration"> | Date | string
   createdAt?: Prisma.DateTimeWithAggregatesFilter<"SystemConfiguration"> | Date | string
   updatedAt?: Prisma.DateTimeWithAggregatesFilter<"SystemConfiguration"> | Date | string
 }
 
 export type SystemConfigurationCreateInput = {
   id?: string
-  lastGenerationTime?: Date | string
+  lastProcessingTime?: Date | string
   createdAt?: Date | string
   updatedAt?: Date | string
 }
 
 export type SystemConfigurationUncheckedCreateInput = {
   id?: string
-  lastGenerationTime?: Date | string
+  lastProcessingTime?: Date | string
   createdAt?: Date | string
   updatedAt?: Date | string
 }
 
 export type SystemConfigurationUpdateInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
-  lastGenerationTime?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  lastProcessingTime?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
 }
 
 export type SystemConfigurationUncheckedUpdateInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
-  lastGenerationTime?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  lastProcessingTime?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
 }
 
 export type SystemConfigurationCreateManyInput = {
   id?: string
-  lastGenerationTime?: Date | string
+  lastProcessingTime?: Date | string
   createdAt?: Date | string
   updatedAt?: Date | string
 }
 
 export type SystemConfigurationUpdateManyMutationInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
-  lastGenerationTime?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  lastProcessingTime?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
 }
 
 export type SystemConfigurationUncheckedUpdateManyInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
-  lastGenerationTime?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  lastProcessingTime?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
 }
 
 export type SystemConfigurationCountOrderByAggregateInput = {
   id?: Prisma.SortOrder
-  lastGenerationTime?: Prisma.SortOrder
+  lastProcessingTime?: Prisma.SortOrder
   createdAt?: Prisma.SortOrder
   updatedAt?: Prisma.SortOrder
 }
 
 export type SystemConfigurationMaxOrderByAggregateInput = {
   id?: Prisma.SortOrder
-  lastGenerationTime?: Prisma.SortOrder
+  lastProcessingTime?: Prisma.SortOrder
   createdAt?: Prisma.SortOrder
   updatedAt?: Prisma.SortOrder
 }
 
 export type SystemConfigurationMinOrderByAggregateInput = {
   id?: Prisma.SortOrder
-  lastGenerationTime?: Prisma.SortOrder
+  lastProcessingTime?: Prisma.SortOrder
   createdAt?: Prisma.SortOrder
   updatedAt?: Prisma.SortOrder
-}
-
-export type DateTimeFieldUpdateOperationsInput = {
-  set?: Date | string
 }
 
 
 
 export type SystemConfigurationSelect<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetSelect<{
   id?: boolean
-  lastGenerationTime?: boolean
+  lastProcessingTime?: boolean
   createdAt?: boolean
   updatedAt?: boolean
 }, ExtArgs["result"]["systemConfiguration"]>
 
 export type SystemConfigurationSelectCreateManyAndReturn<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetSelect<{
   id?: boolean
-  lastGenerationTime?: boolean
+  lastProcessingTime?: boolean
   createdAt?: boolean
   updatedAt?: boolean
 }, ExtArgs["result"]["systemConfiguration"]>
 
 export type SystemConfigurationSelectUpdateManyAndReturn<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetSelect<{
   id?: boolean
-  lastGenerationTime?: boolean
+  lastProcessingTime?: boolean
   createdAt?: boolean
   updatedAt?: boolean
 }, ExtArgs["result"]["systemConfiguration"]>
 
 export type SystemConfigurationSelectScalar = {
   id?: boolean
-  lastGenerationTime?: boolean
+  lastProcessingTime?: boolean
   createdAt?: boolean
   updatedAt?: boolean
 }
 
-export type SystemConfigurationOmit<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetOmit<"id" | "lastGenerationTime" | "createdAt" | "updatedAt", ExtArgs["result"]["systemConfiguration"]>
+export type SystemConfigurationOmit<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetOmit<"id" | "lastProcessingTime" | "createdAt" | "updatedAt", ExtArgs["result"]["systemConfiguration"]>
 
 export type $SystemConfigurationPayload<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
   name: "SystemConfiguration"
   objects: {}
   scalars: runtime.Types.Extensions.GetPayloadResult<{
     id: string
-    lastGenerationTime: Date
+    lastProcessingTime: Date
     createdAt: Date
     updatedAt: Date
   }, ExtArgs["result"]["systemConfiguration"]>
@@ -751,7 +747,7 @@ export interface Prisma__SystemConfigurationClient<T, Null = never, ExtArgs exte
  */
 export interface SystemConfigurationFieldRefs {
   readonly id: Prisma.FieldRef<"SystemConfiguration", 'String'>
-  readonly lastGenerationTime: Prisma.FieldRef<"SystemConfiguration", 'DateTime'>
+  readonly lastProcessingTime: Prisma.FieldRef<"SystemConfiguration", 'DateTime'>
   readonly createdAt: Prisma.FieldRef<"SystemConfiguration", 'DateTime'>
   readonly updatedAt: Prisma.FieldRef<"SystemConfiguration", 'DateTime'>
 }

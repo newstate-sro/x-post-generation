@@ -1,8 +1,7 @@
 import type { AIMessageChunk } from '@langchain/core/messages'
 
 type ParsedPostsReactionsResponse = {
-  id: string
-  pageId: string
+  facebookPostId: string
   reaction: string
 }
 

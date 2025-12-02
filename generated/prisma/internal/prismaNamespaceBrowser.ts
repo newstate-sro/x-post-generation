@@ -53,11 +53,13 @@ export const AnyNull = runtime.AnyNull
 export const ModelName = {
   User: 'User',
   SystemConfiguration: 'SystemConfiguration',
-  EntityOfInterest: 'EntityOfInterest',
-  FacebookPage: 'FacebookPage',
+  TrackedEntity: 'TrackedEntity',
   FacebookPost: 'FacebookPost',
   FacebookPostReaction: 'FacebookPostReaction',
-  Logs: 'Logs'
+  SystemEvent: 'SystemEvent',
+  PostCategory: 'PostCategory',
+  Politics: 'Politics',
+  TrackedEntityConfiguration: 'TrackedEntityConfiguration'
 } as const
 
 export type ModelName = (typeof ModelName)[keyof typeof ModelName]
@@ -78,8 +80,10 @@ export type TransactionIsolationLevel = (typeof TransactionIsolationLevel)[keyof
 
 export const UserScalarFieldEnum = {
   id: 'id',
-  email: 'email',
-  name: 'name'
+  uid: 'uid',
+  name: 'name',
+  createdAt: 'createdAt',
+  updatedAt: 'updatedAt'
 } as const
 
 export type UserScalarFieldEnum = (typeof UserScalarFieldEnum)[keyof typeof UserScalarFieldEnum]
@@ -87,7 +91,7 @@ export type UserScalarFieldEnum = (typeof UserScalarFieldEnum)[keyof typeof User
 
 export const SystemConfigurationScalarFieldEnum = {
   id: 'id',
-  lastGenerationTime: 'lastGenerationTime',
+  lastProcessingTime: 'lastProcessingTime',
   createdAt: 'createdAt',
   updatedAt: 'updatedAt'
 } as const
@@ -95,34 +99,34 @@ export const SystemConfigurationScalarFieldEnum = {
 export type SystemConfigurationScalarFieldEnum = (typeof SystemConfigurationScalarFieldEnum)[keyof typeof SystemConfigurationScalarFieldEnum]
 
 
-export const EntityOfInterestScalarFieldEnum = {
+export const TrackedEntityScalarFieldEnum = {
   id: 'id',
   name: 'name',
   description: 'description',
-  facebookPageId: 'facebookPageId',
+  type: 'type',
+  facebookPageUrl: 'facebookPageUrl',
+  systemPrompt: 'systemPrompt',
   createdAt: 'createdAt',
   updatedAt: 'updatedAt'
 } as const
 
-export type EntityOfInterestScalarFieldEnum = (typeof EntityOfInterestScalarFieldEnum)[keyof typeof EntityOfInterestScalarFieldEnum]
-
-
-export const FacebookPageScalarFieldEnum = {
-  id: 'id',
-  url: 'url',
-  name: 'name',
-  createdAt: 'createdAt',
-  updatedAt: 'updatedAt'
-} as const
-
-export type FacebookPageScalarFieldEnum = (typeof FacebookPageScalarFieldEnum)[keyof typeof FacebookPageScalarFieldEnum]
+export type TrackedEntityScalarFieldEnum = (typeof TrackedEntityScalarFieldEnum)[keyof typeof TrackedEntityScalarFieldEnum]
 
 
 export const FacebookPostScalarFieldEnum = {
   id: 'id',
-  pageId: 'pageId',
+  trackedEntityId: 'trackedEntityId',
+  postId: 'postId',
   url: 'url',
-  name: 'name',
+  timestamp: 'timestamp',
+  text: 'text',
+  likes: 'likes',
+  comments: 'comments',
+  shares: 'shares',
+  topReactionsCount: 'topReactionsCount',
+  isVideo: 'isVideo',
+  viewsCount: 'viewsCount',
+  fullResponse: 'fullResponse',
   createdAt: 'createdAt',
   updatedAt: 'updatedAt'
 } as const
@@ -132,8 +136,7 @@ export type FacebookPostScalarFieldEnum = (typeof FacebookPostScalarFieldEnum)[k
 
 export const FacebookPostReactionScalarFieldEnum = {
   id: 'id',
-  postId: 'postId',
-  userId: 'userId',
+  facebookPostId: 'facebookPostId',
   reaction: 'reaction',
   createdAt: 'createdAt',
   updatedAt: 'updatedAt'
@@ -142,15 +145,45 @@ export const FacebookPostReactionScalarFieldEnum = {
 export type FacebookPostReactionScalarFieldEnum = (typeof FacebookPostReactionScalarFieldEnum)[keyof typeof FacebookPostReactionScalarFieldEnum]
 
 
-export const LogsScalarFieldEnum = {
+export const SystemEventScalarFieldEnum = {
   id: 'id',
-  source: 'source',
-  message: 'message',
+  type: 'type',
+  description: 'description',
   createdAt: 'createdAt',
   updatedAt: 'updatedAt'
 } as const
 
-export type LogsScalarFieldEnum = (typeof LogsScalarFieldEnum)[keyof typeof LogsScalarFieldEnum]
+export type SystemEventScalarFieldEnum = (typeof SystemEventScalarFieldEnum)[keyof typeof SystemEventScalarFieldEnum]
+
+
+export const PostCategoryScalarFieldEnum = {
+  id: 'id',
+  name: 'name',
+  description: 'description',
+  createdAt: 'createdAt',
+  updatedAt: 'updatedAt'
+} as const
+
+export type PostCategoryScalarFieldEnum = (typeof PostCategoryScalarFieldEnum)[keyof typeof PostCategoryScalarFieldEnum]
+
+
+export const PoliticsScalarFieldEnum = {
+  id: 'id',
+  createdAt: 'createdAt',
+  updatedAt: 'updatedAt'
+} as const
+
+export type PoliticsScalarFieldEnum = (typeof PoliticsScalarFieldEnum)[keyof typeof PoliticsScalarFieldEnum]
+
+
+export const TrackedEntityConfigurationScalarFieldEnum = {
+  id: 'id',
+  trackedEntityId: 'trackedEntityId',
+  createdAt: 'createdAt',
+  updatedAt: 'updatedAt'
+} as const
+
+export type TrackedEntityConfigurationScalarFieldEnum = (typeof TrackedEntityConfigurationScalarFieldEnum)[keyof typeof TrackedEntityConfigurationScalarFieldEnum]
 
 
 export const SortOrder = {
@@ -159,6 +192,13 @@ export const SortOrder = {
 } as const
 
 export type SortOrder = (typeof SortOrder)[keyof typeof SortOrder]
+
+
+export const JsonNullValueInput = {
+  JsonNull: 'JsonNull'
+} as const
+
+export type JsonNullValueInput = (typeof JsonNullValueInput)[keyof typeof JsonNullValueInput]
 
 
 export const QueryMode = {
@@ -175,4 +215,13 @@ export const NullsOrder = {
 } as const
 
 export type NullsOrder = (typeof NullsOrder)[keyof typeof NullsOrder]
+
+
+export const JsonNullValueFilter = {
+  DbNull: 'DbNull',
+  JsonNull: 'JsonNull',
+  AnyNull: 'AnyNull'
+} as const
+
+export type JsonNullValueFilter = (typeof JsonNullValueFilter)[keyof typeof JsonNullValueFilter]
 

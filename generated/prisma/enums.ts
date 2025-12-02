@@ -9,7 +9,16 @@
 * 🟢 You can import this file directly.
 */
 
+export const TrackedEntityType = {
+  OWN: 'OWN',
+  OTHER: 'OTHER'
+} as const
+
+export type TrackedEntityType = (typeof TrackedEntityType)[keyof typeof TrackedEntityType]
 
 
-// This file is empty because there are no enums in the schema.
-export {}
+export const SystemEventType = {
+  EMAIL_NOTIFICATION: 'EMAIL_NOTIFICATION'
+} as const
+
+export type SystemEventType = (typeof SystemEventType)[keyof typeof SystemEventType]

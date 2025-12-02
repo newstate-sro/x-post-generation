@@ -28,15 +28,10 @@ export type User = Prisma.UserModel
  */
 export type SystemConfiguration = Prisma.SystemConfigurationModel
 /**
- * Model EntityOfInterest
+ * Model TrackedEntity
  * 
  */
-export type EntityOfInterest = Prisma.EntityOfInterestModel
-/**
- * Model FacebookPage
- * 
- */
-export type FacebookPage = Prisma.FacebookPageModel
+export type TrackedEntity = Prisma.TrackedEntityModel
 /**
  * Model FacebookPost
  * 
@@ -48,7 +43,22 @@ export type FacebookPost = Prisma.FacebookPostModel
  */
 export type FacebookPostReaction = Prisma.FacebookPostReactionModel
 /**
- * Model Logs
+ * Model SystemEvent
  * 
  */
-export type Logs = Prisma.LogsModel
+export type SystemEvent = Prisma.SystemEventModel
+/**
+ * Model PostCategory
+ * 
+ */
+export type PostCategory = Prisma.PostCategoryModel
+/**
+ * Model Politics
+ * 
+ */
+export type Politics = Prisma.PoliticsModel
+/**
+ * Model TrackedEntityConfiguration
+ * 
+ */
+export type TrackedEntityConfiguration = Prisma.TrackedEntityConfigurationModel

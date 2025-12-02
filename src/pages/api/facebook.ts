@@ -4,7 +4,8 @@ import { OpenAiService } from '@/services/OpenAiService/OpenAiService'
 import { ApifyService } from '@/services/ApifyService/ApifyService'
 import type { ApifyPostSuccess } from '@/services/ApifyService/types'
 import { parseLlmPostsReactionsResponse } from '@/utils/parseLlmPostsReactionsResponse'
-// import { RESULTS_LIMIT } from '@/constants/facebook'
+import { TrackedEntityType } from '../../../generated/prisma/enums'
+import type { Prisma } from '../../../generated/prisma/client'
 
 type Data = {
   data?: unknown
@@ -28,40 +29,30 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse<
 
       const systemConfiguration = await prisma.systemConfiguration.findFirstOrThrow({
         orderBy: {
-          lastGenerationTime: 'desc',
+          lastProcessingTime: 'desc',
         },
       })
 
-      const fbEntitiesOfInterest = await prisma.entityOfInterest.findMany({
-        where: {
-          facebookPageId: {
-            not: null,
-          },
-        },
-        include: {
-          facebookPage: true,
-        },
-      })
+      const fbEntitiesOfInterest = await prisma.trackedEntity.findMany()
+      const facebookPagesUrls = fbEntitiesOfInterest.map(
+        (entityOfInterest) => entityOfInterest.facebookPageUrl,
+      )
 
-      const pagesUrls = fbEntitiesOfInterest
-        .map((entityOfInterest) => entityOfInterest.facebookPage?.url)
-        .filter((url): url is string => !!url)
-
+      // get posts data from Apify
       const response = await apifyService.getPostsData({
-        pagesUrls: pagesUrls,
-        // resultsLimit: RESULTS_LIMIT,
-        onlyPostsNewerThan: systemConfiguration.lastGenerationTime,
+        pagesUrls: facebookPagesUrls,
+        onlyPostsNewerThan: systemConfiguration.lastProcessingTime,
         captionText: true,
       })
 
-      const extractedPosts = (
+      const extractedFacebookPostsFromApify = (
         response.filter(
           (post) => !('error' in post) || !('errorDescription' in post),
         ) as ApifyPostSuccess[]
       )
         .map((post) => {
           const entityOfInterest = fbEntitiesOfInterest.find(
-            (entity) => entity.facebookPage?.url === post.facebookUrl,
+            (entity) => entity.facebookPageUrl === post.facebookUrl,
           )
 
           if (!entityOfInterest) {
@@ -69,68 +60,84 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse<
           }
 
           return {
+            trackedEntityId: entityOfInterest.id,
+            postId: post.postId,
+            timestamp: new Date(post.timestamp),
             url: post.url,
-            name: post.text ?? '',
-            pageUrl: post.facebookUrl,
-            pageId: entityOfInterest?.facebookPageId ?? '',
+            text: post.text ?? '',
+            likes: post.likes,
+            comments: post.comments,
+            shares: post.shares,
+            topReactionsCount: post.topReactionsCount,
+            isVideo: post.isVideo ?? false,
+            viewsCount: post.viewsCount ?? 0,
+            fullResponse: JSON.parse(JSON.stringify(post)) as Prisma.InputJsonValue,
           }
         })
         .filter((post): post is NonNullable<typeof post> => post !== null)
 
       const createdFacebookPosts = await prisma.facebookPost.createManyAndReturn({
-        data: extractedPosts.map((post) => ({
-          url: post.url,
-          name: post.name,
-          pageId: post.pageId,
-        })),
+        data: extractedFacebookPostsFromApify,
         skipDuplicates: true,
-      })
-
-      await prisma.systemConfiguration.create({
-        data: { lastGenerationTime: currentTime },
+        include: {
+          trackedEntity: true,
+        },
       })
 
       if (createdFacebookPosts.length === 0) {
         return res.status(200).json({
           data: {
-            newReactions: 0,
+            newOwnPosts: 0,
+            newOtherPosts: 0,
           },
         })
       }
 
-      const openaiResponse = await openAiService.callLlm(
-        `Analyze the following Facebook posts from politicians: ${createdFacebookPosts.map((facebookPost, index) => `Post ${index + 1}: "${JSON.stringify(facebookPost)}"`).join('\n')}. Imagine you are in opposition to the politicians that made those posts. I want you to generate reactions for each of them. Use Slovak language. Return response in JSON format as array of objects with the following structure: { id: string, pageId: string, reaction: string }. Keep reactions in same order as posts were provided. Return just the array of JSON objects, no other text.`,
+      // we don't want to generate reactions for OWN tracked entities
+      const otherFacebookPosts = createdFacebookPosts.filter(
+        (post) => post.trackedEntity.type === TrackedEntityType.OTHER,
       )
 
-      console.log('OPENAI RESPONSE', JSON.stringify(openaiResponse.content, null, 2))
+      const ownFacebookPosts = createdFacebookPosts.filter(
+        (post) => post.trackedEntity.type === TrackedEntityType.OWN,
+      )
 
-      const parsedResponses = parseLlmPostsReactionsResponse(openaiResponse)
+      const openaiResponse = await openAiService.callLlm(
+        `Analyze the following Facebook posts from politicians: ${otherFacebookPosts
+          .map(
+            (facebookPost, index) =>
+              `Post ${index + 1}: "${JSON.stringify({
+                facebookPostId: facebookPost.id,
+                text: facebookPost.text,
+              })}"`,
+          )
+          .join(
+            '\n',
+          )}. Imagine you are in opposition to the politicians that made those posts. I want you to generate reactions for each of them. Use Slovak language. Return response in JSON format as array of objects with the following structure: { facebookPostId: string, reaction: string }. Content of posts is in 'text' property. Keep reactions in same order as posts were provided. Return just the array of JSON objects, no other text.`,
+      )
 
-      await prisma.facebookPostReaction.createMany({
-        data: parsedResponses.map((response) => {
-          return {
-            postId: response.id,
-            userId: '1',
-            reaction: response.reaction,
-          }
-        }),
+      const parsedLLMPostsReactions = parseLlmPostsReactionsResponse(openaiResponse)
+
+      const createdFacebookPostReactions = await prisma.facebookPostReaction.createManyAndReturn({
+        data: parsedLLMPostsReactions,
+      })
+
+      // Add new system configuration to store the time of the last processing once whole process is finished
+      // current time created at the beginning of the process to not loose any posts created during the processing
+      await prisma.systemConfiguration.create({
+        data: { lastProcessingTime: currentTime },
       })
 
       return res.status(200).json({
         data: {
-          newReactions: parsedResponses.length,
-          apifyResponse: response,
-          openaiResponse,
+          newOwnPosts: ownFacebookPosts.length,
+          newOtherPosts: otherFacebookPosts.length,
+          newOtherPostsReactions: createdFacebookPostReactions.length,
+          processingStartedAt: currentTime,
         },
       })
     } catch (error) {
       console.error('ERROR handler:', error)
-      await prisma.logs.create({
-        data: {
-          source: 'api/facebook',
-          message: JSON.stringify(error, null, 2),
-        },
-      })
       return res.status(500).json({ error: 'Internal server error' })
     }
   }
