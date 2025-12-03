@@ -58,7 +58,7 @@ export class ResendService {
     to: string | string[]
     from: string
     subject: string
-    reactTemplate: React.ReactElement
+    reactTemplate: React.ReactNode
   }) {
     try {
       const response = await this.resend.emails.send({

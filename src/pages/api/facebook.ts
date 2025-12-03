@@ -6,7 +6,8 @@ import type { ApifyPostSuccess } from '@/services/ApifyService/types'
 import { parseLlmPostsReactionsResponse } from '@/utils/parseLlmPostsReactionsResponse'
 import { TrackedEntityType } from '../../../generated/prisma/enums'
 import type { Prisma } from '../../../generated/prisma/client'
-
+import { ResendService } from '@/services/ResendService/ResendService'
+import { FacebookPostsReactionsEmail } from '../../../emails/facebook-posts-reactions-email'
 type Data = {
   data?: unknown
   error?: string
@@ -24,6 +25,7 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse<
     try {
       const openAiService = new OpenAiService()
       const apifyService = new ApifyService()
+      const resendService = new ResendService()
 
       const currentTime = new Date()
 
@@ -120,13 +122,39 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse<
 
       const createdFacebookPostReactions = await prisma.facebookPostReaction.createManyAndReturn({
         data: parsedLLMPostsReactions,
+        include: {
+          post: {
+            include: {
+              trackedEntity: true,
+            },
+          },
+        },
       })
+
+      const dataToSendViaEmail: {
+        author: string
+        postText: string
+        postUrl: string
+        reaction: string
+      }[] = createdFacebookPostReactions.map((reaction) => ({
+        author: reaction.post.trackedEntity.name,
+        postText: reaction.post.text,
+        postUrl: reaction.post.url,
+        reaction: reaction.reaction,
+      }))
 
       // Add new system configuration to store the time of the last processing once whole process is finished
       // current time created at the beginning of the process to not loose any posts created during the processing
       await prisma.systemConfiguration.create({
         data: { lastProcessingTime: currentTime },
       })
+
+      // await resendService.sendReactTemplateEmail({
+      //   from: process.env.RESEND_FROM_EMAIL!,
+      //   to: process.env.RESEND_TO_EMAIL!,
+      //   reactTemplate: FacebookPostsReactionsEmail({ postsReactionsData: dataToSendViaEmail }),
+      //   subject: 'Newstate - Reakcie na FB posty',
+      // })
 
       return res.status(200).json({
         data: {
