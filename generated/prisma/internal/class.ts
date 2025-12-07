@@ -20,7 +20,7 @@ const config: runtime.GetPrismaClientConfig = {
   "clientVersion": "7.0.1",
   "engineVersion": "f09f2815f091dbba658cdcd2264306d88bb5bda6",
   "activeProvider": "postgresql",
-  "inlineSchema": "// This is your Prisma schema file,\n// learn more about it in the docs: https://pris.ly/d/prisma-schema\ngenerator client {\n  provider = \"prisma-client\"\n  output   = \"../generated/prisma\"\n}\n\ndatasource db {\n  provider = \"postgresql\"\n}\n\n// User is the user of the app\n// uid is the unique identifier of the user in Supabase Auth\nmodel User {\n  id   String @id @default(uuid())\n  uid  String @unique\n  name String\n\n  createdAt DateTime @default(now())\n  updatedAt DateTime @updatedAt\n}\n\n// System configuration is used to store the state of the system\nmodel SystemConfiguration {\n  id                 String   @id @default(uuid())\n  lastProcessingTime DateTime @default(now())\n\n  createdAt DateTime @default(now())\n  updatedAt DateTime @updatedAt\n}\n\n// OWN - the entities we just track\n// OTHER - the entities we track and create reactions based on their posts\nenum TrackedEntityType {\n  OWN\n  OTHER\n}\n\n// Entity like person, politician, party, etc.\n// We will fetch posts for each entity\n// systemPrompt is the prompt that will be used to generate reactions for the entity\nmodel TrackedEntity {\n  id              String            @id @default(uuid())\n  name            String\n  description     String\n  type            TrackedEntityType\n  facebookPageUrl String            @unique\n  systemPrompt    String?\n\n  createdAt DateTime @default(now())\n  updatedAt DateTime @updatedAt\n\n  facebookPosts               FacebookPost[]\n  trackedEntityConfigurations TrackedEntityConfiguration[]\n}\n\n// table to store Facebook posts data\n// base properties are stored as standalone columns\n// fullResponse property contains whole response from Apify\nmodel FacebookPost {\n  id                String   @id @default(uuid())\n  trackedEntityId   String\n  postId            String   @unique\n  url               String\n  timestamp         DateTime\n  text              String\n  likes             Int\n  comments          Int\n  shares            Int\n  topReactionsCount Int\n  isVideo           Boolean\n  viewsCount        Int\n  fullResponse      Json\n\n  createdAt DateTime @default(now())\n  updatedAt DateTime @updatedAt\n\n  trackedEntity         TrackedEntity          @relation(fields: [trackedEntityId], references: [id], onDelete: Cascade)\n  facebookPostReactions FacebookPostReaction[]\n  postCategories        PostCategory[]\n}\n\n// table to store generated reactions based on Facebook posts\nmodel FacebookPostReaction {\n  id             String @id @default(uuid())\n  facebookPostId String\n  reaction       String\n\n  createdAt DateTime @default(now())\n  updatedAt DateTime @updatedAt\n\n  post FacebookPost @relation(fields: [facebookPostId], references: [id], onDelete: Cascade)\n}\n\nenum SystemEventType {\n  EMAIL_NOTIFICATION\n}\n\n// Events are the events that are tracked by the system, i.e. email notification sent\nmodel SystemEvent {\n  id          String          @id @default(uuid())\n  type        SystemEventType\n  description String\n\n  createdAt DateTime @default(now())\n  updatedAt DateTime @updatedAt\n}\n\n// Post categories will be used to categorize posts and decide if post is relevant or not\nmodel PostCategory {\n  id          String @id @default(uuid())\n  name        String @unique\n  description String\n\n  createdAt DateTime @default(now())\n  updatedAt DateTime @updatedAt\n\n  facebookPosts FacebookPost[]\n}\n\n// politics will be used as input context for AI to generate reactions\nmodel Politics {\n  id String @id @default(uuid())\n\n  createdAt DateTime @default(now())\n  updatedAt DateTime @updatedAt\n}\n\n// table to store prompts and other configuration properties for tracked entities\nmodel TrackedEntityConfiguration {\n  id              String        @id @default(uuid())\n  trackedEntityId String\n  trackedEntity   TrackedEntity @relation(fields: [trackedEntityId], references: [id], onDelete: Cascade)\n\n  createdAt DateTime @default(now())\n  updatedAt DateTime @updatedAt\n}\n",
+  "inlineSchema": "// This is your Prisma schema file,\n// learn more about it in the docs: https://pris.ly/d/prisma-schema\ngenerator client {\n  provider = \"prisma-client\"\n  output   = \"../generated/prisma\"\n}\n\ndatasource db {\n  provider = \"postgresql\"\n}\n\n// ============================================\n// SYSTEM\n// ============================================\n\nmodel SystemConfiguration {\n  id                    String    @id @default(uuid())\n  processingStartedAt   DateTime  @default(now())\n  processingCompletedAt DateTime?\n\n  createdAt DateTime @default(now())\n  updatedAt DateTime @updatedAt\n}\n\nenum SystemEventType {\n  FACEBOOK_POSTS_EMAIL_NOTIFICATION\n  FACEBOOK_POSTS_PROCESSING_STARTED\n  FACEBOOK_POSTS_FETCHED\n  FACEBOOK_POSTS_REACTIONS_GENERATED\n  FACEBOOK_POSTS_PROCESSING_COMPLETED\n  FACEBOOK_POSTS_ERROR\n}\n\nmodel SystemEvent {\n  id      String          @id @default(uuid())\n  type    SystemEventType\n  details Json\n\n  createdAt DateTime @default(now())\n  updatedAt DateTime @updatedAt\n\n  @@index([type])\n  @@index([createdAt])\n}\n\n// ============================================\n// TRACKED ENTITIES\n// ============================================\n\nmodel TrackedEntity {\n  id          String @id @default(uuid())\n  name        String\n  description String\n\n  createdAt DateTime @default(now())\n  updatedAt DateTime @updatedAt\n\n  trackedEntityPosts         TrackedEntityPost[]\n  trackedEntityReactions     TrackedEntityReaction[]\n  trackedEntityOwn           TrackedEntityOwnTrackedEntity?\n  trackedEntityOther         TrackedEntityOtherTrackedEntity?\n  trackedEntityConfiguration TrackedEntityTrackedEntityConfiguration?\n}\n\n// ============================================\n// TRACKED ENTITY TYPE JUNCTIONS (1:1)\n// ============================================\n\nmodel TrackedEntityOwnTrackedEntity {\n  id                 String @id @default(uuid())\n  trackedEntityId    String @unique\n  ownTrackedEntityId String @unique\n\n  createdAt DateTime @default(now())\n  updatedAt DateTime @updatedAt\n\n  trackedEntity    TrackedEntity    @relation(fields: [trackedEntityId], references: [id], onDelete: Cascade)\n  ownTrackedEntity OwnTrackedEntity @relation(fields: [ownTrackedEntityId], references: [id], onDelete: Cascade)\n}\n\nmodel OwnTrackedEntity {\n  id              String @id @default(uuid())\n  facebookPageUrl String @unique\n\n  createdAt DateTime @default(now())\n  updatedAt DateTime @updatedAt\n\n  trackedEntityOwnTrackedEntity TrackedEntityOwnTrackedEntity?\n}\n\nmodel TrackedEntityOtherTrackedEntity {\n  id                   String @id @default(uuid())\n  trackedEntityId      String @unique\n  otherTrackedEntityId String @unique\n\n  createdAt DateTime @default(now())\n  updatedAt DateTime @updatedAt\n\n  trackedEntity      TrackedEntity      @relation(fields: [trackedEntityId], references: [id], onDelete: Cascade)\n  otherTrackedEntity OtherTrackedEntity @relation(fields: [otherTrackedEntityId], references: [id], onDelete: Cascade)\n}\n\nmodel OtherTrackedEntity {\n  id              String @id @default(uuid())\n  facebookPageUrl String @unique\n\n  createdAt DateTime @default(now())\n  updatedAt DateTime @updatedAt\n\n  trackedEntityOtherTrackedEntity TrackedEntityOtherTrackedEntity?\n}\n\n// ============================================\n// CONFIGURATION\n// ============================================\n\nmodel TrackedEntityTrackedEntityConfiguration {\n  id                           String @id @default(uuid())\n  trackedEntityId              String @unique\n  trackedEntityConfigurationId String @unique\n\n  createdAt DateTime @default(now())\n  updatedAt DateTime @updatedAt\n\n  trackedEntity              TrackedEntity              @relation(fields: [trackedEntityId], references: [id], onDelete: Cascade)\n  trackedEntityConfiguration TrackedEntityConfiguration @relation(fields: [trackedEntityConfigurationId], references: [id], onDelete: Cascade)\n}\n\nmodel TrackedEntityConfiguration {\n  id       String  @id @default(uuid())\n  isActive Boolean @default(true)\n\n  createdAt DateTime @default(now())\n  updatedAt DateTime @updatedAt\n\n  trackedEntityTrackedEntityConfiguration TrackedEntityTrackedEntityConfiguration?\n  promptConfigurations                    TrackedEntityConfigurationPromptConfiguration[]\n}\n\nmodel TrackedEntityConfigurationPromptConfiguration {\n  id                           String @id @default(uuid())\n  trackedEntityConfigurationId String\n  promptConfigurationId        String\n\n  createdAt DateTime @default(now())\n  updatedAt DateTime @updatedAt\n\n  promptConfiguration        PromptConfiguration        @relation(fields: [promptConfigurationId], references: [id], onDelete: Cascade)\n  trackedEntityConfiguration TrackedEntityConfiguration @relation(fields: [trackedEntityConfigurationId], references: [id], onDelete: Cascade)\n\n  @@unique([trackedEntityConfigurationId, promptConfigurationId])\n}\n\nmodel PromptConfiguration {\n  id                String  @id @default(uuid())\n  toneOfVoicePrompt String\n  userPrompt        String\n  isActive          Boolean\n\n  createdAt DateTime @default(now())\n  updatedAt DateTime @updatedAt\n\n  trackedEntityConfigurationPromptConfigurations TrackedEntityConfigurationPromptConfiguration[]\n  reactionPromptConfigurations                   ReactionPromptConfiguration[]\n\n  @@index([isActive])\n}\n\n// ============================================\n// POSTS\n// ============================================\n\nmodel TrackedEntityPost {\n  id              String @id @default(uuid())\n  trackedEntityId String\n  postId          String\n\n  createdAt DateTime @default(now())\n  updatedAt DateTime @updatedAt\n\n  trackedEntity TrackedEntity @relation(fields: [trackedEntityId], references: [id], onDelete: Cascade)\n  post          Post          @relation(fields: [postId], references: [id], onDelete: Cascade)\n\n  @@unique([trackedEntityId, postId])\n  @@index([trackedEntityId])\n  @@index([postId])\n}\n\nmodel Post {\n  id String @id @default(uuid())\n\n  createdAt DateTime @default(now())\n  updatedAt DateTime @updatedAt\n\n  trackedEntityPosts TrackedEntityPost[]\n  postReactions      PostReaction[]\n  postFacebookPost   PostFacebookPost?\n}\n\nmodel PostFacebookPost {\n  id             String @id @default(uuid())\n  postId         String @unique\n  facebookPostId String @unique\n\n  createdAt DateTime @default(now())\n  updatedAt DateTime @updatedAt\n\n  post         Post         @relation(fields: [postId], references: [id], onDelete: Cascade)\n  facebookPost FacebookPost @relation(fields: [facebookPostId], references: [id], onDelete: Cascade)\n}\n\nmodel FacebookPost {\n  id                String   @id @default(uuid())\n  facebookPostId    String   @unique\n  url               String\n  postedAt          DateTime\n  text              String\n  likes             Int      @default(0)\n  comments          Int      @default(0)\n  shares            Int      @default(0)\n  topReactionsCount Int      @default(0)\n  isVideo           Boolean  @default(false)\n  viewsCount        Int      @default(0)\n  fullResponse      Json\n\n  createdAt DateTime @default(now())\n  updatedAt DateTime @updatedAt\n\n  postFacebookPost PostFacebookPost?\n\n  @@index([postedAt])\n  @@index([facebookPostId])\n}\n\n// ============================================\n// REACTIONS\n// ============================================\n\nmodel TrackedEntityReaction {\n  id              String @id @default(uuid())\n  trackedEntityId String\n  reactionId      String @unique\n\n  createdAt DateTime @default(now())\n  updatedAt DateTime @updatedAt\n\n  trackedEntity TrackedEntity @relation(fields: [trackedEntityId], references: [id], onDelete: Cascade)\n  reaction      Reaction      @relation(fields: [reactionId], references: [id], onDelete: Cascade)\n\n  @@index([trackedEntityId])\n}\n\nmodel PostReaction {\n  id         String @id @default(uuid())\n  postId     String\n  reactionId String @unique\n\n  createdAt DateTime @default(now())\n  updatedAt DateTime @updatedAt\n\n  post     Post     @relation(fields: [postId], references: [id], onDelete: Cascade)\n  reaction Reaction @relation(fields: [reactionId], references: [id], onDelete: Cascade)\n\n  @@unique([postId, reactionId])\n  @@index([postId])\n}\n\nmodel Reaction {\n  id   String @id @default(uuid())\n  text String\n\n  createdAt DateTime @default(now())\n  updatedAt DateTime @updatedAt\n\n  postReaction                PostReaction?\n  trackedEntityReaction       TrackedEntityReaction?\n  reactionPromptConfiguration ReactionPromptConfiguration?\n}\n\nmodel ReactionPromptConfiguration {\n  id                    String @id @default(uuid())\n  reactionId            String @unique\n  promptConfigurationId String\n\n  createdAt DateTime @default(now())\n  updatedAt DateTime @updatedAt\n\n  reaction            Reaction            @relation(fields: [reactionId], references: [id], onDelete: Cascade)\n  promptConfiguration PromptConfiguration @relation(fields: [promptConfigurationId], references: [id], onDelete: Cascade)\n\n  @@index([promptConfigurationId])\n}\n",
   "runtimeDataModel": {
     "models": {},
     "enums": {},
@@ -28,7 +28,7 @@ const config: runtime.GetPrismaClientConfig = {
   }
 }
 
-config.runtimeDataModel = JSON.parse("{\"models\":{\"User\":{\"fields\":[{\"name\":\"id\",\"kind\":\"scalar\",\"type\":\"String\"},{\"name\":\"uid\",\"kind\":\"scalar\",\"type\":\"String\"},{\"name\":\"name\",\"kind\":\"scalar\",\"type\":\"String\"},{\"name\":\"createdAt\",\"kind\":\"scalar\",\"type\":\"DateTime\"},{\"name\":\"updatedAt\",\"kind\":\"scalar\",\"type\":\"DateTime\"}],\"dbName\":null},\"SystemConfiguration\":{\"fields\":[{\"name\":\"id\",\"kind\":\"scalar\",\"type\":\"String\"},{\"name\":\"lastProcessingTime\",\"kind\":\"scalar\",\"type\":\"DateTime\"},{\"name\":\"createdAt\",\"kind\":\"scalar\",\"type\":\"DateTime\"},{\"name\":\"updatedAt\",\"kind\":\"scalar\",\"type\":\"DateTime\"}],\"dbName\":null},\"TrackedEntity\":{\"fields\":[{\"name\":\"id\",\"kind\":\"scalar\",\"type\":\"String\"},{\"name\":\"name\",\"kind\":\"scalar\",\"type\":\"String\"},{\"name\":\"description\",\"kind\":\"scalar\",\"type\":\"String\"},{\"name\":\"type\",\"kind\":\"enum\",\"type\":\"TrackedEntityType\"},{\"name\":\"facebookPageUrl\",\"kind\":\"scalar\",\"type\":\"String\"},{\"name\":\"systemPrompt\",\"kind\":\"scalar\",\"type\":\"String\"},{\"name\":\"createdAt\",\"kind\":\"scalar\",\"type\":\"DateTime\"},{\"name\":\"updatedAt\",\"kind\":\"scalar\",\"type\":\"DateTime\"},{\"name\":\"facebookPosts\",\"kind\":\"object\",\"type\":\"FacebookPost\",\"relationName\":\"FacebookPostToTrackedEntity\"},{\"name\":\"trackedEntityConfigurations\",\"kind\":\"object\",\"type\":\"TrackedEntityConfiguration\",\"relationName\":\"TrackedEntityToTrackedEntityConfiguration\"}],\"dbName\":null},\"FacebookPost\":{\"fields\":[{\"name\":\"id\",\"kind\":\"scalar\",\"type\":\"String\"},{\"name\":\"trackedEntityId\",\"kind\":\"scalar\",\"type\":\"String\"},{\"name\":\"postId\",\"kind\":\"scalar\",\"type\":\"String\"},{\"name\":\"url\",\"kind\":\"scalar\",\"type\":\"String\"},{\"name\":\"timestamp\",\"kind\":\"scalar\",\"type\":\"DateTime\"},{\"name\":\"text\",\"kind\":\"scalar\",\"type\":\"String\"},{\"name\":\"likes\",\"kind\":\"scalar\",\"type\":\"Int\"},{\"name\":\"comments\",\"kind\":\"scalar\",\"type\":\"Int\"},{\"name\":\"shares\",\"kind\":\"scalar\",\"type\":\"Int\"},{\"name\":\"topReactionsCount\",\"kind\":\"scalar\",\"type\":\"Int\"},{\"name\":\"isVideo\",\"kind\":\"scalar\",\"type\":\"Boolean\"},{\"name\":\"viewsCount\",\"kind\":\"scalar\",\"type\":\"Int\"},{\"name\":\"fullResponse\",\"kind\":\"scalar\",\"type\":\"Json\"},{\"name\":\"createdAt\",\"kind\":\"scalar\",\"type\":\"DateTime\"},{\"name\":\"updatedAt\",\"kind\":\"scalar\",\"type\":\"DateTime\"},{\"name\":\"trackedEntity\",\"kind\":\"object\",\"type\":\"TrackedEntity\",\"relationName\":\"FacebookPostToTrackedEntity\"},{\"name\":\"facebookPostReactions\",\"kind\":\"object\",\"type\":\"FacebookPostReaction\",\"relationName\":\"FacebookPostToFacebookPostReaction\"},{\"name\":\"postCategories\",\"kind\":\"object\",\"type\":\"PostCategory\",\"relationName\":\"FacebookPostToPostCategory\"}],\"dbName\":null},\"FacebookPostReaction\":{\"fields\":[{\"name\":\"id\",\"kind\":\"scalar\",\"type\":\"String\"},{\"name\":\"facebookPostId\",\"kind\":\"scalar\",\"type\":\"String\"},{\"name\":\"reaction\",\"kind\":\"scalar\",\"type\":\"String\"},{\"name\":\"createdAt\",\"kind\":\"scalar\",\"type\":\"DateTime\"},{\"name\":\"updatedAt\",\"kind\":\"scalar\",\"type\":\"DateTime\"},{\"name\":\"post\",\"kind\":\"object\",\"type\":\"FacebookPost\",\"relationName\":\"FacebookPostToFacebookPostReaction\"}],\"dbName\":null},\"SystemEvent\":{\"fields\":[{\"name\":\"id\",\"kind\":\"scalar\",\"type\":\"String\"},{\"name\":\"type\",\"kind\":\"enum\",\"type\":\"SystemEventType\"},{\"name\":\"description\",\"kind\":\"scalar\",\"type\":\"String\"},{\"name\":\"createdAt\",\"kind\":\"scalar\",\"type\":\"DateTime\"},{\"name\":\"updatedAt\",\"kind\":\"scalar\",\"type\":\"DateTime\"}],\"dbName\":null},\"PostCategory\":{\"fields\":[{\"name\":\"id\",\"kind\":\"scalar\",\"type\":\"String\"},{\"name\":\"name\",\"kind\":\"scalar\",\"type\":\"String\"},{\"name\":\"description\",\"kind\":\"scalar\",\"type\":\"String\"},{\"name\":\"createdAt\",\"kind\":\"scalar\",\"type\":\"DateTime\"},{\"name\":\"updatedAt\",\"kind\":\"scalar\",\"type\":\"DateTime\"},{\"name\":\"facebookPosts\",\"kind\":\"object\",\"type\":\"FacebookPost\",\"relationName\":\"FacebookPostToPostCategory\"}],\"dbName\":null},\"Politics\":{\"fields\":[{\"name\":\"id\",\"kind\":\"scalar\",\"type\":\"String\"},{\"name\":\"createdAt\",\"kind\":\"scalar\",\"type\":\"DateTime\"},{\"name\":\"updatedAt\",\"kind\":\"scalar\",\"type\":\"DateTime\"}],\"dbName\":null},\"TrackedEntityConfiguration\":{\"fields\":[{\"name\":\"id\",\"kind\":\"scalar\",\"type\":\"String\"},{\"name\":\"trackedEntityId\",\"kind\":\"scalar\",\"type\":\"String\"},{\"name\":\"trackedEntity\",\"kind\":\"object\",\"type\":\"TrackedEntity\",\"relationName\":\"TrackedEntityToTrackedEntityConfiguration\"},{\"name\":\"createdAt\",\"kind\":\"scalar\",\"type\":\"DateTime\"},{\"name\":\"updatedAt\",\"kind\":\"scalar\",\"type\":\"DateTime\"}],\"dbName\":null}},\"enums\":{},\"types\":{}}")
+config.runtimeDataModel = JSON.parse("{\"models\":{\"SystemConfiguration\":{\"fields\":[{\"name\":\"id\",\"kind\":\"scalar\",\"type\":\"String\"},{\"name\":\"processingStartedAt\",\"kind\":\"scalar\",\"type\":\"DateTime\"},{\"name\":\"processingCompletedAt\",\"kind\":\"scalar\",\"type\":\"DateTime\"},{\"name\":\"createdAt\",\"kind\":\"scalar\",\"type\":\"DateTime\"},{\"name\":\"updatedAt\",\"kind\":\"scalar\",\"type\":\"DateTime\"}],\"dbName\":null},\"SystemEvent\":{\"fields\":[{\"name\":\"id\",\"kind\":\"scalar\",\"type\":\"String\"},{\"name\":\"type\",\"kind\":\"enum\",\"type\":\"SystemEventType\"},{\"name\":\"details\",\"kind\":\"scalar\",\"type\":\"Json\"},{\"name\":\"createdAt\",\"kind\":\"scalar\",\"type\":\"DateTime\"},{\"name\":\"updatedAt\",\"kind\":\"scalar\",\"type\":\"DateTime\"}],\"dbName\":null},\"TrackedEntity\":{\"fields\":[{\"name\":\"id\",\"kind\":\"scalar\",\"type\":\"String\"},{\"name\":\"name\",\"kind\":\"scalar\",\"type\":\"String\"},{\"name\":\"description\",\"kind\":\"scalar\",\"type\":\"String\"},{\"name\":\"createdAt\",\"kind\":\"scalar\",\"type\":\"DateTime\"},{\"name\":\"updatedAt\",\"kind\":\"scalar\",\"type\":\"DateTime\"},{\"name\":\"trackedEntityPosts\",\"kind\":\"object\",\"type\":\"TrackedEntityPost\",\"relationName\":\"TrackedEntityToTrackedEntityPost\"},{\"name\":\"trackedEntityReactions\",\"kind\":\"object\",\"type\":\"TrackedEntityReaction\",\"relationName\":\"TrackedEntityToTrackedEntityReaction\"},{\"name\":\"trackedEntityOwn\",\"kind\":\"object\",\"type\":\"TrackedEntityOwnTrackedEntity\",\"relationName\":\"TrackedEntityToTrackedEntityOwnTrackedEntity\"},{\"name\":\"trackedEntityOther\",\"kind\":\"object\",\"type\":\"TrackedEntityOtherTrackedEntity\",\"relationName\":\"TrackedEntityToTrackedEntityOtherTrackedEntity\"},{\"name\":\"trackedEntityConfiguration\",\"kind\":\"object\",\"type\":\"TrackedEntityTrackedEntityConfiguration\",\"relationName\":\"TrackedEntityToTrackedEntityTrackedEntityConfiguration\"}],\"dbName\":null},\"TrackedEntityOwnTrackedEntity\":{\"fields\":[{\"name\":\"id\",\"kind\":\"scalar\",\"type\":\"String\"},{\"name\":\"trackedEntityId\",\"kind\":\"scalar\",\"type\":\"String\"},{\"name\":\"ownTrackedEntityId\",\"kind\":\"scalar\",\"type\":\"String\"},{\"name\":\"createdAt\",\"kind\":\"scalar\",\"type\":\"DateTime\"},{\"name\":\"updatedAt\",\"kind\":\"scalar\",\"type\":\"DateTime\"},{\"name\":\"trackedEntity\",\"kind\":\"object\",\"type\":\"TrackedEntity\",\"relationName\":\"TrackedEntityToTrackedEntityOwnTrackedEntity\"},{\"name\":\"ownTrackedEntity\",\"kind\":\"object\",\"type\":\"OwnTrackedEntity\",\"relationName\":\"OwnTrackedEntityToTrackedEntityOwnTrackedEntity\"}],\"dbName\":null},\"OwnTrackedEntity\":{\"fields\":[{\"name\":\"id\",\"kind\":\"scalar\",\"type\":\"String\"},{\"name\":\"facebookPageUrl\",\"kind\":\"scalar\",\"type\":\"String\"},{\"name\":\"createdAt\",\"kind\":\"scalar\",\"type\":\"DateTime\"},{\"name\":\"updatedAt\",\"kind\":\"scalar\",\"type\":\"DateTime\"},{\"name\":\"trackedEntityOwnTrackedEntity\",\"kind\":\"object\",\"type\":\"TrackedEntityOwnTrackedEntity\",\"relationName\":\"OwnTrackedEntityToTrackedEntityOwnTrackedEntity\"}],\"dbName\":null},\"TrackedEntityOtherTrackedEntity\":{\"fields\":[{\"name\":\"id\",\"kind\":\"scalar\",\"type\":\"String\"},{\"name\":\"trackedEntityId\",\"kind\":\"scalar\",\"type\":\"String\"},{\"name\":\"otherTrackedEntityId\",\"kind\":\"scalar\",\"type\":\"String\"},{\"name\":\"createdAt\",\"kind\":\"scalar\",\"type\":\"DateTime\"},{\"name\":\"updatedAt\",\"kind\":\"scalar\",\"type\":\"DateTime\"},{\"name\":\"trackedEntity\",\"kind\":\"object\",\"type\":\"TrackedEntity\",\"relationName\":\"TrackedEntityToTrackedEntityOtherTrackedEntity\"},{\"name\":\"otherTrackedEntity\",\"kind\":\"object\",\"type\":\"OtherTrackedEntity\",\"relationName\":\"OtherTrackedEntityToTrackedEntityOtherTrackedEntity\"}],\"dbName\":null},\"OtherTrackedEntity\":{\"fields\":[{\"name\":\"id\",\"kind\":\"scalar\",\"type\":\"String\"},{\"name\":\"facebookPageUrl\",\"kind\":\"scalar\",\"type\":\"String\"},{\"name\":\"createdAt\",\"kind\":\"scalar\",\"type\":\"DateTime\"},{\"name\":\"updatedAt\",\"kind\":\"scalar\",\"type\":\"DateTime\"},{\"name\":\"trackedEntityOtherTrackedEntity\",\"kind\":\"object\",\"type\":\"TrackedEntityOtherTrackedEntity\",\"relationName\":\"OtherTrackedEntityToTrackedEntityOtherTrackedEntity\"}],\"dbName\":null},\"TrackedEntityTrackedEntityConfiguration\":{\"fields\":[{\"name\":\"id\",\"kind\":\"scalar\",\"type\":\"String\"},{\"name\":\"trackedEntityId\",\"kind\":\"scalar\",\"type\":\"String\"},{\"name\":\"trackedEntityConfigurationId\",\"kind\":\"scalar\",\"type\":\"String\"},{\"name\":\"createdAt\",\"kind\":\"scalar\",\"type\":\"DateTime\"},{\"name\":\"updatedAt\",\"kind\":\"scalar\",\"type\":\"DateTime\"},{\"name\":\"trackedEntity\",\"kind\":\"object\",\"type\":\"TrackedEntity\",\"relationName\":\"TrackedEntityToTrackedEntityTrackedEntityConfiguration\"},{\"name\":\"trackedEntityConfiguration\",\"kind\":\"object\",\"type\":\"TrackedEntityConfiguration\",\"relationName\":\"TrackedEntityConfigurationToTrackedEntityTrackedEntityConfiguration\"}],\"dbName\":null},\"TrackedEntityConfiguration\":{\"fields\":[{\"name\":\"id\",\"kind\":\"scalar\",\"type\":\"String\"},{\"name\":\"isActive\",\"kind\":\"scalar\",\"type\":\"Boolean\"},{\"name\":\"createdAt\",\"kind\":\"scalar\",\"type\":\"DateTime\"},{\"name\":\"updatedAt\",\"kind\":\"scalar\",\"type\":\"DateTime\"},{\"name\":\"trackedEntityTrackedEntityConfiguration\",\"kind\":\"object\",\"type\":\"TrackedEntityTrackedEntityConfiguration\",\"relationName\":\"TrackedEntityConfigurationToTrackedEntityTrackedEntityConfiguration\"},{\"name\":\"promptConfigurations\",\"kind\":\"object\",\"type\":\"TrackedEntityConfigurationPromptConfiguration\",\"relationName\":\"TrackedEntityConfigurationToTrackedEntityConfigurationPromptConfiguration\"}],\"dbName\":null},\"TrackedEntityConfigurationPromptConfiguration\":{\"fields\":[{\"name\":\"id\",\"kind\":\"scalar\",\"type\":\"String\"},{\"name\":\"trackedEntityConfigurationId\",\"kind\":\"scalar\",\"type\":\"String\"},{\"name\":\"promptConfigurationId\",\"kind\":\"scalar\",\"type\":\"String\"},{\"name\":\"createdAt\",\"kind\":\"scalar\",\"type\":\"DateTime\"},{\"name\":\"updatedAt\",\"kind\":\"scalar\",\"type\":\"DateTime\"},{\"name\":\"promptConfiguration\",\"kind\":\"object\",\"type\":\"PromptConfiguration\",\"relationName\":\"PromptConfigurationToTrackedEntityConfigurationPromptConfiguration\"},{\"name\":\"trackedEntityConfiguration\",\"kind\":\"object\",\"type\":\"TrackedEntityConfiguration\",\"relationName\":\"TrackedEntityConfigurationToTrackedEntityConfigurationPromptConfiguration\"}],\"dbName\":null},\"PromptConfiguration\":{\"fields\":[{\"name\":\"id\",\"kind\":\"scalar\",\"type\":\"String\"},{\"name\":\"toneOfVoicePrompt\",\"kind\":\"scalar\",\"type\":\"String\"},{\"name\":\"userPrompt\",\"kind\":\"scalar\",\"type\":\"String\"},{\"name\":\"isActive\",\"kind\":\"scalar\",\"type\":\"Boolean\"},{\"name\":\"createdAt\",\"kind\":\"scalar\",\"type\":\"DateTime\"},{\"name\":\"updatedAt\",\"kind\":\"scalar\",\"type\":\"DateTime\"},{\"name\":\"trackedEntityConfigurationPromptConfigurations\",\"kind\":\"object\",\"type\":\"TrackedEntityConfigurationPromptConfiguration\",\"relationName\":\"PromptConfigurationToTrackedEntityConfigurationPromptConfiguration\"},{\"name\":\"reactionPromptConfigurations\",\"kind\":\"object\",\"type\":\"ReactionPromptConfiguration\",\"relationName\":\"PromptConfigurationToReactionPromptConfiguration\"}],\"dbName\":null},\"TrackedEntityPost\":{\"fields\":[{\"name\":\"id\",\"kind\":\"scalar\",\"type\":\"String\"},{\"name\":\"trackedEntityId\",\"kind\":\"scalar\",\"type\":\"String\"},{\"name\":\"postId\",\"kind\":\"scalar\",\"type\":\"String\"},{\"name\":\"createdAt\",\"kind\":\"scalar\",\"type\":\"DateTime\"},{\"name\":\"updatedAt\",\"kind\":\"scalar\",\"type\":\"DateTime\"},{\"name\":\"trackedEntity\",\"kind\":\"object\",\"type\":\"TrackedEntity\",\"relationName\":\"TrackedEntityToTrackedEntityPost\"},{\"name\":\"post\",\"kind\":\"object\",\"type\":\"Post\",\"relationName\":\"PostToTrackedEntityPost\"}],\"dbName\":null},\"Post\":{\"fields\":[{\"name\":\"id\",\"kind\":\"scalar\",\"type\":\"String\"},{\"name\":\"createdAt\",\"kind\":\"scalar\",\"type\":\"DateTime\"},{\"name\":\"updatedAt\",\"kind\":\"scalar\",\"type\":\"DateTime\"},{\"name\":\"trackedEntityPosts\",\"kind\":\"object\",\"type\":\"TrackedEntityPost\",\"relationName\":\"PostToTrackedEntityPost\"},{\"name\":\"postReactions\",\"kind\":\"object\",\"type\":\"PostReaction\",\"relationName\":\"PostToPostReaction\"},{\"name\":\"postFacebookPost\",\"kind\":\"object\",\"type\":\"PostFacebookPost\",\"relationName\":\"PostToPostFacebookPost\"}],\"dbName\":null},\"PostFacebookPost\":{\"fields\":[{\"name\":\"id\",\"kind\":\"scalar\",\"type\":\"String\"},{\"name\":\"postId\",\"kind\":\"scalar\",\"type\":\"String\"},{\"name\":\"facebookPostId\",\"kind\":\"scalar\",\"type\":\"String\"},{\"name\":\"createdAt\",\"kind\":\"scalar\",\"type\":\"DateTime\"},{\"name\":\"updatedAt\",\"kind\":\"scalar\",\"type\":\"DateTime\"},{\"name\":\"post\",\"kind\":\"object\",\"type\":\"Post\",\"relationName\":\"PostToPostFacebookPost\"},{\"name\":\"facebookPost\",\"kind\":\"object\",\"type\":\"FacebookPost\",\"relationName\":\"FacebookPostToPostFacebookPost\"}],\"dbName\":null},\"FacebookPost\":{\"fields\":[{\"name\":\"id\",\"kind\":\"scalar\",\"type\":\"String\"},{\"name\":\"facebookPostId\",\"kind\":\"scalar\",\"type\":\"String\"},{\"name\":\"url\",\"kind\":\"scalar\",\"type\":\"String\"},{\"name\":\"postedAt\",\"kind\":\"scalar\",\"type\":\"DateTime\"},{\"name\":\"text\",\"kind\":\"scalar\",\"type\":\"String\"},{\"name\":\"likes\",\"kind\":\"scalar\",\"type\":\"Int\"},{\"name\":\"comments\",\"kind\":\"scalar\",\"type\":\"Int\"},{\"name\":\"shares\",\"kind\":\"scalar\",\"type\":\"Int\"},{\"name\":\"topReactionsCount\",\"kind\":\"scalar\",\"type\":\"Int\"},{\"name\":\"isVideo\",\"kind\":\"scalar\",\"type\":\"Boolean\"},{\"name\":\"viewsCount\",\"kind\":\"scalar\",\"type\":\"Int\"},{\"name\":\"fullResponse\",\"kind\":\"scalar\",\"type\":\"Json\"},{\"name\":\"createdAt\",\"kind\":\"scalar\",\"type\":\"DateTime\"},{\"name\":\"updatedAt\",\"kind\":\"scalar\",\"type\":\"DateTime\"},{\"name\":\"postFacebookPost\",\"kind\":\"object\",\"type\":\"PostFacebookPost\",\"relationName\":\"FacebookPostToPostFacebookPost\"}],\"dbName\":null},\"TrackedEntityReaction\":{\"fields\":[{\"name\":\"id\",\"kind\":\"scalar\",\"type\":\"String\"},{\"name\":\"trackedEntityId\",\"kind\":\"scalar\",\"type\":\"String\"},{\"name\":\"reactionId\",\"kind\":\"scalar\",\"type\":\"String\"},{\"name\":\"createdAt\",\"kind\":\"scalar\",\"type\":\"DateTime\"},{\"name\":\"updatedAt\",\"kind\":\"scalar\",\"type\":\"DateTime\"},{\"name\":\"trackedEntity\",\"kind\":\"object\",\"type\":\"TrackedEntity\",\"relationName\":\"TrackedEntityToTrackedEntityReaction\"},{\"name\":\"reaction\",\"kind\":\"object\",\"type\":\"Reaction\",\"relationName\":\"ReactionToTrackedEntityReaction\"}],\"dbName\":null},\"PostReaction\":{\"fields\":[{\"name\":\"id\",\"kind\":\"scalar\",\"type\":\"String\"},{\"name\":\"postId\",\"kind\":\"scalar\",\"type\":\"String\"},{\"name\":\"reactionId\",\"kind\":\"scalar\",\"type\":\"String\"},{\"name\":\"createdAt\",\"kind\":\"scalar\",\"type\":\"DateTime\"},{\"name\":\"updatedAt\",\"kind\":\"scalar\",\"type\":\"DateTime\"},{\"name\":\"post\",\"kind\":\"object\",\"type\":\"Post\",\"relationName\":\"PostToPostReaction\"},{\"name\":\"reaction\",\"kind\":\"object\",\"type\":\"Reaction\",\"relationName\":\"PostReactionToReaction\"}],\"dbName\":null},\"Reaction\":{\"fields\":[{\"name\":\"id\",\"kind\":\"scalar\",\"type\":\"String\"},{\"name\":\"text\",\"kind\":\"scalar\",\"type\":\"String\"},{\"name\":\"createdAt\",\"kind\":\"scalar\",\"type\":\"DateTime\"},{\"name\":\"updatedAt\",\"kind\":\"scalar\",\"type\":\"DateTime\"},{\"name\":\"postReaction\",\"kind\":\"object\",\"type\":\"PostReaction\",\"relationName\":\"PostReactionToReaction\"},{\"name\":\"trackedEntityReaction\",\"kind\":\"object\",\"type\":\"TrackedEntityReaction\",\"relationName\":\"ReactionToTrackedEntityReaction\"},{\"name\":\"reactionPromptConfiguration\",\"kind\":\"object\",\"type\":\"ReactionPromptConfiguration\",\"relationName\":\"ReactionToReactionPromptConfiguration\"}],\"dbName\":null},\"ReactionPromptConfiguration\":{\"fields\":[{\"name\":\"id\",\"kind\":\"scalar\",\"type\":\"String\"},{\"name\":\"reactionId\",\"kind\":\"scalar\",\"type\":\"String\"},{\"name\":\"promptConfigurationId\",\"kind\":\"scalar\",\"type\":\"String\"},{\"name\":\"createdAt\",\"kind\":\"scalar\",\"type\":\"DateTime\"},{\"name\":\"updatedAt\",\"kind\":\"scalar\",\"type\":\"DateTime\"},{\"name\":\"reaction\",\"kind\":\"object\",\"type\":\"Reaction\",\"relationName\":\"ReactionToReactionPromptConfiguration\"},{\"name\":\"promptConfiguration\",\"kind\":\"object\",\"type\":\"PromptConfiguration\",\"relationName\":\"PromptConfigurationToReactionPromptConfiguration\"}],\"dbName\":null}},\"enums\":{},\"types\":{}}")
 
 async function decodeBase64AsWasm(wasmBase64: string): Promise<WebAssembly.Module> {
   const { Buffer } = await import('node:buffer')
@@ -58,8 +58,8 @@ export interface PrismaClientConstructor {
    * @example
    * ```
    * const prisma = new PrismaClient()
-   * // Fetch zero or more Users
-   * const users = await prisma.user.findMany()
+   * // Fetch zero or more SystemConfigurations
+   * const systemConfigurations = await prisma.systemConfiguration.findMany()
    * ```
    * 
    * Read more in our [docs](https://www.prisma.io/docs/reference/tools-and-interfaces/prisma-client).
@@ -80,8 +80,8 @@ export interface PrismaClientConstructor {
  * @example
  * ```
  * const prisma = new PrismaClient()
- * // Fetch zero or more Users
- * const users = await prisma.user.findMany()
+ * // Fetch zero or more SystemConfigurations
+ * const systemConfigurations = await prisma.systemConfiguration.findMany()
  * ```
  * 
  * Read more in our [docs](https://www.prisma.io/docs/reference/tools-and-interfaces/prisma-client).
@@ -175,16 +175,6 @@ export interface PrismaClient<
   }>>
 
       /**
-   * `prisma.user`: Exposes CRUD operations for the **User** model.
-    * Example usage:
-    * ```ts
-    * // Fetch zero or more Users
-    * const users = await prisma.user.findMany()
-    * ```
-    */
-  get user(): Prisma.UserDelegate<ExtArgs, { omit: OmitOpts }>;
-
-  /**
    * `prisma.systemConfiguration`: Exposes CRUD operations for the **SystemConfiguration** model.
     * Example usage:
     * ```ts
@@ -193,36 +183,6 @@ export interface PrismaClient<
     * ```
     */
   get systemConfiguration(): Prisma.SystemConfigurationDelegate<ExtArgs, { omit: OmitOpts }>;
-
-  /**
-   * `prisma.trackedEntity`: Exposes CRUD operations for the **TrackedEntity** model.
-    * Example usage:
-    * ```ts
-    * // Fetch zero or more TrackedEntities
-    * const trackedEntities = await prisma.trackedEntity.findMany()
-    * ```
-    */
-  get trackedEntity(): Prisma.TrackedEntityDelegate<ExtArgs, { omit: OmitOpts }>;
-
-  /**
-   * `prisma.facebookPost`: Exposes CRUD operations for the **FacebookPost** model.
-    * Example usage:
-    * ```ts
-    * // Fetch zero or more FacebookPosts
-    * const facebookPosts = await prisma.facebookPost.findMany()
-    * ```
-    */
-  get facebookPost(): Prisma.FacebookPostDelegate<ExtArgs, { omit: OmitOpts }>;
-
-  /**
-   * `prisma.facebookPostReaction`: Exposes CRUD operations for the **FacebookPostReaction** model.
-    * Example usage:
-    * ```ts
-    * // Fetch zero or more FacebookPostReactions
-    * const facebookPostReactions = await prisma.facebookPostReaction.findMany()
-    * ```
-    */
-  get facebookPostReaction(): Prisma.FacebookPostReactionDelegate<ExtArgs, { omit: OmitOpts }>;
 
   /**
    * `prisma.systemEvent`: Exposes CRUD operations for the **SystemEvent** model.
@@ -235,24 +195,64 @@ export interface PrismaClient<
   get systemEvent(): Prisma.SystemEventDelegate<ExtArgs, { omit: OmitOpts }>;
 
   /**
-   * `prisma.postCategory`: Exposes CRUD operations for the **PostCategory** model.
+   * `prisma.trackedEntity`: Exposes CRUD operations for the **TrackedEntity** model.
     * Example usage:
     * ```ts
-    * // Fetch zero or more PostCategories
-    * const postCategories = await prisma.postCategory.findMany()
+    * // Fetch zero or more TrackedEntities
+    * const trackedEntities = await prisma.trackedEntity.findMany()
     * ```
     */
-  get postCategory(): Prisma.PostCategoryDelegate<ExtArgs, { omit: OmitOpts }>;
+  get trackedEntity(): Prisma.TrackedEntityDelegate<ExtArgs, { omit: OmitOpts }>;
 
   /**
-   * `prisma.politics`: Exposes CRUD operations for the **Politics** model.
+   * `prisma.trackedEntityOwnTrackedEntity`: Exposes CRUD operations for the **TrackedEntityOwnTrackedEntity** model.
     * Example usage:
     * ```ts
-    * // Fetch zero or more Politics
-    * const politics = await prisma.politics.findMany()
+    * // Fetch zero or more TrackedEntityOwnTrackedEntities
+    * const trackedEntityOwnTrackedEntities = await prisma.trackedEntityOwnTrackedEntity.findMany()
     * ```
     */
-  get politics(): Prisma.PoliticsDelegate<ExtArgs, { omit: OmitOpts }>;
+  get trackedEntityOwnTrackedEntity(): Prisma.TrackedEntityOwnTrackedEntityDelegate<ExtArgs, { omit: OmitOpts }>;
+
+  /**
+   * `prisma.ownTrackedEntity`: Exposes CRUD operations for the **OwnTrackedEntity** model.
+    * Example usage:
+    * ```ts
+    * // Fetch zero or more OwnTrackedEntities
+    * const ownTrackedEntities = await prisma.ownTrackedEntity.findMany()
+    * ```
+    */
+  get ownTrackedEntity(): Prisma.OwnTrackedEntityDelegate<ExtArgs, { omit: OmitOpts }>;
+
+  /**
+   * `prisma.trackedEntityOtherTrackedEntity`: Exposes CRUD operations for the **TrackedEntityOtherTrackedEntity** model.
+    * Example usage:
+    * ```ts
+    * // Fetch zero or more TrackedEntityOtherTrackedEntities
+    * const trackedEntityOtherTrackedEntities = await prisma.trackedEntityOtherTrackedEntity.findMany()
+    * ```
+    */
+  get trackedEntityOtherTrackedEntity(): Prisma.TrackedEntityOtherTrackedEntityDelegate<ExtArgs, { omit: OmitOpts }>;
+
+  /**
+   * `prisma.otherTrackedEntity`: Exposes CRUD operations for the **OtherTrackedEntity** model.
+    * Example usage:
+    * ```ts
+    * // Fetch zero or more OtherTrackedEntities
+    * const otherTrackedEntities = await prisma.otherTrackedEntity.findMany()
+    * ```
+    */
+  get otherTrackedEntity(): Prisma.OtherTrackedEntityDelegate<ExtArgs, { omit: OmitOpts }>;
+
+  /**
+   * `prisma.trackedEntityTrackedEntityConfiguration`: Exposes CRUD operations for the **TrackedEntityTrackedEntityConfiguration** model.
+    * Example usage:
+    * ```ts
+    * // Fetch zero or more TrackedEntityTrackedEntityConfigurations
+    * const trackedEntityTrackedEntityConfigurations = await prisma.trackedEntityTrackedEntityConfiguration.findMany()
+    * ```
+    */
+  get trackedEntityTrackedEntityConfiguration(): Prisma.TrackedEntityTrackedEntityConfigurationDelegate<ExtArgs, { omit: OmitOpts }>;
 
   /**
    * `prisma.trackedEntityConfiguration`: Exposes CRUD operations for the **TrackedEntityConfiguration** model.
@@ -263,6 +263,106 @@ export interface PrismaClient<
     * ```
     */
   get trackedEntityConfiguration(): Prisma.TrackedEntityConfigurationDelegate<ExtArgs, { omit: OmitOpts }>;
+
+  /**
+   * `prisma.trackedEntityConfigurationPromptConfiguration`: Exposes CRUD operations for the **TrackedEntityConfigurationPromptConfiguration** model.
+    * Example usage:
+    * ```ts
+    * // Fetch zero or more TrackedEntityConfigurationPromptConfigurations
+    * const trackedEntityConfigurationPromptConfigurations = await prisma.trackedEntityConfigurationPromptConfiguration.findMany()
+    * ```
+    */
+  get trackedEntityConfigurationPromptConfiguration(): Prisma.TrackedEntityConfigurationPromptConfigurationDelegate<ExtArgs, { omit: OmitOpts }>;
+
+  /**
+   * `prisma.promptConfiguration`: Exposes CRUD operations for the **PromptConfiguration** model.
+    * Example usage:
+    * ```ts
+    * // Fetch zero or more PromptConfigurations
+    * const promptConfigurations = await prisma.promptConfiguration.findMany()
+    * ```
+    */
+  get promptConfiguration(): Prisma.PromptConfigurationDelegate<ExtArgs, { omit: OmitOpts }>;
+
+  /**
+   * `prisma.trackedEntityPost`: Exposes CRUD operations for the **TrackedEntityPost** model.
+    * Example usage:
+    * ```ts
+    * // Fetch zero or more TrackedEntityPosts
+    * const trackedEntityPosts = await prisma.trackedEntityPost.findMany()
+    * ```
+    */
+  get trackedEntityPost(): Prisma.TrackedEntityPostDelegate<ExtArgs, { omit: OmitOpts }>;
+
+  /**
+   * `prisma.post`: Exposes CRUD operations for the **Post** model.
+    * Example usage:
+    * ```ts
+    * // Fetch zero or more Posts
+    * const posts = await prisma.post.findMany()
+    * ```
+    */
+  get post(): Prisma.PostDelegate<ExtArgs, { omit: OmitOpts }>;
+
+  /**
+   * `prisma.postFacebookPost`: Exposes CRUD operations for the **PostFacebookPost** model.
+    * Example usage:
+    * ```ts
+    * // Fetch zero or more PostFacebookPosts
+    * const postFacebookPosts = await prisma.postFacebookPost.findMany()
+    * ```
+    */
+  get postFacebookPost(): Prisma.PostFacebookPostDelegate<ExtArgs, { omit: OmitOpts }>;
+
+  /**
+   * `prisma.facebookPost`: Exposes CRUD operations for the **FacebookPost** model.
+    * Example usage:
+    * ```ts
+    * // Fetch zero or more FacebookPosts
+    * const facebookPosts = await prisma.facebookPost.findMany()
+    * ```
+    */
+  get facebookPost(): Prisma.FacebookPostDelegate<ExtArgs, { omit: OmitOpts }>;
+
+  /**
+   * `prisma.trackedEntityReaction`: Exposes CRUD operations for the **TrackedEntityReaction** model.
+    * Example usage:
+    * ```ts
+    * // Fetch zero or more TrackedEntityReactions
+    * const trackedEntityReactions = await prisma.trackedEntityReaction.findMany()
+    * ```
+    */
+  get trackedEntityReaction(): Prisma.TrackedEntityReactionDelegate<ExtArgs, { omit: OmitOpts }>;
+
+  /**
+   * `prisma.postReaction`: Exposes CRUD operations for the **PostReaction** model.
+    * Example usage:
+    * ```ts
+    * // Fetch zero or more PostReactions
+    * const postReactions = await prisma.postReaction.findMany()
+    * ```
+    */
+  get postReaction(): Prisma.PostReactionDelegate<ExtArgs, { omit: OmitOpts }>;
+
+  /**
+   * `prisma.reaction`: Exposes CRUD operations for the **Reaction** model.
+    * Example usage:
+    * ```ts
+    * // Fetch zero or more Reactions
+    * const reactions = await prisma.reaction.findMany()
+    * ```
+    */
+  get reaction(): Prisma.ReactionDelegate<ExtArgs, { omit: OmitOpts }>;
+
+  /**
+   * `prisma.reactionPromptConfiguration`: Exposes CRUD operations for the **ReactionPromptConfiguration** model.
+    * Example usage:
+    * ```ts
+    * // Fetch zero or more ReactionPromptConfigurations
+    * const reactionPromptConfigurations = await prisma.reactionPromptConfiguration.findMany()
+    * ```
+    */
+  get reactionPromptConfiguration(): Prisma.ReactionPromptConfigurationDelegate<ExtArgs, { omit: OmitOpts }>;
 }
 
 export function getPrismaClientClass(): PrismaClientConstructor {

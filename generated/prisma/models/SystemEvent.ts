@@ -27,7 +27,6 @@ export type AggregateSystemEvent = {
 export type SystemEventMinAggregateOutputType = {
   id: string | null
   type: $Enums.SystemEventType | null
-  description: string | null
   createdAt: Date | null
   updatedAt: Date | null
 }
@@ -35,7 +34,6 @@ export type SystemEventMinAggregateOutputType = {
 export type SystemEventMaxAggregateOutputType = {
   id: string | null
   type: $Enums.SystemEventType | null
-  description: string | null
   createdAt: Date | null
   updatedAt: Date | null
 }
@@ -43,7 +41,7 @@ export type SystemEventMaxAggregateOutputType = {
 export type SystemEventCountAggregateOutputType = {
   id: number
   type: number
-  description: number
+  details: number
   createdAt: number
   updatedAt: number
   _all: number
@@ -53,7 +51,6 @@ export type SystemEventCountAggregateOutputType = {
 export type SystemEventMinAggregateInputType = {
   id?: true
   type?: true
-  description?: true
   createdAt?: true
   updatedAt?: true
 }
@@ -61,7 +58,6 @@ export type SystemEventMinAggregateInputType = {
 export type SystemEventMaxAggregateInputType = {
   id?: true
   type?: true
-  description?: true
   createdAt?: true
   updatedAt?: true
 }
@@ -69,7 +65,7 @@ export type SystemEventMaxAggregateInputType = {
 export type SystemEventCountAggregateInputType = {
   id?: true
   type?: true
-  description?: true
+  details?: true
   createdAt?: true
   updatedAt?: true
   _all?: true
@@ -150,7 +146,7 @@ export type SystemEventGroupByArgs<ExtArgs extends runtime.Types.Extensions.Inte
 export type SystemEventGroupByOutputType = {
   id: string
   type: $Enums.SystemEventType
-  description: string
+  details: runtime.JsonValue
   createdAt: Date
   updatedAt: Date
   _count: SystemEventCountAggregateOutputType | null
@@ -179,7 +175,7 @@ export type SystemEventWhereInput = {
   NOT?: Prisma.SystemEventWhereInput | Prisma.SystemEventWhereInput[]
   id?: Prisma.StringFilter<"SystemEvent"> | string
   type?: Prisma.EnumSystemEventTypeFilter<"SystemEvent"> | $Enums.SystemEventType
-  description?: Prisma.StringFilter<"SystemEvent"> | string
+  details?: Prisma.JsonFilter<"SystemEvent">
   createdAt?: Prisma.DateTimeFilter<"SystemEvent"> | Date | string
   updatedAt?: Prisma.DateTimeFilter<"SystemEvent"> | Date | string
 }
@@ -187,7 +183,7 @@ export type SystemEventWhereInput = {
 export type SystemEventOrderByWithRelationInput = {
   id?: Prisma.SortOrder
   type?: Prisma.SortOrder
-  description?: Prisma.SortOrder
+  details?: Prisma.SortOrder
   createdAt?: Prisma.SortOrder
   updatedAt?: Prisma.SortOrder
 }
@@ -198,7 +194,7 @@ export type SystemEventWhereUniqueInput = Prisma.AtLeast<{
   OR?: Prisma.SystemEventWhereInput[]
   NOT?: Prisma.SystemEventWhereInput | Prisma.SystemEventWhereInput[]
   type?: Prisma.EnumSystemEventTypeFilter<"SystemEvent"> | $Enums.SystemEventType
-  description?: Prisma.StringFilter<"SystemEvent"> | string
+  details?: Prisma.JsonFilter<"SystemEvent">
   createdAt?: Prisma.DateTimeFilter<"SystemEvent"> | Date | string
   updatedAt?: Prisma.DateTimeFilter<"SystemEvent"> | Date | string
 }, "id">
@@ -206,7 +202,7 @@ export type SystemEventWhereUniqueInput = Prisma.AtLeast<{
 export type SystemEventOrderByWithAggregationInput = {
   id?: Prisma.SortOrder
   type?: Prisma.SortOrder
-  description?: Prisma.SortOrder
+  details?: Prisma.SortOrder
   createdAt?: Prisma.SortOrder
   updatedAt?: Prisma.SortOrder
   _count?: Prisma.SystemEventCountOrderByAggregateInput
@@ -220,7 +216,7 @@ export type SystemEventScalarWhereWithAggregatesInput = {
   NOT?: Prisma.SystemEventScalarWhereWithAggregatesInput | Prisma.SystemEventScalarWhereWithAggregatesInput[]
   id?: Prisma.StringWithAggregatesFilter<"SystemEvent"> | string
   type?: Prisma.EnumSystemEventTypeWithAggregatesFilter<"SystemEvent"> | $Enums.SystemEventType
-  description?: Prisma.StringWithAggregatesFilter<"SystemEvent"> | string
+  details?: Prisma.JsonWithAggregatesFilter<"SystemEvent">
   createdAt?: Prisma.DateTimeWithAggregatesFilter<"SystemEvent"> | Date | string
   updatedAt?: Prisma.DateTimeWithAggregatesFilter<"SystemEvent"> | Date | string
 }
@@ -228,7 +224,7 @@ export type SystemEventScalarWhereWithAggregatesInput = {
 export type SystemEventCreateInput = {
   id?: string
   type: $Enums.SystemEventType
-  description: string
+  details: Prisma.JsonNullValueInput | runtime.InputJsonValue
   createdAt?: Date | string
   updatedAt?: Date | string
 }
@@ -236,7 +232,7 @@ export type SystemEventCreateInput = {
 export type SystemEventUncheckedCreateInput = {
   id?: string
   type: $Enums.SystemEventType
-  description: string
+  details: Prisma.JsonNullValueInput | runtime.InputJsonValue
   createdAt?: Date | string
   updatedAt?: Date | string
 }
@@ -244,7 +240,7 @@ export type SystemEventUncheckedCreateInput = {
 export type SystemEventUpdateInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
   type?: Prisma.EnumSystemEventTypeFieldUpdateOperationsInput | $Enums.SystemEventType
-  description?: Prisma.StringFieldUpdateOperationsInput | string
+  details?: Prisma.JsonNullValueInput | runtime.InputJsonValue
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
 }
@@ -252,7 +248,7 @@ export type SystemEventUpdateInput = {
 export type SystemEventUncheckedUpdateInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
   type?: Prisma.EnumSystemEventTypeFieldUpdateOperationsInput | $Enums.SystemEventType
-  description?: Prisma.StringFieldUpdateOperationsInput | string
+  details?: Prisma.JsonNullValueInput | runtime.InputJsonValue
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
 }
@@ -260,7 +256,7 @@ export type SystemEventUncheckedUpdateInput = {
 export type SystemEventCreateManyInput = {
   id?: string
   type: $Enums.SystemEventType
-  description: string
+  details: Prisma.JsonNullValueInput | runtime.InputJsonValue
   createdAt?: Date | string
   updatedAt?: Date | string
 }
@@ -268,7 +264,7 @@ export type SystemEventCreateManyInput = {
 export type SystemEventUpdateManyMutationInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
   type?: Prisma.EnumSystemEventTypeFieldUpdateOperationsInput | $Enums.SystemEventType
-  description?: Prisma.StringFieldUpdateOperationsInput | string
+  details?: Prisma.JsonNullValueInput | runtime.InputJsonValue
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
 }
@@ -276,7 +272,7 @@ export type SystemEventUpdateManyMutationInput = {
 export type SystemEventUncheckedUpdateManyInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
   type?: Prisma.EnumSystemEventTypeFieldUpdateOperationsInput | $Enums.SystemEventType
-  description?: Prisma.StringFieldUpdateOperationsInput | string
+  details?: Prisma.JsonNullValueInput | runtime.InputJsonValue
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
 }
@@ -284,7 +280,7 @@ export type SystemEventUncheckedUpdateManyInput = {
 export type SystemEventCountOrderByAggregateInput = {
   id?: Prisma.SortOrder
   type?: Prisma.SortOrder
-  description?: Prisma.SortOrder
+  details?: Prisma.SortOrder
   createdAt?: Prisma.SortOrder
   updatedAt?: Prisma.SortOrder
 }
@@ -292,7 +288,6 @@ export type SystemEventCountOrderByAggregateInput = {
 export type SystemEventMaxOrderByAggregateInput = {
   id?: Prisma.SortOrder
   type?: Prisma.SortOrder
-  description?: Prisma.SortOrder
   createdAt?: Prisma.SortOrder
   updatedAt?: Prisma.SortOrder
 }
@@ -300,7 +295,6 @@ export type SystemEventMaxOrderByAggregateInput = {
 export type SystemEventMinOrderByAggregateInput = {
   id?: Prisma.SortOrder
   type?: Prisma.SortOrder
-  description?: Prisma.SortOrder
   createdAt?: Prisma.SortOrder
   updatedAt?: Prisma.SortOrder
 }
@@ -314,7 +308,7 @@ export type EnumSystemEventTypeFieldUpdateOperationsInput = {
 export type SystemEventSelect<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetSelect<{
   id?: boolean
   type?: boolean
-  description?: boolean
+  details?: boolean
   createdAt?: boolean
   updatedAt?: boolean
 }, ExtArgs["result"]["systemEvent"]>
@@ -322,7 +316,7 @@ export type SystemEventSelect<ExtArgs extends runtime.Types.Extensions.InternalA
 export type SystemEventSelectCreateManyAndReturn<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetSelect<{
   id?: boolean
   type?: boolean
-  description?: boolean
+  details?: boolean
   createdAt?: boolean
   updatedAt?: boolean
 }, ExtArgs["result"]["systemEvent"]>
@@ -330,7 +324,7 @@ export type SystemEventSelectCreateManyAndReturn<ExtArgs extends runtime.Types.E
 export type SystemEventSelectUpdateManyAndReturn<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetSelect<{
   id?: boolean
   type?: boolean
-  description?: boolean
+  details?: boolean
   createdAt?: boolean
   updatedAt?: boolean
 }, ExtArgs["result"]["systemEvent"]>
@@ -338,12 +332,12 @@ export type SystemEventSelectUpdateManyAndReturn<ExtArgs extends runtime.Types.E
 export type SystemEventSelectScalar = {
   id?: boolean
   type?: boolean
-  description?: boolean
+  details?: boolean
   createdAt?: boolean
   updatedAt?: boolean
 }
 
-export type SystemEventOmit<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetOmit<"id" | "type" | "description" | "createdAt" | "updatedAt", ExtArgs["result"]["systemEvent"]>
+export type SystemEventOmit<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetOmit<"id" | "type" | "details" | "createdAt" | "updatedAt", ExtArgs["result"]["systemEvent"]>
 
 export type $SystemEventPayload<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
   name: "SystemEvent"
@@ -351,7 +345,7 @@ export type $SystemEventPayload<ExtArgs extends runtime.Types.Extensions.Interna
   scalars: runtime.Types.Extensions.GetPayloadResult<{
     id: string
     type: $Enums.SystemEventType
-    description: string
+    details: runtime.JsonValue
     createdAt: Date
     updatedAt: Date
   }, ExtArgs["result"]["systemEvent"]>
@@ -779,7 +773,7 @@ export interface Prisma__SystemEventClient<T, Null = never, ExtArgs extends runt
 export interface SystemEventFieldRefs {
   readonly id: Prisma.FieldRef<"SystemEvent", 'String'>
   readonly type: Prisma.FieldRef<"SystemEvent", 'SystemEventType'>
-  readonly description: Prisma.FieldRef<"SystemEvent", 'String'>
+  readonly details: Prisma.FieldRef<"SystemEvent", 'Json'>
   readonly createdAt: Prisma.FieldRef<"SystemEvent", 'DateTime'>
   readonly updatedAt: Prisma.FieldRef<"SystemEvent", 'DateTime'>
 }

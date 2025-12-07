@@ -9,16 +9,13 @@
 * 🟢 You can import this file directly.
 */
 
-export const TrackedEntityType = {
-  OWN: 'OWN',
-  OTHER: 'OTHER'
-} as const
-
-export type TrackedEntityType = (typeof TrackedEntityType)[keyof typeof TrackedEntityType]
-
-
 export const SystemEventType = {
-  EMAIL_NOTIFICATION: 'EMAIL_NOTIFICATION'
+  FACEBOOK_POSTS_EMAIL_NOTIFICATION: 'FACEBOOK_POSTS_EMAIL_NOTIFICATION',
+  FACEBOOK_POSTS_PROCESSING_STARTED: 'FACEBOOK_POSTS_PROCESSING_STARTED',
+  FACEBOOK_POSTS_FETCHED: 'FACEBOOK_POSTS_FETCHED',
+  FACEBOOK_POSTS_REACTIONS_GENERATED: 'FACEBOOK_POSTS_REACTIONS_GENERATED',
+  FACEBOOK_POSTS_PROCESSING_COMPLETED: 'FACEBOOK_POSTS_PROCESSING_COMPLETED',
+  FACEBOOK_POSTS_ERROR: 'FACEBOOK_POSTS_ERROR'
 } as const
 
 export type SystemEventType = (typeof SystemEventType)[keyof typeof SystemEventType]

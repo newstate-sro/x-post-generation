@@ -44,10 +44,9 @@ export type FacebookPostSumAggregateOutputType = {
 
 export type FacebookPostMinAggregateOutputType = {
   id: string | null
-  trackedEntityId: string | null
-  postId: string | null
+  facebookPostId: string | null
   url: string | null
-  timestamp: Date | null
+  postedAt: Date | null
   text: string | null
   likes: number | null
   comments: number | null
@@ -61,10 +60,9 @@ export type FacebookPostMinAggregateOutputType = {
 
 export type FacebookPostMaxAggregateOutputType = {
   id: string | null
-  trackedEntityId: string | null
-  postId: string | null
+  facebookPostId: string | null
   url: string | null
-  timestamp: Date | null
+  postedAt: Date | null
   text: string | null
   likes: number | null
   comments: number | null
@@ -78,10 +76,9 @@ export type FacebookPostMaxAggregateOutputType = {
 
 export type FacebookPostCountAggregateOutputType = {
   id: number
-  trackedEntityId: number
-  postId: number
+  facebookPostId: number
   url: number
-  timestamp: number
+  postedAt: number
   text: number
   likes: number
   comments: number
@@ -114,10 +111,9 @@ export type FacebookPostSumAggregateInputType = {
 
 export type FacebookPostMinAggregateInputType = {
   id?: true
-  trackedEntityId?: true
-  postId?: true
+  facebookPostId?: true
   url?: true
-  timestamp?: true
+  postedAt?: true
   text?: true
   likes?: true
   comments?: true
@@ -131,10 +127,9 @@ export type FacebookPostMinAggregateInputType = {
 
 export type FacebookPostMaxAggregateInputType = {
   id?: true
-  trackedEntityId?: true
-  postId?: true
+  facebookPostId?: true
   url?: true
-  timestamp?: true
+  postedAt?: true
   text?: true
   likes?: true
   comments?: true
@@ -148,10 +143,9 @@ export type FacebookPostMaxAggregateInputType = {
 
 export type FacebookPostCountAggregateInputType = {
   id?: true
-  trackedEntityId?: true
-  postId?: true
+  facebookPostId?: true
   url?: true
-  timestamp?: true
+  postedAt?: true
   text?: true
   likes?: true
   comments?: true
@@ -253,10 +247,9 @@ export type FacebookPostGroupByArgs<ExtArgs extends runtime.Types.Extensions.Int
 
 export type FacebookPostGroupByOutputType = {
   id: string
-  trackedEntityId: string
-  postId: string
+  facebookPostId: string
   url: string
-  timestamp: Date
+  postedAt: Date
   text: string
   likes: number
   comments: number
@@ -294,10 +287,9 @@ export type FacebookPostWhereInput = {
   OR?: Prisma.FacebookPostWhereInput[]
   NOT?: Prisma.FacebookPostWhereInput | Prisma.FacebookPostWhereInput[]
   id?: Prisma.StringFilter<"FacebookPost"> | string
-  trackedEntityId?: Prisma.StringFilter<"FacebookPost"> | string
-  postId?: Prisma.StringFilter<"FacebookPost"> | string
+  facebookPostId?: Prisma.StringFilter<"FacebookPost"> | string
   url?: Prisma.StringFilter<"FacebookPost"> | string
-  timestamp?: Prisma.DateTimeFilter<"FacebookPost"> | Date | string
+  postedAt?: Prisma.DateTimeFilter<"FacebookPost"> | Date | string
   text?: Prisma.StringFilter<"FacebookPost"> | string
   likes?: Prisma.IntFilter<"FacebookPost"> | number
   comments?: Prisma.IntFilter<"FacebookPost"> | number
@@ -308,17 +300,14 @@ export type FacebookPostWhereInput = {
   fullResponse?: Prisma.JsonFilter<"FacebookPost">
   createdAt?: Prisma.DateTimeFilter<"FacebookPost"> | Date | string
   updatedAt?: Prisma.DateTimeFilter<"FacebookPost"> | Date | string
-  trackedEntity?: Prisma.XOR<Prisma.TrackedEntityScalarRelationFilter, Prisma.TrackedEntityWhereInput>
-  facebookPostReactions?: Prisma.FacebookPostReactionListRelationFilter
-  postCategories?: Prisma.PostCategoryListRelationFilter
+  postFacebookPost?: Prisma.XOR<Prisma.PostFacebookPostNullableScalarRelationFilter, Prisma.PostFacebookPostWhereInput> | null
 }
 
 export type FacebookPostOrderByWithRelationInput = {
   id?: Prisma.SortOrder
-  trackedEntityId?: Prisma.SortOrder
-  postId?: Prisma.SortOrder
+  facebookPostId?: Prisma.SortOrder
   url?: Prisma.SortOrder
-  timestamp?: Prisma.SortOrder
+  postedAt?: Prisma.SortOrder
   text?: Prisma.SortOrder
   likes?: Prisma.SortOrder
   comments?: Prisma.SortOrder
@@ -329,20 +318,17 @@ export type FacebookPostOrderByWithRelationInput = {
   fullResponse?: Prisma.SortOrder
   createdAt?: Prisma.SortOrder
   updatedAt?: Prisma.SortOrder
-  trackedEntity?: Prisma.TrackedEntityOrderByWithRelationInput
-  facebookPostReactions?: Prisma.FacebookPostReactionOrderByRelationAggregateInput
-  postCategories?: Prisma.PostCategoryOrderByRelationAggregateInput
+  postFacebookPost?: Prisma.PostFacebookPostOrderByWithRelationInput
 }
 
 export type FacebookPostWhereUniqueInput = Prisma.AtLeast<{
   id?: string
-  postId?: string
+  facebookPostId?: string
   AND?: Prisma.FacebookPostWhereInput | Prisma.FacebookPostWhereInput[]
   OR?: Prisma.FacebookPostWhereInput[]
   NOT?: Prisma.FacebookPostWhereInput | Prisma.FacebookPostWhereInput[]
-  trackedEntityId?: Prisma.StringFilter<"FacebookPost"> | string
   url?: Prisma.StringFilter<"FacebookPost"> | string
-  timestamp?: Prisma.DateTimeFilter<"FacebookPost"> | Date | string
+  postedAt?: Prisma.DateTimeFilter<"FacebookPost"> | Date | string
   text?: Prisma.StringFilter<"FacebookPost"> | string
   likes?: Prisma.IntFilter<"FacebookPost"> | number
   comments?: Prisma.IntFilter<"FacebookPost"> | number
@@ -353,17 +339,14 @@ export type FacebookPostWhereUniqueInput = Prisma.AtLeast<{
   fullResponse?: Prisma.JsonFilter<"FacebookPost">
   createdAt?: Prisma.DateTimeFilter<"FacebookPost"> | Date | string
   updatedAt?: Prisma.DateTimeFilter<"FacebookPost"> | Date | string
-  trackedEntity?: Prisma.XOR<Prisma.TrackedEntityScalarRelationFilter, Prisma.TrackedEntityWhereInput>
-  facebookPostReactions?: Prisma.FacebookPostReactionListRelationFilter
-  postCategories?: Prisma.PostCategoryListRelationFilter
-}, "id" | "postId">
+  postFacebookPost?: Prisma.XOR<Prisma.PostFacebookPostNullableScalarRelationFilter, Prisma.PostFacebookPostWhereInput> | null
+}, "id" | "facebookPostId">
 
 export type FacebookPostOrderByWithAggregationInput = {
   id?: Prisma.SortOrder
-  trackedEntityId?: Prisma.SortOrder
-  postId?: Prisma.SortOrder
+  facebookPostId?: Prisma.SortOrder
   url?: Prisma.SortOrder
-  timestamp?: Prisma.SortOrder
+  postedAt?: Prisma.SortOrder
   text?: Prisma.SortOrder
   likes?: Prisma.SortOrder
   comments?: Prisma.SortOrder
@@ -386,10 +369,9 @@ export type FacebookPostScalarWhereWithAggregatesInput = {
   OR?: Prisma.FacebookPostScalarWhereWithAggregatesInput[]
   NOT?: Prisma.FacebookPostScalarWhereWithAggregatesInput | Prisma.FacebookPostScalarWhereWithAggregatesInput[]
   id?: Prisma.StringWithAggregatesFilter<"FacebookPost"> | string
-  trackedEntityId?: Prisma.StringWithAggregatesFilter<"FacebookPost"> | string
-  postId?: Prisma.StringWithAggregatesFilter<"FacebookPost"> | string
+  facebookPostId?: Prisma.StringWithAggregatesFilter<"FacebookPost"> | string
   url?: Prisma.StringWithAggregatesFilter<"FacebookPost"> | string
-  timestamp?: Prisma.DateTimeWithAggregatesFilter<"FacebookPost"> | Date | string
+  postedAt?: Prisma.DateTimeWithAggregatesFilter<"FacebookPost"> | Date | string
   text?: Prisma.StringWithAggregatesFilter<"FacebookPost"> | string
   likes?: Prisma.IntWithAggregatesFilter<"FacebookPost"> | number
   comments?: Prisma.IntWithAggregatesFilter<"FacebookPost"> | number
@@ -404,49 +386,45 @@ export type FacebookPostScalarWhereWithAggregatesInput = {
 
 export type FacebookPostCreateInput = {
   id?: string
-  postId: string
+  facebookPostId: string
   url: string
-  timestamp: Date | string
+  postedAt: Date | string
   text: string
-  likes: number
-  comments: number
-  shares: number
-  topReactionsCount: number
-  isVideo: boolean
-  viewsCount: number
+  likes?: number
+  comments?: number
+  shares?: number
+  topReactionsCount?: number
+  isVideo?: boolean
+  viewsCount?: number
   fullResponse: Prisma.JsonNullValueInput | runtime.InputJsonValue
   createdAt?: Date | string
   updatedAt?: Date | string
-  trackedEntity: Prisma.TrackedEntityCreateNestedOneWithoutFacebookPostsInput
-  facebookPostReactions?: Prisma.FacebookPostReactionCreateNestedManyWithoutPostInput
-  postCategories?: Prisma.PostCategoryCreateNestedManyWithoutFacebookPostsInput
+  postFacebookPost?: Prisma.PostFacebookPostCreateNestedOneWithoutFacebookPostInput
 }
 
 export type FacebookPostUncheckedCreateInput = {
   id?: string
-  trackedEntityId: string
-  postId: string
+  facebookPostId: string
   url: string
-  timestamp: Date | string
+  postedAt: Date | string
   text: string
-  likes: number
-  comments: number
-  shares: number
-  topReactionsCount: number
-  isVideo: boolean
-  viewsCount: number
+  likes?: number
+  comments?: number
+  shares?: number
+  topReactionsCount?: number
+  isVideo?: boolean
+  viewsCount?: number
   fullResponse: Prisma.JsonNullValueInput | runtime.InputJsonValue
   createdAt?: Date | string
   updatedAt?: Date | string
-  facebookPostReactions?: Prisma.FacebookPostReactionUncheckedCreateNestedManyWithoutPostInput
-  postCategories?: Prisma.PostCategoryUncheckedCreateNestedManyWithoutFacebookPostsInput
+  postFacebookPost?: Prisma.PostFacebookPostUncheckedCreateNestedOneWithoutFacebookPostInput
 }
 
 export type FacebookPostUpdateInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
-  postId?: Prisma.StringFieldUpdateOperationsInput | string
+  facebookPostId?: Prisma.StringFieldUpdateOperationsInput | string
   url?: Prisma.StringFieldUpdateOperationsInput | string
-  timestamp?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  postedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   text?: Prisma.StringFieldUpdateOperationsInput | string
   likes?: Prisma.IntFieldUpdateOperationsInput | number
   comments?: Prisma.IntFieldUpdateOperationsInput | number
@@ -457,17 +435,14 @@ export type FacebookPostUpdateInput = {
   fullResponse?: Prisma.JsonNullValueInput | runtime.InputJsonValue
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
-  trackedEntity?: Prisma.TrackedEntityUpdateOneRequiredWithoutFacebookPostsNestedInput
-  facebookPostReactions?: Prisma.FacebookPostReactionUpdateManyWithoutPostNestedInput
-  postCategories?: Prisma.PostCategoryUpdateManyWithoutFacebookPostsNestedInput
+  postFacebookPost?: Prisma.PostFacebookPostUpdateOneWithoutFacebookPostNestedInput
 }
 
 export type FacebookPostUncheckedUpdateInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
-  trackedEntityId?: Prisma.StringFieldUpdateOperationsInput | string
-  postId?: Prisma.StringFieldUpdateOperationsInput | string
+  facebookPostId?: Prisma.StringFieldUpdateOperationsInput | string
   url?: Prisma.StringFieldUpdateOperationsInput | string
-  timestamp?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  postedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   text?: Prisma.StringFieldUpdateOperationsInput | string
   likes?: Prisma.IntFieldUpdateOperationsInput | number
   comments?: Prisma.IntFieldUpdateOperationsInput | number
@@ -478,23 +453,21 @@ export type FacebookPostUncheckedUpdateInput = {
   fullResponse?: Prisma.JsonNullValueInput | runtime.InputJsonValue
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
-  facebookPostReactions?: Prisma.FacebookPostReactionUncheckedUpdateManyWithoutPostNestedInput
-  postCategories?: Prisma.PostCategoryUncheckedUpdateManyWithoutFacebookPostsNestedInput
+  postFacebookPost?: Prisma.PostFacebookPostUncheckedUpdateOneWithoutFacebookPostNestedInput
 }
 
 export type FacebookPostCreateManyInput = {
   id?: string
-  trackedEntityId: string
-  postId: string
+  facebookPostId: string
   url: string
-  timestamp: Date | string
+  postedAt: Date | string
   text: string
-  likes: number
-  comments: number
-  shares: number
-  topReactionsCount: number
-  isVideo: boolean
-  viewsCount: number
+  likes?: number
+  comments?: number
+  shares?: number
+  topReactionsCount?: number
+  isVideo?: boolean
+  viewsCount?: number
   fullResponse: Prisma.JsonNullValueInput | runtime.InputJsonValue
   createdAt?: Date | string
   updatedAt?: Date | string
@@ -502,9 +475,9 @@ export type FacebookPostCreateManyInput = {
 
 export type FacebookPostUpdateManyMutationInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
-  postId?: Prisma.StringFieldUpdateOperationsInput | string
+  facebookPostId?: Prisma.StringFieldUpdateOperationsInput | string
   url?: Prisma.StringFieldUpdateOperationsInput | string
-  timestamp?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  postedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   text?: Prisma.StringFieldUpdateOperationsInput | string
   likes?: Prisma.IntFieldUpdateOperationsInput | number
   comments?: Prisma.IntFieldUpdateOperationsInput | number
@@ -519,10 +492,9 @@ export type FacebookPostUpdateManyMutationInput = {
 
 export type FacebookPostUncheckedUpdateManyInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
-  trackedEntityId?: Prisma.StringFieldUpdateOperationsInput | string
-  postId?: Prisma.StringFieldUpdateOperationsInput | string
+  facebookPostId?: Prisma.StringFieldUpdateOperationsInput | string
   url?: Prisma.StringFieldUpdateOperationsInput | string
-  timestamp?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  postedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   text?: Prisma.StringFieldUpdateOperationsInput | string
   likes?: Prisma.IntFieldUpdateOperationsInput | number
   comments?: Prisma.IntFieldUpdateOperationsInput | number
@@ -535,22 +507,16 @@ export type FacebookPostUncheckedUpdateManyInput = {
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
 }
 
-export type FacebookPostListRelationFilter = {
-  every?: Prisma.FacebookPostWhereInput
-  some?: Prisma.FacebookPostWhereInput
-  none?: Prisma.FacebookPostWhereInput
-}
-
-export type FacebookPostOrderByRelationAggregateInput = {
-  _count?: Prisma.SortOrder
+export type FacebookPostScalarRelationFilter = {
+  is?: Prisma.FacebookPostWhereInput
+  isNot?: Prisma.FacebookPostWhereInput
 }
 
 export type FacebookPostCountOrderByAggregateInput = {
   id?: Prisma.SortOrder
-  trackedEntityId?: Prisma.SortOrder
-  postId?: Prisma.SortOrder
+  facebookPostId?: Prisma.SortOrder
   url?: Prisma.SortOrder
-  timestamp?: Prisma.SortOrder
+  postedAt?: Prisma.SortOrder
   text?: Prisma.SortOrder
   likes?: Prisma.SortOrder
   comments?: Prisma.SortOrder
@@ -573,10 +539,9 @@ export type FacebookPostAvgOrderByAggregateInput = {
 
 export type FacebookPostMaxOrderByAggregateInput = {
   id?: Prisma.SortOrder
-  trackedEntityId?: Prisma.SortOrder
-  postId?: Prisma.SortOrder
+  facebookPostId?: Prisma.SortOrder
   url?: Prisma.SortOrder
-  timestamp?: Prisma.SortOrder
+  postedAt?: Prisma.SortOrder
   text?: Prisma.SortOrder
   likes?: Prisma.SortOrder
   comments?: Prisma.SortOrder
@@ -590,10 +555,9 @@ export type FacebookPostMaxOrderByAggregateInput = {
 
 export type FacebookPostMinOrderByAggregateInput = {
   id?: Prisma.SortOrder
-  trackedEntityId?: Prisma.SortOrder
-  postId?: Prisma.SortOrder
+  facebookPostId?: Prisma.SortOrder
   url?: Prisma.SortOrder
-  timestamp?: Prisma.SortOrder
+  postedAt?: Prisma.SortOrder
   text?: Prisma.SortOrder
   likes?: Prisma.SortOrder
   comments?: Prisma.SortOrder
@@ -613,51 +577,18 @@ export type FacebookPostSumOrderByAggregateInput = {
   viewsCount?: Prisma.SortOrder
 }
 
-export type FacebookPostScalarRelationFilter = {
-  is?: Prisma.FacebookPostWhereInput
-  isNot?: Prisma.FacebookPostWhereInput
+export type FacebookPostCreateNestedOneWithoutPostFacebookPostInput = {
+  create?: Prisma.XOR<Prisma.FacebookPostCreateWithoutPostFacebookPostInput, Prisma.FacebookPostUncheckedCreateWithoutPostFacebookPostInput>
+  connectOrCreate?: Prisma.FacebookPostCreateOrConnectWithoutPostFacebookPostInput
+  connect?: Prisma.FacebookPostWhereUniqueInput
 }
 
-export type FacebookPostCreateNestedManyWithoutTrackedEntityInput = {
-  create?: Prisma.XOR<Prisma.FacebookPostCreateWithoutTrackedEntityInput, Prisma.FacebookPostUncheckedCreateWithoutTrackedEntityInput> | Prisma.FacebookPostCreateWithoutTrackedEntityInput[] | Prisma.FacebookPostUncheckedCreateWithoutTrackedEntityInput[]
-  connectOrCreate?: Prisma.FacebookPostCreateOrConnectWithoutTrackedEntityInput | Prisma.FacebookPostCreateOrConnectWithoutTrackedEntityInput[]
-  createMany?: Prisma.FacebookPostCreateManyTrackedEntityInputEnvelope
-  connect?: Prisma.FacebookPostWhereUniqueInput | Prisma.FacebookPostWhereUniqueInput[]
-}
-
-export type FacebookPostUncheckedCreateNestedManyWithoutTrackedEntityInput = {
-  create?: Prisma.XOR<Prisma.FacebookPostCreateWithoutTrackedEntityInput, Prisma.FacebookPostUncheckedCreateWithoutTrackedEntityInput> | Prisma.FacebookPostCreateWithoutTrackedEntityInput[] | Prisma.FacebookPostUncheckedCreateWithoutTrackedEntityInput[]
-  connectOrCreate?: Prisma.FacebookPostCreateOrConnectWithoutTrackedEntityInput | Prisma.FacebookPostCreateOrConnectWithoutTrackedEntityInput[]
-  createMany?: Prisma.FacebookPostCreateManyTrackedEntityInputEnvelope
-  connect?: Prisma.FacebookPostWhereUniqueInput | Prisma.FacebookPostWhereUniqueInput[]
-}
-
-export type FacebookPostUpdateManyWithoutTrackedEntityNestedInput = {
-  create?: Prisma.XOR<Prisma.FacebookPostCreateWithoutTrackedEntityInput, Prisma.FacebookPostUncheckedCreateWithoutTrackedEntityInput> | Prisma.FacebookPostCreateWithoutTrackedEntityInput[] | Prisma.FacebookPostUncheckedCreateWithoutTrackedEntityInput[]
-  connectOrCreate?: Prisma.FacebookPostCreateOrConnectWithoutTrackedEntityInput | Prisma.FacebookPostCreateOrConnectWithoutTrackedEntityInput[]
-  upsert?: Prisma.FacebookPostUpsertWithWhereUniqueWithoutTrackedEntityInput | Prisma.FacebookPostUpsertWithWhereUniqueWithoutTrackedEntityInput[]
-  createMany?: Prisma.FacebookPostCreateManyTrackedEntityInputEnvelope
-  set?: Prisma.FacebookPostWhereUniqueInput | Prisma.FacebookPostWhereUniqueInput[]
-  disconnect?: Prisma.FacebookPostWhereUniqueInput | Prisma.FacebookPostWhereUniqueInput[]
-  delete?: Prisma.FacebookPostWhereUniqueInput | Prisma.FacebookPostWhereUniqueInput[]
-  connect?: Prisma.FacebookPostWhereUniqueInput | Prisma.FacebookPostWhereUniqueInput[]
-  update?: Prisma.FacebookPostUpdateWithWhereUniqueWithoutTrackedEntityInput | Prisma.FacebookPostUpdateWithWhereUniqueWithoutTrackedEntityInput[]
-  updateMany?: Prisma.FacebookPostUpdateManyWithWhereWithoutTrackedEntityInput | Prisma.FacebookPostUpdateManyWithWhereWithoutTrackedEntityInput[]
-  deleteMany?: Prisma.FacebookPostScalarWhereInput | Prisma.FacebookPostScalarWhereInput[]
-}
-
-export type FacebookPostUncheckedUpdateManyWithoutTrackedEntityNestedInput = {
-  create?: Prisma.XOR<Prisma.FacebookPostCreateWithoutTrackedEntityInput, Prisma.FacebookPostUncheckedCreateWithoutTrackedEntityInput> | Prisma.FacebookPostCreateWithoutTrackedEntityInput[] | Prisma.FacebookPostUncheckedCreateWithoutTrackedEntityInput[]
-  connectOrCreate?: Prisma.FacebookPostCreateOrConnectWithoutTrackedEntityInput | Prisma.FacebookPostCreateOrConnectWithoutTrackedEntityInput[]
-  upsert?: Prisma.FacebookPostUpsertWithWhereUniqueWithoutTrackedEntityInput | Prisma.FacebookPostUpsertWithWhereUniqueWithoutTrackedEntityInput[]
-  createMany?: Prisma.FacebookPostCreateManyTrackedEntityInputEnvelope
-  set?: Prisma.FacebookPostWhereUniqueInput | Prisma.FacebookPostWhereUniqueInput[]
-  disconnect?: Prisma.FacebookPostWhereUniqueInput | Prisma.FacebookPostWhereUniqueInput[]
-  delete?: Prisma.FacebookPostWhereUniqueInput | Prisma.FacebookPostWhereUniqueInput[]
-  connect?: Prisma.FacebookPostWhereUniqueInput | Prisma.FacebookPostWhereUniqueInput[]
-  update?: Prisma.FacebookPostUpdateWithWhereUniqueWithoutTrackedEntityInput | Prisma.FacebookPostUpdateWithWhereUniqueWithoutTrackedEntityInput[]
-  updateMany?: Prisma.FacebookPostUpdateManyWithWhereWithoutTrackedEntityInput | Prisma.FacebookPostUpdateManyWithWhereWithoutTrackedEntityInput[]
-  deleteMany?: Prisma.FacebookPostScalarWhereInput | Prisma.FacebookPostScalarWhereInput[]
+export type FacebookPostUpdateOneRequiredWithoutPostFacebookPostNestedInput = {
+  create?: Prisma.XOR<Prisma.FacebookPostCreateWithoutPostFacebookPostInput, Prisma.FacebookPostUncheckedCreateWithoutPostFacebookPostInput>
+  connectOrCreate?: Prisma.FacebookPostCreateOrConnectWithoutPostFacebookPostInput
+  upsert?: Prisma.FacebookPostUpsertWithoutPostFacebookPostInput
+  connect?: Prisma.FacebookPostWhereUniqueInput
+  update?: Prisma.XOR<Prisma.XOR<Prisma.FacebookPostUpdateToOneWithWhereWithoutPostFacebookPostInput, Prisma.FacebookPostUpdateWithoutPostFacebookPostInput>, Prisma.FacebookPostUncheckedUpdateWithoutPostFacebookPostInput>
 }
 
 export type IntFieldUpdateOperationsInput = {
@@ -668,358 +599,61 @@ export type IntFieldUpdateOperationsInput = {
   divide?: number
 }
 
-export type BoolFieldUpdateOperationsInput = {
-  set?: boolean
-}
-
-export type FacebookPostCreateNestedOneWithoutFacebookPostReactionsInput = {
-  create?: Prisma.XOR<Prisma.FacebookPostCreateWithoutFacebookPostReactionsInput, Prisma.FacebookPostUncheckedCreateWithoutFacebookPostReactionsInput>
-  connectOrCreate?: Prisma.FacebookPostCreateOrConnectWithoutFacebookPostReactionsInput
-  connect?: Prisma.FacebookPostWhereUniqueInput
-}
-
-export type FacebookPostUpdateOneRequiredWithoutFacebookPostReactionsNestedInput = {
-  create?: Prisma.XOR<Prisma.FacebookPostCreateWithoutFacebookPostReactionsInput, Prisma.FacebookPostUncheckedCreateWithoutFacebookPostReactionsInput>
-  connectOrCreate?: Prisma.FacebookPostCreateOrConnectWithoutFacebookPostReactionsInput
-  upsert?: Prisma.FacebookPostUpsertWithoutFacebookPostReactionsInput
-  connect?: Prisma.FacebookPostWhereUniqueInput
-  update?: Prisma.XOR<Prisma.XOR<Prisma.FacebookPostUpdateToOneWithWhereWithoutFacebookPostReactionsInput, Prisma.FacebookPostUpdateWithoutFacebookPostReactionsInput>, Prisma.FacebookPostUncheckedUpdateWithoutFacebookPostReactionsInput>
-}
-
-export type FacebookPostCreateNestedManyWithoutPostCategoriesInput = {
-  create?: Prisma.XOR<Prisma.FacebookPostCreateWithoutPostCategoriesInput, Prisma.FacebookPostUncheckedCreateWithoutPostCategoriesInput> | Prisma.FacebookPostCreateWithoutPostCategoriesInput[] | Prisma.FacebookPostUncheckedCreateWithoutPostCategoriesInput[]
-  connectOrCreate?: Prisma.FacebookPostCreateOrConnectWithoutPostCategoriesInput | Prisma.FacebookPostCreateOrConnectWithoutPostCategoriesInput[]
-  connect?: Prisma.FacebookPostWhereUniqueInput | Prisma.FacebookPostWhereUniqueInput[]
-}
-
-export type FacebookPostUncheckedCreateNestedManyWithoutPostCategoriesInput = {
-  create?: Prisma.XOR<Prisma.FacebookPostCreateWithoutPostCategoriesInput, Prisma.FacebookPostUncheckedCreateWithoutPostCategoriesInput> | Prisma.FacebookPostCreateWithoutPostCategoriesInput[] | Prisma.FacebookPostUncheckedCreateWithoutPostCategoriesInput[]
-  connectOrCreate?: Prisma.FacebookPostCreateOrConnectWithoutPostCategoriesInput | Prisma.FacebookPostCreateOrConnectWithoutPostCategoriesInput[]
-  connect?: Prisma.FacebookPostWhereUniqueInput | Prisma.FacebookPostWhereUniqueInput[]
-}
-
-export type FacebookPostUpdateManyWithoutPostCategoriesNestedInput = {
-  create?: Prisma.XOR<Prisma.FacebookPostCreateWithoutPostCategoriesInput, Prisma.FacebookPostUncheckedCreateWithoutPostCategoriesInput> | Prisma.FacebookPostCreateWithoutPostCategoriesInput[] | Prisma.FacebookPostUncheckedCreateWithoutPostCategoriesInput[]
-  connectOrCreate?: Prisma.FacebookPostCreateOrConnectWithoutPostCategoriesInput | Prisma.FacebookPostCreateOrConnectWithoutPostCategoriesInput[]
-  upsert?: Prisma.FacebookPostUpsertWithWhereUniqueWithoutPostCategoriesInput | Prisma.FacebookPostUpsertWithWhereUniqueWithoutPostCategoriesInput[]
-  set?: Prisma.FacebookPostWhereUniqueInput | Prisma.FacebookPostWhereUniqueInput[]
-  disconnect?: Prisma.FacebookPostWhereUniqueInput | Prisma.FacebookPostWhereUniqueInput[]
-  delete?: Prisma.FacebookPostWhereUniqueInput | Prisma.FacebookPostWhereUniqueInput[]
-  connect?: Prisma.FacebookPostWhereUniqueInput | Prisma.FacebookPostWhereUniqueInput[]
-  update?: Prisma.FacebookPostUpdateWithWhereUniqueWithoutPostCategoriesInput | Prisma.FacebookPostUpdateWithWhereUniqueWithoutPostCategoriesInput[]
-  updateMany?: Prisma.FacebookPostUpdateManyWithWhereWithoutPostCategoriesInput | Prisma.FacebookPostUpdateManyWithWhereWithoutPostCategoriesInput[]
-  deleteMany?: Prisma.FacebookPostScalarWhereInput | Prisma.FacebookPostScalarWhereInput[]
-}
-
-export type FacebookPostUncheckedUpdateManyWithoutPostCategoriesNestedInput = {
-  create?: Prisma.XOR<Prisma.FacebookPostCreateWithoutPostCategoriesInput, Prisma.FacebookPostUncheckedCreateWithoutPostCategoriesInput> | Prisma.FacebookPostCreateWithoutPostCategoriesInput[] | Prisma.FacebookPostUncheckedCreateWithoutPostCategoriesInput[]
-  connectOrCreate?: Prisma.FacebookPostCreateOrConnectWithoutPostCategoriesInput | Prisma.FacebookPostCreateOrConnectWithoutPostCategoriesInput[]
-  upsert?: Prisma.FacebookPostUpsertWithWhereUniqueWithoutPostCategoriesInput | Prisma.FacebookPostUpsertWithWhereUniqueWithoutPostCategoriesInput[]
-  set?: Prisma.FacebookPostWhereUniqueInput | Prisma.FacebookPostWhereUniqueInput[]
-  disconnect?: Prisma.FacebookPostWhereUniqueInput | Prisma.FacebookPostWhereUniqueInput[]
-  delete?: Prisma.FacebookPostWhereUniqueInput | Prisma.FacebookPostWhereUniqueInput[]
-  connect?: Prisma.FacebookPostWhereUniqueInput | Prisma.FacebookPostWhereUniqueInput[]
-  update?: Prisma.FacebookPostUpdateWithWhereUniqueWithoutPostCategoriesInput | Prisma.FacebookPostUpdateWithWhereUniqueWithoutPostCategoriesInput[]
-  updateMany?: Prisma.FacebookPostUpdateManyWithWhereWithoutPostCategoriesInput | Prisma.FacebookPostUpdateManyWithWhereWithoutPostCategoriesInput[]
-  deleteMany?: Prisma.FacebookPostScalarWhereInput | Prisma.FacebookPostScalarWhereInput[]
-}
-
-export type FacebookPostCreateWithoutTrackedEntityInput = {
+export type FacebookPostCreateWithoutPostFacebookPostInput = {
   id?: string
-  postId: string
+  facebookPostId: string
   url: string
-  timestamp: Date | string
+  postedAt: Date | string
   text: string
-  likes: number
-  comments: number
-  shares: number
-  topReactionsCount: number
-  isVideo: boolean
-  viewsCount: number
+  likes?: number
+  comments?: number
+  shares?: number
+  topReactionsCount?: number
+  isVideo?: boolean
+  viewsCount?: number
   fullResponse: Prisma.JsonNullValueInput | runtime.InputJsonValue
   createdAt?: Date | string
   updatedAt?: Date | string
-  facebookPostReactions?: Prisma.FacebookPostReactionCreateNestedManyWithoutPostInput
-  postCategories?: Prisma.PostCategoryCreateNestedManyWithoutFacebookPostsInput
 }
 
-export type FacebookPostUncheckedCreateWithoutTrackedEntityInput = {
+export type FacebookPostUncheckedCreateWithoutPostFacebookPostInput = {
   id?: string
-  postId: string
+  facebookPostId: string
   url: string
-  timestamp: Date | string
+  postedAt: Date | string
   text: string
-  likes: number
-  comments: number
-  shares: number
-  topReactionsCount: number
-  isVideo: boolean
-  viewsCount: number
+  likes?: number
+  comments?: number
+  shares?: number
+  topReactionsCount?: number
+  isVideo?: boolean
+  viewsCount?: number
   fullResponse: Prisma.JsonNullValueInput | runtime.InputJsonValue
   createdAt?: Date | string
   updatedAt?: Date | string
-  facebookPostReactions?: Prisma.FacebookPostReactionUncheckedCreateNestedManyWithoutPostInput
-  postCategories?: Prisma.PostCategoryUncheckedCreateNestedManyWithoutFacebookPostsInput
 }
 
-export type FacebookPostCreateOrConnectWithoutTrackedEntityInput = {
+export type FacebookPostCreateOrConnectWithoutPostFacebookPostInput = {
   where: Prisma.FacebookPostWhereUniqueInput
-  create: Prisma.XOR<Prisma.FacebookPostCreateWithoutTrackedEntityInput, Prisma.FacebookPostUncheckedCreateWithoutTrackedEntityInput>
+  create: Prisma.XOR<Prisma.FacebookPostCreateWithoutPostFacebookPostInput, Prisma.FacebookPostUncheckedCreateWithoutPostFacebookPostInput>
 }
 
-export type FacebookPostCreateManyTrackedEntityInputEnvelope = {
-  data: Prisma.FacebookPostCreateManyTrackedEntityInput | Prisma.FacebookPostCreateManyTrackedEntityInput[]
-  skipDuplicates?: boolean
-}
-
-export type FacebookPostUpsertWithWhereUniqueWithoutTrackedEntityInput = {
-  where: Prisma.FacebookPostWhereUniqueInput
-  update: Prisma.XOR<Prisma.FacebookPostUpdateWithoutTrackedEntityInput, Prisma.FacebookPostUncheckedUpdateWithoutTrackedEntityInput>
-  create: Prisma.XOR<Prisma.FacebookPostCreateWithoutTrackedEntityInput, Prisma.FacebookPostUncheckedCreateWithoutTrackedEntityInput>
-}
-
-export type FacebookPostUpdateWithWhereUniqueWithoutTrackedEntityInput = {
-  where: Prisma.FacebookPostWhereUniqueInput
-  data: Prisma.XOR<Prisma.FacebookPostUpdateWithoutTrackedEntityInput, Prisma.FacebookPostUncheckedUpdateWithoutTrackedEntityInput>
-}
-
-export type FacebookPostUpdateManyWithWhereWithoutTrackedEntityInput = {
-  where: Prisma.FacebookPostScalarWhereInput
-  data: Prisma.XOR<Prisma.FacebookPostUpdateManyMutationInput, Prisma.FacebookPostUncheckedUpdateManyWithoutTrackedEntityInput>
-}
-
-export type FacebookPostScalarWhereInput = {
-  AND?: Prisma.FacebookPostScalarWhereInput | Prisma.FacebookPostScalarWhereInput[]
-  OR?: Prisma.FacebookPostScalarWhereInput[]
-  NOT?: Prisma.FacebookPostScalarWhereInput | Prisma.FacebookPostScalarWhereInput[]
-  id?: Prisma.StringFilter<"FacebookPost"> | string
-  trackedEntityId?: Prisma.StringFilter<"FacebookPost"> | string
-  postId?: Prisma.StringFilter<"FacebookPost"> | string
-  url?: Prisma.StringFilter<"FacebookPost"> | string
-  timestamp?: Prisma.DateTimeFilter<"FacebookPost"> | Date | string
-  text?: Prisma.StringFilter<"FacebookPost"> | string
-  likes?: Prisma.IntFilter<"FacebookPost"> | number
-  comments?: Prisma.IntFilter<"FacebookPost"> | number
-  shares?: Prisma.IntFilter<"FacebookPost"> | number
-  topReactionsCount?: Prisma.IntFilter<"FacebookPost"> | number
-  isVideo?: Prisma.BoolFilter<"FacebookPost"> | boolean
-  viewsCount?: Prisma.IntFilter<"FacebookPost"> | number
-  fullResponse?: Prisma.JsonFilter<"FacebookPost">
-  createdAt?: Prisma.DateTimeFilter<"FacebookPost"> | Date | string
-  updatedAt?: Prisma.DateTimeFilter<"FacebookPost"> | Date | string
-}
-
-export type FacebookPostCreateWithoutFacebookPostReactionsInput = {
-  id?: string
-  postId: string
-  url: string
-  timestamp: Date | string
-  text: string
-  likes: number
-  comments: number
-  shares: number
-  topReactionsCount: number
-  isVideo: boolean
-  viewsCount: number
-  fullResponse: Prisma.JsonNullValueInput | runtime.InputJsonValue
-  createdAt?: Date | string
-  updatedAt?: Date | string
-  trackedEntity: Prisma.TrackedEntityCreateNestedOneWithoutFacebookPostsInput
-  postCategories?: Prisma.PostCategoryCreateNestedManyWithoutFacebookPostsInput
-}
-
-export type FacebookPostUncheckedCreateWithoutFacebookPostReactionsInput = {
-  id?: string
-  trackedEntityId: string
-  postId: string
-  url: string
-  timestamp: Date | string
-  text: string
-  likes: number
-  comments: number
-  shares: number
-  topReactionsCount: number
-  isVideo: boolean
-  viewsCount: number
-  fullResponse: Prisma.JsonNullValueInput | runtime.InputJsonValue
-  createdAt?: Date | string
-  updatedAt?: Date | string
-  postCategories?: Prisma.PostCategoryUncheckedCreateNestedManyWithoutFacebookPostsInput
-}
-
-export type FacebookPostCreateOrConnectWithoutFacebookPostReactionsInput = {
-  where: Prisma.FacebookPostWhereUniqueInput
-  create: Prisma.XOR<Prisma.FacebookPostCreateWithoutFacebookPostReactionsInput, Prisma.FacebookPostUncheckedCreateWithoutFacebookPostReactionsInput>
-}
-
-export type FacebookPostUpsertWithoutFacebookPostReactionsInput = {
-  update: Prisma.XOR<Prisma.FacebookPostUpdateWithoutFacebookPostReactionsInput, Prisma.FacebookPostUncheckedUpdateWithoutFacebookPostReactionsInput>
-  create: Prisma.XOR<Prisma.FacebookPostCreateWithoutFacebookPostReactionsInput, Prisma.FacebookPostUncheckedCreateWithoutFacebookPostReactionsInput>
+export type FacebookPostUpsertWithoutPostFacebookPostInput = {
+  update: Prisma.XOR<Prisma.FacebookPostUpdateWithoutPostFacebookPostInput, Prisma.FacebookPostUncheckedUpdateWithoutPostFacebookPostInput>
+  create: Prisma.XOR<Prisma.FacebookPostCreateWithoutPostFacebookPostInput, Prisma.FacebookPostUncheckedCreateWithoutPostFacebookPostInput>
   where?: Prisma.FacebookPostWhereInput
 }
 
-export type FacebookPostUpdateToOneWithWhereWithoutFacebookPostReactionsInput = {
+export type FacebookPostUpdateToOneWithWhereWithoutPostFacebookPostInput = {
   where?: Prisma.FacebookPostWhereInput
-  data: Prisma.XOR<Prisma.FacebookPostUpdateWithoutFacebookPostReactionsInput, Prisma.FacebookPostUncheckedUpdateWithoutFacebookPostReactionsInput>
+  data: Prisma.XOR<Prisma.FacebookPostUpdateWithoutPostFacebookPostInput, Prisma.FacebookPostUncheckedUpdateWithoutPostFacebookPostInput>
 }
 
-export type FacebookPostUpdateWithoutFacebookPostReactionsInput = {
+export type FacebookPostUpdateWithoutPostFacebookPostInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
-  postId?: Prisma.StringFieldUpdateOperationsInput | string
+  facebookPostId?: Prisma.StringFieldUpdateOperationsInput | string
   url?: Prisma.StringFieldUpdateOperationsInput | string
-  timestamp?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
-  text?: Prisma.StringFieldUpdateOperationsInput | string
-  likes?: Prisma.IntFieldUpdateOperationsInput | number
-  comments?: Prisma.IntFieldUpdateOperationsInput | number
-  shares?: Prisma.IntFieldUpdateOperationsInput | number
-  topReactionsCount?: Prisma.IntFieldUpdateOperationsInput | number
-  isVideo?: Prisma.BoolFieldUpdateOperationsInput | boolean
-  viewsCount?: Prisma.IntFieldUpdateOperationsInput | number
-  fullResponse?: Prisma.JsonNullValueInput | runtime.InputJsonValue
-  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
-  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
-  trackedEntity?: Prisma.TrackedEntityUpdateOneRequiredWithoutFacebookPostsNestedInput
-  postCategories?: Prisma.PostCategoryUpdateManyWithoutFacebookPostsNestedInput
-}
-
-export type FacebookPostUncheckedUpdateWithoutFacebookPostReactionsInput = {
-  id?: Prisma.StringFieldUpdateOperationsInput | string
-  trackedEntityId?: Prisma.StringFieldUpdateOperationsInput | string
-  postId?: Prisma.StringFieldUpdateOperationsInput | string
-  url?: Prisma.StringFieldUpdateOperationsInput | string
-  timestamp?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
-  text?: Prisma.StringFieldUpdateOperationsInput | string
-  likes?: Prisma.IntFieldUpdateOperationsInput | number
-  comments?: Prisma.IntFieldUpdateOperationsInput | number
-  shares?: Prisma.IntFieldUpdateOperationsInput | number
-  topReactionsCount?: Prisma.IntFieldUpdateOperationsInput | number
-  isVideo?: Prisma.BoolFieldUpdateOperationsInput | boolean
-  viewsCount?: Prisma.IntFieldUpdateOperationsInput | number
-  fullResponse?: Prisma.JsonNullValueInput | runtime.InputJsonValue
-  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
-  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
-  postCategories?: Prisma.PostCategoryUncheckedUpdateManyWithoutFacebookPostsNestedInput
-}
-
-export type FacebookPostCreateWithoutPostCategoriesInput = {
-  id?: string
-  postId: string
-  url: string
-  timestamp: Date | string
-  text: string
-  likes: number
-  comments: number
-  shares: number
-  topReactionsCount: number
-  isVideo: boolean
-  viewsCount: number
-  fullResponse: Prisma.JsonNullValueInput | runtime.InputJsonValue
-  createdAt?: Date | string
-  updatedAt?: Date | string
-  trackedEntity: Prisma.TrackedEntityCreateNestedOneWithoutFacebookPostsInput
-  facebookPostReactions?: Prisma.FacebookPostReactionCreateNestedManyWithoutPostInput
-}
-
-export type FacebookPostUncheckedCreateWithoutPostCategoriesInput = {
-  id?: string
-  trackedEntityId: string
-  postId: string
-  url: string
-  timestamp: Date | string
-  text: string
-  likes: number
-  comments: number
-  shares: number
-  topReactionsCount: number
-  isVideo: boolean
-  viewsCount: number
-  fullResponse: Prisma.JsonNullValueInput | runtime.InputJsonValue
-  createdAt?: Date | string
-  updatedAt?: Date | string
-  facebookPostReactions?: Prisma.FacebookPostReactionUncheckedCreateNestedManyWithoutPostInput
-}
-
-export type FacebookPostCreateOrConnectWithoutPostCategoriesInput = {
-  where: Prisma.FacebookPostWhereUniqueInput
-  create: Prisma.XOR<Prisma.FacebookPostCreateWithoutPostCategoriesInput, Prisma.FacebookPostUncheckedCreateWithoutPostCategoriesInput>
-}
-
-export type FacebookPostUpsertWithWhereUniqueWithoutPostCategoriesInput = {
-  where: Prisma.FacebookPostWhereUniqueInput
-  update: Prisma.XOR<Prisma.FacebookPostUpdateWithoutPostCategoriesInput, Prisma.FacebookPostUncheckedUpdateWithoutPostCategoriesInput>
-  create: Prisma.XOR<Prisma.FacebookPostCreateWithoutPostCategoriesInput, Prisma.FacebookPostUncheckedCreateWithoutPostCategoriesInput>
-}
-
-export type FacebookPostUpdateWithWhereUniqueWithoutPostCategoriesInput = {
-  where: Prisma.FacebookPostWhereUniqueInput
-  data: Prisma.XOR<Prisma.FacebookPostUpdateWithoutPostCategoriesInput, Prisma.FacebookPostUncheckedUpdateWithoutPostCategoriesInput>
-}
-
-export type FacebookPostUpdateManyWithWhereWithoutPostCategoriesInput = {
-  where: Prisma.FacebookPostScalarWhereInput
-  data: Prisma.XOR<Prisma.FacebookPostUpdateManyMutationInput, Prisma.FacebookPostUncheckedUpdateManyWithoutPostCategoriesInput>
-}
-
-export type FacebookPostCreateManyTrackedEntityInput = {
-  id?: string
-  postId: string
-  url: string
-  timestamp: Date | string
-  text: string
-  likes: number
-  comments: number
-  shares: number
-  topReactionsCount: number
-  isVideo: boolean
-  viewsCount: number
-  fullResponse: Prisma.JsonNullValueInput | runtime.InputJsonValue
-  createdAt?: Date | string
-  updatedAt?: Date | string
-}
-
-export type FacebookPostUpdateWithoutTrackedEntityInput = {
-  id?: Prisma.StringFieldUpdateOperationsInput | string
-  postId?: Prisma.StringFieldUpdateOperationsInput | string
-  url?: Prisma.StringFieldUpdateOperationsInput | string
-  timestamp?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
-  text?: Prisma.StringFieldUpdateOperationsInput | string
-  likes?: Prisma.IntFieldUpdateOperationsInput | number
-  comments?: Prisma.IntFieldUpdateOperationsInput | number
-  shares?: Prisma.IntFieldUpdateOperationsInput | number
-  topReactionsCount?: Prisma.IntFieldUpdateOperationsInput | number
-  isVideo?: Prisma.BoolFieldUpdateOperationsInput | boolean
-  viewsCount?: Prisma.IntFieldUpdateOperationsInput | number
-  fullResponse?: Prisma.JsonNullValueInput | runtime.InputJsonValue
-  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
-  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
-  facebookPostReactions?: Prisma.FacebookPostReactionUpdateManyWithoutPostNestedInput
-  postCategories?: Prisma.PostCategoryUpdateManyWithoutFacebookPostsNestedInput
-}
-
-export type FacebookPostUncheckedUpdateWithoutTrackedEntityInput = {
-  id?: Prisma.StringFieldUpdateOperationsInput | string
-  postId?: Prisma.StringFieldUpdateOperationsInput | string
-  url?: Prisma.StringFieldUpdateOperationsInput | string
-  timestamp?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
-  text?: Prisma.StringFieldUpdateOperationsInput | string
-  likes?: Prisma.IntFieldUpdateOperationsInput | number
-  comments?: Prisma.IntFieldUpdateOperationsInput | number
-  shares?: Prisma.IntFieldUpdateOperationsInput | number
-  topReactionsCount?: Prisma.IntFieldUpdateOperationsInput | number
-  isVideo?: Prisma.BoolFieldUpdateOperationsInput | boolean
-  viewsCount?: Prisma.IntFieldUpdateOperationsInput | number
-  fullResponse?: Prisma.JsonNullValueInput | runtime.InputJsonValue
-  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
-  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
-  facebookPostReactions?: Prisma.FacebookPostReactionUncheckedUpdateManyWithoutPostNestedInput
-  postCategories?: Prisma.PostCategoryUncheckedUpdateManyWithoutFacebookPostsNestedInput
-}
-
-export type FacebookPostUncheckedUpdateManyWithoutTrackedEntityInput = {
-  id?: Prisma.StringFieldUpdateOperationsInput | string
-  postId?: Prisma.StringFieldUpdateOperationsInput | string
-  url?: Prisma.StringFieldUpdateOperationsInput | string
-  timestamp?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  postedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   text?: Prisma.StringFieldUpdateOperationsInput | string
   likes?: Prisma.IntFieldUpdateOperationsInput | number
   comments?: Prisma.IntFieldUpdateOperationsInput | number
@@ -1032,50 +666,11 @@ export type FacebookPostUncheckedUpdateManyWithoutTrackedEntityInput = {
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
 }
 
-export type FacebookPostUpdateWithoutPostCategoriesInput = {
+export type FacebookPostUncheckedUpdateWithoutPostFacebookPostInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
-  postId?: Prisma.StringFieldUpdateOperationsInput | string
+  facebookPostId?: Prisma.StringFieldUpdateOperationsInput | string
   url?: Prisma.StringFieldUpdateOperationsInput | string
-  timestamp?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
-  text?: Prisma.StringFieldUpdateOperationsInput | string
-  likes?: Prisma.IntFieldUpdateOperationsInput | number
-  comments?: Prisma.IntFieldUpdateOperationsInput | number
-  shares?: Prisma.IntFieldUpdateOperationsInput | number
-  topReactionsCount?: Prisma.IntFieldUpdateOperationsInput | number
-  isVideo?: Prisma.BoolFieldUpdateOperationsInput | boolean
-  viewsCount?: Prisma.IntFieldUpdateOperationsInput | number
-  fullResponse?: Prisma.JsonNullValueInput | runtime.InputJsonValue
-  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
-  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
-  trackedEntity?: Prisma.TrackedEntityUpdateOneRequiredWithoutFacebookPostsNestedInput
-  facebookPostReactions?: Prisma.FacebookPostReactionUpdateManyWithoutPostNestedInput
-}
-
-export type FacebookPostUncheckedUpdateWithoutPostCategoriesInput = {
-  id?: Prisma.StringFieldUpdateOperationsInput | string
-  trackedEntityId?: Prisma.StringFieldUpdateOperationsInput | string
-  postId?: Prisma.StringFieldUpdateOperationsInput | string
-  url?: Prisma.StringFieldUpdateOperationsInput | string
-  timestamp?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
-  text?: Prisma.StringFieldUpdateOperationsInput | string
-  likes?: Prisma.IntFieldUpdateOperationsInput | number
-  comments?: Prisma.IntFieldUpdateOperationsInput | number
-  shares?: Prisma.IntFieldUpdateOperationsInput | number
-  topReactionsCount?: Prisma.IntFieldUpdateOperationsInput | number
-  isVideo?: Prisma.BoolFieldUpdateOperationsInput | boolean
-  viewsCount?: Prisma.IntFieldUpdateOperationsInput | number
-  fullResponse?: Prisma.JsonNullValueInput | runtime.InputJsonValue
-  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
-  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
-  facebookPostReactions?: Prisma.FacebookPostReactionUncheckedUpdateManyWithoutPostNestedInput
-}
-
-export type FacebookPostUncheckedUpdateManyWithoutPostCategoriesInput = {
-  id?: Prisma.StringFieldUpdateOperationsInput | string
-  trackedEntityId?: Prisma.StringFieldUpdateOperationsInput | string
-  postId?: Prisma.StringFieldUpdateOperationsInput | string
-  url?: Prisma.StringFieldUpdateOperationsInput | string
-  timestamp?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  postedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   text?: Prisma.StringFieldUpdateOperationsInput | string
   likes?: Prisma.IntFieldUpdateOperationsInput | number
   comments?: Prisma.IntFieldUpdateOperationsInput | number
@@ -1088,52 +683,13 @@ export type FacebookPostUncheckedUpdateManyWithoutPostCategoriesInput = {
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
 }
 
-
-/**
- * Count Type FacebookPostCountOutputType
- */
-
-export type FacebookPostCountOutputType = {
-  facebookPostReactions: number
-  postCategories: number
-}
-
-export type FacebookPostCountOutputTypeSelect<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
-  facebookPostReactions?: boolean | FacebookPostCountOutputTypeCountFacebookPostReactionsArgs
-  postCategories?: boolean | FacebookPostCountOutputTypeCountPostCategoriesArgs
-}
-
-/**
- * FacebookPostCountOutputType without action
- */
-export type FacebookPostCountOutputTypeDefaultArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
-  /**
-   * Select specific fields to fetch from the FacebookPostCountOutputType
-   */
-  select?: Prisma.FacebookPostCountOutputTypeSelect<ExtArgs> | null
-}
-
-/**
- * FacebookPostCountOutputType without action
- */
-export type FacebookPostCountOutputTypeCountFacebookPostReactionsArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
-  where?: Prisma.FacebookPostReactionWhereInput
-}
-
-/**
- * FacebookPostCountOutputType without action
- */
-export type FacebookPostCountOutputTypeCountPostCategoriesArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
-  where?: Prisma.PostCategoryWhereInput
-}
 
 
 export type FacebookPostSelect<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetSelect<{
   id?: boolean
-  trackedEntityId?: boolean
-  postId?: boolean
+  facebookPostId?: boolean
   url?: boolean
-  timestamp?: boolean
+  postedAt?: boolean
   text?: boolean
   likes?: boolean
   comments?: boolean
@@ -1144,18 +700,14 @@ export type FacebookPostSelect<ExtArgs extends runtime.Types.Extensions.Internal
   fullResponse?: boolean
   createdAt?: boolean
   updatedAt?: boolean
-  trackedEntity?: boolean | Prisma.TrackedEntityDefaultArgs<ExtArgs>
-  facebookPostReactions?: boolean | Prisma.FacebookPost$facebookPostReactionsArgs<ExtArgs>
-  postCategories?: boolean | Prisma.FacebookPost$postCategoriesArgs<ExtArgs>
-  _count?: boolean | Prisma.FacebookPostCountOutputTypeDefaultArgs<ExtArgs>
+  postFacebookPost?: boolean | Prisma.FacebookPost$postFacebookPostArgs<ExtArgs>
 }, ExtArgs["result"]["facebookPost"]>
 
 export type FacebookPostSelectCreateManyAndReturn<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetSelect<{
   id?: boolean
-  trackedEntityId?: boolean
-  postId?: boolean
+  facebookPostId?: boolean
   url?: boolean
-  timestamp?: boolean
+  postedAt?: boolean
   text?: boolean
   likes?: boolean
   comments?: boolean
@@ -1166,15 +718,13 @@ export type FacebookPostSelectCreateManyAndReturn<ExtArgs extends runtime.Types.
   fullResponse?: boolean
   createdAt?: boolean
   updatedAt?: boolean
-  trackedEntity?: boolean | Prisma.TrackedEntityDefaultArgs<ExtArgs>
 }, ExtArgs["result"]["facebookPost"]>
 
 export type FacebookPostSelectUpdateManyAndReturn<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetSelect<{
   id?: boolean
-  trackedEntityId?: boolean
-  postId?: boolean
+  facebookPostId?: boolean
   url?: boolean
-  timestamp?: boolean
+  postedAt?: boolean
   text?: boolean
   likes?: boolean
   comments?: boolean
@@ -1185,15 +735,13 @@ export type FacebookPostSelectUpdateManyAndReturn<ExtArgs extends runtime.Types.
   fullResponse?: boolean
   createdAt?: boolean
   updatedAt?: boolean
-  trackedEntity?: boolean | Prisma.TrackedEntityDefaultArgs<ExtArgs>
 }, ExtArgs["result"]["facebookPost"]>
 
 export type FacebookPostSelectScalar = {
   id?: boolean
-  trackedEntityId?: boolean
-  postId?: boolean
+  facebookPostId?: boolean
   url?: boolean
-  timestamp?: boolean
+  postedAt?: boolean
   text?: boolean
   likes?: boolean
   comments?: boolean
@@ -1206,33 +754,23 @@ export type FacebookPostSelectScalar = {
   updatedAt?: boolean
 }
 
-export type FacebookPostOmit<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetOmit<"id" | "trackedEntityId" | "postId" | "url" | "timestamp" | "text" | "likes" | "comments" | "shares" | "topReactionsCount" | "isVideo" | "viewsCount" | "fullResponse" | "createdAt" | "updatedAt", ExtArgs["result"]["facebookPost"]>
+export type FacebookPostOmit<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetOmit<"id" | "facebookPostId" | "url" | "postedAt" | "text" | "likes" | "comments" | "shares" | "topReactionsCount" | "isVideo" | "viewsCount" | "fullResponse" | "createdAt" | "updatedAt", ExtArgs["result"]["facebookPost"]>
 export type FacebookPostInclude<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
-  trackedEntity?: boolean | Prisma.TrackedEntityDefaultArgs<ExtArgs>
-  facebookPostReactions?: boolean | Prisma.FacebookPost$facebookPostReactionsArgs<ExtArgs>
-  postCategories?: boolean | Prisma.FacebookPost$postCategoriesArgs<ExtArgs>
-  _count?: boolean | Prisma.FacebookPostCountOutputTypeDefaultArgs<ExtArgs>
+  postFacebookPost?: boolean | Prisma.FacebookPost$postFacebookPostArgs<ExtArgs>
 }
-export type FacebookPostIncludeCreateManyAndReturn<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
-  trackedEntity?: boolean | Prisma.TrackedEntityDefaultArgs<ExtArgs>
-}
-export type FacebookPostIncludeUpdateManyAndReturn<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
-  trackedEntity?: boolean | Prisma.TrackedEntityDefaultArgs<ExtArgs>
-}
+export type FacebookPostIncludeCreateManyAndReturn<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {}
+export type FacebookPostIncludeUpdateManyAndReturn<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {}
 
 export type $FacebookPostPayload<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
   name: "FacebookPost"
   objects: {
-    trackedEntity: Prisma.$TrackedEntityPayload<ExtArgs>
-    facebookPostReactions: Prisma.$FacebookPostReactionPayload<ExtArgs>[]
-    postCategories: Prisma.$PostCategoryPayload<ExtArgs>[]
+    postFacebookPost: Prisma.$PostFacebookPostPayload<ExtArgs> | null
   }
   scalars: runtime.Types.Extensions.GetPayloadResult<{
     id: string
-    trackedEntityId: string
-    postId: string
+    facebookPostId: string
     url: string
-    timestamp: Date
+    postedAt: Date
     text: string
     likes: number
     comments: number
@@ -1637,9 +1175,7 @@ readonly fields: FacebookPostFieldRefs;
  */
 export interface Prisma__FacebookPostClient<T, Null = never, ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs, GlobalOmitOptions = {}> extends Prisma.PrismaPromise<T> {
   readonly [Symbol.toStringTag]: "PrismaPromise"
-  trackedEntity<T extends Prisma.TrackedEntityDefaultArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.TrackedEntityDefaultArgs<ExtArgs>>): Prisma.Prisma__TrackedEntityClient<runtime.Types.Result.GetResult<Prisma.$TrackedEntityPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | Null, Null, ExtArgs, GlobalOmitOptions>
-  facebookPostReactions<T extends Prisma.FacebookPost$facebookPostReactionsArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.FacebookPost$facebookPostReactionsArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$FacebookPostReactionPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
-  postCategories<T extends Prisma.FacebookPost$postCategoriesArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.FacebookPost$postCategoriesArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$PostCategoryPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
+  postFacebookPost<T extends Prisma.FacebookPost$postFacebookPostArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.FacebookPost$postFacebookPostArgs<ExtArgs>>): Prisma.Prisma__PostFacebookPostClient<runtime.Types.Result.GetResult<Prisma.$PostFacebookPostPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
   /**
    * Attaches callbacks for the resolution and/or rejection of the Promise.
    * @param onfulfilled The callback to execute when the Promise is resolved.
@@ -1670,10 +1206,9 @@ export interface Prisma__FacebookPostClient<T, Null = never, ExtArgs extends run
  */
 export interface FacebookPostFieldRefs {
   readonly id: Prisma.FieldRef<"FacebookPost", 'String'>
-  readonly trackedEntityId: Prisma.FieldRef<"FacebookPost", 'String'>
-  readonly postId: Prisma.FieldRef<"FacebookPost", 'String'>
+  readonly facebookPostId: Prisma.FieldRef<"FacebookPost", 'String'>
   readonly url: Prisma.FieldRef<"FacebookPost", 'String'>
-  readonly timestamp: Prisma.FieldRef<"FacebookPost", 'DateTime'>
+  readonly postedAt: Prisma.FieldRef<"FacebookPost", 'DateTime'>
   readonly text: Prisma.FieldRef<"FacebookPost", 'String'>
   readonly likes: Prisma.FieldRef<"FacebookPost", 'Int'>
   readonly comments: Prisma.FieldRef<"FacebookPost", 'Int'>
@@ -1933,10 +1468,6 @@ export type FacebookPostCreateManyAndReturnArgs<ExtArgs extends runtime.Types.Ex
    */
   data: Prisma.FacebookPostCreateManyInput | Prisma.FacebookPostCreateManyInput[]
   skipDuplicates?: boolean
-  /**
-   * Choose, which related nodes to fetch as well
-   */
-  include?: Prisma.FacebookPostIncludeCreateManyAndReturn<ExtArgs> | null
 }
 
 /**
@@ -2007,10 +1538,6 @@ export type FacebookPostUpdateManyAndReturnArgs<ExtArgs extends runtime.Types.Ex
    * Limit how many FacebookPosts to update.
    */
   limit?: number
-  /**
-   * Choose, which related nodes to fetch as well
-   */
-  include?: Prisma.FacebookPostIncludeUpdateManyAndReturn<ExtArgs> | null
 }
 
 /**
@@ -2080,51 +1607,22 @@ export type FacebookPostDeleteManyArgs<ExtArgs extends runtime.Types.Extensions.
 }
 
 /**
- * FacebookPost.facebookPostReactions
+ * FacebookPost.postFacebookPost
  */
-export type FacebookPost$facebookPostReactionsArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+export type FacebookPost$postFacebookPostArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
   /**
-   * Select specific fields to fetch from the FacebookPostReaction
+   * Select specific fields to fetch from the PostFacebookPost
    */
-  select?: Prisma.FacebookPostReactionSelect<ExtArgs> | null
+  select?: Prisma.PostFacebookPostSelect<ExtArgs> | null
   /**
-   * Omit specific fields from the FacebookPostReaction
+   * Omit specific fields from the PostFacebookPost
    */
-  omit?: Prisma.FacebookPostReactionOmit<ExtArgs> | null
+  omit?: Prisma.PostFacebookPostOmit<ExtArgs> | null
   /**
    * Choose, which related nodes to fetch as well
    */
-  include?: Prisma.FacebookPostReactionInclude<ExtArgs> | null
-  where?: Prisma.FacebookPostReactionWhereInput
-  orderBy?: Prisma.FacebookPostReactionOrderByWithRelationInput | Prisma.FacebookPostReactionOrderByWithRelationInput[]
-  cursor?: Prisma.FacebookPostReactionWhereUniqueInput
-  take?: number
-  skip?: number
-  distinct?: Prisma.FacebookPostReactionScalarFieldEnum | Prisma.FacebookPostReactionScalarFieldEnum[]
-}
-
-/**
- * FacebookPost.postCategories
- */
-export type FacebookPost$postCategoriesArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
-  /**
-   * Select specific fields to fetch from the PostCategory
-   */
-  select?: Prisma.PostCategorySelect<ExtArgs> | null
-  /**
-   * Omit specific fields from the PostCategory
-   */
-  omit?: Prisma.PostCategoryOmit<ExtArgs> | null
-  /**
-   * Choose, which related nodes to fetch as well
-   */
-  include?: Prisma.PostCategoryInclude<ExtArgs> | null
-  where?: Prisma.PostCategoryWhereInput
-  orderBy?: Prisma.PostCategoryOrderByWithRelationInput | Prisma.PostCategoryOrderByWithRelationInput[]
-  cursor?: Prisma.PostCategoryWhereUniqueInput
-  take?: number
-  skip?: number
-  distinct?: Prisma.PostCategoryScalarFieldEnum | Prisma.PostCategoryScalarFieldEnum[]
+  include?: Prisma.PostFacebookPostInclude<ExtArgs> | null
+  where?: Prisma.PostFacebookPostWhereInput
 }
 
 /**
