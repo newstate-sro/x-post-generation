@@ -9,129 +9,284 @@ datasource db {
   provider = "postgresql"
 }
 
-// User is the user of the app
-// uid is the unique identifier of the user in Supabase Auth
-model User {
-  id   String @id @default(uuid())
-  uid  String @unique
-  name String
+// ============================================
+// SYSTEM
+// ============================================
 
-  createdAt DateTime @default(now())
-  updatedAt DateTime @updatedAt
-}
-
-// System configuration is used to store the state of the system
 model SystemConfiguration {
-  id                 String   @id @default(uuid())
-  lastProcessingTime DateTime @default(now())
+  id                    String    @id @default(uuid())
+  processingStartedAt   DateTime  @default(now())
+  processingCompletedAt DateTime?
 
   createdAt DateTime @default(now())
   updatedAt DateTime @updatedAt
 }
 
-// OWN - the entities we just track
-// OTHER - the entities we track and create reactions based on their posts
-enum TrackedEntityType {
-  OWN
-  OTHER
+enum SystemEventType {
+  FACEBOOK_POSTS_EMAIL_NOTIFICATION
+  FACEBOOK_POSTS_PROCESSING_STARTED
+  FACEBOOK_POSTS_FETCHED
+  FACEBOOK_POSTS_REACTIONS_GENERATED
+  FACEBOOK_POSTS_PROCESSING_COMPLETED
+  FACEBOOK_POSTS_ERROR
 }
 
-// Entity like person, politician, party, etc.
-// We will fetch posts for each entity
-// systemPrompt is the prompt that will be used to generate reactions for the entity
+model SystemEvent {
+  id      String          @id @default(uuid())
+  type    SystemEventType
+  details Json
+
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  @@index([type])
+  @@index([createdAt])
+}
+
+// ============================================
+// TRACKED ENTITIES
+// ============================================
+
 model TrackedEntity {
-  id              String            @id @default(uuid())
-  name            String
-  description     String
-  type            TrackedEntityType
-  facebookPageUrl String            @unique
-  systemPrompt    String?
+  id          String @id @default(uuid())
+  name        String
+  description String
 
   createdAt DateTime @default(now())
   updatedAt DateTime @updatedAt
 
-  facebookPosts               FacebookPost[]
-  trackedEntityConfigurations TrackedEntityConfiguration[]
+  trackedEntityPosts         TrackedEntityPost[]
+  trackedEntityReactions     TrackedEntityReaction[]
+  trackedEntityOwn           TrackedEntityOwnTrackedEntity?
+  trackedEntityOther         TrackedEntityOtherTrackedEntity?
+  trackedEntityConfiguration TrackedEntityTrackedEntityConfiguration?
 }
 
-// table to store Facebook posts data
-// base properties are stored as standalone columns
-// fullResponse property contains whole response from Apify
+// ============================================
+// TRACKED ENTITY TYPE JUNCTIONS (1:1)
+// ============================================
+
+model TrackedEntityOwnTrackedEntity {
+  id                 String @id @default(uuid())
+  trackedEntityId    String @unique
+  ownTrackedEntityId String @unique
+
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  trackedEntity    TrackedEntity    @relation(fields: [trackedEntityId], references: [id], onDelete: Cascade)
+  ownTrackedEntity OwnTrackedEntity @relation(fields: [ownTrackedEntityId], references: [id], onDelete: Cascade)
+}
+
+model OwnTrackedEntity {
+  id              String @id @default(uuid())
+  facebookPageUrl String @unique
+
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  trackedEntityOwnTrackedEntity TrackedEntityOwnTrackedEntity?
+}
+
+model TrackedEntityOtherTrackedEntity {
+  id                   String @id @default(uuid())
+  trackedEntityId      String @unique
+  otherTrackedEntityId String @unique
+
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  trackedEntity      TrackedEntity      @relation(fields: [trackedEntityId], references: [id], onDelete: Cascade)
+  otherTrackedEntity OtherTrackedEntity @relation(fields: [otherTrackedEntityId], references: [id], onDelete: Cascade)
+}
+
+model OtherTrackedEntity {
+  id              String @id @default(uuid())
+  facebookPageUrl String @unique
+
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  trackedEntityOtherTrackedEntity TrackedEntityOtherTrackedEntity?
+}
+
+// ============================================
+// CONFIGURATION
+// ============================================
+
+model TrackedEntityTrackedEntityConfiguration {
+  id                           String @id @default(uuid())
+  trackedEntityId              String @unique
+  trackedEntityConfigurationId String @unique
+
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  trackedEntity              TrackedEntity              @relation(fields: [trackedEntityId], references: [id], onDelete: Cascade)
+  trackedEntityConfiguration TrackedEntityConfiguration @relation(fields: [trackedEntityConfigurationId], references: [id], onDelete: Cascade)
+}
+
+model TrackedEntityConfiguration {
+  id       String  @id @default(uuid())
+  isActive Boolean @default(true)
+
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  trackedEntityTrackedEntityConfiguration TrackedEntityTrackedEntityConfiguration?
+  promptConfigurations                    TrackedEntityConfigurationPromptConfiguration[]
+}
+
+model TrackedEntityConfigurationPromptConfiguration {
+  id                           String @id @default(uuid())
+  trackedEntityConfigurationId String
+  promptConfigurationId        String
+
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  promptConfiguration        PromptConfiguration        @relation(fields: [promptConfigurationId], references: [id], onDelete: Cascade)
+  trackedEntityConfiguration TrackedEntityConfiguration @relation(fields: [trackedEntityConfigurationId], references: [id], onDelete: Cascade)
+
+  @@unique([trackedEntityConfigurationId, promptConfigurationId])
+}
+
+model PromptConfiguration {
+  id                String  @id @default(uuid())
+  toneOfVoicePrompt String
+  userPrompt        String
+  isActive          Boolean
+
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  trackedEntityConfigurationPromptConfigurations TrackedEntityConfigurationPromptConfiguration[]
+  reactionPromptConfigurations                   ReactionPromptConfiguration[]
+
+  @@index([isActive])
+}
+
+// ============================================
+// POSTS
+// ============================================
+
+model TrackedEntityPost {
+  id              String @id @default(uuid())
+  trackedEntityId String
+  postId          String
+
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  trackedEntity TrackedEntity @relation(fields: [trackedEntityId], references: [id], onDelete: Cascade)
+  post          Post          @relation(fields: [postId], references: [id], onDelete: Cascade)
+
+  @@unique([trackedEntityId, postId])
+  @@index([trackedEntityId])
+  @@index([postId])
+}
+
+model Post {
+  id String @id @default(uuid())
+
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  trackedEntityPosts TrackedEntityPost[]
+  postReactions      PostReaction[]
+  postFacebookPost   PostFacebookPost?
+}
+
+model PostFacebookPost {
+  id             String @id @default(uuid())
+  postId         String @unique
+  facebookPostId String @unique
+
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  post         Post         @relation(fields: [postId], references: [id], onDelete: Cascade)
+  facebookPost FacebookPost @relation(fields: [facebookPostId], references: [id], onDelete: Cascade)
+}
+
 model FacebookPost {
   id                String   @id @default(uuid())
-  trackedEntityId   String
-  postId            String   @unique
+  facebookPostId    String   @unique
   url               String
-  timestamp         DateTime
+  postedAt          DateTime
   text              String
-  likes             Int
-  comments          Int
-  shares            Int
-  topReactionsCount Int
-  isVideo           Boolean
-  viewsCount        Int
+  likes             Int      @default(0)
+  comments          Int      @default(0)
+  shares            Int      @default(0)
+  topReactionsCount Int      @default(0)
+  isVideo           Boolean  @default(false)
+  viewsCount        Int      @default(0)
   fullResponse      Json
 
   createdAt DateTime @default(now())
   updatedAt DateTime @updatedAt
 
-  trackedEntity         TrackedEntity          @relation(fields: [trackedEntityId], references: [id], onDelete: Cascade)
-  facebookPostReactions FacebookPostReaction[]
-  postCategories        PostCategory[]
+  postFacebookPost PostFacebookPost?
+
+  @@index([postedAt])
+  @@index([facebookPostId])
 }
 
-// table to store generated reactions based on Facebook posts
-model FacebookPostReaction {
-  id             String @id @default(uuid())
-  facebookPostId String
-  reaction       String
+// ============================================
+// REACTIONS
+// ============================================
 
-  createdAt DateTime @default(now())
-  updatedAt DateTime @updatedAt
-
-  post FacebookPost @relation(fields: [facebookPostId], references: [id], onDelete: Cascade)
-}
-
-enum SystemEventType {
-  EMAIL_NOTIFICATION
-}
-
-// Events are the events that are tracked by the system, i.e. email notification sent
-model SystemEvent {
-  id          String          @id @default(uuid())
-  type        SystemEventType
-  description String
-
-  createdAt DateTime @default(now())
-  updatedAt DateTime @updatedAt
-}
-
-// Post categories will be used to categorize posts and decide if post is relevant or not
-model PostCategory {
-  id          String @id @default(uuid())
-  name        String @unique
-  description String
-
-  createdAt DateTime @default(now())
-  updatedAt DateTime @updatedAt
-
-  facebookPosts FacebookPost[]
-}
-
-// politics will be used as input context for AI to generate reactions
-model Politics {
-  id String @id @default(uuid())
-
-  createdAt DateTime @default(now())
-  updatedAt DateTime @updatedAt
-}
-
-// table to store prompts and other configuration properties for tracked entities
-model TrackedEntityConfiguration {
-  id              String        @id @default(uuid())
+model TrackedEntityReaction {
+  id              String @id @default(uuid())
   trackedEntityId String
-  trackedEntity   TrackedEntity @relation(fields: [trackedEntityId], references: [id], onDelete: Cascade)
+  reactionId      String @unique
 
   createdAt DateTime @default(now())
   updatedAt DateTime @updatedAt
+
+  trackedEntity TrackedEntity @relation(fields: [trackedEntityId], references: [id], onDelete: Cascade)
+  reaction      Reaction      @relation(fields: [reactionId], references: [id], onDelete: Cascade)
+
+  @@index([trackedEntityId])
+}
+
+model PostReaction {
+  id         String @id @default(uuid())
+  postId     String
+  reactionId String @unique
+
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  post     Post     @relation(fields: [postId], references: [id], onDelete: Cascade)
+  reaction Reaction @relation(fields: [reactionId], references: [id], onDelete: Cascade)
+
+  @@unique([postId, reactionId])
+  @@index([postId])
+}
+
+model Reaction {
+  id   String @id @default(uuid())
+  text String
+
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  postReaction                PostReaction?
+  trackedEntityReaction       TrackedEntityReaction?
+  reactionPromptConfiguration ReactionPromptConfiguration?
+}
+
+model ReactionPromptConfiguration {
+  id                    String @id @default(uuid())
+  reactionId            String @unique
+  promptConfigurationId String
+
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  reaction            Reaction            @relation(fields: [reactionId], references: [id], onDelete: Cascade)
+  promptConfiguration PromptConfiguration @relation(fields: [promptConfigurationId], references: [id], onDelete: Cascade)
+
+  @@index([promptConfigurationId])
 }
