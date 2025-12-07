@@ -175,7 +175,7 @@ export type TrackedEntityConfigurationWhereInput = {
   createdAt?: Prisma.DateTimeFilter<"TrackedEntityConfiguration"> | Date | string
   updatedAt?: Prisma.DateTimeFilter<"TrackedEntityConfiguration"> | Date | string
   trackedEntityTrackedEntityConfiguration?: Prisma.XOR<Prisma.TrackedEntityTrackedEntityConfigurationNullableScalarRelationFilter, Prisma.TrackedEntityTrackedEntityConfigurationWhereInput> | null
-  promptConfigurations?: Prisma.TrackedEntityConfigurationPromptConfigurationListRelationFilter
+  trackedEntityConfigurationPromptConfigurations?: Prisma.TrackedEntityConfigurationPromptConfigurationListRelationFilter
 }
 
 export type TrackedEntityConfigurationOrderByWithRelationInput = {
@@ -184,7 +184,7 @@ export type TrackedEntityConfigurationOrderByWithRelationInput = {
   createdAt?: Prisma.SortOrder
   updatedAt?: Prisma.SortOrder
   trackedEntityTrackedEntityConfiguration?: Prisma.TrackedEntityTrackedEntityConfigurationOrderByWithRelationInput
-  promptConfigurations?: Prisma.TrackedEntityConfigurationPromptConfigurationOrderByRelationAggregateInput
+  trackedEntityConfigurationPromptConfigurations?: Prisma.TrackedEntityConfigurationPromptConfigurationOrderByRelationAggregateInput
 }
 
 export type TrackedEntityConfigurationWhereUniqueInput = Prisma.AtLeast<{
@@ -196,7 +196,7 @@ export type TrackedEntityConfigurationWhereUniqueInput = Prisma.AtLeast<{
   createdAt?: Prisma.DateTimeFilter<"TrackedEntityConfiguration"> | Date | string
   updatedAt?: Prisma.DateTimeFilter<"TrackedEntityConfiguration"> | Date | string
   trackedEntityTrackedEntityConfiguration?: Prisma.XOR<Prisma.TrackedEntityTrackedEntityConfigurationNullableScalarRelationFilter, Prisma.TrackedEntityTrackedEntityConfigurationWhereInput> | null
-  promptConfigurations?: Prisma.TrackedEntityConfigurationPromptConfigurationListRelationFilter
+  trackedEntityConfigurationPromptConfigurations?: Prisma.TrackedEntityConfigurationPromptConfigurationListRelationFilter
 }, "id">
 
 export type TrackedEntityConfigurationOrderByWithAggregationInput = {
@@ -225,7 +225,7 @@ export type TrackedEntityConfigurationCreateInput = {
   createdAt?: Date | string
   updatedAt?: Date | string
   trackedEntityTrackedEntityConfiguration?: Prisma.TrackedEntityTrackedEntityConfigurationCreateNestedOneWithoutTrackedEntityConfigurationInput
-  promptConfigurations?: Prisma.TrackedEntityConfigurationPromptConfigurationCreateNestedManyWithoutTrackedEntityConfigurationInput
+  trackedEntityConfigurationPromptConfigurations?: Prisma.TrackedEntityConfigurationPromptConfigurationCreateNestedManyWithoutTrackedEntityConfigurationInput
 }
 
 export type TrackedEntityConfigurationUncheckedCreateInput = {
@@ -234,7 +234,7 @@ export type TrackedEntityConfigurationUncheckedCreateInput = {
   createdAt?: Date | string
   updatedAt?: Date | string
   trackedEntityTrackedEntityConfiguration?: Prisma.TrackedEntityTrackedEntityConfigurationUncheckedCreateNestedOneWithoutTrackedEntityConfigurationInput
-  promptConfigurations?: Prisma.TrackedEntityConfigurationPromptConfigurationUncheckedCreateNestedManyWithoutTrackedEntityConfigurationInput
+  trackedEntityConfigurationPromptConfigurations?: Prisma.TrackedEntityConfigurationPromptConfigurationUncheckedCreateNestedManyWithoutTrackedEntityConfigurationInput
 }
 
 export type TrackedEntityConfigurationUpdateInput = {
@@ -243,7 +243,7 @@ export type TrackedEntityConfigurationUpdateInput = {
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   trackedEntityTrackedEntityConfiguration?: Prisma.TrackedEntityTrackedEntityConfigurationUpdateOneWithoutTrackedEntityConfigurationNestedInput
-  promptConfigurations?: Prisma.TrackedEntityConfigurationPromptConfigurationUpdateManyWithoutTrackedEntityConfigurationNestedInput
+  trackedEntityConfigurationPromptConfigurations?: Prisma.TrackedEntityConfigurationPromptConfigurationUpdateManyWithoutTrackedEntityConfigurationNestedInput
 }
 
 export type TrackedEntityConfigurationUncheckedUpdateInput = {
@@ -252,7 +252,7 @@ export type TrackedEntityConfigurationUncheckedUpdateInput = {
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   trackedEntityTrackedEntityConfiguration?: Prisma.TrackedEntityTrackedEntityConfigurationUncheckedUpdateOneWithoutTrackedEntityConfigurationNestedInput
-  promptConfigurations?: Prisma.TrackedEntityConfigurationPromptConfigurationUncheckedUpdateManyWithoutTrackedEntityConfigurationNestedInput
+  trackedEntityConfigurationPromptConfigurations?: Prisma.TrackedEntityConfigurationPromptConfigurationUncheckedUpdateManyWithoutTrackedEntityConfigurationNestedInput
 }
 
 export type TrackedEntityConfigurationCreateManyInput = {
@@ -320,18 +320,18 @@ export type BoolFieldUpdateOperationsInput = {
   set?: boolean
 }
 
-export type TrackedEntityConfigurationCreateNestedOneWithoutPromptConfigurationsInput = {
-  create?: Prisma.XOR<Prisma.TrackedEntityConfigurationCreateWithoutPromptConfigurationsInput, Prisma.TrackedEntityConfigurationUncheckedCreateWithoutPromptConfigurationsInput>
-  connectOrCreate?: Prisma.TrackedEntityConfigurationCreateOrConnectWithoutPromptConfigurationsInput
+export type TrackedEntityConfigurationCreateNestedOneWithoutTrackedEntityConfigurationPromptConfigurationsInput = {
+  create?: Prisma.XOR<Prisma.TrackedEntityConfigurationCreateWithoutTrackedEntityConfigurationPromptConfigurationsInput, Prisma.TrackedEntityConfigurationUncheckedCreateWithoutTrackedEntityConfigurationPromptConfigurationsInput>
+  connectOrCreate?: Prisma.TrackedEntityConfigurationCreateOrConnectWithoutTrackedEntityConfigurationPromptConfigurationsInput
   connect?: Prisma.TrackedEntityConfigurationWhereUniqueInput
 }
 
-export type TrackedEntityConfigurationUpdateOneRequiredWithoutPromptConfigurationsNestedInput = {
-  create?: Prisma.XOR<Prisma.TrackedEntityConfigurationCreateWithoutPromptConfigurationsInput, Prisma.TrackedEntityConfigurationUncheckedCreateWithoutPromptConfigurationsInput>
-  connectOrCreate?: Prisma.TrackedEntityConfigurationCreateOrConnectWithoutPromptConfigurationsInput
-  upsert?: Prisma.TrackedEntityConfigurationUpsertWithoutPromptConfigurationsInput
+export type TrackedEntityConfigurationUpdateOneRequiredWithoutTrackedEntityConfigurationPromptConfigurationsNestedInput = {
+  create?: Prisma.XOR<Prisma.TrackedEntityConfigurationCreateWithoutTrackedEntityConfigurationPromptConfigurationsInput, Prisma.TrackedEntityConfigurationUncheckedCreateWithoutTrackedEntityConfigurationPromptConfigurationsInput>
+  connectOrCreate?: Prisma.TrackedEntityConfigurationCreateOrConnectWithoutTrackedEntityConfigurationPromptConfigurationsInput
+  upsert?: Prisma.TrackedEntityConfigurationUpsertWithoutTrackedEntityConfigurationPromptConfigurationsInput
   connect?: Prisma.TrackedEntityConfigurationWhereUniqueInput
-  update?: Prisma.XOR<Prisma.XOR<Prisma.TrackedEntityConfigurationUpdateToOneWithWhereWithoutPromptConfigurationsInput, Prisma.TrackedEntityConfigurationUpdateWithoutPromptConfigurationsInput>, Prisma.TrackedEntityConfigurationUncheckedUpdateWithoutPromptConfigurationsInput>
+  update?: Prisma.XOR<Prisma.XOR<Prisma.TrackedEntityConfigurationUpdateToOneWithWhereWithoutTrackedEntityConfigurationPromptConfigurationsInput, Prisma.TrackedEntityConfigurationUpdateWithoutTrackedEntityConfigurationPromptConfigurationsInput>, Prisma.TrackedEntityConfigurationUncheckedUpdateWithoutTrackedEntityConfigurationPromptConfigurationsInput>
 }
 
 export type TrackedEntityConfigurationCreateWithoutTrackedEntityTrackedEntityConfigurationInput = {
@@ -339,7 +339,7 @@ export type TrackedEntityConfigurationCreateWithoutTrackedEntityTrackedEntityCon
   isActive?: boolean
   createdAt?: Date | string
   updatedAt?: Date | string
-  promptConfigurations?: Prisma.TrackedEntityConfigurationPromptConfigurationCreateNestedManyWithoutTrackedEntityConfigurationInput
+  trackedEntityConfigurationPromptConfigurations?: Prisma.TrackedEntityConfigurationPromptConfigurationCreateNestedManyWithoutTrackedEntityConfigurationInput
 }
 
 export type TrackedEntityConfigurationUncheckedCreateWithoutTrackedEntityTrackedEntityConfigurationInput = {
@@ -347,7 +347,7 @@ export type TrackedEntityConfigurationUncheckedCreateWithoutTrackedEntityTracked
   isActive?: boolean
   createdAt?: Date | string
   updatedAt?: Date | string
-  promptConfigurations?: Prisma.TrackedEntityConfigurationPromptConfigurationUncheckedCreateNestedManyWithoutTrackedEntityConfigurationInput
+  trackedEntityConfigurationPromptConfigurations?: Prisma.TrackedEntityConfigurationPromptConfigurationUncheckedCreateNestedManyWithoutTrackedEntityConfigurationInput
 }
 
 export type TrackedEntityConfigurationCreateOrConnectWithoutTrackedEntityTrackedEntityConfigurationInput = {
@@ -371,7 +371,7 @@ export type TrackedEntityConfigurationUpdateWithoutTrackedEntityTrackedEntityCon
   isActive?: Prisma.BoolFieldUpdateOperationsInput | boolean
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
-  promptConfigurations?: Prisma.TrackedEntityConfigurationPromptConfigurationUpdateManyWithoutTrackedEntityConfigurationNestedInput
+  trackedEntityConfigurationPromptConfigurations?: Prisma.TrackedEntityConfigurationPromptConfigurationUpdateManyWithoutTrackedEntityConfigurationNestedInput
 }
 
 export type TrackedEntityConfigurationUncheckedUpdateWithoutTrackedEntityTrackedEntityConfigurationInput = {
@@ -379,10 +379,10 @@ export type TrackedEntityConfigurationUncheckedUpdateWithoutTrackedEntityTracked
   isActive?: Prisma.BoolFieldUpdateOperationsInput | boolean
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
-  promptConfigurations?: Prisma.TrackedEntityConfigurationPromptConfigurationUncheckedUpdateManyWithoutTrackedEntityConfigurationNestedInput
+  trackedEntityConfigurationPromptConfigurations?: Prisma.TrackedEntityConfigurationPromptConfigurationUncheckedUpdateManyWithoutTrackedEntityConfigurationNestedInput
 }
 
-export type TrackedEntityConfigurationCreateWithoutPromptConfigurationsInput = {
+export type TrackedEntityConfigurationCreateWithoutTrackedEntityConfigurationPromptConfigurationsInput = {
   id?: string
   isActive?: boolean
   createdAt?: Date | string
@@ -390,7 +390,7 @@ export type TrackedEntityConfigurationCreateWithoutPromptConfigurationsInput = {
   trackedEntityTrackedEntityConfiguration?: Prisma.TrackedEntityTrackedEntityConfigurationCreateNestedOneWithoutTrackedEntityConfigurationInput
 }
 
-export type TrackedEntityConfigurationUncheckedCreateWithoutPromptConfigurationsInput = {
+export type TrackedEntityConfigurationUncheckedCreateWithoutTrackedEntityConfigurationPromptConfigurationsInput = {
   id?: string
   isActive?: boolean
   createdAt?: Date | string
@@ -398,23 +398,23 @@ export type TrackedEntityConfigurationUncheckedCreateWithoutPromptConfigurations
   trackedEntityTrackedEntityConfiguration?: Prisma.TrackedEntityTrackedEntityConfigurationUncheckedCreateNestedOneWithoutTrackedEntityConfigurationInput
 }
 
-export type TrackedEntityConfigurationCreateOrConnectWithoutPromptConfigurationsInput = {
+export type TrackedEntityConfigurationCreateOrConnectWithoutTrackedEntityConfigurationPromptConfigurationsInput = {
   where: Prisma.TrackedEntityConfigurationWhereUniqueInput
-  create: Prisma.XOR<Prisma.TrackedEntityConfigurationCreateWithoutPromptConfigurationsInput, Prisma.TrackedEntityConfigurationUncheckedCreateWithoutPromptConfigurationsInput>
+  create: Prisma.XOR<Prisma.TrackedEntityConfigurationCreateWithoutTrackedEntityConfigurationPromptConfigurationsInput, Prisma.TrackedEntityConfigurationUncheckedCreateWithoutTrackedEntityConfigurationPromptConfigurationsInput>
 }
 
-export type TrackedEntityConfigurationUpsertWithoutPromptConfigurationsInput = {
-  update: Prisma.XOR<Prisma.TrackedEntityConfigurationUpdateWithoutPromptConfigurationsInput, Prisma.TrackedEntityConfigurationUncheckedUpdateWithoutPromptConfigurationsInput>
-  create: Prisma.XOR<Prisma.TrackedEntityConfigurationCreateWithoutPromptConfigurationsInput, Prisma.TrackedEntityConfigurationUncheckedCreateWithoutPromptConfigurationsInput>
+export type TrackedEntityConfigurationUpsertWithoutTrackedEntityConfigurationPromptConfigurationsInput = {
+  update: Prisma.XOR<Prisma.TrackedEntityConfigurationUpdateWithoutTrackedEntityConfigurationPromptConfigurationsInput, Prisma.TrackedEntityConfigurationUncheckedUpdateWithoutTrackedEntityConfigurationPromptConfigurationsInput>
+  create: Prisma.XOR<Prisma.TrackedEntityConfigurationCreateWithoutTrackedEntityConfigurationPromptConfigurationsInput, Prisma.TrackedEntityConfigurationUncheckedCreateWithoutTrackedEntityConfigurationPromptConfigurationsInput>
   where?: Prisma.TrackedEntityConfigurationWhereInput
 }
 
-export type TrackedEntityConfigurationUpdateToOneWithWhereWithoutPromptConfigurationsInput = {
+export type TrackedEntityConfigurationUpdateToOneWithWhereWithoutTrackedEntityConfigurationPromptConfigurationsInput = {
   where?: Prisma.TrackedEntityConfigurationWhereInput
-  data: Prisma.XOR<Prisma.TrackedEntityConfigurationUpdateWithoutPromptConfigurationsInput, Prisma.TrackedEntityConfigurationUncheckedUpdateWithoutPromptConfigurationsInput>
+  data: Prisma.XOR<Prisma.TrackedEntityConfigurationUpdateWithoutTrackedEntityConfigurationPromptConfigurationsInput, Prisma.TrackedEntityConfigurationUncheckedUpdateWithoutTrackedEntityConfigurationPromptConfigurationsInput>
 }
 
-export type TrackedEntityConfigurationUpdateWithoutPromptConfigurationsInput = {
+export type TrackedEntityConfigurationUpdateWithoutTrackedEntityConfigurationPromptConfigurationsInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
   isActive?: Prisma.BoolFieldUpdateOperationsInput | boolean
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
@@ -422,7 +422,7 @@ export type TrackedEntityConfigurationUpdateWithoutPromptConfigurationsInput = {
   trackedEntityTrackedEntityConfiguration?: Prisma.TrackedEntityTrackedEntityConfigurationUpdateOneWithoutTrackedEntityConfigurationNestedInput
 }
 
-export type TrackedEntityConfigurationUncheckedUpdateWithoutPromptConfigurationsInput = {
+export type TrackedEntityConfigurationUncheckedUpdateWithoutTrackedEntityConfigurationPromptConfigurationsInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
   isActive?: Prisma.BoolFieldUpdateOperationsInput | boolean
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
@@ -436,11 +436,11 @@ export type TrackedEntityConfigurationUncheckedUpdateWithoutPromptConfigurations
  */
 
 export type TrackedEntityConfigurationCountOutputType = {
-  promptConfigurations: number
+  trackedEntityConfigurationPromptConfigurations: number
 }
 
 export type TrackedEntityConfigurationCountOutputTypeSelect<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
-  promptConfigurations?: boolean | TrackedEntityConfigurationCountOutputTypeCountPromptConfigurationsArgs
+  trackedEntityConfigurationPromptConfigurations?: boolean | TrackedEntityConfigurationCountOutputTypeCountTrackedEntityConfigurationPromptConfigurationsArgs
 }
 
 /**
@@ -456,7 +456,7 @@ export type TrackedEntityConfigurationCountOutputTypeDefaultArgs<ExtArgs extends
 /**
  * TrackedEntityConfigurationCountOutputType without action
  */
-export type TrackedEntityConfigurationCountOutputTypeCountPromptConfigurationsArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+export type TrackedEntityConfigurationCountOutputTypeCountTrackedEntityConfigurationPromptConfigurationsArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
   where?: Prisma.TrackedEntityConfigurationPromptConfigurationWhereInput
 }
 
@@ -467,7 +467,7 @@ export type TrackedEntityConfigurationSelect<ExtArgs extends runtime.Types.Exten
   createdAt?: boolean
   updatedAt?: boolean
   trackedEntityTrackedEntityConfiguration?: boolean | Prisma.TrackedEntityConfiguration$trackedEntityTrackedEntityConfigurationArgs<ExtArgs>
-  promptConfigurations?: boolean | Prisma.TrackedEntityConfiguration$promptConfigurationsArgs<ExtArgs>
+  trackedEntityConfigurationPromptConfigurations?: boolean | Prisma.TrackedEntityConfiguration$trackedEntityConfigurationPromptConfigurationsArgs<ExtArgs>
   _count?: boolean | Prisma.TrackedEntityConfigurationCountOutputTypeDefaultArgs<ExtArgs>
 }, ExtArgs["result"]["trackedEntityConfiguration"]>
 
@@ -495,7 +495,7 @@ export type TrackedEntityConfigurationSelectScalar = {
 export type TrackedEntityConfigurationOmit<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetOmit<"id" | "isActive" | "createdAt" | "updatedAt", ExtArgs["result"]["trackedEntityConfiguration"]>
 export type TrackedEntityConfigurationInclude<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
   trackedEntityTrackedEntityConfiguration?: boolean | Prisma.TrackedEntityConfiguration$trackedEntityTrackedEntityConfigurationArgs<ExtArgs>
-  promptConfigurations?: boolean | Prisma.TrackedEntityConfiguration$promptConfigurationsArgs<ExtArgs>
+  trackedEntityConfigurationPromptConfigurations?: boolean | Prisma.TrackedEntityConfiguration$trackedEntityConfigurationPromptConfigurationsArgs<ExtArgs>
   _count?: boolean | Prisma.TrackedEntityConfigurationCountOutputTypeDefaultArgs<ExtArgs>
 }
 export type TrackedEntityConfigurationIncludeCreateManyAndReturn<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {}
@@ -505,7 +505,7 @@ export type $TrackedEntityConfigurationPayload<ExtArgs extends runtime.Types.Ext
   name: "TrackedEntityConfiguration"
   objects: {
     trackedEntityTrackedEntityConfiguration: Prisma.$TrackedEntityTrackedEntityConfigurationPayload<ExtArgs> | null
-    promptConfigurations: Prisma.$TrackedEntityConfigurationPromptConfigurationPayload<ExtArgs>[]
+    trackedEntityConfigurationPromptConfigurations: Prisma.$TrackedEntityConfigurationPromptConfigurationPayload<ExtArgs>[]
   }
   scalars: runtime.Types.Extensions.GetPayloadResult<{
     id: string
@@ -907,7 +907,7 @@ readonly fields: TrackedEntityConfigurationFieldRefs;
 export interface Prisma__TrackedEntityConfigurationClient<T, Null = never, ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs, GlobalOmitOptions = {}> extends Prisma.PrismaPromise<T> {
   readonly [Symbol.toStringTag]: "PrismaPromise"
   trackedEntityTrackedEntityConfiguration<T extends Prisma.TrackedEntityConfiguration$trackedEntityTrackedEntityConfigurationArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.TrackedEntityConfiguration$trackedEntityTrackedEntityConfigurationArgs<ExtArgs>>): Prisma.Prisma__TrackedEntityTrackedEntityConfigurationClient<runtime.Types.Result.GetResult<Prisma.$TrackedEntityTrackedEntityConfigurationPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
-  promptConfigurations<T extends Prisma.TrackedEntityConfiguration$promptConfigurationsArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.TrackedEntityConfiguration$promptConfigurationsArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$TrackedEntityConfigurationPromptConfigurationPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
+  trackedEntityConfigurationPromptConfigurations<T extends Prisma.TrackedEntityConfiguration$trackedEntityConfigurationPromptConfigurationsArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.TrackedEntityConfiguration$trackedEntityConfigurationPromptConfigurationsArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$TrackedEntityConfigurationPromptConfigurationPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
   /**
    * Attaches callbacks for the resolution and/or rejection of the Promise.
    * @param onfulfilled The callback to execute when the Promise is resolved.
@@ -1348,9 +1348,9 @@ export type TrackedEntityConfiguration$trackedEntityTrackedEntityConfigurationAr
 }
 
 /**
- * TrackedEntityConfiguration.promptConfigurations
+ * TrackedEntityConfiguration.trackedEntityConfigurationPromptConfigurations
  */
-export type TrackedEntityConfiguration$promptConfigurationsArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+export type TrackedEntityConfiguration$trackedEntityConfigurationPromptConfigurationsArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
   /**
    * Select specific fields to fetch from the TrackedEntityConfigurationPromptConfiguration
    */

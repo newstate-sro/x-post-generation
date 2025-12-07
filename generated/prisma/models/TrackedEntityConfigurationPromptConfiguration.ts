@@ -237,7 +237,7 @@ export type TrackedEntityConfigurationPromptConfigurationCreateInput = {
   createdAt?: Date | string
   updatedAt?: Date | string
   promptConfiguration: Prisma.PromptConfigurationCreateNestedOneWithoutTrackedEntityConfigurationPromptConfigurationsInput
-  trackedEntityConfiguration: Prisma.TrackedEntityConfigurationCreateNestedOneWithoutPromptConfigurationsInput
+  trackedEntityConfiguration: Prisma.TrackedEntityConfigurationCreateNestedOneWithoutTrackedEntityConfigurationPromptConfigurationsInput
 }
 
 export type TrackedEntityConfigurationPromptConfigurationUncheckedCreateInput = {
@@ -253,7 +253,7 @@ export type TrackedEntityConfigurationPromptConfigurationUpdateInput = {
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   promptConfiguration?: Prisma.PromptConfigurationUpdateOneRequiredWithoutTrackedEntityConfigurationPromptConfigurationsNestedInput
-  trackedEntityConfiguration?: Prisma.TrackedEntityConfigurationUpdateOneRequiredWithoutPromptConfigurationsNestedInput
+  trackedEntityConfiguration?: Prisma.TrackedEntityConfigurationUpdateOneRequiredWithoutTrackedEntityConfigurationPromptConfigurationsNestedInput
 }
 
 export type TrackedEntityConfigurationPromptConfigurationUncheckedUpdateInput = {
@@ -464,7 +464,7 @@ export type TrackedEntityConfigurationPromptConfigurationCreateWithoutPromptConf
   id?: string
   createdAt?: Date | string
   updatedAt?: Date | string
-  trackedEntityConfiguration: Prisma.TrackedEntityConfigurationCreateNestedOneWithoutPromptConfigurationsInput
+  trackedEntityConfiguration: Prisma.TrackedEntityConfigurationCreateNestedOneWithoutTrackedEntityConfigurationPromptConfigurationsInput
 }
 
 export type TrackedEntityConfigurationPromptConfigurationUncheckedCreateWithoutPromptConfigurationInput = {
@@ -539,7 +539,7 @@ export type TrackedEntityConfigurationPromptConfigurationUpdateWithoutPromptConf
   id?: Prisma.StringFieldUpdateOperationsInput | string
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
-  trackedEntityConfiguration?: Prisma.TrackedEntityConfigurationUpdateOneRequiredWithoutPromptConfigurationsNestedInput
+  trackedEntityConfiguration?: Prisma.TrackedEntityConfigurationUpdateOneRequiredWithoutTrackedEntityConfigurationPromptConfigurationsNestedInput
 }
 
 export type TrackedEntityConfigurationPromptConfigurationUncheckedUpdateWithoutPromptConfigurationInput = {

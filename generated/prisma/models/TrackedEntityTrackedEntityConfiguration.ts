@@ -235,7 +235,7 @@ export type TrackedEntityTrackedEntityConfigurationCreateInput = {
   id?: string
   createdAt?: Date | string
   updatedAt?: Date | string
-  trackedEntity: Prisma.TrackedEntityCreateNestedOneWithoutTrackedEntityConfigurationInput
+  trackedEntity: Prisma.TrackedEntityCreateNestedOneWithoutTrackedEntityTrackedEntityConfigurationInput
   trackedEntityConfiguration: Prisma.TrackedEntityConfigurationCreateNestedOneWithoutTrackedEntityTrackedEntityConfigurationInput
 }
 
@@ -251,7 +251,7 @@ export type TrackedEntityTrackedEntityConfigurationUpdateInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
-  trackedEntity?: Prisma.TrackedEntityUpdateOneRequiredWithoutTrackedEntityConfigurationNestedInput
+  trackedEntity?: Prisma.TrackedEntityUpdateOneRequiredWithoutTrackedEntityTrackedEntityConfigurationNestedInput
   trackedEntityConfiguration?: Prisma.TrackedEntityConfigurationUpdateOneRequiredWithoutTrackedEntityTrackedEntityConfigurationNestedInput
 }
 
@@ -426,7 +426,7 @@ export type TrackedEntityTrackedEntityConfigurationCreateWithoutTrackedEntityCon
   id?: string
   createdAt?: Date | string
   updatedAt?: Date | string
-  trackedEntity: Prisma.TrackedEntityCreateNestedOneWithoutTrackedEntityConfigurationInput
+  trackedEntity: Prisma.TrackedEntityCreateNestedOneWithoutTrackedEntityTrackedEntityConfigurationInput
 }
 
 export type TrackedEntityTrackedEntityConfigurationUncheckedCreateWithoutTrackedEntityConfigurationInput = {
@@ -456,7 +456,7 @@ export type TrackedEntityTrackedEntityConfigurationUpdateWithoutTrackedEntityCon
   id?: Prisma.StringFieldUpdateOperationsInput | string
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
-  trackedEntity?: Prisma.TrackedEntityUpdateOneRequiredWithoutTrackedEntityConfigurationNestedInput
+  trackedEntity?: Prisma.TrackedEntityUpdateOneRequiredWithoutTrackedEntityTrackedEntityConfigurationNestedInput
 }
 
 export type TrackedEntityTrackedEntityConfigurationUncheckedUpdateWithoutTrackedEntityConfigurationInput = {

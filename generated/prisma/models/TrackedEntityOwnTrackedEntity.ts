@@ -235,7 +235,7 @@ export type TrackedEntityOwnTrackedEntityCreateInput = {
   id?: string
   createdAt?: Date | string
   updatedAt?: Date | string
-  trackedEntity: Prisma.TrackedEntityCreateNestedOneWithoutTrackedEntityOwnInput
+  trackedEntity: Prisma.TrackedEntityCreateNestedOneWithoutTrackedEntityOwnTrackedEntityInput
   ownTrackedEntity: Prisma.OwnTrackedEntityCreateNestedOneWithoutTrackedEntityOwnTrackedEntityInput
 }
 
@@ -251,7 +251,7 @@ export type TrackedEntityOwnTrackedEntityUpdateInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
-  trackedEntity?: Prisma.TrackedEntityUpdateOneRequiredWithoutTrackedEntityOwnNestedInput
+  trackedEntity?: Prisma.TrackedEntityUpdateOneRequiredWithoutTrackedEntityOwnTrackedEntityNestedInput
   ownTrackedEntity?: Prisma.OwnTrackedEntityUpdateOneRequiredWithoutTrackedEntityOwnTrackedEntityNestedInput
 }
 
@@ -426,7 +426,7 @@ export type TrackedEntityOwnTrackedEntityCreateWithoutOwnTrackedEntityInput = {
   id?: string
   createdAt?: Date | string
   updatedAt?: Date | string
-  trackedEntity: Prisma.TrackedEntityCreateNestedOneWithoutTrackedEntityOwnInput
+  trackedEntity: Prisma.TrackedEntityCreateNestedOneWithoutTrackedEntityOwnTrackedEntityInput
 }
 
 export type TrackedEntityOwnTrackedEntityUncheckedCreateWithoutOwnTrackedEntityInput = {
@@ -456,7 +456,7 @@ export type TrackedEntityOwnTrackedEntityUpdateWithoutOwnTrackedEntityInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
-  trackedEntity?: Prisma.TrackedEntityUpdateOneRequiredWithoutTrackedEntityOwnNestedInput
+  trackedEntity?: Prisma.TrackedEntityUpdateOneRequiredWithoutTrackedEntityOwnTrackedEntityNestedInput
 }
 
 export type TrackedEntityOwnTrackedEntityUncheckedUpdateWithoutOwnTrackedEntityInput = {

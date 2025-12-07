@@ -55,11 +55,11 @@ model TrackedEntity {
   createdAt DateTime @default(now())
   updatedAt DateTime @updatedAt
 
-  trackedEntityPosts         TrackedEntityPost[]
-  trackedEntityReactions     TrackedEntityReaction[]
-  trackedEntityOwn           TrackedEntityOwnTrackedEntity?
-  trackedEntityOther         TrackedEntityOtherTrackedEntity?
-  trackedEntityConfiguration TrackedEntityTrackedEntityConfiguration?
+  trackedEntityPosts                      TrackedEntityPost[]
+  trackedEntityReactions                  TrackedEntityReaction[]
+  trackedEntityOwnTrackedEntity           TrackedEntityOwnTrackedEntity?
+  trackedEntityOtherTrackedEntity         TrackedEntityOtherTrackedEntity?
+  trackedEntityTrackedEntityConfiguration TrackedEntityTrackedEntityConfiguration?
 }
 
 // ============================================
@@ -133,8 +133,8 @@ model TrackedEntityConfiguration {
   createdAt DateTime @default(now())
   updatedAt DateTime @updatedAt
 
-  trackedEntityTrackedEntityConfiguration TrackedEntityTrackedEntityConfiguration?
-  promptConfigurations                    TrackedEntityConfigurationPromptConfiguration[]
+  trackedEntityTrackedEntityConfiguration        TrackedEntityTrackedEntityConfiguration?
+  trackedEntityConfigurationPromptConfigurations TrackedEntityConfigurationPromptConfiguration[]
 }
 
 model TrackedEntityConfigurationPromptConfiguration {

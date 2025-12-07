@@ -235,7 +235,7 @@ export type TrackedEntityOtherTrackedEntityCreateInput = {
   id?: string
   createdAt?: Date | string
   updatedAt?: Date | string
-  trackedEntity: Prisma.TrackedEntityCreateNestedOneWithoutTrackedEntityOtherInput
+  trackedEntity: Prisma.TrackedEntityCreateNestedOneWithoutTrackedEntityOtherTrackedEntityInput
   otherTrackedEntity: Prisma.OtherTrackedEntityCreateNestedOneWithoutTrackedEntityOtherTrackedEntityInput
 }
 
@@ -251,7 +251,7 @@ export type TrackedEntityOtherTrackedEntityUpdateInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
-  trackedEntity?: Prisma.TrackedEntityUpdateOneRequiredWithoutTrackedEntityOtherNestedInput
+  trackedEntity?: Prisma.TrackedEntityUpdateOneRequiredWithoutTrackedEntityOtherTrackedEntityNestedInput
   otherTrackedEntity?: Prisma.OtherTrackedEntityUpdateOneRequiredWithoutTrackedEntityOtherTrackedEntityNestedInput
 }
 
@@ -426,7 +426,7 @@ export type TrackedEntityOtherTrackedEntityCreateWithoutOtherTrackedEntityInput 
   id?: string
   createdAt?: Date | string
   updatedAt?: Date | string
-  trackedEntity: Prisma.TrackedEntityCreateNestedOneWithoutTrackedEntityOtherInput
+  trackedEntity: Prisma.TrackedEntityCreateNestedOneWithoutTrackedEntityOtherTrackedEntityInput
 }
 
 export type TrackedEntityOtherTrackedEntityUncheckedCreateWithoutOtherTrackedEntityInput = {
@@ -456,7 +456,7 @@ export type TrackedEntityOtherTrackedEntityUpdateWithoutOtherTrackedEntityInput 
   id?: Prisma.StringFieldUpdateOperationsInput | string
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
-  trackedEntity?: Prisma.TrackedEntityUpdateOneRequiredWithoutTrackedEntityOtherNestedInput
+  trackedEntity?: Prisma.TrackedEntityUpdateOneRequiredWithoutTrackedEntityOtherTrackedEntityNestedInput
 }
 
 export type TrackedEntityOtherTrackedEntityUncheckedUpdateWithoutOtherTrackedEntityInput = {
