@@ -218,6 +218,7 @@ export const getServerSideProps: GetServerSideProps = async (context) => {
     if (!res.ok) {
       return {
         props: {
+          // @ts-expect-error - authResult.props is not typed
           ...authResult.props,
           post: null,
           error: 'Post not found',
@@ -229,6 +230,7 @@ export const getServerSideProps: GetServerSideProps = async (context) => {
 
     return {
       props: {
+        // @ts-expect-error - authResult.props is not typed
         ...authResult.props,
         post,
       },
@@ -236,6 +238,7 @@ export const getServerSideProps: GetServerSideProps = async (context) => {
   } catch (error) {
     return {
       props: {
+        // @ts-expect-error - authResult.props is not typed
         ...authResult.props,
         post: null,
         error: 'Failed to fetch post',

@@ -4,6 +4,9 @@ CREATE TYPE "SystemProcessingType" AS ENUM ('OWN', 'OTHER');
 -- CreateEnum
 CREATE TYPE "TrackedEntityType" AS ENUM ('OWN', 'OTHER');
 
+-- CreateEnum
+CREATE TYPE "CategoryEuSk" AS ENUM ('EU', 'SK', 'NONE');
+
 -- CreateTable
 CREATE TABLE "SystemConfiguration" (
     "id" TEXT NOT NULL,
@@ -46,6 +49,7 @@ CREATE TABLE "PromptConfiguration" (
 CREATE TABLE "Post" (
     "id" TEXT NOT NULL,
     "trackedEntityId" TEXT NOT NULL,
+    "categoryEuSk" "CategoryEuSk",
     "createdAt" TIMESTAMP(3) NOT NULL DEFAULT CURRENT_TIMESTAMP,
     "updatedAt" TIMESTAMP(3) NOT NULL,
 
@@ -84,6 +88,18 @@ CREATE TABLE "Reaction" (
     "updatedAt" TIMESTAMP(3) NOT NULL,
 
     CONSTRAINT "Reaction_pkey" PRIMARY KEY ("id")
+);
+
+-- CreateTable
+CREATE TABLE "SystemPromptConfiguration" (
+    "id" TEXT NOT NULL,
+    "categoryEuSkPrompt" TEXT NOT NULL,
+    "euPoliticsPrompt" TEXT NOT NULL,
+    "skPoliticsPrompt" TEXT NOT NULL,
+    "createdAt" TIMESTAMP(3) NOT NULL DEFAULT CURRENT_TIMESTAMP,
+    "updatedAt" TIMESTAMP(3) NOT NULL,
+
+    CONSTRAINT "SystemPromptConfiguration_pkey" PRIMARY KEY ("id")
 );
 
 -- CreateIndex
