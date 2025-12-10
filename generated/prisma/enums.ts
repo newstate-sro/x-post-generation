@@ -9,13 +9,26 @@
 * 🟢 You can import this file directly.
 */
 
-export const SystemEventType = {
-  FACEBOOK_POSTS_EMAIL_NOTIFICATION: 'FACEBOOK_POSTS_EMAIL_NOTIFICATION',
-  FACEBOOK_POSTS_PROCESSING_STARTED: 'FACEBOOK_POSTS_PROCESSING_STARTED',
-  FACEBOOK_POSTS_FETCHED: 'FACEBOOK_POSTS_FETCHED',
-  FACEBOOK_POSTS_REACTIONS_GENERATED: 'FACEBOOK_POSTS_REACTIONS_GENERATED',
-  FACEBOOK_POSTS_PROCESSING_COMPLETED: 'FACEBOOK_POSTS_PROCESSING_COMPLETED',
-  FACEBOOK_POSTS_ERROR: 'FACEBOOK_POSTS_ERROR'
+export const SystemProcessingType = {
+  OWN: 'OWN',
+  OTHER: 'OTHER'
 } as const
 
-export type SystemEventType = (typeof SystemEventType)[keyof typeof SystemEventType]
+export type SystemProcessingType = (typeof SystemProcessingType)[keyof typeof SystemProcessingType]
+
+
+export const TrackedEntityType = {
+  OWN: 'OWN',
+  OTHER: 'OTHER'
+} as const
+
+export type TrackedEntityType = (typeof TrackedEntityType)[keyof typeof TrackedEntityType]
+
+
+export const CategoryEuSk = {
+  EU: 'EU',
+  SK: 'SK',
+  NONE: 'NONE'
+} as const
+
+export type CategoryEuSk = (typeof CategoryEuSk)[keyof typeof CategoryEuSk]

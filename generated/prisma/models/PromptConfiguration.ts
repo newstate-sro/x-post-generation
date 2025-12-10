@@ -26,6 +26,7 @@ export type AggregatePromptConfiguration = {
 
 export type PromptConfigurationMinAggregateOutputType = {
   id: string | null
+  trackedEntityId: string | null
   toneOfVoicePrompt: string | null
   userPrompt: string | null
   isActive: boolean | null
@@ -35,6 +36,7 @@ export type PromptConfigurationMinAggregateOutputType = {
 
 export type PromptConfigurationMaxAggregateOutputType = {
   id: string | null
+  trackedEntityId: string | null
   toneOfVoicePrompt: string | null
   userPrompt: string | null
   isActive: boolean | null
@@ -44,6 +46,7 @@ export type PromptConfigurationMaxAggregateOutputType = {
 
 export type PromptConfigurationCountAggregateOutputType = {
   id: number
+  trackedEntityId: number
   toneOfVoicePrompt: number
   userPrompt: number
   isActive: number
@@ -55,6 +58,7 @@ export type PromptConfigurationCountAggregateOutputType = {
 
 export type PromptConfigurationMinAggregateInputType = {
   id?: true
+  trackedEntityId?: true
   toneOfVoicePrompt?: true
   userPrompt?: true
   isActive?: true
@@ -64,6 +68,7 @@ export type PromptConfigurationMinAggregateInputType = {
 
 export type PromptConfigurationMaxAggregateInputType = {
   id?: true
+  trackedEntityId?: true
   toneOfVoicePrompt?: true
   userPrompt?: true
   isActive?: true
@@ -73,6 +78,7 @@ export type PromptConfigurationMaxAggregateInputType = {
 
 export type PromptConfigurationCountAggregateInputType = {
   id?: true
+  trackedEntityId?: true
   toneOfVoicePrompt?: true
   userPrompt?: true
   isActive?: true
@@ -155,6 +161,7 @@ export type PromptConfigurationGroupByArgs<ExtArgs extends runtime.Types.Extensi
 
 export type PromptConfigurationGroupByOutputType = {
   id: string
+  trackedEntityId: string
   toneOfVoicePrompt: string
   userPrompt: string
   isActive: boolean
@@ -185,28 +192,31 @@ export type PromptConfigurationWhereInput = {
   OR?: Prisma.PromptConfigurationWhereInput[]
   NOT?: Prisma.PromptConfigurationWhereInput | Prisma.PromptConfigurationWhereInput[]
   id?: Prisma.StringFilter<"PromptConfiguration"> | string
+  trackedEntityId?: Prisma.StringFilter<"PromptConfiguration"> | string
   toneOfVoicePrompt?: Prisma.StringFilter<"PromptConfiguration"> | string
   userPrompt?: Prisma.StringFilter<"PromptConfiguration"> | string
   isActive?: Prisma.BoolFilter<"PromptConfiguration"> | boolean
   createdAt?: Prisma.DateTimeFilter<"PromptConfiguration"> | Date | string
   updatedAt?: Prisma.DateTimeFilter<"PromptConfiguration"> | Date | string
-  trackedEntityConfigurationPromptConfigurations?: Prisma.TrackedEntityConfigurationPromptConfigurationListRelationFilter
-  reactionPromptConfigurations?: Prisma.ReactionPromptConfigurationListRelationFilter
+  trackedEntity?: Prisma.XOR<Prisma.TrackedEntityScalarRelationFilter, Prisma.TrackedEntityWhereInput>
+  reactions?: Prisma.ReactionListRelationFilter
 }
 
 export type PromptConfigurationOrderByWithRelationInput = {
   id?: Prisma.SortOrder
+  trackedEntityId?: Prisma.SortOrder
   toneOfVoicePrompt?: Prisma.SortOrder
   userPrompt?: Prisma.SortOrder
   isActive?: Prisma.SortOrder
   createdAt?: Prisma.SortOrder
   updatedAt?: Prisma.SortOrder
-  trackedEntityConfigurationPromptConfigurations?: Prisma.TrackedEntityConfigurationPromptConfigurationOrderByRelationAggregateInput
-  reactionPromptConfigurations?: Prisma.ReactionPromptConfigurationOrderByRelationAggregateInput
+  trackedEntity?: Prisma.TrackedEntityOrderByWithRelationInput
+  reactions?: Prisma.ReactionOrderByRelationAggregateInput
 }
 
 export type PromptConfigurationWhereUniqueInput = Prisma.AtLeast<{
   id?: string
+  trackedEntityId?: string
   AND?: Prisma.PromptConfigurationWhereInput | Prisma.PromptConfigurationWhereInput[]
   OR?: Prisma.PromptConfigurationWhereInput[]
   NOT?: Prisma.PromptConfigurationWhereInput | Prisma.PromptConfigurationWhereInput[]
@@ -215,12 +225,13 @@ export type PromptConfigurationWhereUniqueInput = Prisma.AtLeast<{
   isActive?: Prisma.BoolFilter<"PromptConfiguration"> | boolean
   createdAt?: Prisma.DateTimeFilter<"PromptConfiguration"> | Date | string
   updatedAt?: Prisma.DateTimeFilter<"PromptConfiguration"> | Date | string
-  trackedEntityConfigurationPromptConfigurations?: Prisma.TrackedEntityConfigurationPromptConfigurationListRelationFilter
-  reactionPromptConfigurations?: Prisma.ReactionPromptConfigurationListRelationFilter
-}, "id">
+  trackedEntity?: Prisma.XOR<Prisma.TrackedEntityScalarRelationFilter, Prisma.TrackedEntityWhereInput>
+  reactions?: Prisma.ReactionListRelationFilter
+}, "id" | "trackedEntityId">
 
 export type PromptConfigurationOrderByWithAggregationInput = {
   id?: Prisma.SortOrder
+  trackedEntityId?: Prisma.SortOrder
   toneOfVoicePrompt?: Prisma.SortOrder
   userPrompt?: Prisma.SortOrder
   isActive?: Prisma.SortOrder
@@ -236,6 +247,7 @@ export type PromptConfigurationScalarWhereWithAggregatesInput = {
   OR?: Prisma.PromptConfigurationScalarWhereWithAggregatesInput[]
   NOT?: Prisma.PromptConfigurationScalarWhereWithAggregatesInput | Prisma.PromptConfigurationScalarWhereWithAggregatesInput[]
   id?: Prisma.StringWithAggregatesFilter<"PromptConfiguration"> | string
+  trackedEntityId?: Prisma.StringWithAggregatesFilter<"PromptConfiguration"> | string
   toneOfVoicePrompt?: Prisma.StringWithAggregatesFilter<"PromptConfiguration"> | string
   userPrompt?: Prisma.StringWithAggregatesFilter<"PromptConfiguration"> | string
   isActive?: Prisma.BoolWithAggregatesFilter<"PromptConfiguration"> | boolean
@@ -250,19 +262,19 @@ export type PromptConfigurationCreateInput = {
   isActive: boolean
   createdAt?: Date | string
   updatedAt?: Date | string
-  trackedEntityConfigurationPromptConfigurations?: Prisma.TrackedEntityConfigurationPromptConfigurationCreateNestedManyWithoutPromptConfigurationInput
-  reactionPromptConfigurations?: Prisma.ReactionPromptConfigurationCreateNestedManyWithoutPromptConfigurationInput
+  trackedEntity: Prisma.TrackedEntityCreateNestedOneWithoutPromptConfigurationInput
+  reactions?: Prisma.ReactionCreateNestedManyWithoutPromptConfigurationInput
 }
 
 export type PromptConfigurationUncheckedCreateInput = {
   id?: string
+  trackedEntityId: string
   toneOfVoicePrompt: string
   userPrompt: string
   isActive: boolean
   createdAt?: Date | string
   updatedAt?: Date | string
-  trackedEntityConfigurationPromptConfigurations?: Prisma.TrackedEntityConfigurationPromptConfigurationUncheckedCreateNestedManyWithoutPromptConfigurationInput
-  reactionPromptConfigurations?: Prisma.ReactionPromptConfigurationUncheckedCreateNestedManyWithoutPromptConfigurationInput
+  reactions?: Prisma.ReactionUncheckedCreateNestedManyWithoutPromptConfigurationInput
 }
 
 export type PromptConfigurationUpdateInput = {
@@ -272,23 +284,24 @@ export type PromptConfigurationUpdateInput = {
   isActive?: Prisma.BoolFieldUpdateOperationsInput | boolean
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
-  trackedEntityConfigurationPromptConfigurations?: Prisma.TrackedEntityConfigurationPromptConfigurationUpdateManyWithoutPromptConfigurationNestedInput
-  reactionPromptConfigurations?: Prisma.ReactionPromptConfigurationUpdateManyWithoutPromptConfigurationNestedInput
+  trackedEntity?: Prisma.TrackedEntityUpdateOneRequiredWithoutPromptConfigurationNestedInput
+  reactions?: Prisma.ReactionUpdateManyWithoutPromptConfigurationNestedInput
 }
 
 export type PromptConfigurationUncheckedUpdateInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
+  trackedEntityId?: Prisma.StringFieldUpdateOperationsInput | string
   toneOfVoicePrompt?: Prisma.StringFieldUpdateOperationsInput | string
   userPrompt?: Prisma.StringFieldUpdateOperationsInput | string
   isActive?: Prisma.BoolFieldUpdateOperationsInput | boolean
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
-  trackedEntityConfigurationPromptConfigurations?: Prisma.TrackedEntityConfigurationPromptConfigurationUncheckedUpdateManyWithoutPromptConfigurationNestedInput
-  reactionPromptConfigurations?: Prisma.ReactionPromptConfigurationUncheckedUpdateManyWithoutPromptConfigurationNestedInput
+  reactions?: Prisma.ReactionUncheckedUpdateManyWithoutPromptConfigurationNestedInput
 }
 
 export type PromptConfigurationCreateManyInput = {
   id?: string
+  trackedEntityId: string
   toneOfVoicePrompt: string
   userPrompt: string
   isActive: boolean
@@ -307,6 +320,7 @@ export type PromptConfigurationUpdateManyMutationInput = {
 
 export type PromptConfigurationUncheckedUpdateManyInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
+  trackedEntityId?: Prisma.StringFieldUpdateOperationsInput | string
   toneOfVoicePrompt?: Prisma.StringFieldUpdateOperationsInput | string
   userPrompt?: Prisma.StringFieldUpdateOperationsInput | string
   isActive?: Prisma.BoolFieldUpdateOperationsInput | boolean
@@ -314,13 +328,14 @@ export type PromptConfigurationUncheckedUpdateManyInput = {
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
 }
 
-export type PromptConfigurationScalarRelationFilter = {
-  is?: Prisma.PromptConfigurationWhereInput
-  isNot?: Prisma.PromptConfigurationWhereInput
+export type PromptConfigurationNullableScalarRelationFilter = {
+  is?: Prisma.PromptConfigurationWhereInput | null
+  isNot?: Prisma.PromptConfigurationWhereInput | null
 }
 
 export type PromptConfigurationCountOrderByAggregateInput = {
   id?: Prisma.SortOrder
+  trackedEntityId?: Prisma.SortOrder
   toneOfVoicePrompt?: Prisma.SortOrder
   userPrompt?: Prisma.SortOrder
   isActive?: Prisma.SortOrder
@@ -330,6 +345,7 @@ export type PromptConfigurationCountOrderByAggregateInput = {
 
 export type PromptConfigurationMaxOrderByAggregateInput = {
   id?: Prisma.SortOrder
+  trackedEntityId?: Prisma.SortOrder
   toneOfVoicePrompt?: Prisma.SortOrder
   userPrompt?: Prisma.SortOrder
   isActive?: Prisma.SortOrder
@@ -339,6 +355,7 @@ export type PromptConfigurationMaxOrderByAggregateInput = {
 
 export type PromptConfigurationMinOrderByAggregateInput = {
   id?: Prisma.SortOrder
+  trackedEntityId?: Prisma.SortOrder
   toneOfVoicePrompt?: Prisma.SortOrder
   userPrompt?: Prisma.SortOrder
   isActive?: Prisma.SortOrder
@@ -346,144 +363,171 @@ export type PromptConfigurationMinOrderByAggregateInput = {
   updatedAt?: Prisma.SortOrder
 }
 
-export type PromptConfigurationCreateNestedOneWithoutTrackedEntityConfigurationPromptConfigurationsInput = {
-  create?: Prisma.XOR<Prisma.PromptConfigurationCreateWithoutTrackedEntityConfigurationPromptConfigurationsInput, Prisma.PromptConfigurationUncheckedCreateWithoutTrackedEntityConfigurationPromptConfigurationsInput>
-  connectOrCreate?: Prisma.PromptConfigurationCreateOrConnectWithoutTrackedEntityConfigurationPromptConfigurationsInput
+export type PromptConfigurationScalarRelationFilter = {
+  is?: Prisma.PromptConfigurationWhereInput
+  isNot?: Prisma.PromptConfigurationWhereInput
+}
+
+export type PromptConfigurationCreateNestedOneWithoutTrackedEntityInput = {
+  create?: Prisma.XOR<Prisma.PromptConfigurationCreateWithoutTrackedEntityInput, Prisma.PromptConfigurationUncheckedCreateWithoutTrackedEntityInput>
+  connectOrCreate?: Prisma.PromptConfigurationCreateOrConnectWithoutTrackedEntityInput
   connect?: Prisma.PromptConfigurationWhereUniqueInput
 }
 
-export type PromptConfigurationUpdateOneRequiredWithoutTrackedEntityConfigurationPromptConfigurationsNestedInput = {
-  create?: Prisma.XOR<Prisma.PromptConfigurationCreateWithoutTrackedEntityConfigurationPromptConfigurationsInput, Prisma.PromptConfigurationUncheckedCreateWithoutTrackedEntityConfigurationPromptConfigurationsInput>
-  connectOrCreate?: Prisma.PromptConfigurationCreateOrConnectWithoutTrackedEntityConfigurationPromptConfigurationsInput
-  upsert?: Prisma.PromptConfigurationUpsertWithoutTrackedEntityConfigurationPromptConfigurationsInput
-  connect?: Prisma.PromptConfigurationWhereUniqueInput
-  update?: Prisma.XOR<Prisma.XOR<Prisma.PromptConfigurationUpdateToOneWithWhereWithoutTrackedEntityConfigurationPromptConfigurationsInput, Prisma.PromptConfigurationUpdateWithoutTrackedEntityConfigurationPromptConfigurationsInput>, Prisma.PromptConfigurationUncheckedUpdateWithoutTrackedEntityConfigurationPromptConfigurationsInput>
-}
-
-export type PromptConfigurationCreateNestedOneWithoutReactionPromptConfigurationsInput = {
-  create?: Prisma.XOR<Prisma.PromptConfigurationCreateWithoutReactionPromptConfigurationsInput, Prisma.PromptConfigurationUncheckedCreateWithoutReactionPromptConfigurationsInput>
-  connectOrCreate?: Prisma.PromptConfigurationCreateOrConnectWithoutReactionPromptConfigurationsInput
+export type PromptConfigurationUncheckedCreateNestedOneWithoutTrackedEntityInput = {
+  create?: Prisma.XOR<Prisma.PromptConfigurationCreateWithoutTrackedEntityInput, Prisma.PromptConfigurationUncheckedCreateWithoutTrackedEntityInput>
+  connectOrCreate?: Prisma.PromptConfigurationCreateOrConnectWithoutTrackedEntityInput
   connect?: Prisma.PromptConfigurationWhereUniqueInput
 }
 
-export type PromptConfigurationUpdateOneRequiredWithoutReactionPromptConfigurationsNestedInput = {
-  create?: Prisma.XOR<Prisma.PromptConfigurationCreateWithoutReactionPromptConfigurationsInput, Prisma.PromptConfigurationUncheckedCreateWithoutReactionPromptConfigurationsInput>
-  connectOrCreate?: Prisma.PromptConfigurationCreateOrConnectWithoutReactionPromptConfigurationsInput
-  upsert?: Prisma.PromptConfigurationUpsertWithoutReactionPromptConfigurationsInput
+export type PromptConfigurationUpdateOneWithoutTrackedEntityNestedInput = {
+  create?: Prisma.XOR<Prisma.PromptConfigurationCreateWithoutTrackedEntityInput, Prisma.PromptConfigurationUncheckedCreateWithoutTrackedEntityInput>
+  connectOrCreate?: Prisma.PromptConfigurationCreateOrConnectWithoutTrackedEntityInput
+  upsert?: Prisma.PromptConfigurationUpsertWithoutTrackedEntityInput
+  disconnect?: Prisma.PromptConfigurationWhereInput | boolean
+  delete?: Prisma.PromptConfigurationWhereInput | boolean
   connect?: Prisma.PromptConfigurationWhereUniqueInput
-  update?: Prisma.XOR<Prisma.XOR<Prisma.PromptConfigurationUpdateToOneWithWhereWithoutReactionPromptConfigurationsInput, Prisma.PromptConfigurationUpdateWithoutReactionPromptConfigurationsInput>, Prisma.PromptConfigurationUncheckedUpdateWithoutReactionPromptConfigurationsInput>
+  update?: Prisma.XOR<Prisma.XOR<Prisma.PromptConfigurationUpdateToOneWithWhereWithoutTrackedEntityInput, Prisma.PromptConfigurationUpdateWithoutTrackedEntityInput>, Prisma.PromptConfigurationUncheckedUpdateWithoutTrackedEntityInput>
 }
 
-export type PromptConfigurationCreateWithoutTrackedEntityConfigurationPromptConfigurationsInput = {
+export type PromptConfigurationUncheckedUpdateOneWithoutTrackedEntityNestedInput = {
+  create?: Prisma.XOR<Prisma.PromptConfigurationCreateWithoutTrackedEntityInput, Prisma.PromptConfigurationUncheckedCreateWithoutTrackedEntityInput>
+  connectOrCreate?: Prisma.PromptConfigurationCreateOrConnectWithoutTrackedEntityInput
+  upsert?: Prisma.PromptConfigurationUpsertWithoutTrackedEntityInput
+  disconnect?: Prisma.PromptConfigurationWhereInput | boolean
+  delete?: Prisma.PromptConfigurationWhereInput | boolean
+  connect?: Prisma.PromptConfigurationWhereUniqueInput
+  update?: Prisma.XOR<Prisma.XOR<Prisma.PromptConfigurationUpdateToOneWithWhereWithoutTrackedEntityInput, Prisma.PromptConfigurationUpdateWithoutTrackedEntityInput>, Prisma.PromptConfigurationUncheckedUpdateWithoutTrackedEntityInput>
+}
+
+export type BoolFieldUpdateOperationsInput = {
+  set?: boolean
+}
+
+export type PromptConfigurationCreateNestedOneWithoutReactionsInput = {
+  create?: Prisma.XOR<Prisma.PromptConfigurationCreateWithoutReactionsInput, Prisma.PromptConfigurationUncheckedCreateWithoutReactionsInput>
+  connectOrCreate?: Prisma.PromptConfigurationCreateOrConnectWithoutReactionsInput
+  connect?: Prisma.PromptConfigurationWhereUniqueInput
+}
+
+export type PromptConfigurationUpdateOneRequiredWithoutReactionsNestedInput = {
+  create?: Prisma.XOR<Prisma.PromptConfigurationCreateWithoutReactionsInput, Prisma.PromptConfigurationUncheckedCreateWithoutReactionsInput>
+  connectOrCreate?: Prisma.PromptConfigurationCreateOrConnectWithoutReactionsInput
+  upsert?: Prisma.PromptConfigurationUpsertWithoutReactionsInput
+  connect?: Prisma.PromptConfigurationWhereUniqueInput
+  update?: Prisma.XOR<Prisma.XOR<Prisma.PromptConfigurationUpdateToOneWithWhereWithoutReactionsInput, Prisma.PromptConfigurationUpdateWithoutReactionsInput>, Prisma.PromptConfigurationUncheckedUpdateWithoutReactionsInput>
+}
+
+export type PromptConfigurationCreateWithoutTrackedEntityInput = {
   id?: string
   toneOfVoicePrompt: string
   userPrompt: string
   isActive: boolean
   createdAt?: Date | string
   updatedAt?: Date | string
-  reactionPromptConfigurations?: Prisma.ReactionPromptConfigurationCreateNestedManyWithoutPromptConfigurationInput
+  reactions?: Prisma.ReactionCreateNestedManyWithoutPromptConfigurationInput
 }
 
-export type PromptConfigurationUncheckedCreateWithoutTrackedEntityConfigurationPromptConfigurationsInput = {
+export type PromptConfigurationUncheckedCreateWithoutTrackedEntityInput = {
   id?: string
   toneOfVoicePrompt: string
   userPrompt: string
   isActive: boolean
   createdAt?: Date | string
   updatedAt?: Date | string
-  reactionPromptConfigurations?: Prisma.ReactionPromptConfigurationUncheckedCreateNestedManyWithoutPromptConfigurationInput
+  reactions?: Prisma.ReactionUncheckedCreateNestedManyWithoutPromptConfigurationInput
 }
 
-export type PromptConfigurationCreateOrConnectWithoutTrackedEntityConfigurationPromptConfigurationsInput = {
+export type PromptConfigurationCreateOrConnectWithoutTrackedEntityInput = {
   where: Prisma.PromptConfigurationWhereUniqueInput
-  create: Prisma.XOR<Prisma.PromptConfigurationCreateWithoutTrackedEntityConfigurationPromptConfigurationsInput, Prisma.PromptConfigurationUncheckedCreateWithoutTrackedEntityConfigurationPromptConfigurationsInput>
+  create: Prisma.XOR<Prisma.PromptConfigurationCreateWithoutTrackedEntityInput, Prisma.PromptConfigurationUncheckedCreateWithoutTrackedEntityInput>
 }
 
-export type PromptConfigurationUpsertWithoutTrackedEntityConfigurationPromptConfigurationsInput = {
-  update: Prisma.XOR<Prisma.PromptConfigurationUpdateWithoutTrackedEntityConfigurationPromptConfigurationsInput, Prisma.PromptConfigurationUncheckedUpdateWithoutTrackedEntityConfigurationPromptConfigurationsInput>
-  create: Prisma.XOR<Prisma.PromptConfigurationCreateWithoutTrackedEntityConfigurationPromptConfigurationsInput, Prisma.PromptConfigurationUncheckedCreateWithoutTrackedEntityConfigurationPromptConfigurationsInput>
+export type PromptConfigurationUpsertWithoutTrackedEntityInput = {
+  update: Prisma.XOR<Prisma.PromptConfigurationUpdateWithoutTrackedEntityInput, Prisma.PromptConfigurationUncheckedUpdateWithoutTrackedEntityInput>
+  create: Prisma.XOR<Prisma.PromptConfigurationCreateWithoutTrackedEntityInput, Prisma.PromptConfigurationUncheckedCreateWithoutTrackedEntityInput>
   where?: Prisma.PromptConfigurationWhereInput
 }
 
-export type PromptConfigurationUpdateToOneWithWhereWithoutTrackedEntityConfigurationPromptConfigurationsInput = {
+export type PromptConfigurationUpdateToOneWithWhereWithoutTrackedEntityInput = {
   where?: Prisma.PromptConfigurationWhereInput
-  data: Prisma.XOR<Prisma.PromptConfigurationUpdateWithoutTrackedEntityConfigurationPromptConfigurationsInput, Prisma.PromptConfigurationUncheckedUpdateWithoutTrackedEntityConfigurationPromptConfigurationsInput>
+  data: Prisma.XOR<Prisma.PromptConfigurationUpdateWithoutTrackedEntityInput, Prisma.PromptConfigurationUncheckedUpdateWithoutTrackedEntityInput>
 }
 
-export type PromptConfigurationUpdateWithoutTrackedEntityConfigurationPromptConfigurationsInput = {
+export type PromptConfigurationUpdateWithoutTrackedEntityInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
   toneOfVoicePrompt?: Prisma.StringFieldUpdateOperationsInput | string
   userPrompt?: Prisma.StringFieldUpdateOperationsInput | string
   isActive?: Prisma.BoolFieldUpdateOperationsInput | boolean
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
-  reactionPromptConfigurations?: Prisma.ReactionPromptConfigurationUpdateManyWithoutPromptConfigurationNestedInput
+  reactions?: Prisma.ReactionUpdateManyWithoutPromptConfigurationNestedInput
 }
 
-export type PromptConfigurationUncheckedUpdateWithoutTrackedEntityConfigurationPromptConfigurationsInput = {
+export type PromptConfigurationUncheckedUpdateWithoutTrackedEntityInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
   toneOfVoicePrompt?: Prisma.StringFieldUpdateOperationsInput | string
   userPrompt?: Prisma.StringFieldUpdateOperationsInput | string
   isActive?: Prisma.BoolFieldUpdateOperationsInput | boolean
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
-  reactionPromptConfigurations?: Prisma.ReactionPromptConfigurationUncheckedUpdateManyWithoutPromptConfigurationNestedInput
+  reactions?: Prisma.ReactionUncheckedUpdateManyWithoutPromptConfigurationNestedInput
 }
 
-export type PromptConfigurationCreateWithoutReactionPromptConfigurationsInput = {
+export type PromptConfigurationCreateWithoutReactionsInput = {
   id?: string
   toneOfVoicePrompt: string
   userPrompt: string
   isActive: boolean
   createdAt?: Date | string
   updatedAt?: Date | string
-  trackedEntityConfigurationPromptConfigurations?: Prisma.TrackedEntityConfigurationPromptConfigurationCreateNestedManyWithoutPromptConfigurationInput
+  trackedEntity: Prisma.TrackedEntityCreateNestedOneWithoutPromptConfigurationInput
 }
 
-export type PromptConfigurationUncheckedCreateWithoutReactionPromptConfigurationsInput = {
+export type PromptConfigurationUncheckedCreateWithoutReactionsInput = {
   id?: string
+  trackedEntityId: string
   toneOfVoicePrompt: string
   userPrompt: string
   isActive: boolean
   createdAt?: Date | string
   updatedAt?: Date | string
-  trackedEntityConfigurationPromptConfigurations?: Prisma.TrackedEntityConfigurationPromptConfigurationUncheckedCreateNestedManyWithoutPromptConfigurationInput
 }
 
-export type PromptConfigurationCreateOrConnectWithoutReactionPromptConfigurationsInput = {
+export type PromptConfigurationCreateOrConnectWithoutReactionsInput = {
   where: Prisma.PromptConfigurationWhereUniqueInput
-  create: Prisma.XOR<Prisma.PromptConfigurationCreateWithoutReactionPromptConfigurationsInput, Prisma.PromptConfigurationUncheckedCreateWithoutReactionPromptConfigurationsInput>
+  create: Prisma.XOR<Prisma.PromptConfigurationCreateWithoutReactionsInput, Prisma.PromptConfigurationUncheckedCreateWithoutReactionsInput>
 }
 
-export type PromptConfigurationUpsertWithoutReactionPromptConfigurationsInput = {
-  update: Prisma.XOR<Prisma.PromptConfigurationUpdateWithoutReactionPromptConfigurationsInput, Prisma.PromptConfigurationUncheckedUpdateWithoutReactionPromptConfigurationsInput>
-  create: Prisma.XOR<Prisma.PromptConfigurationCreateWithoutReactionPromptConfigurationsInput, Prisma.PromptConfigurationUncheckedCreateWithoutReactionPromptConfigurationsInput>
+export type PromptConfigurationUpsertWithoutReactionsInput = {
+  update: Prisma.XOR<Prisma.PromptConfigurationUpdateWithoutReactionsInput, Prisma.PromptConfigurationUncheckedUpdateWithoutReactionsInput>
+  create: Prisma.XOR<Prisma.PromptConfigurationCreateWithoutReactionsInput, Prisma.PromptConfigurationUncheckedCreateWithoutReactionsInput>
   where?: Prisma.PromptConfigurationWhereInput
 }
 
-export type PromptConfigurationUpdateToOneWithWhereWithoutReactionPromptConfigurationsInput = {
+export type PromptConfigurationUpdateToOneWithWhereWithoutReactionsInput = {
   where?: Prisma.PromptConfigurationWhereInput
-  data: Prisma.XOR<Prisma.PromptConfigurationUpdateWithoutReactionPromptConfigurationsInput, Prisma.PromptConfigurationUncheckedUpdateWithoutReactionPromptConfigurationsInput>
+  data: Prisma.XOR<Prisma.PromptConfigurationUpdateWithoutReactionsInput, Prisma.PromptConfigurationUncheckedUpdateWithoutReactionsInput>
 }
 
-export type PromptConfigurationUpdateWithoutReactionPromptConfigurationsInput = {
+export type PromptConfigurationUpdateWithoutReactionsInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
   toneOfVoicePrompt?: Prisma.StringFieldUpdateOperationsInput | string
   userPrompt?: Prisma.StringFieldUpdateOperationsInput | string
   isActive?: Prisma.BoolFieldUpdateOperationsInput | boolean
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
-  trackedEntityConfigurationPromptConfigurations?: Prisma.TrackedEntityConfigurationPromptConfigurationUpdateManyWithoutPromptConfigurationNestedInput
+  trackedEntity?: Prisma.TrackedEntityUpdateOneRequiredWithoutPromptConfigurationNestedInput
 }
 
-export type PromptConfigurationUncheckedUpdateWithoutReactionPromptConfigurationsInput = {
+export type PromptConfigurationUncheckedUpdateWithoutReactionsInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
+  trackedEntityId?: Prisma.StringFieldUpdateOperationsInput | string
   toneOfVoicePrompt?: Prisma.StringFieldUpdateOperationsInput | string
   userPrompt?: Prisma.StringFieldUpdateOperationsInput | string
   isActive?: Prisma.BoolFieldUpdateOperationsInput | boolean
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
-  trackedEntityConfigurationPromptConfigurations?: Prisma.TrackedEntityConfigurationPromptConfigurationUncheckedUpdateManyWithoutPromptConfigurationNestedInput
 }
 
 
@@ -492,13 +536,11 @@ export type PromptConfigurationUncheckedUpdateWithoutReactionPromptConfiguration
  */
 
 export type PromptConfigurationCountOutputType = {
-  trackedEntityConfigurationPromptConfigurations: number
-  reactionPromptConfigurations: number
+  reactions: number
 }
 
 export type PromptConfigurationCountOutputTypeSelect<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
-  trackedEntityConfigurationPromptConfigurations?: boolean | PromptConfigurationCountOutputTypeCountTrackedEntityConfigurationPromptConfigurationsArgs
-  reactionPromptConfigurations?: boolean | PromptConfigurationCountOutputTypeCountReactionPromptConfigurationsArgs
+  reactions?: boolean | PromptConfigurationCountOutputTypeCountReactionsArgs
 }
 
 /**
@@ -514,50 +556,49 @@ export type PromptConfigurationCountOutputTypeDefaultArgs<ExtArgs extends runtim
 /**
  * PromptConfigurationCountOutputType without action
  */
-export type PromptConfigurationCountOutputTypeCountTrackedEntityConfigurationPromptConfigurationsArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
-  where?: Prisma.TrackedEntityConfigurationPromptConfigurationWhereInput
-}
-
-/**
- * PromptConfigurationCountOutputType without action
- */
-export type PromptConfigurationCountOutputTypeCountReactionPromptConfigurationsArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
-  where?: Prisma.ReactionPromptConfigurationWhereInput
+export type PromptConfigurationCountOutputTypeCountReactionsArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  where?: Prisma.ReactionWhereInput
 }
 
 
 export type PromptConfigurationSelect<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetSelect<{
   id?: boolean
+  trackedEntityId?: boolean
   toneOfVoicePrompt?: boolean
   userPrompt?: boolean
   isActive?: boolean
   createdAt?: boolean
   updatedAt?: boolean
-  trackedEntityConfigurationPromptConfigurations?: boolean | Prisma.PromptConfiguration$trackedEntityConfigurationPromptConfigurationsArgs<ExtArgs>
-  reactionPromptConfigurations?: boolean | Prisma.PromptConfiguration$reactionPromptConfigurationsArgs<ExtArgs>
+  trackedEntity?: boolean | Prisma.TrackedEntityDefaultArgs<ExtArgs>
+  reactions?: boolean | Prisma.PromptConfiguration$reactionsArgs<ExtArgs>
   _count?: boolean | Prisma.PromptConfigurationCountOutputTypeDefaultArgs<ExtArgs>
 }, ExtArgs["result"]["promptConfiguration"]>
 
 export type PromptConfigurationSelectCreateManyAndReturn<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetSelect<{
   id?: boolean
+  trackedEntityId?: boolean
   toneOfVoicePrompt?: boolean
   userPrompt?: boolean
   isActive?: boolean
   createdAt?: boolean
   updatedAt?: boolean
+  trackedEntity?: boolean | Prisma.TrackedEntityDefaultArgs<ExtArgs>
 }, ExtArgs["result"]["promptConfiguration"]>
 
 export type PromptConfigurationSelectUpdateManyAndReturn<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetSelect<{
   id?: boolean
+  trackedEntityId?: boolean
   toneOfVoicePrompt?: boolean
   userPrompt?: boolean
   isActive?: boolean
   createdAt?: boolean
   updatedAt?: boolean
+  trackedEntity?: boolean | Prisma.TrackedEntityDefaultArgs<ExtArgs>
 }, ExtArgs["result"]["promptConfiguration"]>
 
 export type PromptConfigurationSelectScalar = {
   id?: boolean
+  trackedEntityId?: boolean
   toneOfVoicePrompt?: boolean
   userPrompt?: boolean
   isActive?: boolean
@@ -565,23 +606,28 @@ export type PromptConfigurationSelectScalar = {
   updatedAt?: boolean
 }
 
-export type PromptConfigurationOmit<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetOmit<"id" | "toneOfVoicePrompt" | "userPrompt" | "isActive" | "createdAt" | "updatedAt", ExtArgs["result"]["promptConfiguration"]>
+export type PromptConfigurationOmit<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetOmit<"id" | "trackedEntityId" | "toneOfVoicePrompt" | "userPrompt" | "isActive" | "createdAt" | "updatedAt", ExtArgs["result"]["promptConfiguration"]>
 export type PromptConfigurationInclude<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
-  trackedEntityConfigurationPromptConfigurations?: boolean | Prisma.PromptConfiguration$trackedEntityConfigurationPromptConfigurationsArgs<ExtArgs>
-  reactionPromptConfigurations?: boolean | Prisma.PromptConfiguration$reactionPromptConfigurationsArgs<ExtArgs>
+  trackedEntity?: boolean | Prisma.TrackedEntityDefaultArgs<ExtArgs>
+  reactions?: boolean | Prisma.PromptConfiguration$reactionsArgs<ExtArgs>
   _count?: boolean | Prisma.PromptConfigurationCountOutputTypeDefaultArgs<ExtArgs>
 }
-export type PromptConfigurationIncludeCreateManyAndReturn<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {}
-export type PromptConfigurationIncludeUpdateManyAndReturn<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {}
+export type PromptConfigurationIncludeCreateManyAndReturn<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  trackedEntity?: boolean | Prisma.TrackedEntityDefaultArgs<ExtArgs>
+}
+export type PromptConfigurationIncludeUpdateManyAndReturn<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  trackedEntity?: boolean | Prisma.TrackedEntityDefaultArgs<ExtArgs>
+}
 
 export type $PromptConfigurationPayload<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
   name: "PromptConfiguration"
   objects: {
-    trackedEntityConfigurationPromptConfigurations: Prisma.$TrackedEntityConfigurationPromptConfigurationPayload<ExtArgs>[]
-    reactionPromptConfigurations: Prisma.$ReactionPromptConfigurationPayload<ExtArgs>[]
+    trackedEntity: Prisma.$TrackedEntityPayload<ExtArgs>
+    reactions: Prisma.$ReactionPayload<ExtArgs>[]
   }
   scalars: runtime.Types.Extensions.GetPayloadResult<{
     id: string
+    trackedEntityId: string
     toneOfVoicePrompt: string
     userPrompt: string
     isActive: boolean
@@ -981,8 +1027,8 @@ readonly fields: PromptConfigurationFieldRefs;
  */
 export interface Prisma__PromptConfigurationClient<T, Null = never, ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs, GlobalOmitOptions = {}> extends Prisma.PrismaPromise<T> {
   readonly [Symbol.toStringTag]: "PrismaPromise"
-  trackedEntityConfigurationPromptConfigurations<T extends Prisma.PromptConfiguration$trackedEntityConfigurationPromptConfigurationsArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.PromptConfiguration$trackedEntityConfigurationPromptConfigurationsArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$TrackedEntityConfigurationPromptConfigurationPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
-  reactionPromptConfigurations<T extends Prisma.PromptConfiguration$reactionPromptConfigurationsArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.PromptConfiguration$reactionPromptConfigurationsArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$ReactionPromptConfigurationPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
+  trackedEntity<T extends Prisma.TrackedEntityDefaultArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.TrackedEntityDefaultArgs<ExtArgs>>): Prisma.Prisma__TrackedEntityClient<runtime.Types.Result.GetResult<Prisma.$TrackedEntityPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | Null, Null, ExtArgs, GlobalOmitOptions>
+  reactions<T extends Prisma.PromptConfiguration$reactionsArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.PromptConfiguration$reactionsArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$ReactionPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
   /**
    * Attaches callbacks for the resolution and/or rejection of the Promise.
    * @param onfulfilled The callback to execute when the Promise is resolved.
@@ -1013,6 +1059,7 @@ export interface Prisma__PromptConfigurationClient<T, Null = never, ExtArgs exte
  */
 export interface PromptConfigurationFieldRefs {
   readonly id: Prisma.FieldRef<"PromptConfiguration", 'String'>
+  readonly trackedEntityId: Prisma.FieldRef<"PromptConfiguration", 'String'>
   readonly toneOfVoicePrompt: Prisma.FieldRef<"PromptConfiguration", 'String'>
   readonly userPrompt: Prisma.FieldRef<"PromptConfiguration", 'String'>
   readonly isActive: Prisma.FieldRef<"PromptConfiguration", 'Boolean'>
@@ -1267,6 +1314,10 @@ export type PromptConfigurationCreateManyAndReturnArgs<ExtArgs extends runtime.T
    */
   data: Prisma.PromptConfigurationCreateManyInput | Prisma.PromptConfigurationCreateManyInput[]
   skipDuplicates?: boolean
+  /**
+   * Choose, which related nodes to fetch as well
+   */
+  include?: Prisma.PromptConfigurationIncludeCreateManyAndReturn<ExtArgs> | null
 }
 
 /**
@@ -1337,6 +1388,10 @@ export type PromptConfigurationUpdateManyAndReturnArgs<ExtArgs extends runtime.T
    * Limit how many PromptConfigurations to update.
    */
   limit?: number
+  /**
+   * Choose, which related nodes to fetch as well
+   */
+  include?: Prisma.PromptConfigurationIncludeUpdateManyAndReturn<ExtArgs> | null
 }
 
 /**
@@ -1406,51 +1461,27 @@ export type PromptConfigurationDeleteManyArgs<ExtArgs extends runtime.Types.Exte
 }
 
 /**
- * PromptConfiguration.trackedEntityConfigurationPromptConfigurations
+ * PromptConfiguration.reactions
  */
-export type PromptConfiguration$trackedEntityConfigurationPromptConfigurationsArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+export type PromptConfiguration$reactionsArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
   /**
-   * Select specific fields to fetch from the TrackedEntityConfigurationPromptConfiguration
+   * Select specific fields to fetch from the Reaction
    */
-  select?: Prisma.TrackedEntityConfigurationPromptConfigurationSelect<ExtArgs> | null
+  select?: Prisma.ReactionSelect<ExtArgs> | null
   /**
-   * Omit specific fields from the TrackedEntityConfigurationPromptConfiguration
+   * Omit specific fields from the Reaction
    */
-  omit?: Prisma.TrackedEntityConfigurationPromptConfigurationOmit<ExtArgs> | null
+  omit?: Prisma.ReactionOmit<ExtArgs> | null
   /**
    * Choose, which related nodes to fetch as well
    */
-  include?: Prisma.TrackedEntityConfigurationPromptConfigurationInclude<ExtArgs> | null
-  where?: Prisma.TrackedEntityConfigurationPromptConfigurationWhereInput
-  orderBy?: Prisma.TrackedEntityConfigurationPromptConfigurationOrderByWithRelationInput | Prisma.TrackedEntityConfigurationPromptConfigurationOrderByWithRelationInput[]
-  cursor?: Prisma.TrackedEntityConfigurationPromptConfigurationWhereUniqueInput
+  include?: Prisma.ReactionInclude<ExtArgs> | null
+  where?: Prisma.ReactionWhereInput
+  orderBy?: Prisma.ReactionOrderByWithRelationInput | Prisma.ReactionOrderByWithRelationInput[]
+  cursor?: Prisma.ReactionWhereUniqueInput
   take?: number
   skip?: number
-  distinct?: Prisma.TrackedEntityConfigurationPromptConfigurationScalarFieldEnum | Prisma.TrackedEntityConfigurationPromptConfigurationScalarFieldEnum[]
-}
-
-/**
- * PromptConfiguration.reactionPromptConfigurations
- */
-export type PromptConfiguration$reactionPromptConfigurationsArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
-  /**
-   * Select specific fields to fetch from the ReactionPromptConfiguration
-   */
-  select?: Prisma.ReactionPromptConfigurationSelect<ExtArgs> | null
-  /**
-   * Omit specific fields from the ReactionPromptConfiguration
-   */
-  omit?: Prisma.ReactionPromptConfigurationOmit<ExtArgs> | null
-  /**
-   * Choose, which related nodes to fetch as well
-   */
-  include?: Prisma.ReactionPromptConfigurationInclude<ExtArgs> | null
-  where?: Prisma.ReactionPromptConfigurationWhereInput
-  orderBy?: Prisma.ReactionPromptConfigurationOrderByWithRelationInput | Prisma.ReactionPromptConfigurationOrderByWithRelationInput[]
-  cursor?: Prisma.ReactionPromptConfigurationWhereUniqueInput
-  take?: number
-  skip?: number
-  distinct?: Prisma.ReactionPromptConfigurationScalarFieldEnum | Prisma.ReactionPromptConfigurationScalarFieldEnum[]
+  distinct?: Prisma.ReactionScalarFieldEnum | Prisma.ReactionScalarFieldEnum[]
 }
 
 /**

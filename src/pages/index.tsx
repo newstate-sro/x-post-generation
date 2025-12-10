@@ -1,18 +1,10 @@
-import Image from 'next/image'
 import { useRouter } from 'next/router'
-import { Geist, Geist_Mono } from 'next/font/google'
 import { useAuth } from '../contexts/AuthContext'
 import Link from 'next/link'
-
-const geistSans = Geist({
-  variable: '--font-geist-sans',
-  subsets: ['latin'],
-})
-
-const geistMono = Geist_Mono({
-  variable: '--font-geist-mono',
-  subsets: ['latin'],
-})
+import { Button } from '@/components/ui/button'
+import { Card, CardContent } from '@/components/ui/card'
+import { Skeleton } from '@/components/ui/skeleton'
+import { Zap, ArrowRight, LogOut } from 'lucide-react'
 
 export default function Home() {
   const { user, loading, logout } = useAuth()
@@ -23,105 +15,74 @@ export default function Home() {
     router.push('/login')
   }
 
+  if (loading) {
+    return (
+      <div className="flex min-h-screen items-center justify-center bg-background">
+        <div className="space-y-4 text-center">
+          <Skeleton className="mx-auto h-16 w-16 rounded-2xl" />
+          <Skeleton className="mx-auto h-8 w-32" />
+          <Skeleton className="mx-auto h-4 w-48" />
+        </div>
+      </div>
+    )
+  }
+
   return (
-    <div
-      className={`${geistSans.className} ${geistMono.className} flex min-h-screen items-center justify-center bg-zinc-50 font-sans dark:bg-black`}
-    >
-      <main className="flex min-h-screen w-full max-w-3xl flex-col items-center justify-between py-32 px-16 bg-white dark:bg-black sm:items-start">
-        <div className="flex w-full items-center justify-between">
-          <Image
-            className="dark:invert"
-            src="/next.svg"
-            alt="Next.js logo"
-            width={100}
-            height={20}
-            priority
-          />
-          {!loading && (
-            <div className="flex items-center gap-4">
-              {user ? (
-                <>
-                  <span className="text-sm text-zinc-600 dark:text-zinc-400">{user.email}</span>
-                  <Link
-                    href="/dashboard"
-                    className="rounded-md bg-zinc-100 px-4 py-2 text-sm font-medium text-black transition-colors hover:bg-zinc-200 dark:bg-zinc-800 dark:text-zinc-50 dark:hover:bg-zinc-700"
-                  >
-                    Dashboard
-                  </Link>
-                  <button
-                    onClick={handleLogout}
-                    className="rounded-md bg-black px-4 py-2 text-sm font-medium text-white transition-colors hover:bg-zinc-800 dark:bg-zinc-50 dark:text-black dark:hover:bg-zinc-200"
-                  >
-                    Logout
-                  </button>
-                </>
-              ) : (
-                <Link
-                  href="/login"
-                  className="rounded-md bg-black px-4 py-2 text-sm font-medium text-white transition-colors hover:bg-zinc-800 dark:bg-zinc-50 dark:text-black dark:hover:bg-zinc-200"
-                >
-                  Login
-                </Link>
-              )}
-            </div>
-          )}
+    <div className="relative flex min-h-screen flex-col items-center justify-center bg-background px-4">
+      {/* Subtle gradient background */}
+      <div className="pointer-events-none absolute inset-0 overflow-hidden">
+        <div className="absolute -left-1/4 -top-1/4 h-1/2 w-1/2 rounded-full bg-muted/50 blur-3xl" />
+        <div className="absolute -bottom-1/4 -right-1/4 h-1/2 w-1/2 rounded-full bg-muted/30 blur-3xl" />
+      </div>
+
+      <div className="relative z-10 w-full max-w-sm">
+        {/* Logo & Title */}
+        <div className="mb-10 text-center">
+          <div className="mx-auto mb-5 flex h-14 w-14 items-center justify-center rounded-xl bg-primary">
+            <Zap className="h-7 w-7 text-primary-foreground" />
+          </div>
+          <h1 className="mb-2 text-3xl font-semibold tracking-tight text-foreground">Spark</h1>
+          <p className="text-base text-muted-foreground">AI-powered political reactions.</p>
+          <p className="mt-1 text-sm text-muted-foreground/80">Respond smarter, not harder.</p>
         </div>
-        <Image
-          className="dark:invert"
-          src="/next.svg"
-          alt="Next.js logo"
-          width={100}
-          height={20}
-          priority
-        />
-        <div className="flex flex-col items-center gap-6 text-center sm:items-start sm:text-left">
-          <h1 className="max-w-xs text-3xl font-semibold leading-10 tracking-tight text-black dark:text-zinc-50">
-            To get started, edit the index.tsx file.
-          </h1>
-          <p className="max-w-md text-lg leading-8 text-zinc-600 dark:text-zinc-400">
-            Looking for a starting point or more instructions? Head over to{' '}
-            <a
-              href="https://vercel.com/templates?framework=next.js&utm_source=create-next-app&utm_medium=default-template-tw&utm_campaign=create-next-app"
-              className="font-medium text-zinc-950 dark:text-zinc-50"
-            >
-              Templates
-            </a>{' '}
-            or the{' '}
-            <a
-              href="https://nextjs.org/learn?utm_source=create-next-app&utm_medium=default-template-tw&utm_campaign=create-next-app"
-              className="font-medium text-zinc-950 dark:text-zinc-50"
-            >
-              Learning
-            </a>{' '}
-            center.
-          </p>
-        </div>
-        <div className="flex flex-col gap-4 text-base font-medium sm:flex-row">
-          <a
-            className="flex h-12 w-full items-center justify-center gap-2 rounded-full bg-foreground px-5 text-background transition-colors hover:bg-[#383838] dark:hover:bg-[#ccc] md:w-[158px]"
-            href="https://vercel.com/new?utm_source=create-next-app&utm_medium=default-template-tw&utm_campaign=create-next-app"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            <Image
-              className="dark:invert"
-              src="/vercel.svg"
-              alt="Vercel logomark"
-              width={16}
-              height={16}
-            />
-            Deploy Now
-          </a>
-          <a
-            className="flex h-12 w-full items-center justify-center rounded-full border border-solid border-black/[.08] px-5 transition-colors hover:border-transparent hover:bg-black/[.04] dark:border-white/[.145] dark:hover:bg-[#1a1a1a] md:w-[158px]"
-            href="https://nextjs.org/docs/pages/getting-started?utm_source=create-next-app&utm_medium=default-template-tw&utm_campaign=create-next-app"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            Documentation
-          </a>
-        </div>
-      </main>
+
+        {user ? (
+          <div className="space-y-4">
+            <Card>
+              <CardContent className="pt-6">
+                <p className="mb-1 text-xs font-medium uppercase tracking-wider text-muted-foreground">
+                  Logged in as
+                </p>
+                <p className="truncate text-sm text-foreground">{user.email}</p>
+              </CardContent>
+            </Card>
+
+            <Button asChild className="w-full" size="lg">
+              <Link href="/dashboard">
+                Go to Dashboard
+                <ArrowRight className="h-4 w-4" />
+              </Link>
+            </Button>
+
+            <Button variant="outline" className="w-full" size="lg" onClick={handleLogout}>
+              <LogOut className="h-4 w-4" />
+              Logout
+            </Button>
+          </div>
+        ) : (
+          <Button asChild className="w-full" size="lg">
+            <Link href="/login">
+              Get Started
+              <ArrowRight className="h-4 w-4" />
+            </Link>
+          </Button>
+        )}
+      </div>
+
+      {/* Footer */}
+      <p className="absolute bottom-6 text-xs text-muted-foreground">
+        © {new Date().getFullYear()} Spark
+      </p>
     </div>
   )
 }

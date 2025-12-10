@@ -44,6 +44,7 @@ export type FacebookPostSumAggregateOutputType = {
 
 export type FacebookPostMinAggregateOutputType = {
   id: string | null
+  postId: string | null
   facebookPostId: string | null
   url: string | null
   postedAt: Date | null
@@ -60,6 +61,7 @@ export type FacebookPostMinAggregateOutputType = {
 
 export type FacebookPostMaxAggregateOutputType = {
   id: string | null
+  postId: string | null
   facebookPostId: string | null
   url: string | null
   postedAt: Date | null
@@ -76,6 +78,7 @@ export type FacebookPostMaxAggregateOutputType = {
 
 export type FacebookPostCountAggregateOutputType = {
   id: number
+  postId: number
   facebookPostId: number
   url: number
   postedAt: number
@@ -111,6 +114,7 @@ export type FacebookPostSumAggregateInputType = {
 
 export type FacebookPostMinAggregateInputType = {
   id?: true
+  postId?: true
   facebookPostId?: true
   url?: true
   postedAt?: true
@@ -127,6 +131,7 @@ export type FacebookPostMinAggregateInputType = {
 
 export type FacebookPostMaxAggregateInputType = {
   id?: true
+  postId?: true
   facebookPostId?: true
   url?: true
   postedAt?: true
@@ -143,6 +148,7 @@ export type FacebookPostMaxAggregateInputType = {
 
 export type FacebookPostCountAggregateInputType = {
   id?: true
+  postId?: true
   facebookPostId?: true
   url?: true
   postedAt?: true
@@ -247,6 +253,7 @@ export type FacebookPostGroupByArgs<ExtArgs extends runtime.Types.Extensions.Int
 
 export type FacebookPostGroupByOutputType = {
   id: string
+  postId: string
   facebookPostId: string
   url: string
   postedAt: Date
@@ -287,6 +294,7 @@ export type FacebookPostWhereInput = {
   OR?: Prisma.FacebookPostWhereInput[]
   NOT?: Prisma.FacebookPostWhereInput | Prisma.FacebookPostWhereInput[]
   id?: Prisma.StringFilter<"FacebookPost"> | string
+  postId?: Prisma.StringFilter<"FacebookPost"> | string
   facebookPostId?: Prisma.StringFilter<"FacebookPost"> | string
   url?: Prisma.StringFilter<"FacebookPost"> | string
   postedAt?: Prisma.DateTimeFilter<"FacebookPost"> | Date | string
@@ -300,11 +308,12 @@ export type FacebookPostWhereInput = {
   fullResponse?: Prisma.JsonFilter<"FacebookPost">
   createdAt?: Prisma.DateTimeFilter<"FacebookPost"> | Date | string
   updatedAt?: Prisma.DateTimeFilter<"FacebookPost"> | Date | string
-  postFacebookPost?: Prisma.XOR<Prisma.PostFacebookPostNullableScalarRelationFilter, Prisma.PostFacebookPostWhereInput> | null
+  post?: Prisma.XOR<Prisma.PostScalarRelationFilter, Prisma.PostWhereInput>
 }
 
 export type FacebookPostOrderByWithRelationInput = {
   id?: Prisma.SortOrder
+  postId?: Prisma.SortOrder
   facebookPostId?: Prisma.SortOrder
   url?: Prisma.SortOrder
   postedAt?: Prisma.SortOrder
@@ -318,11 +327,12 @@ export type FacebookPostOrderByWithRelationInput = {
   fullResponse?: Prisma.SortOrder
   createdAt?: Prisma.SortOrder
   updatedAt?: Prisma.SortOrder
-  postFacebookPost?: Prisma.PostFacebookPostOrderByWithRelationInput
+  post?: Prisma.PostOrderByWithRelationInput
 }
 
 export type FacebookPostWhereUniqueInput = Prisma.AtLeast<{
   id?: string
+  postId?: string
   facebookPostId?: string
   AND?: Prisma.FacebookPostWhereInput | Prisma.FacebookPostWhereInput[]
   OR?: Prisma.FacebookPostWhereInput[]
@@ -339,11 +349,12 @@ export type FacebookPostWhereUniqueInput = Prisma.AtLeast<{
   fullResponse?: Prisma.JsonFilter<"FacebookPost">
   createdAt?: Prisma.DateTimeFilter<"FacebookPost"> | Date | string
   updatedAt?: Prisma.DateTimeFilter<"FacebookPost"> | Date | string
-  postFacebookPost?: Prisma.XOR<Prisma.PostFacebookPostNullableScalarRelationFilter, Prisma.PostFacebookPostWhereInput> | null
-}, "id" | "facebookPostId">
+  post?: Prisma.XOR<Prisma.PostScalarRelationFilter, Prisma.PostWhereInput>
+}, "id" | "postId" | "facebookPostId">
 
 export type FacebookPostOrderByWithAggregationInput = {
   id?: Prisma.SortOrder
+  postId?: Prisma.SortOrder
   facebookPostId?: Prisma.SortOrder
   url?: Prisma.SortOrder
   postedAt?: Prisma.SortOrder
@@ -369,6 +380,7 @@ export type FacebookPostScalarWhereWithAggregatesInput = {
   OR?: Prisma.FacebookPostScalarWhereWithAggregatesInput[]
   NOT?: Prisma.FacebookPostScalarWhereWithAggregatesInput | Prisma.FacebookPostScalarWhereWithAggregatesInput[]
   id?: Prisma.StringWithAggregatesFilter<"FacebookPost"> | string
+  postId?: Prisma.StringWithAggregatesFilter<"FacebookPost"> | string
   facebookPostId?: Prisma.StringWithAggregatesFilter<"FacebookPost"> | string
   url?: Prisma.StringWithAggregatesFilter<"FacebookPost"> | string
   postedAt?: Prisma.DateTimeWithAggregatesFilter<"FacebookPost"> | Date | string
@@ -399,11 +411,12 @@ export type FacebookPostCreateInput = {
   fullResponse: Prisma.JsonNullValueInput | runtime.InputJsonValue
   createdAt?: Date | string
   updatedAt?: Date | string
-  postFacebookPost?: Prisma.PostFacebookPostCreateNestedOneWithoutFacebookPostInput
+  post: Prisma.PostCreateNestedOneWithoutFacebookPostInput
 }
 
 export type FacebookPostUncheckedCreateInput = {
   id?: string
+  postId: string
   facebookPostId: string
   url: string
   postedAt: Date | string
@@ -417,7 +430,6 @@ export type FacebookPostUncheckedCreateInput = {
   fullResponse: Prisma.JsonNullValueInput | runtime.InputJsonValue
   createdAt?: Date | string
   updatedAt?: Date | string
-  postFacebookPost?: Prisma.PostFacebookPostUncheckedCreateNestedOneWithoutFacebookPostInput
 }
 
 export type FacebookPostUpdateInput = {
@@ -435,11 +447,12 @@ export type FacebookPostUpdateInput = {
   fullResponse?: Prisma.JsonNullValueInput | runtime.InputJsonValue
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
-  postFacebookPost?: Prisma.PostFacebookPostUpdateOneWithoutFacebookPostNestedInput
+  post?: Prisma.PostUpdateOneRequiredWithoutFacebookPostNestedInput
 }
 
 export type FacebookPostUncheckedUpdateInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
+  postId?: Prisma.StringFieldUpdateOperationsInput | string
   facebookPostId?: Prisma.StringFieldUpdateOperationsInput | string
   url?: Prisma.StringFieldUpdateOperationsInput | string
   postedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
@@ -453,11 +466,11 @@ export type FacebookPostUncheckedUpdateInput = {
   fullResponse?: Prisma.JsonNullValueInput | runtime.InputJsonValue
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
-  postFacebookPost?: Prisma.PostFacebookPostUncheckedUpdateOneWithoutFacebookPostNestedInput
 }
 
 export type FacebookPostCreateManyInput = {
   id?: string
+  postId: string
   facebookPostId: string
   url: string
   postedAt: Date | string
@@ -492,6 +505,7 @@ export type FacebookPostUpdateManyMutationInput = {
 
 export type FacebookPostUncheckedUpdateManyInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
+  postId?: Prisma.StringFieldUpdateOperationsInput | string
   facebookPostId?: Prisma.StringFieldUpdateOperationsInput | string
   url?: Prisma.StringFieldUpdateOperationsInput | string
   postedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
@@ -507,13 +521,14 @@ export type FacebookPostUncheckedUpdateManyInput = {
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
 }
 
-export type FacebookPostScalarRelationFilter = {
-  is?: Prisma.FacebookPostWhereInput
-  isNot?: Prisma.FacebookPostWhereInput
+export type FacebookPostNullableScalarRelationFilter = {
+  is?: Prisma.FacebookPostWhereInput | null
+  isNot?: Prisma.FacebookPostWhereInput | null
 }
 
 export type FacebookPostCountOrderByAggregateInput = {
   id?: Prisma.SortOrder
+  postId?: Prisma.SortOrder
   facebookPostId?: Prisma.SortOrder
   url?: Prisma.SortOrder
   postedAt?: Prisma.SortOrder
@@ -539,6 +554,7 @@ export type FacebookPostAvgOrderByAggregateInput = {
 
 export type FacebookPostMaxOrderByAggregateInput = {
   id?: Prisma.SortOrder
+  postId?: Prisma.SortOrder
   facebookPostId?: Prisma.SortOrder
   url?: Prisma.SortOrder
   postedAt?: Prisma.SortOrder
@@ -555,6 +571,7 @@ export type FacebookPostMaxOrderByAggregateInput = {
 
 export type FacebookPostMinOrderByAggregateInput = {
   id?: Prisma.SortOrder
+  postId?: Prisma.SortOrder
   facebookPostId?: Prisma.SortOrder
   url?: Prisma.SortOrder
   postedAt?: Prisma.SortOrder
@@ -577,18 +594,36 @@ export type FacebookPostSumOrderByAggregateInput = {
   viewsCount?: Prisma.SortOrder
 }
 
-export type FacebookPostCreateNestedOneWithoutPostFacebookPostInput = {
-  create?: Prisma.XOR<Prisma.FacebookPostCreateWithoutPostFacebookPostInput, Prisma.FacebookPostUncheckedCreateWithoutPostFacebookPostInput>
-  connectOrCreate?: Prisma.FacebookPostCreateOrConnectWithoutPostFacebookPostInput
+export type FacebookPostCreateNestedOneWithoutPostInput = {
+  create?: Prisma.XOR<Prisma.FacebookPostCreateWithoutPostInput, Prisma.FacebookPostUncheckedCreateWithoutPostInput>
+  connectOrCreate?: Prisma.FacebookPostCreateOrConnectWithoutPostInput
   connect?: Prisma.FacebookPostWhereUniqueInput
 }
 
-export type FacebookPostUpdateOneRequiredWithoutPostFacebookPostNestedInput = {
-  create?: Prisma.XOR<Prisma.FacebookPostCreateWithoutPostFacebookPostInput, Prisma.FacebookPostUncheckedCreateWithoutPostFacebookPostInput>
-  connectOrCreate?: Prisma.FacebookPostCreateOrConnectWithoutPostFacebookPostInput
-  upsert?: Prisma.FacebookPostUpsertWithoutPostFacebookPostInput
+export type FacebookPostUncheckedCreateNestedOneWithoutPostInput = {
+  create?: Prisma.XOR<Prisma.FacebookPostCreateWithoutPostInput, Prisma.FacebookPostUncheckedCreateWithoutPostInput>
+  connectOrCreate?: Prisma.FacebookPostCreateOrConnectWithoutPostInput
   connect?: Prisma.FacebookPostWhereUniqueInput
-  update?: Prisma.XOR<Prisma.XOR<Prisma.FacebookPostUpdateToOneWithWhereWithoutPostFacebookPostInput, Prisma.FacebookPostUpdateWithoutPostFacebookPostInput>, Prisma.FacebookPostUncheckedUpdateWithoutPostFacebookPostInput>
+}
+
+export type FacebookPostUpdateOneWithoutPostNestedInput = {
+  create?: Prisma.XOR<Prisma.FacebookPostCreateWithoutPostInput, Prisma.FacebookPostUncheckedCreateWithoutPostInput>
+  connectOrCreate?: Prisma.FacebookPostCreateOrConnectWithoutPostInput
+  upsert?: Prisma.FacebookPostUpsertWithoutPostInput
+  disconnect?: Prisma.FacebookPostWhereInput | boolean
+  delete?: Prisma.FacebookPostWhereInput | boolean
+  connect?: Prisma.FacebookPostWhereUniqueInput
+  update?: Prisma.XOR<Prisma.XOR<Prisma.FacebookPostUpdateToOneWithWhereWithoutPostInput, Prisma.FacebookPostUpdateWithoutPostInput>, Prisma.FacebookPostUncheckedUpdateWithoutPostInput>
+}
+
+export type FacebookPostUncheckedUpdateOneWithoutPostNestedInput = {
+  create?: Prisma.XOR<Prisma.FacebookPostCreateWithoutPostInput, Prisma.FacebookPostUncheckedCreateWithoutPostInput>
+  connectOrCreate?: Prisma.FacebookPostCreateOrConnectWithoutPostInput
+  upsert?: Prisma.FacebookPostUpsertWithoutPostInput
+  disconnect?: Prisma.FacebookPostWhereInput | boolean
+  delete?: Prisma.FacebookPostWhereInput | boolean
+  connect?: Prisma.FacebookPostWhereUniqueInput
+  update?: Prisma.XOR<Prisma.XOR<Prisma.FacebookPostUpdateToOneWithWhereWithoutPostInput, Prisma.FacebookPostUpdateWithoutPostInput>, Prisma.FacebookPostUncheckedUpdateWithoutPostInput>
 }
 
 export type IntFieldUpdateOperationsInput = {
@@ -599,7 +634,7 @@ export type IntFieldUpdateOperationsInput = {
   divide?: number
 }
 
-export type FacebookPostCreateWithoutPostFacebookPostInput = {
+export type FacebookPostCreateWithoutPostInput = {
   id?: string
   facebookPostId: string
   url: string
@@ -616,7 +651,7 @@ export type FacebookPostCreateWithoutPostFacebookPostInput = {
   updatedAt?: Date | string
 }
 
-export type FacebookPostUncheckedCreateWithoutPostFacebookPostInput = {
+export type FacebookPostUncheckedCreateWithoutPostInput = {
   id?: string
   facebookPostId: string
   url: string
@@ -633,23 +668,23 @@ export type FacebookPostUncheckedCreateWithoutPostFacebookPostInput = {
   updatedAt?: Date | string
 }
 
-export type FacebookPostCreateOrConnectWithoutPostFacebookPostInput = {
+export type FacebookPostCreateOrConnectWithoutPostInput = {
   where: Prisma.FacebookPostWhereUniqueInput
-  create: Prisma.XOR<Prisma.FacebookPostCreateWithoutPostFacebookPostInput, Prisma.FacebookPostUncheckedCreateWithoutPostFacebookPostInput>
+  create: Prisma.XOR<Prisma.FacebookPostCreateWithoutPostInput, Prisma.FacebookPostUncheckedCreateWithoutPostInput>
 }
 
-export type FacebookPostUpsertWithoutPostFacebookPostInput = {
-  update: Prisma.XOR<Prisma.FacebookPostUpdateWithoutPostFacebookPostInput, Prisma.FacebookPostUncheckedUpdateWithoutPostFacebookPostInput>
-  create: Prisma.XOR<Prisma.FacebookPostCreateWithoutPostFacebookPostInput, Prisma.FacebookPostUncheckedCreateWithoutPostFacebookPostInput>
+export type FacebookPostUpsertWithoutPostInput = {
+  update: Prisma.XOR<Prisma.FacebookPostUpdateWithoutPostInput, Prisma.FacebookPostUncheckedUpdateWithoutPostInput>
+  create: Prisma.XOR<Prisma.FacebookPostCreateWithoutPostInput, Prisma.FacebookPostUncheckedCreateWithoutPostInput>
   where?: Prisma.FacebookPostWhereInput
 }
 
-export type FacebookPostUpdateToOneWithWhereWithoutPostFacebookPostInput = {
+export type FacebookPostUpdateToOneWithWhereWithoutPostInput = {
   where?: Prisma.FacebookPostWhereInput
-  data: Prisma.XOR<Prisma.FacebookPostUpdateWithoutPostFacebookPostInput, Prisma.FacebookPostUncheckedUpdateWithoutPostFacebookPostInput>
+  data: Prisma.XOR<Prisma.FacebookPostUpdateWithoutPostInput, Prisma.FacebookPostUncheckedUpdateWithoutPostInput>
 }
 
-export type FacebookPostUpdateWithoutPostFacebookPostInput = {
+export type FacebookPostUpdateWithoutPostInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
   facebookPostId?: Prisma.StringFieldUpdateOperationsInput | string
   url?: Prisma.StringFieldUpdateOperationsInput | string
@@ -666,7 +701,7 @@ export type FacebookPostUpdateWithoutPostFacebookPostInput = {
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
 }
 
-export type FacebookPostUncheckedUpdateWithoutPostFacebookPostInput = {
+export type FacebookPostUncheckedUpdateWithoutPostInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
   facebookPostId?: Prisma.StringFieldUpdateOperationsInput | string
   url?: Prisma.StringFieldUpdateOperationsInput | string
@@ -687,6 +722,7 @@ export type FacebookPostUncheckedUpdateWithoutPostFacebookPostInput = {
 
 export type FacebookPostSelect<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetSelect<{
   id?: boolean
+  postId?: boolean
   facebookPostId?: boolean
   url?: boolean
   postedAt?: boolean
@@ -700,11 +736,12 @@ export type FacebookPostSelect<ExtArgs extends runtime.Types.Extensions.Internal
   fullResponse?: boolean
   createdAt?: boolean
   updatedAt?: boolean
-  postFacebookPost?: boolean | Prisma.FacebookPost$postFacebookPostArgs<ExtArgs>
+  post?: boolean | Prisma.PostDefaultArgs<ExtArgs>
 }, ExtArgs["result"]["facebookPost"]>
 
 export type FacebookPostSelectCreateManyAndReturn<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetSelect<{
   id?: boolean
+  postId?: boolean
   facebookPostId?: boolean
   url?: boolean
   postedAt?: boolean
@@ -718,10 +755,12 @@ export type FacebookPostSelectCreateManyAndReturn<ExtArgs extends runtime.Types.
   fullResponse?: boolean
   createdAt?: boolean
   updatedAt?: boolean
+  post?: boolean | Prisma.PostDefaultArgs<ExtArgs>
 }, ExtArgs["result"]["facebookPost"]>
 
 export type FacebookPostSelectUpdateManyAndReturn<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetSelect<{
   id?: boolean
+  postId?: boolean
   facebookPostId?: boolean
   url?: boolean
   postedAt?: boolean
@@ -735,10 +774,12 @@ export type FacebookPostSelectUpdateManyAndReturn<ExtArgs extends runtime.Types.
   fullResponse?: boolean
   createdAt?: boolean
   updatedAt?: boolean
+  post?: boolean | Prisma.PostDefaultArgs<ExtArgs>
 }, ExtArgs["result"]["facebookPost"]>
 
 export type FacebookPostSelectScalar = {
   id?: boolean
+  postId?: boolean
   facebookPostId?: boolean
   url?: boolean
   postedAt?: boolean
@@ -754,20 +795,25 @@ export type FacebookPostSelectScalar = {
   updatedAt?: boolean
 }
 
-export type FacebookPostOmit<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetOmit<"id" | "facebookPostId" | "url" | "postedAt" | "text" | "likes" | "comments" | "shares" | "topReactionsCount" | "isVideo" | "viewsCount" | "fullResponse" | "createdAt" | "updatedAt", ExtArgs["result"]["facebookPost"]>
+export type FacebookPostOmit<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetOmit<"id" | "postId" | "facebookPostId" | "url" | "postedAt" | "text" | "likes" | "comments" | "shares" | "topReactionsCount" | "isVideo" | "viewsCount" | "fullResponse" | "createdAt" | "updatedAt", ExtArgs["result"]["facebookPost"]>
 export type FacebookPostInclude<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
-  postFacebookPost?: boolean | Prisma.FacebookPost$postFacebookPostArgs<ExtArgs>
+  post?: boolean | Prisma.PostDefaultArgs<ExtArgs>
 }
-export type FacebookPostIncludeCreateManyAndReturn<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {}
-export type FacebookPostIncludeUpdateManyAndReturn<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {}
+export type FacebookPostIncludeCreateManyAndReturn<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  post?: boolean | Prisma.PostDefaultArgs<ExtArgs>
+}
+export type FacebookPostIncludeUpdateManyAndReturn<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  post?: boolean | Prisma.PostDefaultArgs<ExtArgs>
+}
 
 export type $FacebookPostPayload<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
   name: "FacebookPost"
   objects: {
-    postFacebookPost: Prisma.$PostFacebookPostPayload<ExtArgs> | null
+    post: Prisma.$PostPayload<ExtArgs>
   }
   scalars: runtime.Types.Extensions.GetPayloadResult<{
     id: string
+    postId: string
     facebookPostId: string
     url: string
     postedAt: Date
@@ -1175,7 +1221,7 @@ readonly fields: FacebookPostFieldRefs;
  */
 export interface Prisma__FacebookPostClient<T, Null = never, ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs, GlobalOmitOptions = {}> extends Prisma.PrismaPromise<T> {
   readonly [Symbol.toStringTag]: "PrismaPromise"
-  postFacebookPost<T extends Prisma.FacebookPost$postFacebookPostArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.FacebookPost$postFacebookPostArgs<ExtArgs>>): Prisma.Prisma__PostFacebookPostClient<runtime.Types.Result.GetResult<Prisma.$PostFacebookPostPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
+  post<T extends Prisma.PostDefaultArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.PostDefaultArgs<ExtArgs>>): Prisma.Prisma__PostClient<runtime.Types.Result.GetResult<Prisma.$PostPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | Null, Null, ExtArgs, GlobalOmitOptions>
   /**
    * Attaches callbacks for the resolution and/or rejection of the Promise.
    * @param onfulfilled The callback to execute when the Promise is resolved.
@@ -1206,6 +1252,7 @@ export interface Prisma__FacebookPostClient<T, Null = never, ExtArgs extends run
  */
 export interface FacebookPostFieldRefs {
   readonly id: Prisma.FieldRef<"FacebookPost", 'String'>
+  readonly postId: Prisma.FieldRef<"FacebookPost", 'String'>
   readonly facebookPostId: Prisma.FieldRef<"FacebookPost", 'String'>
   readonly url: Prisma.FieldRef<"FacebookPost", 'String'>
   readonly postedAt: Prisma.FieldRef<"FacebookPost", 'DateTime'>
@@ -1468,6 +1515,10 @@ export type FacebookPostCreateManyAndReturnArgs<ExtArgs extends runtime.Types.Ex
    */
   data: Prisma.FacebookPostCreateManyInput | Prisma.FacebookPostCreateManyInput[]
   skipDuplicates?: boolean
+  /**
+   * Choose, which related nodes to fetch as well
+   */
+  include?: Prisma.FacebookPostIncludeCreateManyAndReturn<ExtArgs> | null
 }
 
 /**
@@ -1538,6 +1589,10 @@ export type FacebookPostUpdateManyAndReturnArgs<ExtArgs extends runtime.Types.Ex
    * Limit how many FacebookPosts to update.
    */
   limit?: number
+  /**
+   * Choose, which related nodes to fetch as well
+   */
+  include?: Prisma.FacebookPostIncludeUpdateManyAndReturn<ExtArgs> | null
 }
 
 /**
@@ -1604,25 +1659,6 @@ export type FacebookPostDeleteManyArgs<ExtArgs extends runtime.Types.Extensions.
    * Limit how many FacebookPosts to delete.
    */
   limit?: number
-}
-
-/**
- * FacebookPost.postFacebookPost
- */
-export type FacebookPost$postFacebookPostArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
-  /**
-   * Select specific fields to fetch from the PostFacebookPost
-   */
-  select?: Prisma.PostFacebookPostSelect<ExtArgs> | null
-  /**
-   * Omit specific fields from the PostFacebookPost
-   */
-  omit?: Prisma.PostFacebookPostOmit<ExtArgs> | null
-  /**
-   * Choose, which related nodes to fetch as well
-   */
-  include?: Prisma.PostFacebookPostInclude<ExtArgs> | null
-  where?: Prisma.PostFacebookPostWhereInput
 }
 
 /**

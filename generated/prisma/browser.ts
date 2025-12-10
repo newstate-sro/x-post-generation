@@ -23,92 +23,32 @@ export * from './enums';
  */
 export type SystemConfiguration = Prisma.SystemConfigurationModel
 /**
- * Model SystemEvent
- * 
- */
-export type SystemEvent = Prisma.SystemEventModel
-/**
  * Model TrackedEntity
  * 
  */
 export type TrackedEntity = Prisma.TrackedEntityModel
-/**
- * Model TrackedEntityOwnTrackedEntity
- * 
- */
-export type TrackedEntityOwnTrackedEntity = Prisma.TrackedEntityOwnTrackedEntityModel
-/**
- * Model OwnTrackedEntity
- * 
- */
-export type OwnTrackedEntity = Prisma.OwnTrackedEntityModel
-/**
- * Model TrackedEntityOtherTrackedEntity
- * 
- */
-export type TrackedEntityOtherTrackedEntity = Prisma.TrackedEntityOtherTrackedEntityModel
-/**
- * Model OtherTrackedEntity
- * 
- */
-export type OtherTrackedEntity = Prisma.OtherTrackedEntityModel
-/**
- * Model TrackedEntityTrackedEntityConfiguration
- * 
- */
-export type TrackedEntityTrackedEntityConfiguration = Prisma.TrackedEntityTrackedEntityConfigurationModel
-/**
- * Model TrackedEntityConfiguration
- * 
- */
-export type TrackedEntityConfiguration = Prisma.TrackedEntityConfigurationModel
-/**
- * Model TrackedEntityConfigurationPromptConfiguration
- * 
- */
-export type TrackedEntityConfigurationPromptConfiguration = Prisma.TrackedEntityConfigurationPromptConfigurationModel
 /**
  * Model PromptConfiguration
  * 
  */
 export type PromptConfiguration = Prisma.PromptConfigurationModel
 /**
- * Model TrackedEntityPost
- * 
- */
-export type TrackedEntityPost = Prisma.TrackedEntityPostModel
-/**
  * Model Post
  * 
  */
 export type Post = Prisma.PostModel
-/**
- * Model PostFacebookPost
- * 
- */
-export type PostFacebookPost = Prisma.PostFacebookPostModel
 /**
  * Model FacebookPost
  * 
  */
 export type FacebookPost = Prisma.FacebookPostModel
 /**
- * Model TrackedEntityReaction
- * 
- */
-export type TrackedEntityReaction = Prisma.TrackedEntityReactionModel
-/**
- * Model PostReaction
- * 
- */
-export type PostReaction = Prisma.PostReactionModel
-/**
  * Model Reaction
  * 
  */
 export type Reaction = Prisma.ReactionModel
 /**
- * Model ReactionPromptConfiguration
+ * Model SystemPromptConfiguration
  * 
  */
-export type ReactionPromptConfiguration = Prisma.ReactionPromptConfigurationModel
+export type SystemPromptConfiguration = Prisma.SystemPromptConfigurationModel

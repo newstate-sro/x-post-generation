@@ -1,10 +1,10 @@
 import type { AIMessageChunk } from '@langchain/core/messages'
 
-type ParsedPostsReactionsResponse = {
+type ParsedOwnPostResponse = {
   trackedEntityId: string
   postId: string
-  promptConfigurationId: string
-  reaction: string
+  text: string
+  categoryEuSk: 'EU' | 'SK' | 'NONE'
 }
 
 /**
@@ -12,9 +12,9 @@ type ParsedPostsReactionsResponse = {
  * Extracts JSON from markdown code blocks and parses it.
  *
  * @param content - The string content from AIMessageChunk
- * @returns Parsed array of posts reactions response objects
+ * @returns Parsed array of own posts response objects
  */
-function parseSingleResponse(content: string): ParsedPostsReactionsResponse[] {
+function parseSingleResponse(content: string): ParsedOwnPostResponse[] {
   // Remove markdown code block markers (```json and ```)
   const cleanedContent = content
     .replace(/^```json\s*/i, '')
@@ -25,7 +25,7 @@ function parseSingleResponse(content: string): ParsedPostsReactionsResponse[] {
     const parsed = JSON.parse(cleanedContent)
     return Array.isArray(parsed) ? parsed : [parsed]
   } catch (error) {
-    console.error('ERROR parseLlmPostsReactionsResponse:', error)
+    console.error('ERROR parseLlmOwnPostsResponse:', error)
     throw new Error(`Failed to parse LLM response as JSON: ${error}`)
   }
 }
@@ -35,12 +35,10 @@ function parseSingleResponse(content: string): ParsedPostsReactionsResponse[] {
  * Extracts JSON from markdown code blocks and parses each response.
  *
  * @param llmResponses - Array of AIMessageChunk responses from LangChain
- * @returns Parsed array of posts reactions response objects (flattened from all responses)
+ * @returns Parsed array of own posts response objects (flattened from all responses)
  */
-export function parseLlmPostsReactionsResponse(
-  llmResponses: AIMessageChunk[],
-): ParsedPostsReactionsResponse[] {
-  const allReactions: ParsedPostsReactionsResponse[] = []
+export function parseLlmOwnPostsResponse(llmResponses: AIMessageChunk[]): ParsedOwnPostResponse[] {
+  const allPosts: ParsedOwnPostResponse[] = []
 
   for (const llmResponse of llmResponses) {
     if (typeof llmResponse.content !== 'string') {
@@ -48,8 +46,8 @@ export function parseLlmPostsReactionsResponse(
     }
 
     const parsed = parseSingleResponse(llmResponse.content)
-    allReactions.push(...parsed)
+    allPosts.push(...parsed)
   }
 
-  return allReactions
+  return allPosts
 }

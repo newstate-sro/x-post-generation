@@ -385,24 +385,12 @@ type FieldRefInputType<Model, FieldType> = Model extends never ? never : FieldRe
 
 export const ModelName = {
   SystemConfiguration: 'SystemConfiguration',
-  SystemEvent: 'SystemEvent',
   TrackedEntity: 'TrackedEntity',
-  TrackedEntityOwnTrackedEntity: 'TrackedEntityOwnTrackedEntity',
-  OwnTrackedEntity: 'OwnTrackedEntity',
-  TrackedEntityOtherTrackedEntity: 'TrackedEntityOtherTrackedEntity',
-  OtherTrackedEntity: 'OtherTrackedEntity',
-  TrackedEntityTrackedEntityConfiguration: 'TrackedEntityTrackedEntityConfiguration',
-  TrackedEntityConfiguration: 'TrackedEntityConfiguration',
-  TrackedEntityConfigurationPromptConfiguration: 'TrackedEntityConfigurationPromptConfiguration',
   PromptConfiguration: 'PromptConfiguration',
-  TrackedEntityPost: 'TrackedEntityPost',
   Post: 'Post',
-  PostFacebookPost: 'PostFacebookPost',
   FacebookPost: 'FacebookPost',
-  TrackedEntityReaction: 'TrackedEntityReaction',
-  PostReaction: 'PostReaction',
   Reaction: 'Reaction',
-  ReactionPromptConfiguration: 'ReactionPromptConfiguration'
+  SystemPromptConfiguration: 'SystemPromptConfiguration'
 } as const
 
 export type ModelName = (typeof ModelName)[keyof typeof ModelName]
@@ -418,7 +406,7 @@ export type TypeMap<ExtArgs extends runtime.Types.Extensions.InternalArgs = runt
     omit: GlobalOmitOptions
   }
   meta: {
-    modelProps: "systemConfiguration" | "systemEvent" | "trackedEntity" | "trackedEntityOwnTrackedEntity" | "ownTrackedEntity" | "trackedEntityOtherTrackedEntity" | "otherTrackedEntity" | "trackedEntityTrackedEntityConfiguration" | "trackedEntityConfiguration" | "trackedEntityConfigurationPromptConfiguration" | "promptConfiguration" | "trackedEntityPost" | "post" | "postFacebookPost" | "facebookPost" | "trackedEntityReaction" | "postReaction" | "reaction" | "reactionPromptConfiguration"
+    modelProps: "systemConfiguration" | "trackedEntity" | "promptConfiguration" | "post" | "facebookPost" | "reaction" | "systemPromptConfiguration"
     txIsolationLevel: TransactionIsolationLevel
   }
   model: {
@@ -496,80 +484,6 @@ export type TypeMap<ExtArgs extends runtime.Types.Extensions.InternalArgs = runt
         }
       }
     }
-    SystemEvent: {
-      payload: Prisma.$SystemEventPayload<ExtArgs>
-      fields: Prisma.SystemEventFieldRefs
-      operations: {
-        findUnique: {
-          args: Prisma.SystemEventFindUniqueArgs<ExtArgs>
-          result: runtime.Types.Utils.PayloadToResult<Prisma.$SystemEventPayload> | null
-        }
-        findUniqueOrThrow: {
-          args: Prisma.SystemEventFindUniqueOrThrowArgs<ExtArgs>
-          result: runtime.Types.Utils.PayloadToResult<Prisma.$SystemEventPayload>
-        }
-        findFirst: {
-          args: Prisma.SystemEventFindFirstArgs<ExtArgs>
-          result: runtime.Types.Utils.PayloadToResult<Prisma.$SystemEventPayload> | null
-        }
-        findFirstOrThrow: {
-          args: Prisma.SystemEventFindFirstOrThrowArgs<ExtArgs>
-          result: runtime.Types.Utils.PayloadToResult<Prisma.$SystemEventPayload>
-        }
-        findMany: {
-          args: Prisma.SystemEventFindManyArgs<ExtArgs>
-          result: runtime.Types.Utils.PayloadToResult<Prisma.$SystemEventPayload>[]
-        }
-        create: {
-          args: Prisma.SystemEventCreateArgs<ExtArgs>
-          result: runtime.Types.Utils.PayloadToResult<Prisma.$SystemEventPayload>
-        }
-        createMany: {
-          args: Prisma.SystemEventCreateManyArgs<ExtArgs>
-          result: BatchPayload
-        }
-        createManyAndReturn: {
-          args: Prisma.SystemEventCreateManyAndReturnArgs<ExtArgs>
-          result: runtime.Types.Utils.PayloadToResult<Prisma.$SystemEventPayload>[]
-        }
-        delete: {
-          args: Prisma.SystemEventDeleteArgs<ExtArgs>
-          result: runtime.Types.Utils.PayloadToResult<Prisma.$SystemEventPayload>
-        }
-        update: {
-          args: Prisma.SystemEventUpdateArgs<ExtArgs>
-          result: runtime.Types.Utils.PayloadToResult<Prisma.$SystemEventPayload>
-        }
-        deleteMany: {
-          args: Prisma.SystemEventDeleteManyArgs<ExtArgs>
-          result: BatchPayload
-        }
-        updateMany: {
-          args: Prisma.SystemEventUpdateManyArgs<ExtArgs>
-          result: BatchPayload
-        }
-        updateManyAndReturn: {
-          args: Prisma.SystemEventUpdateManyAndReturnArgs<ExtArgs>
-          result: runtime.Types.Utils.PayloadToResult<Prisma.$SystemEventPayload>[]
-        }
-        upsert: {
-          args: Prisma.SystemEventUpsertArgs<ExtArgs>
-          result: runtime.Types.Utils.PayloadToResult<Prisma.$SystemEventPayload>
-        }
-        aggregate: {
-          args: Prisma.SystemEventAggregateArgs<ExtArgs>
-          result: runtime.Types.Utils.Optional<Prisma.AggregateSystemEvent>
-        }
-        groupBy: {
-          args: Prisma.SystemEventGroupByArgs<ExtArgs>
-          result: runtime.Types.Utils.Optional<Prisma.SystemEventGroupByOutputType>[]
-        }
-        count: {
-          args: Prisma.SystemEventCountArgs<ExtArgs>
-          result: runtime.Types.Utils.Optional<Prisma.SystemEventCountAggregateOutputType> | number
-        }
-      }
-    }
     TrackedEntity: {
       payload: Prisma.$TrackedEntityPayload<ExtArgs>
       fields: Prisma.TrackedEntityFieldRefs
@@ -641,524 +555,6 @@ export type TypeMap<ExtArgs extends runtime.Types.Extensions.InternalArgs = runt
         count: {
           args: Prisma.TrackedEntityCountArgs<ExtArgs>
           result: runtime.Types.Utils.Optional<Prisma.TrackedEntityCountAggregateOutputType> | number
-        }
-      }
-    }
-    TrackedEntityOwnTrackedEntity: {
-      payload: Prisma.$TrackedEntityOwnTrackedEntityPayload<ExtArgs>
-      fields: Prisma.TrackedEntityOwnTrackedEntityFieldRefs
-      operations: {
-        findUnique: {
-          args: Prisma.TrackedEntityOwnTrackedEntityFindUniqueArgs<ExtArgs>
-          result: runtime.Types.Utils.PayloadToResult<Prisma.$TrackedEntityOwnTrackedEntityPayload> | null
-        }
-        findUniqueOrThrow: {
-          args: Prisma.TrackedEntityOwnTrackedEntityFindUniqueOrThrowArgs<ExtArgs>
-          result: runtime.Types.Utils.PayloadToResult<Prisma.$TrackedEntityOwnTrackedEntityPayload>
-        }
-        findFirst: {
-          args: Prisma.TrackedEntityOwnTrackedEntityFindFirstArgs<ExtArgs>
-          result: runtime.Types.Utils.PayloadToResult<Prisma.$TrackedEntityOwnTrackedEntityPayload> | null
-        }
-        findFirstOrThrow: {
-          args: Prisma.TrackedEntityOwnTrackedEntityFindFirstOrThrowArgs<ExtArgs>
-          result: runtime.Types.Utils.PayloadToResult<Prisma.$TrackedEntityOwnTrackedEntityPayload>
-        }
-        findMany: {
-          args: Prisma.TrackedEntityOwnTrackedEntityFindManyArgs<ExtArgs>
-          result: runtime.Types.Utils.PayloadToResult<Prisma.$TrackedEntityOwnTrackedEntityPayload>[]
-        }
-        create: {
-          args: Prisma.TrackedEntityOwnTrackedEntityCreateArgs<ExtArgs>
-          result: runtime.Types.Utils.PayloadToResult<Prisma.$TrackedEntityOwnTrackedEntityPayload>
-        }
-        createMany: {
-          args: Prisma.TrackedEntityOwnTrackedEntityCreateManyArgs<ExtArgs>
-          result: BatchPayload
-        }
-        createManyAndReturn: {
-          args: Prisma.TrackedEntityOwnTrackedEntityCreateManyAndReturnArgs<ExtArgs>
-          result: runtime.Types.Utils.PayloadToResult<Prisma.$TrackedEntityOwnTrackedEntityPayload>[]
-        }
-        delete: {
-          args: Prisma.TrackedEntityOwnTrackedEntityDeleteArgs<ExtArgs>
-          result: runtime.Types.Utils.PayloadToResult<Prisma.$TrackedEntityOwnTrackedEntityPayload>
-        }
-        update: {
-          args: Prisma.TrackedEntityOwnTrackedEntityUpdateArgs<ExtArgs>
-          result: runtime.Types.Utils.PayloadToResult<Prisma.$TrackedEntityOwnTrackedEntityPayload>
-        }
-        deleteMany: {
-          args: Prisma.TrackedEntityOwnTrackedEntityDeleteManyArgs<ExtArgs>
-          result: BatchPayload
-        }
-        updateMany: {
-          args: Prisma.TrackedEntityOwnTrackedEntityUpdateManyArgs<ExtArgs>
-          result: BatchPayload
-        }
-        updateManyAndReturn: {
-          args: Prisma.TrackedEntityOwnTrackedEntityUpdateManyAndReturnArgs<ExtArgs>
-          result: runtime.Types.Utils.PayloadToResult<Prisma.$TrackedEntityOwnTrackedEntityPayload>[]
-        }
-        upsert: {
-          args: Prisma.TrackedEntityOwnTrackedEntityUpsertArgs<ExtArgs>
-          result: runtime.Types.Utils.PayloadToResult<Prisma.$TrackedEntityOwnTrackedEntityPayload>
-        }
-        aggregate: {
-          args: Prisma.TrackedEntityOwnTrackedEntityAggregateArgs<ExtArgs>
-          result: runtime.Types.Utils.Optional<Prisma.AggregateTrackedEntityOwnTrackedEntity>
-        }
-        groupBy: {
-          args: Prisma.TrackedEntityOwnTrackedEntityGroupByArgs<ExtArgs>
-          result: runtime.Types.Utils.Optional<Prisma.TrackedEntityOwnTrackedEntityGroupByOutputType>[]
-        }
-        count: {
-          args: Prisma.TrackedEntityOwnTrackedEntityCountArgs<ExtArgs>
-          result: runtime.Types.Utils.Optional<Prisma.TrackedEntityOwnTrackedEntityCountAggregateOutputType> | number
-        }
-      }
-    }
-    OwnTrackedEntity: {
-      payload: Prisma.$OwnTrackedEntityPayload<ExtArgs>
-      fields: Prisma.OwnTrackedEntityFieldRefs
-      operations: {
-        findUnique: {
-          args: Prisma.OwnTrackedEntityFindUniqueArgs<ExtArgs>
-          result: runtime.Types.Utils.PayloadToResult<Prisma.$OwnTrackedEntityPayload> | null
-        }
-        findUniqueOrThrow: {
-          args: Prisma.OwnTrackedEntityFindUniqueOrThrowArgs<ExtArgs>
-          result: runtime.Types.Utils.PayloadToResult<Prisma.$OwnTrackedEntityPayload>
-        }
-        findFirst: {
-          args: Prisma.OwnTrackedEntityFindFirstArgs<ExtArgs>
-          result: runtime.Types.Utils.PayloadToResult<Prisma.$OwnTrackedEntityPayload> | null
-        }
-        findFirstOrThrow: {
-          args: Prisma.OwnTrackedEntityFindFirstOrThrowArgs<ExtArgs>
-          result: runtime.Types.Utils.PayloadToResult<Prisma.$OwnTrackedEntityPayload>
-        }
-        findMany: {
-          args: Prisma.OwnTrackedEntityFindManyArgs<ExtArgs>
-          result: runtime.Types.Utils.PayloadToResult<Prisma.$OwnTrackedEntityPayload>[]
-        }
-        create: {
-          args: Prisma.OwnTrackedEntityCreateArgs<ExtArgs>
-          result: runtime.Types.Utils.PayloadToResult<Prisma.$OwnTrackedEntityPayload>
-        }
-        createMany: {
-          args: Prisma.OwnTrackedEntityCreateManyArgs<ExtArgs>
-          result: BatchPayload
-        }
-        createManyAndReturn: {
-          args: Prisma.OwnTrackedEntityCreateManyAndReturnArgs<ExtArgs>
-          result: runtime.Types.Utils.PayloadToResult<Prisma.$OwnTrackedEntityPayload>[]
-        }
-        delete: {
-          args: Prisma.OwnTrackedEntityDeleteArgs<ExtArgs>
-          result: runtime.Types.Utils.PayloadToResult<Prisma.$OwnTrackedEntityPayload>
-        }
-        update: {
-          args: Prisma.OwnTrackedEntityUpdateArgs<ExtArgs>
-          result: runtime.Types.Utils.PayloadToResult<Prisma.$OwnTrackedEntityPayload>
-        }
-        deleteMany: {
-          args: Prisma.OwnTrackedEntityDeleteManyArgs<ExtArgs>
-          result: BatchPayload
-        }
-        updateMany: {
-          args: Prisma.OwnTrackedEntityUpdateManyArgs<ExtArgs>
-          result: BatchPayload
-        }
-        updateManyAndReturn: {
-          args: Prisma.OwnTrackedEntityUpdateManyAndReturnArgs<ExtArgs>
-          result: runtime.Types.Utils.PayloadToResult<Prisma.$OwnTrackedEntityPayload>[]
-        }
-        upsert: {
-          args: Prisma.OwnTrackedEntityUpsertArgs<ExtArgs>
-          result: runtime.Types.Utils.PayloadToResult<Prisma.$OwnTrackedEntityPayload>
-        }
-        aggregate: {
-          args: Prisma.OwnTrackedEntityAggregateArgs<ExtArgs>
-          result: runtime.Types.Utils.Optional<Prisma.AggregateOwnTrackedEntity>
-        }
-        groupBy: {
-          args: Prisma.OwnTrackedEntityGroupByArgs<ExtArgs>
-          result: runtime.Types.Utils.Optional<Prisma.OwnTrackedEntityGroupByOutputType>[]
-        }
-        count: {
-          args: Prisma.OwnTrackedEntityCountArgs<ExtArgs>
-          result: runtime.Types.Utils.Optional<Prisma.OwnTrackedEntityCountAggregateOutputType> | number
-        }
-      }
-    }
-    TrackedEntityOtherTrackedEntity: {
-      payload: Prisma.$TrackedEntityOtherTrackedEntityPayload<ExtArgs>
-      fields: Prisma.TrackedEntityOtherTrackedEntityFieldRefs
-      operations: {
-        findUnique: {
-          args: Prisma.TrackedEntityOtherTrackedEntityFindUniqueArgs<ExtArgs>
-          result: runtime.Types.Utils.PayloadToResult<Prisma.$TrackedEntityOtherTrackedEntityPayload> | null
-        }
-        findUniqueOrThrow: {
-          args: Prisma.TrackedEntityOtherTrackedEntityFindUniqueOrThrowArgs<ExtArgs>
-          result: runtime.Types.Utils.PayloadToResult<Prisma.$TrackedEntityOtherTrackedEntityPayload>
-        }
-        findFirst: {
-          args: Prisma.TrackedEntityOtherTrackedEntityFindFirstArgs<ExtArgs>
-          result: runtime.Types.Utils.PayloadToResult<Prisma.$TrackedEntityOtherTrackedEntityPayload> | null
-        }
-        findFirstOrThrow: {
-          args: Prisma.TrackedEntityOtherTrackedEntityFindFirstOrThrowArgs<ExtArgs>
-          result: runtime.Types.Utils.PayloadToResult<Prisma.$TrackedEntityOtherTrackedEntityPayload>
-        }
-        findMany: {
-          args: Prisma.TrackedEntityOtherTrackedEntityFindManyArgs<ExtArgs>
-          result: runtime.Types.Utils.PayloadToResult<Prisma.$TrackedEntityOtherTrackedEntityPayload>[]
-        }
-        create: {
-          args: Prisma.TrackedEntityOtherTrackedEntityCreateArgs<ExtArgs>
-          result: runtime.Types.Utils.PayloadToResult<Prisma.$TrackedEntityOtherTrackedEntityPayload>
-        }
-        createMany: {
-          args: Prisma.TrackedEntityOtherTrackedEntityCreateManyArgs<ExtArgs>
-          result: BatchPayload
-        }
-        createManyAndReturn: {
-          args: Prisma.TrackedEntityOtherTrackedEntityCreateManyAndReturnArgs<ExtArgs>
-          result: runtime.Types.Utils.PayloadToResult<Prisma.$TrackedEntityOtherTrackedEntityPayload>[]
-        }
-        delete: {
-          args: Prisma.TrackedEntityOtherTrackedEntityDeleteArgs<ExtArgs>
-          result: runtime.Types.Utils.PayloadToResult<Prisma.$TrackedEntityOtherTrackedEntityPayload>
-        }
-        update: {
-          args: Prisma.TrackedEntityOtherTrackedEntityUpdateArgs<ExtArgs>
-          result: runtime.Types.Utils.PayloadToResult<Prisma.$TrackedEntityOtherTrackedEntityPayload>
-        }
-        deleteMany: {
-          args: Prisma.TrackedEntityOtherTrackedEntityDeleteManyArgs<ExtArgs>
-          result: BatchPayload
-        }
-        updateMany: {
-          args: Prisma.TrackedEntityOtherTrackedEntityUpdateManyArgs<ExtArgs>
-          result: BatchPayload
-        }
-        updateManyAndReturn: {
-          args: Prisma.TrackedEntityOtherTrackedEntityUpdateManyAndReturnArgs<ExtArgs>
-          result: runtime.Types.Utils.PayloadToResult<Prisma.$TrackedEntityOtherTrackedEntityPayload>[]
-        }
-        upsert: {
-          args: Prisma.TrackedEntityOtherTrackedEntityUpsertArgs<ExtArgs>
-          result: runtime.Types.Utils.PayloadToResult<Prisma.$TrackedEntityOtherTrackedEntityPayload>
-        }
-        aggregate: {
-          args: Prisma.TrackedEntityOtherTrackedEntityAggregateArgs<ExtArgs>
-          result: runtime.Types.Utils.Optional<Prisma.AggregateTrackedEntityOtherTrackedEntity>
-        }
-        groupBy: {
-          args: Prisma.TrackedEntityOtherTrackedEntityGroupByArgs<ExtArgs>
-          result: runtime.Types.Utils.Optional<Prisma.TrackedEntityOtherTrackedEntityGroupByOutputType>[]
-        }
-        count: {
-          args: Prisma.TrackedEntityOtherTrackedEntityCountArgs<ExtArgs>
-          result: runtime.Types.Utils.Optional<Prisma.TrackedEntityOtherTrackedEntityCountAggregateOutputType> | number
-        }
-      }
-    }
-    OtherTrackedEntity: {
-      payload: Prisma.$OtherTrackedEntityPayload<ExtArgs>
-      fields: Prisma.OtherTrackedEntityFieldRefs
-      operations: {
-        findUnique: {
-          args: Prisma.OtherTrackedEntityFindUniqueArgs<ExtArgs>
-          result: runtime.Types.Utils.PayloadToResult<Prisma.$OtherTrackedEntityPayload> | null
-        }
-        findUniqueOrThrow: {
-          args: Prisma.OtherTrackedEntityFindUniqueOrThrowArgs<ExtArgs>
-          result: runtime.Types.Utils.PayloadToResult<Prisma.$OtherTrackedEntityPayload>
-        }
-        findFirst: {
-          args: Prisma.OtherTrackedEntityFindFirstArgs<ExtArgs>
-          result: runtime.Types.Utils.PayloadToResult<Prisma.$OtherTrackedEntityPayload> | null
-        }
-        findFirstOrThrow: {
-          args: Prisma.OtherTrackedEntityFindFirstOrThrowArgs<ExtArgs>
-          result: runtime.Types.Utils.PayloadToResult<Prisma.$OtherTrackedEntityPayload>
-        }
-        findMany: {
-          args: Prisma.OtherTrackedEntityFindManyArgs<ExtArgs>
-          result: runtime.Types.Utils.PayloadToResult<Prisma.$OtherTrackedEntityPayload>[]
-        }
-        create: {
-          args: Prisma.OtherTrackedEntityCreateArgs<ExtArgs>
-          result: runtime.Types.Utils.PayloadToResult<Prisma.$OtherTrackedEntityPayload>
-        }
-        createMany: {
-          args: Prisma.OtherTrackedEntityCreateManyArgs<ExtArgs>
-          result: BatchPayload
-        }
-        createManyAndReturn: {
-          args: Prisma.OtherTrackedEntityCreateManyAndReturnArgs<ExtArgs>
-          result: runtime.Types.Utils.PayloadToResult<Prisma.$OtherTrackedEntityPayload>[]
-        }
-        delete: {
-          args: Prisma.OtherTrackedEntityDeleteArgs<ExtArgs>
-          result: runtime.Types.Utils.PayloadToResult<Prisma.$OtherTrackedEntityPayload>
-        }
-        update: {
-          args: Prisma.OtherTrackedEntityUpdateArgs<ExtArgs>
-          result: runtime.Types.Utils.PayloadToResult<Prisma.$OtherTrackedEntityPayload>
-        }
-        deleteMany: {
-          args: Prisma.OtherTrackedEntityDeleteManyArgs<ExtArgs>
-          result: BatchPayload
-        }
-        updateMany: {
-          args: Prisma.OtherTrackedEntityUpdateManyArgs<ExtArgs>
-          result: BatchPayload
-        }
-        updateManyAndReturn: {
-          args: Prisma.OtherTrackedEntityUpdateManyAndReturnArgs<ExtArgs>
-          result: runtime.Types.Utils.PayloadToResult<Prisma.$OtherTrackedEntityPayload>[]
-        }
-        upsert: {
-          args: Prisma.OtherTrackedEntityUpsertArgs<ExtArgs>
-          result: runtime.Types.Utils.PayloadToResult<Prisma.$OtherTrackedEntityPayload>
-        }
-        aggregate: {
-          args: Prisma.OtherTrackedEntityAggregateArgs<ExtArgs>
-          result: runtime.Types.Utils.Optional<Prisma.AggregateOtherTrackedEntity>
-        }
-        groupBy: {
-          args: Prisma.OtherTrackedEntityGroupByArgs<ExtArgs>
-          result: runtime.Types.Utils.Optional<Prisma.OtherTrackedEntityGroupByOutputType>[]
-        }
-        count: {
-          args: Prisma.OtherTrackedEntityCountArgs<ExtArgs>
-          result: runtime.Types.Utils.Optional<Prisma.OtherTrackedEntityCountAggregateOutputType> | number
-        }
-      }
-    }
-    TrackedEntityTrackedEntityConfiguration: {
-      payload: Prisma.$TrackedEntityTrackedEntityConfigurationPayload<ExtArgs>
-      fields: Prisma.TrackedEntityTrackedEntityConfigurationFieldRefs
-      operations: {
-        findUnique: {
-          args: Prisma.TrackedEntityTrackedEntityConfigurationFindUniqueArgs<ExtArgs>
-          result: runtime.Types.Utils.PayloadToResult<Prisma.$TrackedEntityTrackedEntityConfigurationPayload> | null
-        }
-        findUniqueOrThrow: {
-          args: Prisma.TrackedEntityTrackedEntityConfigurationFindUniqueOrThrowArgs<ExtArgs>
-          result: runtime.Types.Utils.PayloadToResult<Prisma.$TrackedEntityTrackedEntityConfigurationPayload>
-        }
-        findFirst: {
-          args: Prisma.TrackedEntityTrackedEntityConfigurationFindFirstArgs<ExtArgs>
-          result: runtime.Types.Utils.PayloadToResult<Prisma.$TrackedEntityTrackedEntityConfigurationPayload> | null
-        }
-        findFirstOrThrow: {
-          args: Prisma.TrackedEntityTrackedEntityConfigurationFindFirstOrThrowArgs<ExtArgs>
-          result: runtime.Types.Utils.PayloadToResult<Prisma.$TrackedEntityTrackedEntityConfigurationPayload>
-        }
-        findMany: {
-          args: Prisma.TrackedEntityTrackedEntityConfigurationFindManyArgs<ExtArgs>
-          result: runtime.Types.Utils.PayloadToResult<Prisma.$TrackedEntityTrackedEntityConfigurationPayload>[]
-        }
-        create: {
-          args: Prisma.TrackedEntityTrackedEntityConfigurationCreateArgs<ExtArgs>
-          result: runtime.Types.Utils.PayloadToResult<Prisma.$TrackedEntityTrackedEntityConfigurationPayload>
-        }
-        createMany: {
-          args: Prisma.TrackedEntityTrackedEntityConfigurationCreateManyArgs<ExtArgs>
-          result: BatchPayload
-        }
-        createManyAndReturn: {
-          args: Prisma.TrackedEntityTrackedEntityConfigurationCreateManyAndReturnArgs<ExtArgs>
-          result: runtime.Types.Utils.PayloadToResult<Prisma.$TrackedEntityTrackedEntityConfigurationPayload>[]
-        }
-        delete: {
-          args: Prisma.TrackedEntityTrackedEntityConfigurationDeleteArgs<ExtArgs>
-          result: runtime.Types.Utils.PayloadToResult<Prisma.$TrackedEntityTrackedEntityConfigurationPayload>
-        }
-        update: {
-          args: Prisma.TrackedEntityTrackedEntityConfigurationUpdateArgs<ExtArgs>
-          result: runtime.Types.Utils.PayloadToResult<Prisma.$TrackedEntityTrackedEntityConfigurationPayload>
-        }
-        deleteMany: {
-          args: Prisma.TrackedEntityTrackedEntityConfigurationDeleteManyArgs<ExtArgs>
-          result: BatchPayload
-        }
-        updateMany: {
-          args: Prisma.TrackedEntityTrackedEntityConfigurationUpdateManyArgs<ExtArgs>
-          result: BatchPayload
-        }
-        updateManyAndReturn: {
-          args: Prisma.TrackedEntityTrackedEntityConfigurationUpdateManyAndReturnArgs<ExtArgs>
-          result: runtime.Types.Utils.PayloadToResult<Prisma.$TrackedEntityTrackedEntityConfigurationPayload>[]
-        }
-        upsert: {
-          args: Prisma.TrackedEntityTrackedEntityConfigurationUpsertArgs<ExtArgs>
-          result: runtime.Types.Utils.PayloadToResult<Prisma.$TrackedEntityTrackedEntityConfigurationPayload>
-        }
-        aggregate: {
-          args: Prisma.TrackedEntityTrackedEntityConfigurationAggregateArgs<ExtArgs>
-          result: runtime.Types.Utils.Optional<Prisma.AggregateTrackedEntityTrackedEntityConfiguration>
-        }
-        groupBy: {
-          args: Prisma.TrackedEntityTrackedEntityConfigurationGroupByArgs<ExtArgs>
-          result: runtime.Types.Utils.Optional<Prisma.TrackedEntityTrackedEntityConfigurationGroupByOutputType>[]
-        }
-        count: {
-          args: Prisma.TrackedEntityTrackedEntityConfigurationCountArgs<ExtArgs>
-          result: runtime.Types.Utils.Optional<Prisma.TrackedEntityTrackedEntityConfigurationCountAggregateOutputType> | number
-        }
-      }
-    }
-    TrackedEntityConfiguration: {
-      payload: Prisma.$TrackedEntityConfigurationPayload<ExtArgs>
-      fields: Prisma.TrackedEntityConfigurationFieldRefs
-      operations: {
-        findUnique: {
-          args: Prisma.TrackedEntityConfigurationFindUniqueArgs<ExtArgs>
-          result: runtime.Types.Utils.PayloadToResult<Prisma.$TrackedEntityConfigurationPayload> | null
-        }
-        findUniqueOrThrow: {
-          args: Prisma.TrackedEntityConfigurationFindUniqueOrThrowArgs<ExtArgs>
-          result: runtime.Types.Utils.PayloadToResult<Prisma.$TrackedEntityConfigurationPayload>
-        }
-        findFirst: {
-          args: Prisma.TrackedEntityConfigurationFindFirstArgs<ExtArgs>
-          result: runtime.Types.Utils.PayloadToResult<Prisma.$TrackedEntityConfigurationPayload> | null
-        }
-        findFirstOrThrow: {
-          args: Prisma.TrackedEntityConfigurationFindFirstOrThrowArgs<ExtArgs>
-          result: runtime.Types.Utils.PayloadToResult<Prisma.$TrackedEntityConfigurationPayload>
-        }
-        findMany: {
-          args: Prisma.TrackedEntityConfigurationFindManyArgs<ExtArgs>
-          result: runtime.Types.Utils.PayloadToResult<Prisma.$TrackedEntityConfigurationPayload>[]
-        }
-        create: {
-          args: Prisma.TrackedEntityConfigurationCreateArgs<ExtArgs>
-          result: runtime.Types.Utils.PayloadToResult<Prisma.$TrackedEntityConfigurationPayload>
-        }
-        createMany: {
-          args: Prisma.TrackedEntityConfigurationCreateManyArgs<ExtArgs>
-          result: BatchPayload
-        }
-        createManyAndReturn: {
-          args: Prisma.TrackedEntityConfigurationCreateManyAndReturnArgs<ExtArgs>
-          result: runtime.Types.Utils.PayloadToResult<Prisma.$TrackedEntityConfigurationPayload>[]
-        }
-        delete: {
-          args: Prisma.TrackedEntityConfigurationDeleteArgs<ExtArgs>
-          result: runtime.Types.Utils.PayloadToResult<Prisma.$TrackedEntityConfigurationPayload>
-        }
-        update: {
-          args: Prisma.TrackedEntityConfigurationUpdateArgs<ExtArgs>
-          result: runtime.Types.Utils.PayloadToResult<Prisma.$TrackedEntityConfigurationPayload>
-        }
-        deleteMany: {
-          args: Prisma.TrackedEntityConfigurationDeleteManyArgs<ExtArgs>
-          result: BatchPayload
-        }
-        updateMany: {
-          args: Prisma.TrackedEntityConfigurationUpdateManyArgs<ExtArgs>
-          result: BatchPayload
-        }
-        updateManyAndReturn: {
-          args: Prisma.TrackedEntityConfigurationUpdateManyAndReturnArgs<ExtArgs>
-          result: runtime.Types.Utils.PayloadToResult<Prisma.$TrackedEntityConfigurationPayload>[]
-        }
-        upsert: {
-          args: Prisma.TrackedEntityConfigurationUpsertArgs<ExtArgs>
-          result: runtime.Types.Utils.PayloadToResult<Prisma.$TrackedEntityConfigurationPayload>
-        }
-        aggregate: {
-          args: Prisma.TrackedEntityConfigurationAggregateArgs<ExtArgs>
-          result: runtime.Types.Utils.Optional<Prisma.AggregateTrackedEntityConfiguration>
-        }
-        groupBy: {
-          args: Prisma.TrackedEntityConfigurationGroupByArgs<ExtArgs>
-          result: runtime.Types.Utils.Optional<Prisma.TrackedEntityConfigurationGroupByOutputType>[]
-        }
-        count: {
-          args: Prisma.TrackedEntityConfigurationCountArgs<ExtArgs>
-          result: runtime.Types.Utils.Optional<Prisma.TrackedEntityConfigurationCountAggregateOutputType> | number
-        }
-      }
-    }
-    TrackedEntityConfigurationPromptConfiguration: {
-      payload: Prisma.$TrackedEntityConfigurationPromptConfigurationPayload<ExtArgs>
-      fields: Prisma.TrackedEntityConfigurationPromptConfigurationFieldRefs
-      operations: {
-        findUnique: {
-          args: Prisma.TrackedEntityConfigurationPromptConfigurationFindUniqueArgs<ExtArgs>
-          result: runtime.Types.Utils.PayloadToResult<Prisma.$TrackedEntityConfigurationPromptConfigurationPayload> | null
-        }
-        findUniqueOrThrow: {
-          args: Prisma.TrackedEntityConfigurationPromptConfigurationFindUniqueOrThrowArgs<ExtArgs>
-          result: runtime.Types.Utils.PayloadToResult<Prisma.$TrackedEntityConfigurationPromptConfigurationPayload>
-        }
-        findFirst: {
-          args: Prisma.TrackedEntityConfigurationPromptConfigurationFindFirstArgs<ExtArgs>
-          result: runtime.Types.Utils.PayloadToResult<Prisma.$TrackedEntityConfigurationPromptConfigurationPayload> | null
-        }
-        findFirstOrThrow: {
-          args: Prisma.TrackedEntityConfigurationPromptConfigurationFindFirstOrThrowArgs<ExtArgs>
-          result: runtime.Types.Utils.PayloadToResult<Prisma.$TrackedEntityConfigurationPromptConfigurationPayload>
-        }
-        findMany: {
-          args: Prisma.TrackedEntityConfigurationPromptConfigurationFindManyArgs<ExtArgs>
-          result: runtime.Types.Utils.PayloadToResult<Prisma.$TrackedEntityConfigurationPromptConfigurationPayload>[]
-        }
-        create: {
-          args: Prisma.TrackedEntityConfigurationPromptConfigurationCreateArgs<ExtArgs>
-          result: runtime.Types.Utils.PayloadToResult<Prisma.$TrackedEntityConfigurationPromptConfigurationPayload>
-        }
-        createMany: {
-          args: Prisma.TrackedEntityConfigurationPromptConfigurationCreateManyArgs<ExtArgs>
-          result: BatchPayload
-        }
-        createManyAndReturn: {
-          args: Prisma.TrackedEntityConfigurationPromptConfigurationCreateManyAndReturnArgs<ExtArgs>
-          result: runtime.Types.Utils.PayloadToResult<Prisma.$TrackedEntityConfigurationPromptConfigurationPayload>[]
-        }
-        delete: {
-          args: Prisma.TrackedEntityConfigurationPromptConfigurationDeleteArgs<ExtArgs>
-          result: runtime.Types.Utils.PayloadToResult<Prisma.$TrackedEntityConfigurationPromptConfigurationPayload>
-        }
-        update: {
-          args: Prisma.TrackedEntityConfigurationPromptConfigurationUpdateArgs<ExtArgs>
-          result: runtime.Types.Utils.PayloadToResult<Prisma.$TrackedEntityConfigurationPromptConfigurationPayload>
-        }
-        deleteMany: {
-          args: Prisma.TrackedEntityConfigurationPromptConfigurationDeleteManyArgs<ExtArgs>
-          result: BatchPayload
-        }
-        updateMany: {
-          args: Prisma.TrackedEntityConfigurationPromptConfigurationUpdateManyArgs<ExtArgs>
-          result: BatchPayload
-        }
-        updateManyAndReturn: {
-          args: Prisma.TrackedEntityConfigurationPromptConfigurationUpdateManyAndReturnArgs<ExtArgs>
-          result: runtime.Types.Utils.PayloadToResult<Prisma.$TrackedEntityConfigurationPromptConfigurationPayload>[]
-        }
-        upsert: {
-          args: Prisma.TrackedEntityConfigurationPromptConfigurationUpsertArgs<ExtArgs>
-          result: runtime.Types.Utils.PayloadToResult<Prisma.$TrackedEntityConfigurationPromptConfigurationPayload>
-        }
-        aggregate: {
-          args: Prisma.TrackedEntityConfigurationPromptConfigurationAggregateArgs<ExtArgs>
-          result: runtime.Types.Utils.Optional<Prisma.AggregateTrackedEntityConfigurationPromptConfiguration>
-        }
-        groupBy: {
-          args: Prisma.TrackedEntityConfigurationPromptConfigurationGroupByArgs<ExtArgs>
-          result: runtime.Types.Utils.Optional<Prisma.TrackedEntityConfigurationPromptConfigurationGroupByOutputType>[]
-        }
-        count: {
-          args: Prisma.TrackedEntityConfigurationPromptConfigurationCountArgs<ExtArgs>
-          result: runtime.Types.Utils.Optional<Prisma.TrackedEntityConfigurationPromptConfigurationCountAggregateOutputType> | number
         }
       }
     }
@@ -1236,80 +632,6 @@ export type TypeMap<ExtArgs extends runtime.Types.Extensions.InternalArgs = runt
         }
       }
     }
-    TrackedEntityPost: {
-      payload: Prisma.$TrackedEntityPostPayload<ExtArgs>
-      fields: Prisma.TrackedEntityPostFieldRefs
-      operations: {
-        findUnique: {
-          args: Prisma.TrackedEntityPostFindUniqueArgs<ExtArgs>
-          result: runtime.Types.Utils.PayloadToResult<Prisma.$TrackedEntityPostPayload> | null
-        }
-        findUniqueOrThrow: {
-          args: Prisma.TrackedEntityPostFindUniqueOrThrowArgs<ExtArgs>
-          result: runtime.Types.Utils.PayloadToResult<Prisma.$TrackedEntityPostPayload>
-        }
-        findFirst: {
-          args: Prisma.TrackedEntityPostFindFirstArgs<ExtArgs>
-          result: runtime.Types.Utils.PayloadToResult<Prisma.$TrackedEntityPostPayload> | null
-        }
-        findFirstOrThrow: {
-          args: Prisma.TrackedEntityPostFindFirstOrThrowArgs<ExtArgs>
-          result: runtime.Types.Utils.PayloadToResult<Prisma.$TrackedEntityPostPayload>
-        }
-        findMany: {
-          args: Prisma.TrackedEntityPostFindManyArgs<ExtArgs>
-          result: runtime.Types.Utils.PayloadToResult<Prisma.$TrackedEntityPostPayload>[]
-        }
-        create: {
-          args: Prisma.TrackedEntityPostCreateArgs<ExtArgs>
-          result: runtime.Types.Utils.PayloadToResult<Prisma.$TrackedEntityPostPayload>
-        }
-        createMany: {
-          args: Prisma.TrackedEntityPostCreateManyArgs<ExtArgs>
-          result: BatchPayload
-        }
-        createManyAndReturn: {
-          args: Prisma.TrackedEntityPostCreateManyAndReturnArgs<ExtArgs>
-          result: runtime.Types.Utils.PayloadToResult<Prisma.$TrackedEntityPostPayload>[]
-        }
-        delete: {
-          args: Prisma.TrackedEntityPostDeleteArgs<ExtArgs>
-          result: runtime.Types.Utils.PayloadToResult<Prisma.$TrackedEntityPostPayload>
-        }
-        update: {
-          args: Prisma.TrackedEntityPostUpdateArgs<ExtArgs>
-          result: runtime.Types.Utils.PayloadToResult<Prisma.$TrackedEntityPostPayload>
-        }
-        deleteMany: {
-          args: Prisma.TrackedEntityPostDeleteManyArgs<ExtArgs>
-          result: BatchPayload
-        }
-        updateMany: {
-          args: Prisma.TrackedEntityPostUpdateManyArgs<ExtArgs>
-          result: BatchPayload
-        }
-        updateManyAndReturn: {
-          args: Prisma.TrackedEntityPostUpdateManyAndReturnArgs<ExtArgs>
-          result: runtime.Types.Utils.PayloadToResult<Prisma.$TrackedEntityPostPayload>[]
-        }
-        upsert: {
-          args: Prisma.TrackedEntityPostUpsertArgs<ExtArgs>
-          result: runtime.Types.Utils.PayloadToResult<Prisma.$TrackedEntityPostPayload>
-        }
-        aggregate: {
-          args: Prisma.TrackedEntityPostAggregateArgs<ExtArgs>
-          result: runtime.Types.Utils.Optional<Prisma.AggregateTrackedEntityPost>
-        }
-        groupBy: {
-          args: Prisma.TrackedEntityPostGroupByArgs<ExtArgs>
-          result: runtime.Types.Utils.Optional<Prisma.TrackedEntityPostGroupByOutputType>[]
-        }
-        count: {
-          args: Prisma.TrackedEntityPostCountArgs<ExtArgs>
-          result: runtime.Types.Utils.Optional<Prisma.TrackedEntityPostCountAggregateOutputType> | number
-        }
-      }
-    }
     Post: {
       payload: Prisma.$PostPayload<ExtArgs>
       fields: Prisma.PostFieldRefs
@@ -1381,80 +703,6 @@ export type TypeMap<ExtArgs extends runtime.Types.Extensions.InternalArgs = runt
         count: {
           args: Prisma.PostCountArgs<ExtArgs>
           result: runtime.Types.Utils.Optional<Prisma.PostCountAggregateOutputType> | number
-        }
-      }
-    }
-    PostFacebookPost: {
-      payload: Prisma.$PostFacebookPostPayload<ExtArgs>
-      fields: Prisma.PostFacebookPostFieldRefs
-      operations: {
-        findUnique: {
-          args: Prisma.PostFacebookPostFindUniqueArgs<ExtArgs>
-          result: runtime.Types.Utils.PayloadToResult<Prisma.$PostFacebookPostPayload> | null
-        }
-        findUniqueOrThrow: {
-          args: Prisma.PostFacebookPostFindUniqueOrThrowArgs<ExtArgs>
-          result: runtime.Types.Utils.PayloadToResult<Prisma.$PostFacebookPostPayload>
-        }
-        findFirst: {
-          args: Prisma.PostFacebookPostFindFirstArgs<ExtArgs>
-          result: runtime.Types.Utils.PayloadToResult<Prisma.$PostFacebookPostPayload> | null
-        }
-        findFirstOrThrow: {
-          args: Prisma.PostFacebookPostFindFirstOrThrowArgs<ExtArgs>
-          result: runtime.Types.Utils.PayloadToResult<Prisma.$PostFacebookPostPayload>
-        }
-        findMany: {
-          args: Prisma.PostFacebookPostFindManyArgs<ExtArgs>
-          result: runtime.Types.Utils.PayloadToResult<Prisma.$PostFacebookPostPayload>[]
-        }
-        create: {
-          args: Prisma.PostFacebookPostCreateArgs<ExtArgs>
-          result: runtime.Types.Utils.PayloadToResult<Prisma.$PostFacebookPostPayload>
-        }
-        createMany: {
-          args: Prisma.PostFacebookPostCreateManyArgs<ExtArgs>
-          result: BatchPayload
-        }
-        createManyAndReturn: {
-          args: Prisma.PostFacebookPostCreateManyAndReturnArgs<ExtArgs>
-          result: runtime.Types.Utils.PayloadToResult<Prisma.$PostFacebookPostPayload>[]
-        }
-        delete: {
-          args: Prisma.PostFacebookPostDeleteArgs<ExtArgs>
-          result: runtime.Types.Utils.PayloadToResult<Prisma.$PostFacebookPostPayload>
-        }
-        update: {
-          args: Prisma.PostFacebookPostUpdateArgs<ExtArgs>
-          result: runtime.Types.Utils.PayloadToResult<Prisma.$PostFacebookPostPayload>
-        }
-        deleteMany: {
-          args: Prisma.PostFacebookPostDeleteManyArgs<ExtArgs>
-          result: BatchPayload
-        }
-        updateMany: {
-          args: Prisma.PostFacebookPostUpdateManyArgs<ExtArgs>
-          result: BatchPayload
-        }
-        updateManyAndReturn: {
-          args: Prisma.PostFacebookPostUpdateManyAndReturnArgs<ExtArgs>
-          result: runtime.Types.Utils.PayloadToResult<Prisma.$PostFacebookPostPayload>[]
-        }
-        upsert: {
-          args: Prisma.PostFacebookPostUpsertArgs<ExtArgs>
-          result: runtime.Types.Utils.PayloadToResult<Prisma.$PostFacebookPostPayload>
-        }
-        aggregate: {
-          args: Prisma.PostFacebookPostAggregateArgs<ExtArgs>
-          result: runtime.Types.Utils.Optional<Prisma.AggregatePostFacebookPost>
-        }
-        groupBy: {
-          args: Prisma.PostFacebookPostGroupByArgs<ExtArgs>
-          result: runtime.Types.Utils.Optional<Prisma.PostFacebookPostGroupByOutputType>[]
-        }
-        count: {
-          args: Prisma.PostFacebookPostCountArgs<ExtArgs>
-          result: runtime.Types.Utils.Optional<Prisma.PostFacebookPostCountAggregateOutputType> | number
         }
       }
     }
@@ -1532,154 +780,6 @@ export type TypeMap<ExtArgs extends runtime.Types.Extensions.InternalArgs = runt
         }
       }
     }
-    TrackedEntityReaction: {
-      payload: Prisma.$TrackedEntityReactionPayload<ExtArgs>
-      fields: Prisma.TrackedEntityReactionFieldRefs
-      operations: {
-        findUnique: {
-          args: Prisma.TrackedEntityReactionFindUniqueArgs<ExtArgs>
-          result: runtime.Types.Utils.PayloadToResult<Prisma.$TrackedEntityReactionPayload> | null
-        }
-        findUniqueOrThrow: {
-          args: Prisma.TrackedEntityReactionFindUniqueOrThrowArgs<ExtArgs>
-          result: runtime.Types.Utils.PayloadToResult<Prisma.$TrackedEntityReactionPayload>
-        }
-        findFirst: {
-          args: Prisma.TrackedEntityReactionFindFirstArgs<ExtArgs>
-          result: runtime.Types.Utils.PayloadToResult<Prisma.$TrackedEntityReactionPayload> | null
-        }
-        findFirstOrThrow: {
-          args: Prisma.TrackedEntityReactionFindFirstOrThrowArgs<ExtArgs>
-          result: runtime.Types.Utils.PayloadToResult<Prisma.$TrackedEntityReactionPayload>
-        }
-        findMany: {
-          args: Prisma.TrackedEntityReactionFindManyArgs<ExtArgs>
-          result: runtime.Types.Utils.PayloadToResult<Prisma.$TrackedEntityReactionPayload>[]
-        }
-        create: {
-          args: Prisma.TrackedEntityReactionCreateArgs<ExtArgs>
-          result: runtime.Types.Utils.PayloadToResult<Prisma.$TrackedEntityReactionPayload>
-        }
-        createMany: {
-          args: Prisma.TrackedEntityReactionCreateManyArgs<ExtArgs>
-          result: BatchPayload
-        }
-        createManyAndReturn: {
-          args: Prisma.TrackedEntityReactionCreateManyAndReturnArgs<ExtArgs>
-          result: runtime.Types.Utils.PayloadToResult<Prisma.$TrackedEntityReactionPayload>[]
-        }
-        delete: {
-          args: Prisma.TrackedEntityReactionDeleteArgs<ExtArgs>
-          result: runtime.Types.Utils.PayloadToResult<Prisma.$TrackedEntityReactionPayload>
-        }
-        update: {
-          args: Prisma.TrackedEntityReactionUpdateArgs<ExtArgs>
-          result: runtime.Types.Utils.PayloadToResult<Prisma.$TrackedEntityReactionPayload>
-        }
-        deleteMany: {
-          args: Prisma.TrackedEntityReactionDeleteManyArgs<ExtArgs>
-          result: BatchPayload
-        }
-        updateMany: {
-          args: Prisma.TrackedEntityReactionUpdateManyArgs<ExtArgs>
-          result: BatchPayload
-        }
-        updateManyAndReturn: {
-          args: Prisma.TrackedEntityReactionUpdateManyAndReturnArgs<ExtArgs>
-          result: runtime.Types.Utils.PayloadToResult<Prisma.$TrackedEntityReactionPayload>[]
-        }
-        upsert: {
-          args: Prisma.TrackedEntityReactionUpsertArgs<ExtArgs>
-          result: runtime.Types.Utils.PayloadToResult<Prisma.$TrackedEntityReactionPayload>
-        }
-        aggregate: {
-          args: Prisma.TrackedEntityReactionAggregateArgs<ExtArgs>
-          result: runtime.Types.Utils.Optional<Prisma.AggregateTrackedEntityReaction>
-        }
-        groupBy: {
-          args: Prisma.TrackedEntityReactionGroupByArgs<ExtArgs>
-          result: runtime.Types.Utils.Optional<Prisma.TrackedEntityReactionGroupByOutputType>[]
-        }
-        count: {
-          args: Prisma.TrackedEntityReactionCountArgs<ExtArgs>
-          result: runtime.Types.Utils.Optional<Prisma.TrackedEntityReactionCountAggregateOutputType> | number
-        }
-      }
-    }
-    PostReaction: {
-      payload: Prisma.$PostReactionPayload<ExtArgs>
-      fields: Prisma.PostReactionFieldRefs
-      operations: {
-        findUnique: {
-          args: Prisma.PostReactionFindUniqueArgs<ExtArgs>
-          result: runtime.Types.Utils.PayloadToResult<Prisma.$PostReactionPayload> | null
-        }
-        findUniqueOrThrow: {
-          args: Prisma.PostReactionFindUniqueOrThrowArgs<ExtArgs>
-          result: runtime.Types.Utils.PayloadToResult<Prisma.$PostReactionPayload>
-        }
-        findFirst: {
-          args: Prisma.PostReactionFindFirstArgs<ExtArgs>
-          result: runtime.Types.Utils.PayloadToResult<Prisma.$PostReactionPayload> | null
-        }
-        findFirstOrThrow: {
-          args: Prisma.PostReactionFindFirstOrThrowArgs<ExtArgs>
-          result: runtime.Types.Utils.PayloadToResult<Prisma.$PostReactionPayload>
-        }
-        findMany: {
-          args: Prisma.PostReactionFindManyArgs<ExtArgs>
-          result: runtime.Types.Utils.PayloadToResult<Prisma.$PostReactionPayload>[]
-        }
-        create: {
-          args: Prisma.PostReactionCreateArgs<ExtArgs>
-          result: runtime.Types.Utils.PayloadToResult<Prisma.$PostReactionPayload>
-        }
-        createMany: {
-          args: Prisma.PostReactionCreateManyArgs<ExtArgs>
-          result: BatchPayload
-        }
-        createManyAndReturn: {
-          args: Prisma.PostReactionCreateManyAndReturnArgs<ExtArgs>
-          result: runtime.Types.Utils.PayloadToResult<Prisma.$PostReactionPayload>[]
-        }
-        delete: {
-          args: Prisma.PostReactionDeleteArgs<ExtArgs>
-          result: runtime.Types.Utils.PayloadToResult<Prisma.$PostReactionPayload>
-        }
-        update: {
-          args: Prisma.PostReactionUpdateArgs<ExtArgs>
-          result: runtime.Types.Utils.PayloadToResult<Prisma.$PostReactionPayload>
-        }
-        deleteMany: {
-          args: Prisma.PostReactionDeleteManyArgs<ExtArgs>
-          result: BatchPayload
-        }
-        updateMany: {
-          args: Prisma.PostReactionUpdateManyArgs<ExtArgs>
-          result: BatchPayload
-        }
-        updateManyAndReturn: {
-          args: Prisma.PostReactionUpdateManyAndReturnArgs<ExtArgs>
-          result: runtime.Types.Utils.PayloadToResult<Prisma.$PostReactionPayload>[]
-        }
-        upsert: {
-          args: Prisma.PostReactionUpsertArgs<ExtArgs>
-          result: runtime.Types.Utils.PayloadToResult<Prisma.$PostReactionPayload>
-        }
-        aggregate: {
-          args: Prisma.PostReactionAggregateArgs<ExtArgs>
-          result: runtime.Types.Utils.Optional<Prisma.AggregatePostReaction>
-        }
-        groupBy: {
-          args: Prisma.PostReactionGroupByArgs<ExtArgs>
-          result: runtime.Types.Utils.Optional<Prisma.PostReactionGroupByOutputType>[]
-        }
-        count: {
-          args: Prisma.PostReactionCountArgs<ExtArgs>
-          result: runtime.Types.Utils.Optional<Prisma.PostReactionCountAggregateOutputType> | number
-        }
-      }
-    }
     Reaction: {
       payload: Prisma.$ReactionPayload<ExtArgs>
       fields: Prisma.ReactionFieldRefs
@@ -1754,77 +854,77 @@ export type TypeMap<ExtArgs extends runtime.Types.Extensions.InternalArgs = runt
         }
       }
     }
-    ReactionPromptConfiguration: {
-      payload: Prisma.$ReactionPromptConfigurationPayload<ExtArgs>
-      fields: Prisma.ReactionPromptConfigurationFieldRefs
+    SystemPromptConfiguration: {
+      payload: Prisma.$SystemPromptConfigurationPayload<ExtArgs>
+      fields: Prisma.SystemPromptConfigurationFieldRefs
       operations: {
         findUnique: {
-          args: Prisma.ReactionPromptConfigurationFindUniqueArgs<ExtArgs>
-          result: runtime.Types.Utils.PayloadToResult<Prisma.$ReactionPromptConfigurationPayload> | null
+          args: Prisma.SystemPromptConfigurationFindUniqueArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$SystemPromptConfigurationPayload> | null
         }
         findUniqueOrThrow: {
-          args: Prisma.ReactionPromptConfigurationFindUniqueOrThrowArgs<ExtArgs>
-          result: runtime.Types.Utils.PayloadToResult<Prisma.$ReactionPromptConfigurationPayload>
+          args: Prisma.SystemPromptConfigurationFindUniqueOrThrowArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$SystemPromptConfigurationPayload>
         }
         findFirst: {
-          args: Prisma.ReactionPromptConfigurationFindFirstArgs<ExtArgs>
-          result: runtime.Types.Utils.PayloadToResult<Prisma.$ReactionPromptConfigurationPayload> | null
+          args: Prisma.SystemPromptConfigurationFindFirstArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$SystemPromptConfigurationPayload> | null
         }
         findFirstOrThrow: {
-          args: Prisma.ReactionPromptConfigurationFindFirstOrThrowArgs<ExtArgs>
-          result: runtime.Types.Utils.PayloadToResult<Prisma.$ReactionPromptConfigurationPayload>
+          args: Prisma.SystemPromptConfigurationFindFirstOrThrowArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$SystemPromptConfigurationPayload>
         }
         findMany: {
-          args: Prisma.ReactionPromptConfigurationFindManyArgs<ExtArgs>
-          result: runtime.Types.Utils.PayloadToResult<Prisma.$ReactionPromptConfigurationPayload>[]
+          args: Prisma.SystemPromptConfigurationFindManyArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$SystemPromptConfigurationPayload>[]
         }
         create: {
-          args: Prisma.ReactionPromptConfigurationCreateArgs<ExtArgs>
-          result: runtime.Types.Utils.PayloadToResult<Prisma.$ReactionPromptConfigurationPayload>
+          args: Prisma.SystemPromptConfigurationCreateArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$SystemPromptConfigurationPayload>
         }
         createMany: {
-          args: Prisma.ReactionPromptConfigurationCreateManyArgs<ExtArgs>
+          args: Prisma.SystemPromptConfigurationCreateManyArgs<ExtArgs>
           result: BatchPayload
         }
         createManyAndReturn: {
-          args: Prisma.ReactionPromptConfigurationCreateManyAndReturnArgs<ExtArgs>
-          result: runtime.Types.Utils.PayloadToResult<Prisma.$ReactionPromptConfigurationPayload>[]
+          args: Prisma.SystemPromptConfigurationCreateManyAndReturnArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$SystemPromptConfigurationPayload>[]
         }
         delete: {
-          args: Prisma.ReactionPromptConfigurationDeleteArgs<ExtArgs>
-          result: runtime.Types.Utils.PayloadToResult<Prisma.$ReactionPromptConfigurationPayload>
+          args: Prisma.SystemPromptConfigurationDeleteArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$SystemPromptConfigurationPayload>
         }
         update: {
-          args: Prisma.ReactionPromptConfigurationUpdateArgs<ExtArgs>
-          result: runtime.Types.Utils.PayloadToResult<Prisma.$ReactionPromptConfigurationPayload>
+          args: Prisma.SystemPromptConfigurationUpdateArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$SystemPromptConfigurationPayload>
         }
         deleteMany: {
-          args: Prisma.ReactionPromptConfigurationDeleteManyArgs<ExtArgs>
+          args: Prisma.SystemPromptConfigurationDeleteManyArgs<ExtArgs>
           result: BatchPayload
         }
         updateMany: {
-          args: Prisma.ReactionPromptConfigurationUpdateManyArgs<ExtArgs>
+          args: Prisma.SystemPromptConfigurationUpdateManyArgs<ExtArgs>
           result: BatchPayload
         }
         updateManyAndReturn: {
-          args: Prisma.ReactionPromptConfigurationUpdateManyAndReturnArgs<ExtArgs>
-          result: runtime.Types.Utils.PayloadToResult<Prisma.$ReactionPromptConfigurationPayload>[]
+          args: Prisma.SystemPromptConfigurationUpdateManyAndReturnArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$SystemPromptConfigurationPayload>[]
         }
         upsert: {
-          args: Prisma.ReactionPromptConfigurationUpsertArgs<ExtArgs>
-          result: runtime.Types.Utils.PayloadToResult<Prisma.$ReactionPromptConfigurationPayload>
+          args: Prisma.SystemPromptConfigurationUpsertArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$SystemPromptConfigurationPayload>
         }
         aggregate: {
-          args: Prisma.ReactionPromptConfigurationAggregateArgs<ExtArgs>
-          result: runtime.Types.Utils.Optional<Prisma.AggregateReactionPromptConfiguration>
+          args: Prisma.SystemPromptConfigurationAggregateArgs<ExtArgs>
+          result: runtime.Types.Utils.Optional<Prisma.AggregateSystemPromptConfiguration>
         }
         groupBy: {
-          args: Prisma.ReactionPromptConfigurationGroupByArgs<ExtArgs>
-          result: runtime.Types.Utils.Optional<Prisma.ReactionPromptConfigurationGroupByOutputType>[]
+          args: Prisma.SystemPromptConfigurationGroupByArgs<ExtArgs>
+          result: runtime.Types.Utils.Optional<Prisma.SystemPromptConfigurationGroupByOutputType>[]
         }
         count: {
-          args: Prisma.ReactionPromptConfigurationCountArgs<ExtArgs>
-          result: runtime.Types.Utils.Optional<Prisma.ReactionPromptConfigurationCountAggregateOutputType> | number
+          args: Prisma.SystemPromptConfigurationCountArgs<ExtArgs>
+          result: runtime.Types.Utils.Optional<Prisma.SystemPromptConfigurationCountAggregateOutputType> | number
         }
       }
     }
@@ -1871,6 +971,7 @@ export const SystemConfigurationScalarFieldEnum = {
   id: 'id',
   processingStartedAt: 'processingStartedAt',
   processingCompletedAt: 'processingCompletedAt',
+  processingType: 'processingType',
   createdAt: 'createdAt',
   updatedAt: 'updatedAt'
 } as const
@@ -1878,21 +979,12 @@ export const SystemConfigurationScalarFieldEnum = {
 export type SystemConfigurationScalarFieldEnum = (typeof SystemConfigurationScalarFieldEnum)[keyof typeof SystemConfigurationScalarFieldEnum]
 
 
-export const SystemEventScalarFieldEnum = {
-  id: 'id',
-  type: 'type',
-  details: 'details',
-  createdAt: 'createdAt',
-  updatedAt: 'updatedAt'
-} as const
-
-export type SystemEventScalarFieldEnum = (typeof SystemEventScalarFieldEnum)[keyof typeof SystemEventScalarFieldEnum]
-
-
 export const TrackedEntityScalarFieldEnum = {
   id: 'id',
+  type: 'type',
   name: 'name',
   description: 'description',
+  facebookPageUrl: 'facebookPageUrl',
   createdAt: 'createdAt',
   updatedAt: 'updatedAt'
 } as const
@@ -1900,82 +992,9 @@ export const TrackedEntityScalarFieldEnum = {
 export type TrackedEntityScalarFieldEnum = (typeof TrackedEntityScalarFieldEnum)[keyof typeof TrackedEntityScalarFieldEnum]
 
 
-export const TrackedEntityOwnTrackedEntityScalarFieldEnum = {
-  id: 'id',
-  trackedEntityId: 'trackedEntityId',
-  ownTrackedEntityId: 'ownTrackedEntityId',
-  createdAt: 'createdAt',
-  updatedAt: 'updatedAt'
-} as const
-
-export type TrackedEntityOwnTrackedEntityScalarFieldEnum = (typeof TrackedEntityOwnTrackedEntityScalarFieldEnum)[keyof typeof TrackedEntityOwnTrackedEntityScalarFieldEnum]
-
-
-export const OwnTrackedEntityScalarFieldEnum = {
-  id: 'id',
-  facebookPageUrl: 'facebookPageUrl',
-  createdAt: 'createdAt',
-  updatedAt: 'updatedAt'
-} as const
-
-export type OwnTrackedEntityScalarFieldEnum = (typeof OwnTrackedEntityScalarFieldEnum)[keyof typeof OwnTrackedEntityScalarFieldEnum]
-
-
-export const TrackedEntityOtherTrackedEntityScalarFieldEnum = {
-  id: 'id',
-  trackedEntityId: 'trackedEntityId',
-  otherTrackedEntityId: 'otherTrackedEntityId',
-  createdAt: 'createdAt',
-  updatedAt: 'updatedAt'
-} as const
-
-export type TrackedEntityOtherTrackedEntityScalarFieldEnum = (typeof TrackedEntityOtherTrackedEntityScalarFieldEnum)[keyof typeof TrackedEntityOtherTrackedEntityScalarFieldEnum]
-
-
-export const OtherTrackedEntityScalarFieldEnum = {
-  id: 'id',
-  facebookPageUrl: 'facebookPageUrl',
-  createdAt: 'createdAt',
-  updatedAt: 'updatedAt'
-} as const
-
-export type OtherTrackedEntityScalarFieldEnum = (typeof OtherTrackedEntityScalarFieldEnum)[keyof typeof OtherTrackedEntityScalarFieldEnum]
-
-
-export const TrackedEntityTrackedEntityConfigurationScalarFieldEnum = {
-  id: 'id',
-  trackedEntityId: 'trackedEntityId',
-  trackedEntityConfigurationId: 'trackedEntityConfigurationId',
-  createdAt: 'createdAt',
-  updatedAt: 'updatedAt'
-} as const
-
-export type TrackedEntityTrackedEntityConfigurationScalarFieldEnum = (typeof TrackedEntityTrackedEntityConfigurationScalarFieldEnum)[keyof typeof TrackedEntityTrackedEntityConfigurationScalarFieldEnum]
-
-
-export const TrackedEntityConfigurationScalarFieldEnum = {
-  id: 'id',
-  isActive: 'isActive',
-  createdAt: 'createdAt',
-  updatedAt: 'updatedAt'
-} as const
-
-export type TrackedEntityConfigurationScalarFieldEnum = (typeof TrackedEntityConfigurationScalarFieldEnum)[keyof typeof TrackedEntityConfigurationScalarFieldEnum]
-
-
-export const TrackedEntityConfigurationPromptConfigurationScalarFieldEnum = {
-  id: 'id',
-  trackedEntityConfigurationId: 'trackedEntityConfigurationId',
-  promptConfigurationId: 'promptConfigurationId',
-  createdAt: 'createdAt',
-  updatedAt: 'updatedAt'
-} as const
-
-export type TrackedEntityConfigurationPromptConfigurationScalarFieldEnum = (typeof TrackedEntityConfigurationPromptConfigurationScalarFieldEnum)[keyof typeof TrackedEntityConfigurationPromptConfigurationScalarFieldEnum]
-
-
 export const PromptConfigurationScalarFieldEnum = {
   id: 'id',
+  trackedEntityId: 'trackedEntityId',
   toneOfVoicePrompt: 'toneOfVoicePrompt',
   userPrompt: 'userPrompt',
   isActive: 'isActive',
@@ -1986,19 +1005,10 @@ export const PromptConfigurationScalarFieldEnum = {
 export type PromptConfigurationScalarFieldEnum = (typeof PromptConfigurationScalarFieldEnum)[keyof typeof PromptConfigurationScalarFieldEnum]
 
 
-export const TrackedEntityPostScalarFieldEnum = {
-  id: 'id',
-  trackedEntityId: 'trackedEntityId',
-  postId: 'postId',
-  createdAt: 'createdAt',
-  updatedAt: 'updatedAt'
-} as const
-
-export type TrackedEntityPostScalarFieldEnum = (typeof TrackedEntityPostScalarFieldEnum)[keyof typeof TrackedEntityPostScalarFieldEnum]
-
-
 export const PostScalarFieldEnum = {
   id: 'id',
+  trackedEntityId: 'trackedEntityId',
+  categoryEuSk: 'categoryEuSk',
   createdAt: 'createdAt',
   updatedAt: 'updatedAt'
 } as const
@@ -2006,19 +1016,9 @@ export const PostScalarFieldEnum = {
 export type PostScalarFieldEnum = (typeof PostScalarFieldEnum)[keyof typeof PostScalarFieldEnum]
 
 
-export const PostFacebookPostScalarFieldEnum = {
-  id: 'id',
-  postId: 'postId',
-  facebookPostId: 'facebookPostId',
-  createdAt: 'createdAt',
-  updatedAt: 'updatedAt'
-} as const
-
-export type PostFacebookPostScalarFieldEnum = (typeof PostFacebookPostScalarFieldEnum)[keyof typeof PostFacebookPostScalarFieldEnum]
-
-
 export const FacebookPostScalarFieldEnum = {
   id: 'id',
+  postId: 'postId',
   facebookPostId: 'facebookPostId',
   url: 'url',
   postedAt: 'postedAt',
@@ -2037,30 +1037,11 @@ export const FacebookPostScalarFieldEnum = {
 export type FacebookPostScalarFieldEnum = (typeof FacebookPostScalarFieldEnum)[keyof typeof FacebookPostScalarFieldEnum]
 
 
-export const TrackedEntityReactionScalarFieldEnum = {
-  id: 'id',
-  trackedEntityId: 'trackedEntityId',
-  reactionId: 'reactionId',
-  createdAt: 'createdAt',
-  updatedAt: 'updatedAt'
-} as const
-
-export type TrackedEntityReactionScalarFieldEnum = (typeof TrackedEntityReactionScalarFieldEnum)[keyof typeof TrackedEntityReactionScalarFieldEnum]
-
-
-export const PostReactionScalarFieldEnum = {
-  id: 'id',
-  postId: 'postId',
-  reactionId: 'reactionId',
-  createdAt: 'createdAt',
-  updatedAt: 'updatedAt'
-} as const
-
-export type PostReactionScalarFieldEnum = (typeof PostReactionScalarFieldEnum)[keyof typeof PostReactionScalarFieldEnum]
-
-
 export const ReactionScalarFieldEnum = {
   id: 'id',
+  trackedEntityId: 'trackedEntityId',
+  postId: 'postId',
+  promptConfigurationId: 'promptConfigurationId',
   text: 'text',
   createdAt: 'createdAt',
   updatedAt: 'updatedAt'
@@ -2069,15 +1050,16 @@ export const ReactionScalarFieldEnum = {
 export type ReactionScalarFieldEnum = (typeof ReactionScalarFieldEnum)[keyof typeof ReactionScalarFieldEnum]
 
 
-export const ReactionPromptConfigurationScalarFieldEnum = {
+export const SystemPromptConfigurationScalarFieldEnum = {
   id: 'id',
-  reactionId: 'reactionId',
-  promptConfigurationId: 'promptConfigurationId',
+  categoryEuSkPrompt: 'categoryEuSkPrompt',
+  euPoliticsPrompt: 'euPoliticsPrompt',
+  skPoliticsPrompt: 'skPoliticsPrompt',
   createdAt: 'createdAt',
   updatedAt: 'updatedAt'
 } as const
 
-export type ReactionPromptConfigurationScalarFieldEnum = (typeof ReactionPromptConfigurationScalarFieldEnum)[keyof typeof ReactionPromptConfigurationScalarFieldEnum]
+export type SystemPromptConfigurationScalarFieldEnum = (typeof SystemPromptConfigurationScalarFieldEnum)[keyof typeof SystemPromptConfigurationScalarFieldEnum]
 
 
 export const SortOrder = {
@@ -2155,30 +1137,30 @@ export type ListDateTimeFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaM
 
 
 /**
- * Reference to a field of type 'SystemEventType'
+ * Reference to a field of type 'SystemProcessingType'
  */
-export type EnumSystemEventTypeFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'SystemEventType'>
+export type EnumSystemProcessingTypeFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'SystemProcessingType'>
     
 
 
 /**
- * Reference to a field of type 'SystemEventType[]'
+ * Reference to a field of type 'SystemProcessingType[]'
  */
-export type ListEnumSystemEventTypeFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'SystemEventType[]'>
+export type ListEnumSystemProcessingTypeFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'SystemProcessingType[]'>
     
 
 
 /**
- * Reference to a field of type 'Json'
+ * Reference to a field of type 'TrackedEntityType'
  */
-export type JsonFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'Json'>
+export type EnumTrackedEntityTypeFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'TrackedEntityType'>
     
 
 
 /**
- * Reference to a field of type 'QueryMode'
+ * Reference to a field of type 'TrackedEntityType[]'
  */
-export type EnumQueryModeFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'QueryMode'>
+export type ListEnumTrackedEntityTypeFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'TrackedEntityType[]'>
     
 
 
@@ -2186,6 +1168,20 @@ export type EnumQueryModeFieldRefInput<$PrismaModel> = FieldRefInputType<$Prisma
  * Reference to a field of type 'Boolean'
  */
 export type BooleanFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'Boolean'>
+    
+
+
+/**
+ * Reference to a field of type 'CategoryEuSk'
+ */
+export type EnumCategoryEuSkFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'CategoryEuSk'>
+    
+
+
+/**
+ * Reference to a field of type 'CategoryEuSk[]'
+ */
+export type ListEnumCategoryEuSkFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'CategoryEuSk[]'>
     
 
 
@@ -2200,6 +1196,20 @@ export type IntFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'In
  * Reference to a field of type 'Int[]'
  */
 export type ListIntFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'Int[]'>
+    
+
+
+/**
+ * Reference to a field of type 'Json'
+ */
+export type JsonFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'Json'>
+    
+
+
+/**
+ * Reference to a field of type 'QueryMode'
+ */
+export type EnumQueryModeFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'QueryMode'>
     
 
 
@@ -2296,24 +1306,12 @@ export type PrismaClientOptions = ({
 }
 export type GlobalOmitConfig = {
   systemConfiguration?: Prisma.SystemConfigurationOmit
-  systemEvent?: Prisma.SystemEventOmit
   trackedEntity?: Prisma.TrackedEntityOmit
-  trackedEntityOwnTrackedEntity?: Prisma.TrackedEntityOwnTrackedEntityOmit
-  ownTrackedEntity?: Prisma.OwnTrackedEntityOmit
-  trackedEntityOtherTrackedEntity?: Prisma.TrackedEntityOtherTrackedEntityOmit
-  otherTrackedEntity?: Prisma.OtherTrackedEntityOmit
-  trackedEntityTrackedEntityConfiguration?: Prisma.TrackedEntityTrackedEntityConfigurationOmit
-  trackedEntityConfiguration?: Prisma.TrackedEntityConfigurationOmit
-  trackedEntityConfigurationPromptConfiguration?: Prisma.TrackedEntityConfigurationPromptConfigurationOmit
   promptConfiguration?: Prisma.PromptConfigurationOmit
-  trackedEntityPost?: Prisma.TrackedEntityPostOmit
   post?: Prisma.PostOmit
-  postFacebookPost?: Prisma.PostFacebookPostOmit
   facebookPost?: Prisma.FacebookPostOmit
-  trackedEntityReaction?: Prisma.TrackedEntityReactionOmit
-  postReaction?: Prisma.PostReactionOmit
   reaction?: Prisma.ReactionOmit
-  reactionPromptConfiguration?: Prisma.ReactionPromptConfigurationOmit
+  systemPromptConfiguration?: Prisma.SystemPromptConfigurationOmit
 }
 
 /* Types for Logging */

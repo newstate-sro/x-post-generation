@@ -28,6 +28,7 @@ export type SystemConfigurationMinAggregateOutputType = {
   id: string | null
   processingStartedAt: Date | null
   processingCompletedAt: Date | null
+  processingType: $Enums.SystemProcessingType | null
   createdAt: Date | null
   updatedAt: Date | null
 }
@@ -36,6 +37,7 @@ export type SystemConfigurationMaxAggregateOutputType = {
   id: string | null
   processingStartedAt: Date | null
   processingCompletedAt: Date | null
+  processingType: $Enums.SystemProcessingType | null
   createdAt: Date | null
   updatedAt: Date | null
 }
@@ -44,6 +46,7 @@ export type SystemConfigurationCountAggregateOutputType = {
   id: number
   processingStartedAt: number
   processingCompletedAt: number
+  processingType: number
   createdAt: number
   updatedAt: number
   _all: number
@@ -54,6 +57,7 @@ export type SystemConfigurationMinAggregateInputType = {
   id?: true
   processingStartedAt?: true
   processingCompletedAt?: true
+  processingType?: true
   createdAt?: true
   updatedAt?: true
 }
@@ -62,6 +66,7 @@ export type SystemConfigurationMaxAggregateInputType = {
   id?: true
   processingStartedAt?: true
   processingCompletedAt?: true
+  processingType?: true
   createdAt?: true
   updatedAt?: true
 }
@@ -70,6 +75,7 @@ export type SystemConfigurationCountAggregateInputType = {
   id?: true
   processingStartedAt?: true
   processingCompletedAt?: true
+  processingType?: true
   createdAt?: true
   updatedAt?: true
   _all?: true
@@ -151,6 +157,7 @@ export type SystemConfigurationGroupByOutputType = {
   id: string
   processingStartedAt: Date
   processingCompletedAt: Date | null
+  processingType: $Enums.SystemProcessingType
   createdAt: Date
   updatedAt: Date
   _count: SystemConfigurationCountAggregateOutputType | null
@@ -180,6 +187,7 @@ export type SystemConfigurationWhereInput = {
   id?: Prisma.StringFilter<"SystemConfiguration"> | string
   processingStartedAt?: Prisma.DateTimeFilter<"SystemConfiguration"> | Date | string
   processingCompletedAt?: Prisma.DateTimeNullableFilter<"SystemConfiguration"> | Date | string | null
+  processingType?: Prisma.EnumSystemProcessingTypeFilter<"SystemConfiguration"> | $Enums.SystemProcessingType
   createdAt?: Prisma.DateTimeFilter<"SystemConfiguration"> | Date | string
   updatedAt?: Prisma.DateTimeFilter<"SystemConfiguration"> | Date | string
 }
@@ -188,6 +196,7 @@ export type SystemConfigurationOrderByWithRelationInput = {
   id?: Prisma.SortOrder
   processingStartedAt?: Prisma.SortOrder
   processingCompletedAt?: Prisma.SortOrderInput | Prisma.SortOrder
+  processingType?: Prisma.SortOrder
   createdAt?: Prisma.SortOrder
   updatedAt?: Prisma.SortOrder
 }
@@ -199,6 +208,7 @@ export type SystemConfigurationWhereUniqueInput = Prisma.AtLeast<{
   NOT?: Prisma.SystemConfigurationWhereInput | Prisma.SystemConfigurationWhereInput[]
   processingStartedAt?: Prisma.DateTimeFilter<"SystemConfiguration"> | Date | string
   processingCompletedAt?: Prisma.DateTimeNullableFilter<"SystemConfiguration"> | Date | string | null
+  processingType?: Prisma.EnumSystemProcessingTypeFilter<"SystemConfiguration"> | $Enums.SystemProcessingType
   createdAt?: Prisma.DateTimeFilter<"SystemConfiguration"> | Date | string
   updatedAt?: Prisma.DateTimeFilter<"SystemConfiguration"> | Date | string
 }, "id">
@@ -207,6 +217,7 @@ export type SystemConfigurationOrderByWithAggregationInput = {
   id?: Prisma.SortOrder
   processingStartedAt?: Prisma.SortOrder
   processingCompletedAt?: Prisma.SortOrderInput | Prisma.SortOrder
+  processingType?: Prisma.SortOrder
   createdAt?: Prisma.SortOrder
   updatedAt?: Prisma.SortOrder
   _count?: Prisma.SystemConfigurationCountOrderByAggregateInput
@@ -221,6 +232,7 @@ export type SystemConfigurationScalarWhereWithAggregatesInput = {
   id?: Prisma.StringWithAggregatesFilter<"SystemConfiguration"> | string
   processingStartedAt?: Prisma.DateTimeWithAggregatesFilter<"SystemConfiguration"> | Date | string
   processingCompletedAt?: Prisma.DateTimeNullableWithAggregatesFilter<"SystemConfiguration"> | Date | string | null
+  processingType?: Prisma.EnumSystemProcessingTypeWithAggregatesFilter<"SystemConfiguration"> | $Enums.SystemProcessingType
   createdAt?: Prisma.DateTimeWithAggregatesFilter<"SystemConfiguration"> | Date | string
   updatedAt?: Prisma.DateTimeWithAggregatesFilter<"SystemConfiguration"> | Date | string
 }
@@ -229,6 +241,7 @@ export type SystemConfigurationCreateInput = {
   id?: string
   processingStartedAt?: Date | string
   processingCompletedAt?: Date | string | null
+  processingType: $Enums.SystemProcessingType
   createdAt?: Date | string
   updatedAt?: Date | string
 }
@@ -237,6 +250,7 @@ export type SystemConfigurationUncheckedCreateInput = {
   id?: string
   processingStartedAt?: Date | string
   processingCompletedAt?: Date | string | null
+  processingType: $Enums.SystemProcessingType
   createdAt?: Date | string
   updatedAt?: Date | string
 }
@@ -245,6 +259,7 @@ export type SystemConfigurationUpdateInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
   processingStartedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   processingCompletedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  processingType?: Prisma.EnumSystemProcessingTypeFieldUpdateOperationsInput | $Enums.SystemProcessingType
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
 }
@@ -253,6 +268,7 @@ export type SystemConfigurationUncheckedUpdateInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
   processingStartedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   processingCompletedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  processingType?: Prisma.EnumSystemProcessingTypeFieldUpdateOperationsInput | $Enums.SystemProcessingType
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
 }
@@ -261,6 +277,7 @@ export type SystemConfigurationCreateManyInput = {
   id?: string
   processingStartedAt?: Date | string
   processingCompletedAt?: Date | string | null
+  processingType: $Enums.SystemProcessingType
   createdAt?: Date | string
   updatedAt?: Date | string
 }
@@ -269,6 +286,7 @@ export type SystemConfigurationUpdateManyMutationInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
   processingStartedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   processingCompletedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  processingType?: Prisma.EnumSystemProcessingTypeFieldUpdateOperationsInput | $Enums.SystemProcessingType
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
 }
@@ -277,6 +295,7 @@ export type SystemConfigurationUncheckedUpdateManyInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
   processingStartedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   processingCompletedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  processingType?: Prisma.EnumSystemProcessingTypeFieldUpdateOperationsInput | $Enums.SystemProcessingType
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
 }
@@ -285,6 +304,7 @@ export type SystemConfigurationCountOrderByAggregateInput = {
   id?: Prisma.SortOrder
   processingStartedAt?: Prisma.SortOrder
   processingCompletedAt?: Prisma.SortOrder
+  processingType?: Prisma.SortOrder
   createdAt?: Prisma.SortOrder
   updatedAt?: Prisma.SortOrder
 }
@@ -293,6 +313,7 @@ export type SystemConfigurationMaxOrderByAggregateInput = {
   id?: Prisma.SortOrder
   processingStartedAt?: Prisma.SortOrder
   processingCompletedAt?: Prisma.SortOrder
+  processingType?: Prisma.SortOrder
   createdAt?: Prisma.SortOrder
   updatedAt?: Prisma.SortOrder
 }
@@ -301,6 +322,7 @@ export type SystemConfigurationMinOrderByAggregateInput = {
   id?: Prisma.SortOrder
   processingStartedAt?: Prisma.SortOrder
   processingCompletedAt?: Prisma.SortOrder
+  processingType?: Prisma.SortOrder
   createdAt?: Prisma.SortOrder
   updatedAt?: Prisma.SortOrder
 }
@@ -317,12 +339,17 @@ export type NullableDateTimeFieldUpdateOperationsInput = {
   set?: Date | string | null
 }
 
+export type EnumSystemProcessingTypeFieldUpdateOperationsInput = {
+  set?: $Enums.SystemProcessingType
+}
+
 
 
 export type SystemConfigurationSelect<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetSelect<{
   id?: boolean
   processingStartedAt?: boolean
   processingCompletedAt?: boolean
+  processingType?: boolean
   createdAt?: boolean
   updatedAt?: boolean
 }, ExtArgs["result"]["systemConfiguration"]>
@@ -331,6 +358,7 @@ export type SystemConfigurationSelectCreateManyAndReturn<ExtArgs extends runtime
   id?: boolean
   processingStartedAt?: boolean
   processingCompletedAt?: boolean
+  processingType?: boolean
   createdAt?: boolean
   updatedAt?: boolean
 }, ExtArgs["result"]["systemConfiguration"]>
@@ -339,6 +367,7 @@ export type SystemConfigurationSelectUpdateManyAndReturn<ExtArgs extends runtime
   id?: boolean
   processingStartedAt?: boolean
   processingCompletedAt?: boolean
+  processingType?: boolean
   createdAt?: boolean
   updatedAt?: boolean
 }, ExtArgs["result"]["systemConfiguration"]>
@@ -347,11 +376,12 @@ export type SystemConfigurationSelectScalar = {
   id?: boolean
   processingStartedAt?: boolean
   processingCompletedAt?: boolean
+  processingType?: boolean
   createdAt?: boolean
   updatedAt?: boolean
 }
 
-export type SystemConfigurationOmit<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetOmit<"id" | "processingStartedAt" | "processingCompletedAt" | "createdAt" | "updatedAt", ExtArgs["result"]["systemConfiguration"]>
+export type SystemConfigurationOmit<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetOmit<"id" | "processingStartedAt" | "processingCompletedAt" | "processingType" | "createdAt" | "updatedAt", ExtArgs["result"]["systemConfiguration"]>
 
 export type $SystemConfigurationPayload<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
   name: "SystemConfiguration"
@@ -360,6 +390,7 @@ export type $SystemConfigurationPayload<ExtArgs extends runtime.Types.Extensions
     id: string
     processingStartedAt: Date
     processingCompletedAt: Date | null
+    processingType: $Enums.SystemProcessingType
     createdAt: Date
     updatedAt: Date
   }, ExtArgs["result"]["systemConfiguration"]>
@@ -788,6 +819,7 @@ export interface SystemConfigurationFieldRefs {
   readonly id: Prisma.FieldRef<"SystemConfiguration", 'String'>
   readonly processingStartedAt: Prisma.FieldRef<"SystemConfiguration", 'DateTime'>
   readonly processingCompletedAt: Prisma.FieldRef<"SystemConfiguration", 'DateTime'>
+  readonly processingType: Prisma.FieldRef<"SystemConfiguration", 'SystemProcessingType'>
   readonly createdAt: Prisma.FieldRef<"SystemConfiguration", 'DateTime'>
   readonly updatedAt: Prisma.FieldRef<"SystemConfiguration", 'DateTime'>
 }

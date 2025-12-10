@@ -4,12 +4,21 @@ export const FacebookPostsReactionsEmail = ({
   postsReactionsData,
 }: {
   postsReactionsData: {
-    author: string
-    postText: string
     postUrl: string
-    reaction: string
+    postAuthor: string
+    postText: string
+    reactionsData: {
+      reactionAuthor: string
+      reactionText: string
+    }[]
   }[]
 }) => {
+  const totalPosts = postsReactionsData.length
+  const totalReactions = postsReactionsData.reduce(
+    (sum, post) => sum + post.reactionsData.length,
+    0,
+  )
+
   return (
     <Html>
       <Body style={{ fontFamily: 'Arial, sans-serif', backgroundColor: '#f4f4f4' }}>
@@ -21,38 +30,27 @@ export const FacebookPostsReactionsEmail = ({
             backgroundColor: '#ffffff',
           }}
         >
-          <Text style={{ fontSize: '24px', fontWeight: 'bold', marginBottom: '20px' }}>
-            Reakcie vygenerované na relevantné FB posty
+          <Text style={{ fontSize: '24px', fontWeight: 'bold', marginBottom: '15px' }}>
+            Reakcie vygenerované na FB posty
+          </Text>
+          <Text style={{ fontSize: '18px', fontWeight: 'bold' }}>Počet postov: {totalPosts}</Text>
+          <Text style={{ fontSize: '18px', fontWeight: 'bold' }}>
+            Počet reakcií: {totalReactions}
           </Text>
 
-          <Text style={{ fontSize: '18px', fontWeight: 'bold', marginBottom: '10px' }}>
-            Výsledok: {postsReactionsData.length} reakcií
-          </Text>
-
-          {postsReactionsData.map((post, index) => (
+          {postsReactionsData.map((postGroup, postIndex) => (
             <Section
-              key={index}
+              key={postIndex}
               style={{
                 marginBottom: '30px',
                 paddingBottom: '20px',
-                borderBottom: index < postsReactionsData.length - 1 ? '1px solid #e0e0e0' : 'none',
+                borderBottom:
+                  postIndex < postsReactionsData.length - 1 ? '1px solid #e0e0e0' : 'none',
               }}
             >
-              <Text
-                style={{
-                  fontSize: '12px',
-                  fontWeight: 'bold',
-                  color: '#999',
-                  textTransform: 'uppercase',
-                  letterSpacing: '0.5px',
-                  marginBottom: '10px',
-                }}
-              >
-                Post #{index + 1}
-              </Text>
-
+              {/* Post header */}
               <Row style={{ marginBottom: '10px' }}>
-                <Column style={{ width: '60px', verticalAlign: 'top', paddingRight: '10px' }}>
+                <Column style={{ width: '80px', verticalAlign: 'top', paddingRight: '10px' }}>
                   <Text
                     style={{
                       fontSize: '12px',
@@ -63,7 +61,7 @@ export const FacebookPostsReactionsEmail = ({
                       margin: 0,
                     }}
                   >
-                    Autor
+                    Autor postu
                   </Text>
                 </Column>
                 <Column style={{ verticalAlign: 'top' }}>
@@ -75,13 +73,13 @@ export const FacebookPostsReactionsEmail = ({
                       color: '#333',
                     }}
                   >
-                    {post.author}
+                    {postGroup.postAuthor}
                   </Text>
                 </Column>
               </Row>
 
               <Row style={{ marginBottom: '10px' }}>
-                <Column style={{ width: '60px', verticalAlign: 'top', paddingRight: '10px' }}>
+                <Column style={{ width: '80px', verticalAlign: 'top', paddingRight: '10px' }}>
                   <Text
                     style={{
                       fontSize: '12px',
@@ -97,7 +95,7 @@ export const FacebookPostsReactionsEmail = ({
                 </Column>
                 <Column style={{ verticalAlign: 'top' }}>
                   <Link
-                    href={post.postUrl}
+                    href={postGroup.postUrl}
                     style={{
                       fontSize: '14px',
                       color: '#0066cc',
@@ -105,13 +103,13 @@ export const FacebookPostsReactionsEmail = ({
                       margin: 0,
                     }}
                   >
-                    {post.postUrl}
+                    {postGroup.postUrl}
                   </Link>
                 </Column>
               </Row>
 
-              <Row style={{ marginBottom: '10px' }}>
-                <Column style={{ width: '60px', verticalAlign: 'top', paddingRight: '10px' }}>
+              <Row style={{ marginBottom: '20px' }}>
+                <Column style={{ width: '80px', verticalAlign: 'top', paddingRight: '10px' }}>
                   <Text
                     style={{
                       fontSize: '12px',
@@ -127,27 +125,34 @@ export const FacebookPostsReactionsEmail = ({
                 </Column>
                 <Column style={{ verticalAlign: 'top' }}>
                   <Text style={{ fontSize: '14px', color: '#666', margin: 0, lineHeight: '1.5' }}>
-                    {post.postText}
+                    {postGroup.postText}
                   </Text>
                 </Column>
               </Row>
 
-              <Row>
-                <Column style={{ width: '60px', verticalAlign: 'top', paddingRight: '10px' }}>
+              {/* Reactions */}
+              {postGroup.reactionsData.map((reaction, reactionIndex) => (
+                <Section
+                  key={reactionIndex}
+                  style={{
+                    marginBottom: '15px',
+                    paddingLeft: '20px',
+                    borderLeft: '3px solid #e0e0e0',
+                  }}
+                >
                   <Text
                     style={{
                       fontSize: '12px',
                       fontWeight: 'bold',
-                      color: '#999',
                       textTransform: 'uppercase',
                       letterSpacing: '0.5px',
-                      margin: 0,
+                      marginBottom: '8px',
+                      color: '#333',
                     }}
                   >
-                    Reakcia
+                    Reakcia #{reactionIndex + 1} — {reaction.reactionAuthor}
                   </Text>
-                </Column>
-                <Column style={{ verticalAlign: 'top' }}>
+
                   <Text
                     style={{
                       fontSize: '14px',
@@ -157,10 +162,10 @@ export const FacebookPostsReactionsEmail = ({
                       lineHeight: '1.5',
                     }}
                   >
-                    {post.reaction}
+                    {reaction.reactionText}
                   </Text>
-                </Column>
-              </Row>
+                </Section>
+              ))}
             </Section>
           ))}
         </Container>

@@ -26,6 +26,9 @@ export type AggregateReaction = {
 
 export type ReactionMinAggregateOutputType = {
   id: string | null
+  trackedEntityId: string | null
+  postId: string | null
+  promptConfigurationId: string | null
   text: string | null
   createdAt: Date | null
   updatedAt: Date | null
@@ -33,6 +36,9 @@ export type ReactionMinAggregateOutputType = {
 
 export type ReactionMaxAggregateOutputType = {
   id: string | null
+  trackedEntityId: string | null
+  postId: string | null
+  promptConfigurationId: string | null
   text: string | null
   createdAt: Date | null
   updatedAt: Date | null
@@ -40,6 +46,9 @@ export type ReactionMaxAggregateOutputType = {
 
 export type ReactionCountAggregateOutputType = {
   id: number
+  trackedEntityId: number
+  postId: number
+  promptConfigurationId: number
   text: number
   createdAt: number
   updatedAt: number
@@ -49,6 +58,9 @@ export type ReactionCountAggregateOutputType = {
 
 export type ReactionMinAggregateInputType = {
   id?: true
+  trackedEntityId?: true
+  postId?: true
+  promptConfigurationId?: true
   text?: true
   createdAt?: true
   updatedAt?: true
@@ -56,6 +68,9 @@ export type ReactionMinAggregateInputType = {
 
 export type ReactionMaxAggregateInputType = {
   id?: true
+  trackedEntityId?: true
+  postId?: true
+  promptConfigurationId?: true
   text?: true
   createdAt?: true
   updatedAt?: true
@@ -63,6 +78,9 @@ export type ReactionMaxAggregateInputType = {
 
 export type ReactionCountAggregateInputType = {
   id?: true
+  trackedEntityId?: true
+  postId?: true
+  promptConfigurationId?: true
   text?: true
   createdAt?: true
   updatedAt?: true
@@ -143,6 +161,9 @@ export type ReactionGroupByArgs<ExtArgs extends runtime.Types.Extensions.Interna
 
 export type ReactionGroupByOutputType = {
   id: string
+  trackedEntityId: string
+  postId: string
+  promptConfigurationId: string
   text: string
   createdAt: Date
   updatedAt: Date
@@ -171,22 +192,28 @@ export type ReactionWhereInput = {
   OR?: Prisma.ReactionWhereInput[]
   NOT?: Prisma.ReactionWhereInput | Prisma.ReactionWhereInput[]
   id?: Prisma.StringFilter<"Reaction"> | string
+  trackedEntityId?: Prisma.StringFilter<"Reaction"> | string
+  postId?: Prisma.StringFilter<"Reaction"> | string
+  promptConfigurationId?: Prisma.StringFilter<"Reaction"> | string
   text?: Prisma.StringFilter<"Reaction"> | string
   createdAt?: Prisma.DateTimeFilter<"Reaction"> | Date | string
   updatedAt?: Prisma.DateTimeFilter<"Reaction"> | Date | string
-  postReaction?: Prisma.XOR<Prisma.PostReactionNullableScalarRelationFilter, Prisma.PostReactionWhereInput> | null
-  trackedEntityReaction?: Prisma.XOR<Prisma.TrackedEntityReactionNullableScalarRelationFilter, Prisma.TrackedEntityReactionWhereInput> | null
-  reactionPromptConfiguration?: Prisma.XOR<Prisma.ReactionPromptConfigurationNullableScalarRelationFilter, Prisma.ReactionPromptConfigurationWhereInput> | null
+  trackedEntity?: Prisma.XOR<Prisma.TrackedEntityScalarRelationFilter, Prisma.TrackedEntityWhereInput>
+  post?: Prisma.XOR<Prisma.PostScalarRelationFilter, Prisma.PostWhereInput>
+  promptConfiguration?: Prisma.XOR<Prisma.PromptConfigurationScalarRelationFilter, Prisma.PromptConfigurationWhereInput>
 }
 
 export type ReactionOrderByWithRelationInput = {
   id?: Prisma.SortOrder
+  trackedEntityId?: Prisma.SortOrder
+  postId?: Prisma.SortOrder
+  promptConfigurationId?: Prisma.SortOrder
   text?: Prisma.SortOrder
   createdAt?: Prisma.SortOrder
   updatedAt?: Prisma.SortOrder
-  postReaction?: Prisma.PostReactionOrderByWithRelationInput
-  trackedEntityReaction?: Prisma.TrackedEntityReactionOrderByWithRelationInput
-  reactionPromptConfiguration?: Prisma.ReactionPromptConfigurationOrderByWithRelationInput
+  trackedEntity?: Prisma.TrackedEntityOrderByWithRelationInput
+  post?: Prisma.PostOrderByWithRelationInput
+  promptConfiguration?: Prisma.PromptConfigurationOrderByWithRelationInput
 }
 
 export type ReactionWhereUniqueInput = Prisma.AtLeast<{
@@ -194,16 +221,22 @@ export type ReactionWhereUniqueInput = Prisma.AtLeast<{
   AND?: Prisma.ReactionWhereInput | Prisma.ReactionWhereInput[]
   OR?: Prisma.ReactionWhereInput[]
   NOT?: Prisma.ReactionWhereInput | Prisma.ReactionWhereInput[]
+  trackedEntityId?: Prisma.StringFilter<"Reaction"> | string
+  postId?: Prisma.StringFilter<"Reaction"> | string
+  promptConfigurationId?: Prisma.StringFilter<"Reaction"> | string
   text?: Prisma.StringFilter<"Reaction"> | string
   createdAt?: Prisma.DateTimeFilter<"Reaction"> | Date | string
   updatedAt?: Prisma.DateTimeFilter<"Reaction"> | Date | string
-  postReaction?: Prisma.XOR<Prisma.PostReactionNullableScalarRelationFilter, Prisma.PostReactionWhereInput> | null
-  trackedEntityReaction?: Prisma.XOR<Prisma.TrackedEntityReactionNullableScalarRelationFilter, Prisma.TrackedEntityReactionWhereInput> | null
-  reactionPromptConfiguration?: Prisma.XOR<Prisma.ReactionPromptConfigurationNullableScalarRelationFilter, Prisma.ReactionPromptConfigurationWhereInput> | null
+  trackedEntity?: Prisma.XOR<Prisma.TrackedEntityScalarRelationFilter, Prisma.TrackedEntityWhereInput>
+  post?: Prisma.XOR<Prisma.PostScalarRelationFilter, Prisma.PostWhereInput>
+  promptConfiguration?: Prisma.XOR<Prisma.PromptConfigurationScalarRelationFilter, Prisma.PromptConfigurationWhereInput>
 }, "id">
 
 export type ReactionOrderByWithAggregationInput = {
   id?: Prisma.SortOrder
+  trackedEntityId?: Prisma.SortOrder
+  postId?: Prisma.SortOrder
+  promptConfigurationId?: Prisma.SortOrder
   text?: Prisma.SortOrder
   createdAt?: Prisma.SortOrder
   updatedAt?: Prisma.SortOrder
@@ -217,6 +250,9 @@ export type ReactionScalarWhereWithAggregatesInput = {
   OR?: Prisma.ReactionScalarWhereWithAggregatesInput[]
   NOT?: Prisma.ReactionScalarWhereWithAggregatesInput | Prisma.ReactionScalarWhereWithAggregatesInput[]
   id?: Prisma.StringWithAggregatesFilter<"Reaction"> | string
+  trackedEntityId?: Prisma.StringWithAggregatesFilter<"Reaction"> | string
+  postId?: Prisma.StringWithAggregatesFilter<"Reaction"> | string
+  promptConfigurationId?: Prisma.StringWithAggregatesFilter<"Reaction"> | string
   text?: Prisma.StringWithAggregatesFilter<"Reaction"> | string
   createdAt?: Prisma.DateTimeWithAggregatesFilter<"Reaction"> | Date | string
   updatedAt?: Prisma.DateTimeWithAggregatesFilter<"Reaction"> | Date | string
@@ -227,19 +263,19 @@ export type ReactionCreateInput = {
   text: string
   createdAt?: Date | string
   updatedAt?: Date | string
-  postReaction?: Prisma.PostReactionCreateNestedOneWithoutReactionInput
-  trackedEntityReaction?: Prisma.TrackedEntityReactionCreateNestedOneWithoutReactionInput
-  reactionPromptConfiguration?: Prisma.ReactionPromptConfigurationCreateNestedOneWithoutReactionInput
+  trackedEntity: Prisma.TrackedEntityCreateNestedOneWithoutReactionsInput
+  post: Prisma.PostCreateNestedOneWithoutReactionsInput
+  promptConfiguration: Prisma.PromptConfigurationCreateNestedOneWithoutReactionsInput
 }
 
 export type ReactionUncheckedCreateInput = {
   id?: string
+  trackedEntityId: string
+  postId: string
+  promptConfigurationId: string
   text: string
   createdAt?: Date | string
   updatedAt?: Date | string
-  postReaction?: Prisma.PostReactionUncheckedCreateNestedOneWithoutReactionInput
-  trackedEntityReaction?: Prisma.TrackedEntityReactionUncheckedCreateNestedOneWithoutReactionInput
-  reactionPromptConfiguration?: Prisma.ReactionPromptConfigurationUncheckedCreateNestedOneWithoutReactionInput
 }
 
 export type ReactionUpdateInput = {
@@ -247,23 +283,26 @@ export type ReactionUpdateInput = {
   text?: Prisma.StringFieldUpdateOperationsInput | string
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
-  postReaction?: Prisma.PostReactionUpdateOneWithoutReactionNestedInput
-  trackedEntityReaction?: Prisma.TrackedEntityReactionUpdateOneWithoutReactionNestedInput
-  reactionPromptConfiguration?: Prisma.ReactionPromptConfigurationUpdateOneWithoutReactionNestedInput
+  trackedEntity?: Prisma.TrackedEntityUpdateOneRequiredWithoutReactionsNestedInput
+  post?: Prisma.PostUpdateOneRequiredWithoutReactionsNestedInput
+  promptConfiguration?: Prisma.PromptConfigurationUpdateOneRequiredWithoutReactionsNestedInput
 }
 
 export type ReactionUncheckedUpdateInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
+  trackedEntityId?: Prisma.StringFieldUpdateOperationsInput | string
+  postId?: Prisma.StringFieldUpdateOperationsInput | string
+  promptConfigurationId?: Prisma.StringFieldUpdateOperationsInput | string
   text?: Prisma.StringFieldUpdateOperationsInput | string
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
-  postReaction?: Prisma.PostReactionUncheckedUpdateOneWithoutReactionNestedInput
-  trackedEntityReaction?: Prisma.TrackedEntityReactionUncheckedUpdateOneWithoutReactionNestedInput
-  reactionPromptConfiguration?: Prisma.ReactionPromptConfigurationUncheckedUpdateOneWithoutReactionNestedInput
 }
 
 export type ReactionCreateManyInput = {
   id?: string
+  trackedEntityId: string
+  postId: string
+  promptConfigurationId: string
   text: string
   createdAt?: Date | string
   updatedAt?: Date | string
@@ -278,18 +317,29 @@ export type ReactionUpdateManyMutationInput = {
 
 export type ReactionUncheckedUpdateManyInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
+  trackedEntityId?: Prisma.StringFieldUpdateOperationsInput | string
+  postId?: Prisma.StringFieldUpdateOperationsInput | string
+  promptConfigurationId?: Prisma.StringFieldUpdateOperationsInput | string
   text?: Prisma.StringFieldUpdateOperationsInput | string
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
 }
 
-export type ReactionScalarRelationFilter = {
-  is?: Prisma.ReactionWhereInput
-  isNot?: Prisma.ReactionWhereInput
+export type ReactionListRelationFilter = {
+  every?: Prisma.ReactionWhereInput
+  some?: Prisma.ReactionWhereInput
+  none?: Prisma.ReactionWhereInput
+}
+
+export type ReactionOrderByRelationAggregateInput = {
+  _count?: Prisma.SortOrder
 }
 
 export type ReactionCountOrderByAggregateInput = {
   id?: Prisma.SortOrder
+  trackedEntityId?: Prisma.SortOrder
+  postId?: Prisma.SortOrder
+  promptConfigurationId?: Prisma.SortOrder
   text?: Prisma.SortOrder
   createdAt?: Prisma.SortOrder
   updatedAt?: Prisma.SortOrder
@@ -297,6 +347,9 @@ export type ReactionCountOrderByAggregateInput = {
 
 export type ReactionMaxOrderByAggregateInput = {
   id?: Prisma.SortOrder
+  trackedEntityId?: Prisma.SortOrder
+  postId?: Prisma.SortOrder
+  promptConfigurationId?: Prisma.SortOrder
   text?: Prisma.SortOrder
   createdAt?: Prisma.SortOrder
   updatedAt?: Prisma.SortOrder
@@ -304,260 +357,473 @@ export type ReactionMaxOrderByAggregateInput = {
 
 export type ReactionMinOrderByAggregateInput = {
   id?: Prisma.SortOrder
+  trackedEntityId?: Prisma.SortOrder
+  postId?: Prisma.SortOrder
+  promptConfigurationId?: Prisma.SortOrder
   text?: Prisma.SortOrder
   createdAt?: Prisma.SortOrder
   updatedAt?: Prisma.SortOrder
 }
 
-export type ReactionCreateNestedOneWithoutTrackedEntityReactionInput = {
-  create?: Prisma.XOR<Prisma.ReactionCreateWithoutTrackedEntityReactionInput, Prisma.ReactionUncheckedCreateWithoutTrackedEntityReactionInput>
-  connectOrCreate?: Prisma.ReactionCreateOrConnectWithoutTrackedEntityReactionInput
-  connect?: Prisma.ReactionWhereUniqueInput
+export type ReactionCreateNestedManyWithoutTrackedEntityInput = {
+  create?: Prisma.XOR<Prisma.ReactionCreateWithoutTrackedEntityInput, Prisma.ReactionUncheckedCreateWithoutTrackedEntityInput> | Prisma.ReactionCreateWithoutTrackedEntityInput[] | Prisma.ReactionUncheckedCreateWithoutTrackedEntityInput[]
+  connectOrCreate?: Prisma.ReactionCreateOrConnectWithoutTrackedEntityInput | Prisma.ReactionCreateOrConnectWithoutTrackedEntityInput[]
+  createMany?: Prisma.ReactionCreateManyTrackedEntityInputEnvelope
+  connect?: Prisma.ReactionWhereUniqueInput | Prisma.ReactionWhereUniqueInput[]
 }
 
-export type ReactionUpdateOneRequiredWithoutTrackedEntityReactionNestedInput = {
-  create?: Prisma.XOR<Prisma.ReactionCreateWithoutTrackedEntityReactionInput, Prisma.ReactionUncheckedCreateWithoutTrackedEntityReactionInput>
-  connectOrCreate?: Prisma.ReactionCreateOrConnectWithoutTrackedEntityReactionInput
-  upsert?: Prisma.ReactionUpsertWithoutTrackedEntityReactionInput
-  connect?: Prisma.ReactionWhereUniqueInput
-  update?: Prisma.XOR<Prisma.XOR<Prisma.ReactionUpdateToOneWithWhereWithoutTrackedEntityReactionInput, Prisma.ReactionUpdateWithoutTrackedEntityReactionInput>, Prisma.ReactionUncheckedUpdateWithoutTrackedEntityReactionInput>
+export type ReactionUncheckedCreateNestedManyWithoutTrackedEntityInput = {
+  create?: Prisma.XOR<Prisma.ReactionCreateWithoutTrackedEntityInput, Prisma.ReactionUncheckedCreateWithoutTrackedEntityInput> | Prisma.ReactionCreateWithoutTrackedEntityInput[] | Prisma.ReactionUncheckedCreateWithoutTrackedEntityInput[]
+  connectOrCreate?: Prisma.ReactionCreateOrConnectWithoutTrackedEntityInput | Prisma.ReactionCreateOrConnectWithoutTrackedEntityInput[]
+  createMany?: Prisma.ReactionCreateManyTrackedEntityInputEnvelope
+  connect?: Prisma.ReactionWhereUniqueInput | Prisma.ReactionWhereUniqueInput[]
 }
 
-export type ReactionCreateNestedOneWithoutPostReactionInput = {
-  create?: Prisma.XOR<Prisma.ReactionCreateWithoutPostReactionInput, Prisma.ReactionUncheckedCreateWithoutPostReactionInput>
-  connectOrCreate?: Prisma.ReactionCreateOrConnectWithoutPostReactionInput
-  connect?: Prisma.ReactionWhereUniqueInput
+export type ReactionUpdateManyWithoutTrackedEntityNestedInput = {
+  create?: Prisma.XOR<Prisma.ReactionCreateWithoutTrackedEntityInput, Prisma.ReactionUncheckedCreateWithoutTrackedEntityInput> | Prisma.ReactionCreateWithoutTrackedEntityInput[] | Prisma.ReactionUncheckedCreateWithoutTrackedEntityInput[]
+  connectOrCreate?: Prisma.ReactionCreateOrConnectWithoutTrackedEntityInput | Prisma.ReactionCreateOrConnectWithoutTrackedEntityInput[]
+  upsert?: Prisma.ReactionUpsertWithWhereUniqueWithoutTrackedEntityInput | Prisma.ReactionUpsertWithWhereUniqueWithoutTrackedEntityInput[]
+  createMany?: Prisma.ReactionCreateManyTrackedEntityInputEnvelope
+  set?: Prisma.ReactionWhereUniqueInput | Prisma.ReactionWhereUniqueInput[]
+  disconnect?: Prisma.ReactionWhereUniqueInput | Prisma.ReactionWhereUniqueInput[]
+  delete?: Prisma.ReactionWhereUniqueInput | Prisma.ReactionWhereUniqueInput[]
+  connect?: Prisma.ReactionWhereUniqueInput | Prisma.ReactionWhereUniqueInput[]
+  update?: Prisma.ReactionUpdateWithWhereUniqueWithoutTrackedEntityInput | Prisma.ReactionUpdateWithWhereUniqueWithoutTrackedEntityInput[]
+  updateMany?: Prisma.ReactionUpdateManyWithWhereWithoutTrackedEntityInput | Prisma.ReactionUpdateManyWithWhereWithoutTrackedEntityInput[]
+  deleteMany?: Prisma.ReactionScalarWhereInput | Prisma.ReactionScalarWhereInput[]
 }
 
-export type ReactionUpdateOneRequiredWithoutPostReactionNestedInput = {
-  create?: Prisma.XOR<Prisma.ReactionCreateWithoutPostReactionInput, Prisma.ReactionUncheckedCreateWithoutPostReactionInput>
-  connectOrCreate?: Prisma.ReactionCreateOrConnectWithoutPostReactionInput
-  upsert?: Prisma.ReactionUpsertWithoutPostReactionInput
-  connect?: Prisma.ReactionWhereUniqueInput
-  update?: Prisma.XOR<Prisma.XOR<Prisma.ReactionUpdateToOneWithWhereWithoutPostReactionInput, Prisma.ReactionUpdateWithoutPostReactionInput>, Prisma.ReactionUncheckedUpdateWithoutPostReactionInput>
+export type ReactionUncheckedUpdateManyWithoutTrackedEntityNestedInput = {
+  create?: Prisma.XOR<Prisma.ReactionCreateWithoutTrackedEntityInput, Prisma.ReactionUncheckedCreateWithoutTrackedEntityInput> | Prisma.ReactionCreateWithoutTrackedEntityInput[] | Prisma.ReactionUncheckedCreateWithoutTrackedEntityInput[]
+  connectOrCreate?: Prisma.ReactionCreateOrConnectWithoutTrackedEntityInput | Prisma.ReactionCreateOrConnectWithoutTrackedEntityInput[]
+  upsert?: Prisma.ReactionUpsertWithWhereUniqueWithoutTrackedEntityInput | Prisma.ReactionUpsertWithWhereUniqueWithoutTrackedEntityInput[]
+  createMany?: Prisma.ReactionCreateManyTrackedEntityInputEnvelope
+  set?: Prisma.ReactionWhereUniqueInput | Prisma.ReactionWhereUniqueInput[]
+  disconnect?: Prisma.ReactionWhereUniqueInput | Prisma.ReactionWhereUniqueInput[]
+  delete?: Prisma.ReactionWhereUniqueInput | Prisma.ReactionWhereUniqueInput[]
+  connect?: Prisma.ReactionWhereUniqueInput | Prisma.ReactionWhereUniqueInput[]
+  update?: Prisma.ReactionUpdateWithWhereUniqueWithoutTrackedEntityInput | Prisma.ReactionUpdateWithWhereUniqueWithoutTrackedEntityInput[]
+  updateMany?: Prisma.ReactionUpdateManyWithWhereWithoutTrackedEntityInput | Prisma.ReactionUpdateManyWithWhereWithoutTrackedEntityInput[]
+  deleteMany?: Prisma.ReactionScalarWhereInput | Prisma.ReactionScalarWhereInput[]
 }
 
-export type ReactionCreateNestedOneWithoutReactionPromptConfigurationInput = {
-  create?: Prisma.XOR<Prisma.ReactionCreateWithoutReactionPromptConfigurationInput, Prisma.ReactionUncheckedCreateWithoutReactionPromptConfigurationInput>
-  connectOrCreate?: Prisma.ReactionCreateOrConnectWithoutReactionPromptConfigurationInput
-  connect?: Prisma.ReactionWhereUniqueInput
+export type ReactionCreateNestedManyWithoutPromptConfigurationInput = {
+  create?: Prisma.XOR<Prisma.ReactionCreateWithoutPromptConfigurationInput, Prisma.ReactionUncheckedCreateWithoutPromptConfigurationInput> | Prisma.ReactionCreateWithoutPromptConfigurationInput[] | Prisma.ReactionUncheckedCreateWithoutPromptConfigurationInput[]
+  connectOrCreate?: Prisma.ReactionCreateOrConnectWithoutPromptConfigurationInput | Prisma.ReactionCreateOrConnectWithoutPromptConfigurationInput[]
+  createMany?: Prisma.ReactionCreateManyPromptConfigurationInputEnvelope
+  connect?: Prisma.ReactionWhereUniqueInput | Prisma.ReactionWhereUniqueInput[]
 }
 
-export type ReactionUpdateOneRequiredWithoutReactionPromptConfigurationNestedInput = {
-  create?: Prisma.XOR<Prisma.ReactionCreateWithoutReactionPromptConfigurationInput, Prisma.ReactionUncheckedCreateWithoutReactionPromptConfigurationInput>
-  connectOrCreate?: Prisma.ReactionCreateOrConnectWithoutReactionPromptConfigurationInput
-  upsert?: Prisma.ReactionUpsertWithoutReactionPromptConfigurationInput
-  connect?: Prisma.ReactionWhereUniqueInput
-  update?: Prisma.XOR<Prisma.XOR<Prisma.ReactionUpdateToOneWithWhereWithoutReactionPromptConfigurationInput, Prisma.ReactionUpdateWithoutReactionPromptConfigurationInput>, Prisma.ReactionUncheckedUpdateWithoutReactionPromptConfigurationInput>
+export type ReactionUncheckedCreateNestedManyWithoutPromptConfigurationInput = {
+  create?: Prisma.XOR<Prisma.ReactionCreateWithoutPromptConfigurationInput, Prisma.ReactionUncheckedCreateWithoutPromptConfigurationInput> | Prisma.ReactionCreateWithoutPromptConfigurationInput[] | Prisma.ReactionUncheckedCreateWithoutPromptConfigurationInput[]
+  connectOrCreate?: Prisma.ReactionCreateOrConnectWithoutPromptConfigurationInput | Prisma.ReactionCreateOrConnectWithoutPromptConfigurationInput[]
+  createMany?: Prisma.ReactionCreateManyPromptConfigurationInputEnvelope
+  connect?: Prisma.ReactionWhereUniqueInput | Prisma.ReactionWhereUniqueInput[]
 }
 
-export type ReactionCreateWithoutTrackedEntityReactionInput = {
+export type ReactionUpdateManyWithoutPromptConfigurationNestedInput = {
+  create?: Prisma.XOR<Prisma.ReactionCreateWithoutPromptConfigurationInput, Prisma.ReactionUncheckedCreateWithoutPromptConfigurationInput> | Prisma.ReactionCreateWithoutPromptConfigurationInput[] | Prisma.ReactionUncheckedCreateWithoutPromptConfigurationInput[]
+  connectOrCreate?: Prisma.ReactionCreateOrConnectWithoutPromptConfigurationInput | Prisma.ReactionCreateOrConnectWithoutPromptConfigurationInput[]
+  upsert?: Prisma.ReactionUpsertWithWhereUniqueWithoutPromptConfigurationInput | Prisma.ReactionUpsertWithWhereUniqueWithoutPromptConfigurationInput[]
+  createMany?: Prisma.ReactionCreateManyPromptConfigurationInputEnvelope
+  set?: Prisma.ReactionWhereUniqueInput | Prisma.ReactionWhereUniqueInput[]
+  disconnect?: Prisma.ReactionWhereUniqueInput | Prisma.ReactionWhereUniqueInput[]
+  delete?: Prisma.ReactionWhereUniqueInput | Prisma.ReactionWhereUniqueInput[]
+  connect?: Prisma.ReactionWhereUniqueInput | Prisma.ReactionWhereUniqueInput[]
+  update?: Prisma.ReactionUpdateWithWhereUniqueWithoutPromptConfigurationInput | Prisma.ReactionUpdateWithWhereUniqueWithoutPromptConfigurationInput[]
+  updateMany?: Prisma.ReactionUpdateManyWithWhereWithoutPromptConfigurationInput | Prisma.ReactionUpdateManyWithWhereWithoutPromptConfigurationInput[]
+  deleteMany?: Prisma.ReactionScalarWhereInput | Prisma.ReactionScalarWhereInput[]
+}
+
+export type ReactionUncheckedUpdateManyWithoutPromptConfigurationNestedInput = {
+  create?: Prisma.XOR<Prisma.ReactionCreateWithoutPromptConfigurationInput, Prisma.ReactionUncheckedCreateWithoutPromptConfigurationInput> | Prisma.ReactionCreateWithoutPromptConfigurationInput[] | Prisma.ReactionUncheckedCreateWithoutPromptConfigurationInput[]
+  connectOrCreate?: Prisma.ReactionCreateOrConnectWithoutPromptConfigurationInput | Prisma.ReactionCreateOrConnectWithoutPromptConfigurationInput[]
+  upsert?: Prisma.ReactionUpsertWithWhereUniqueWithoutPromptConfigurationInput | Prisma.ReactionUpsertWithWhereUniqueWithoutPromptConfigurationInput[]
+  createMany?: Prisma.ReactionCreateManyPromptConfigurationInputEnvelope
+  set?: Prisma.ReactionWhereUniqueInput | Prisma.ReactionWhereUniqueInput[]
+  disconnect?: Prisma.ReactionWhereUniqueInput | Prisma.ReactionWhereUniqueInput[]
+  delete?: Prisma.ReactionWhereUniqueInput | Prisma.ReactionWhereUniqueInput[]
+  connect?: Prisma.ReactionWhereUniqueInput | Prisma.ReactionWhereUniqueInput[]
+  update?: Prisma.ReactionUpdateWithWhereUniqueWithoutPromptConfigurationInput | Prisma.ReactionUpdateWithWhereUniqueWithoutPromptConfigurationInput[]
+  updateMany?: Prisma.ReactionUpdateManyWithWhereWithoutPromptConfigurationInput | Prisma.ReactionUpdateManyWithWhereWithoutPromptConfigurationInput[]
+  deleteMany?: Prisma.ReactionScalarWhereInput | Prisma.ReactionScalarWhereInput[]
+}
+
+export type ReactionCreateNestedManyWithoutPostInput = {
+  create?: Prisma.XOR<Prisma.ReactionCreateWithoutPostInput, Prisma.ReactionUncheckedCreateWithoutPostInput> | Prisma.ReactionCreateWithoutPostInput[] | Prisma.ReactionUncheckedCreateWithoutPostInput[]
+  connectOrCreate?: Prisma.ReactionCreateOrConnectWithoutPostInput | Prisma.ReactionCreateOrConnectWithoutPostInput[]
+  createMany?: Prisma.ReactionCreateManyPostInputEnvelope
+  connect?: Prisma.ReactionWhereUniqueInput | Prisma.ReactionWhereUniqueInput[]
+}
+
+export type ReactionUncheckedCreateNestedManyWithoutPostInput = {
+  create?: Prisma.XOR<Prisma.ReactionCreateWithoutPostInput, Prisma.ReactionUncheckedCreateWithoutPostInput> | Prisma.ReactionCreateWithoutPostInput[] | Prisma.ReactionUncheckedCreateWithoutPostInput[]
+  connectOrCreate?: Prisma.ReactionCreateOrConnectWithoutPostInput | Prisma.ReactionCreateOrConnectWithoutPostInput[]
+  createMany?: Prisma.ReactionCreateManyPostInputEnvelope
+  connect?: Prisma.ReactionWhereUniqueInput | Prisma.ReactionWhereUniqueInput[]
+}
+
+export type ReactionUpdateManyWithoutPostNestedInput = {
+  create?: Prisma.XOR<Prisma.ReactionCreateWithoutPostInput, Prisma.ReactionUncheckedCreateWithoutPostInput> | Prisma.ReactionCreateWithoutPostInput[] | Prisma.ReactionUncheckedCreateWithoutPostInput[]
+  connectOrCreate?: Prisma.ReactionCreateOrConnectWithoutPostInput | Prisma.ReactionCreateOrConnectWithoutPostInput[]
+  upsert?: Prisma.ReactionUpsertWithWhereUniqueWithoutPostInput | Prisma.ReactionUpsertWithWhereUniqueWithoutPostInput[]
+  createMany?: Prisma.ReactionCreateManyPostInputEnvelope
+  set?: Prisma.ReactionWhereUniqueInput | Prisma.ReactionWhereUniqueInput[]
+  disconnect?: Prisma.ReactionWhereUniqueInput | Prisma.ReactionWhereUniqueInput[]
+  delete?: Prisma.ReactionWhereUniqueInput | Prisma.ReactionWhereUniqueInput[]
+  connect?: Prisma.ReactionWhereUniqueInput | Prisma.ReactionWhereUniqueInput[]
+  update?: Prisma.ReactionUpdateWithWhereUniqueWithoutPostInput | Prisma.ReactionUpdateWithWhereUniqueWithoutPostInput[]
+  updateMany?: Prisma.ReactionUpdateManyWithWhereWithoutPostInput | Prisma.ReactionUpdateManyWithWhereWithoutPostInput[]
+  deleteMany?: Prisma.ReactionScalarWhereInput | Prisma.ReactionScalarWhereInput[]
+}
+
+export type ReactionUncheckedUpdateManyWithoutPostNestedInput = {
+  create?: Prisma.XOR<Prisma.ReactionCreateWithoutPostInput, Prisma.ReactionUncheckedCreateWithoutPostInput> | Prisma.ReactionCreateWithoutPostInput[] | Prisma.ReactionUncheckedCreateWithoutPostInput[]
+  connectOrCreate?: Prisma.ReactionCreateOrConnectWithoutPostInput | Prisma.ReactionCreateOrConnectWithoutPostInput[]
+  upsert?: Prisma.ReactionUpsertWithWhereUniqueWithoutPostInput | Prisma.ReactionUpsertWithWhereUniqueWithoutPostInput[]
+  createMany?: Prisma.ReactionCreateManyPostInputEnvelope
+  set?: Prisma.ReactionWhereUniqueInput | Prisma.ReactionWhereUniqueInput[]
+  disconnect?: Prisma.ReactionWhereUniqueInput | Prisma.ReactionWhereUniqueInput[]
+  delete?: Prisma.ReactionWhereUniqueInput | Prisma.ReactionWhereUniqueInput[]
+  connect?: Prisma.ReactionWhereUniqueInput | Prisma.ReactionWhereUniqueInput[]
+  update?: Prisma.ReactionUpdateWithWhereUniqueWithoutPostInput | Prisma.ReactionUpdateWithWhereUniqueWithoutPostInput[]
+  updateMany?: Prisma.ReactionUpdateManyWithWhereWithoutPostInput | Prisma.ReactionUpdateManyWithWhereWithoutPostInput[]
+  deleteMany?: Prisma.ReactionScalarWhereInput | Prisma.ReactionScalarWhereInput[]
+}
+
+export type ReactionCreateWithoutTrackedEntityInput = {
   id?: string
   text: string
   createdAt?: Date | string
   updatedAt?: Date | string
-  postReaction?: Prisma.PostReactionCreateNestedOneWithoutReactionInput
-  reactionPromptConfiguration?: Prisma.ReactionPromptConfigurationCreateNestedOneWithoutReactionInput
+  post: Prisma.PostCreateNestedOneWithoutReactionsInput
+  promptConfiguration: Prisma.PromptConfigurationCreateNestedOneWithoutReactionsInput
 }
 
-export type ReactionUncheckedCreateWithoutTrackedEntityReactionInput = {
+export type ReactionUncheckedCreateWithoutTrackedEntityInput = {
   id?: string
+  postId: string
+  promptConfigurationId: string
   text: string
   createdAt?: Date | string
   updatedAt?: Date | string
-  postReaction?: Prisma.PostReactionUncheckedCreateNestedOneWithoutReactionInput
-  reactionPromptConfiguration?: Prisma.ReactionPromptConfigurationUncheckedCreateNestedOneWithoutReactionInput
 }
 
-export type ReactionCreateOrConnectWithoutTrackedEntityReactionInput = {
+export type ReactionCreateOrConnectWithoutTrackedEntityInput = {
   where: Prisma.ReactionWhereUniqueInput
-  create: Prisma.XOR<Prisma.ReactionCreateWithoutTrackedEntityReactionInput, Prisma.ReactionUncheckedCreateWithoutTrackedEntityReactionInput>
+  create: Prisma.XOR<Prisma.ReactionCreateWithoutTrackedEntityInput, Prisma.ReactionUncheckedCreateWithoutTrackedEntityInput>
 }
 
-export type ReactionUpsertWithoutTrackedEntityReactionInput = {
-  update: Prisma.XOR<Prisma.ReactionUpdateWithoutTrackedEntityReactionInput, Prisma.ReactionUncheckedUpdateWithoutTrackedEntityReactionInput>
-  create: Prisma.XOR<Prisma.ReactionCreateWithoutTrackedEntityReactionInput, Prisma.ReactionUncheckedCreateWithoutTrackedEntityReactionInput>
-  where?: Prisma.ReactionWhereInput
+export type ReactionCreateManyTrackedEntityInputEnvelope = {
+  data: Prisma.ReactionCreateManyTrackedEntityInput | Prisma.ReactionCreateManyTrackedEntityInput[]
+  skipDuplicates?: boolean
 }
 
-export type ReactionUpdateToOneWithWhereWithoutTrackedEntityReactionInput = {
-  where?: Prisma.ReactionWhereInput
-  data: Prisma.XOR<Prisma.ReactionUpdateWithoutTrackedEntityReactionInput, Prisma.ReactionUncheckedUpdateWithoutTrackedEntityReactionInput>
-}
-
-export type ReactionUpdateWithoutTrackedEntityReactionInput = {
-  id?: Prisma.StringFieldUpdateOperationsInput | string
-  text?: Prisma.StringFieldUpdateOperationsInput | string
-  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
-  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
-  postReaction?: Prisma.PostReactionUpdateOneWithoutReactionNestedInput
-  reactionPromptConfiguration?: Prisma.ReactionPromptConfigurationUpdateOneWithoutReactionNestedInput
-}
-
-export type ReactionUncheckedUpdateWithoutTrackedEntityReactionInput = {
-  id?: Prisma.StringFieldUpdateOperationsInput | string
-  text?: Prisma.StringFieldUpdateOperationsInput | string
-  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
-  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
-  postReaction?: Prisma.PostReactionUncheckedUpdateOneWithoutReactionNestedInput
-  reactionPromptConfiguration?: Prisma.ReactionPromptConfigurationUncheckedUpdateOneWithoutReactionNestedInput
-}
-
-export type ReactionCreateWithoutPostReactionInput = {
-  id?: string
-  text: string
-  createdAt?: Date | string
-  updatedAt?: Date | string
-  trackedEntityReaction?: Prisma.TrackedEntityReactionCreateNestedOneWithoutReactionInput
-  reactionPromptConfiguration?: Prisma.ReactionPromptConfigurationCreateNestedOneWithoutReactionInput
-}
-
-export type ReactionUncheckedCreateWithoutPostReactionInput = {
-  id?: string
-  text: string
-  createdAt?: Date | string
-  updatedAt?: Date | string
-  trackedEntityReaction?: Prisma.TrackedEntityReactionUncheckedCreateNestedOneWithoutReactionInput
-  reactionPromptConfiguration?: Prisma.ReactionPromptConfigurationUncheckedCreateNestedOneWithoutReactionInput
-}
-
-export type ReactionCreateOrConnectWithoutPostReactionInput = {
+export type ReactionUpsertWithWhereUniqueWithoutTrackedEntityInput = {
   where: Prisma.ReactionWhereUniqueInput
-  create: Prisma.XOR<Prisma.ReactionCreateWithoutPostReactionInput, Prisma.ReactionUncheckedCreateWithoutPostReactionInput>
+  update: Prisma.XOR<Prisma.ReactionUpdateWithoutTrackedEntityInput, Prisma.ReactionUncheckedUpdateWithoutTrackedEntityInput>
+  create: Prisma.XOR<Prisma.ReactionCreateWithoutTrackedEntityInput, Prisma.ReactionUncheckedCreateWithoutTrackedEntityInput>
 }
 
-export type ReactionUpsertWithoutPostReactionInput = {
-  update: Prisma.XOR<Prisma.ReactionUpdateWithoutPostReactionInput, Prisma.ReactionUncheckedUpdateWithoutPostReactionInput>
-  create: Prisma.XOR<Prisma.ReactionCreateWithoutPostReactionInput, Prisma.ReactionUncheckedCreateWithoutPostReactionInput>
-  where?: Prisma.ReactionWhereInput
-}
-
-export type ReactionUpdateToOneWithWhereWithoutPostReactionInput = {
-  where?: Prisma.ReactionWhereInput
-  data: Prisma.XOR<Prisma.ReactionUpdateWithoutPostReactionInput, Prisma.ReactionUncheckedUpdateWithoutPostReactionInput>
-}
-
-export type ReactionUpdateWithoutPostReactionInput = {
-  id?: Prisma.StringFieldUpdateOperationsInput | string
-  text?: Prisma.StringFieldUpdateOperationsInput | string
-  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
-  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
-  trackedEntityReaction?: Prisma.TrackedEntityReactionUpdateOneWithoutReactionNestedInput
-  reactionPromptConfiguration?: Prisma.ReactionPromptConfigurationUpdateOneWithoutReactionNestedInput
-}
-
-export type ReactionUncheckedUpdateWithoutPostReactionInput = {
-  id?: Prisma.StringFieldUpdateOperationsInput | string
-  text?: Prisma.StringFieldUpdateOperationsInput | string
-  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
-  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
-  trackedEntityReaction?: Prisma.TrackedEntityReactionUncheckedUpdateOneWithoutReactionNestedInput
-  reactionPromptConfiguration?: Prisma.ReactionPromptConfigurationUncheckedUpdateOneWithoutReactionNestedInput
-}
-
-export type ReactionCreateWithoutReactionPromptConfigurationInput = {
-  id?: string
-  text: string
-  createdAt?: Date | string
-  updatedAt?: Date | string
-  postReaction?: Prisma.PostReactionCreateNestedOneWithoutReactionInput
-  trackedEntityReaction?: Prisma.TrackedEntityReactionCreateNestedOneWithoutReactionInput
-}
-
-export type ReactionUncheckedCreateWithoutReactionPromptConfigurationInput = {
-  id?: string
-  text: string
-  createdAt?: Date | string
-  updatedAt?: Date | string
-  postReaction?: Prisma.PostReactionUncheckedCreateNestedOneWithoutReactionInput
-  trackedEntityReaction?: Prisma.TrackedEntityReactionUncheckedCreateNestedOneWithoutReactionInput
-}
-
-export type ReactionCreateOrConnectWithoutReactionPromptConfigurationInput = {
+export type ReactionUpdateWithWhereUniqueWithoutTrackedEntityInput = {
   where: Prisma.ReactionWhereUniqueInput
-  create: Prisma.XOR<Prisma.ReactionCreateWithoutReactionPromptConfigurationInput, Prisma.ReactionUncheckedCreateWithoutReactionPromptConfigurationInput>
+  data: Prisma.XOR<Prisma.ReactionUpdateWithoutTrackedEntityInput, Prisma.ReactionUncheckedUpdateWithoutTrackedEntityInput>
 }
 
-export type ReactionUpsertWithoutReactionPromptConfigurationInput = {
-  update: Prisma.XOR<Prisma.ReactionUpdateWithoutReactionPromptConfigurationInput, Prisma.ReactionUncheckedUpdateWithoutReactionPromptConfigurationInput>
-  create: Prisma.XOR<Prisma.ReactionCreateWithoutReactionPromptConfigurationInput, Prisma.ReactionUncheckedCreateWithoutReactionPromptConfigurationInput>
-  where?: Prisma.ReactionWhereInput
+export type ReactionUpdateManyWithWhereWithoutTrackedEntityInput = {
+  where: Prisma.ReactionScalarWhereInput
+  data: Prisma.XOR<Prisma.ReactionUpdateManyMutationInput, Prisma.ReactionUncheckedUpdateManyWithoutTrackedEntityInput>
 }
 
-export type ReactionUpdateToOneWithWhereWithoutReactionPromptConfigurationInput = {
-  where?: Prisma.ReactionWhereInput
-  data: Prisma.XOR<Prisma.ReactionUpdateWithoutReactionPromptConfigurationInput, Prisma.ReactionUncheckedUpdateWithoutReactionPromptConfigurationInput>
+export type ReactionScalarWhereInput = {
+  AND?: Prisma.ReactionScalarWhereInput | Prisma.ReactionScalarWhereInput[]
+  OR?: Prisma.ReactionScalarWhereInput[]
+  NOT?: Prisma.ReactionScalarWhereInput | Prisma.ReactionScalarWhereInput[]
+  id?: Prisma.StringFilter<"Reaction"> | string
+  trackedEntityId?: Prisma.StringFilter<"Reaction"> | string
+  postId?: Prisma.StringFilter<"Reaction"> | string
+  promptConfigurationId?: Prisma.StringFilter<"Reaction"> | string
+  text?: Prisma.StringFilter<"Reaction"> | string
+  createdAt?: Prisma.DateTimeFilter<"Reaction"> | Date | string
+  updatedAt?: Prisma.DateTimeFilter<"Reaction"> | Date | string
 }
 
-export type ReactionUpdateWithoutReactionPromptConfigurationInput = {
+export type ReactionCreateWithoutPromptConfigurationInput = {
+  id?: string
+  text: string
+  createdAt?: Date | string
+  updatedAt?: Date | string
+  trackedEntity: Prisma.TrackedEntityCreateNestedOneWithoutReactionsInput
+  post: Prisma.PostCreateNestedOneWithoutReactionsInput
+}
+
+export type ReactionUncheckedCreateWithoutPromptConfigurationInput = {
+  id?: string
+  trackedEntityId: string
+  postId: string
+  text: string
+  createdAt?: Date | string
+  updatedAt?: Date | string
+}
+
+export type ReactionCreateOrConnectWithoutPromptConfigurationInput = {
+  where: Prisma.ReactionWhereUniqueInput
+  create: Prisma.XOR<Prisma.ReactionCreateWithoutPromptConfigurationInput, Prisma.ReactionUncheckedCreateWithoutPromptConfigurationInput>
+}
+
+export type ReactionCreateManyPromptConfigurationInputEnvelope = {
+  data: Prisma.ReactionCreateManyPromptConfigurationInput | Prisma.ReactionCreateManyPromptConfigurationInput[]
+  skipDuplicates?: boolean
+}
+
+export type ReactionUpsertWithWhereUniqueWithoutPromptConfigurationInput = {
+  where: Prisma.ReactionWhereUniqueInput
+  update: Prisma.XOR<Prisma.ReactionUpdateWithoutPromptConfigurationInput, Prisma.ReactionUncheckedUpdateWithoutPromptConfigurationInput>
+  create: Prisma.XOR<Prisma.ReactionCreateWithoutPromptConfigurationInput, Prisma.ReactionUncheckedCreateWithoutPromptConfigurationInput>
+}
+
+export type ReactionUpdateWithWhereUniqueWithoutPromptConfigurationInput = {
+  where: Prisma.ReactionWhereUniqueInput
+  data: Prisma.XOR<Prisma.ReactionUpdateWithoutPromptConfigurationInput, Prisma.ReactionUncheckedUpdateWithoutPromptConfigurationInput>
+}
+
+export type ReactionUpdateManyWithWhereWithoutPromptConfigurationInput = {
+  where: Prisma.ReactionScalarWhereInput
+  data: Prisma.XOR<Prisma.ReactionUpdateManyMutationInput, Prisma.ReactionUncheckedUpdateManyWithoutPromptConfigurationInput>
+}
+
+export type ReactionCreateWithoutPostInput = {
+  id?: string
+  text: string
+  createdAt?: Date | string
+  updatedAt?: Date | string
+  trackedEntity: Prisma.TrackedEntityCreateNestedOneWithoutReactionsInput
+  promptConfiguration: Prisma.PromptConfigurationCreateNestedOneWithoutReactionsInput
+}
+
+export type ReactionUncheckedCreateWithoutPostInput = {
+  id?: string
+  trackedEntityId: string
+  promptConfigurationId: string
+  text: string
+  createdAt?: Date | string
+  updatedAt?: Date | string
+}
+
+export type ReactionCreateOrConnectWithoutPostInput = {
+  where: Prisma.ReactionWhereUniqueInput
+  create: Prisma.XOR<Prisma.ReactionCreateWithoutPostInput, Prisma.ReactionUncheckedCreateWithoutPostInput>
+}
+
+export type ReactionCreateManyPostInputEnvelope = {
+  data: Prisma.ReactionCreateManyPostInput | Prisma.ReactionCreateManyPostInput[]
+  skipDuplicates?: boolean
+}
+
+export type ReactionUpsertWithWhereUniqueWithoutPostInput = {
+  where: Prisma.ReactionWhereUniqueInput
+  update: Prisma.XOR<Prisma.ReactionUpdateWithoutPostInput, Prisma.ReactionUncheckedUpdateWithoutPostInput>
+  create: Prisma.XOR<Prisma.ReactionCreateWithoutPostInput, Prisma.ReactionUncheckedCreateWithoutPostInput>
+}
+
+export type ReactionUpdateWithWhereUniqueWithoutPostInput = {
+  where: Prisma.ReactionWhereUniqueInput
+  data: Prisma.XOR<Prisma.ReactionUpdateWithoutPostInput, Prisma.ReactionUncheckedUpdateWithoutPostInput>
+}
+
+export type ReactionUpdateManyWithWhereWithoutPostInput = {
+  where: Prisma.ReactionScalarWhereInput
+  data: Prisma.XOR<Prisma.ReactionUpdateManyMutationInput, Prisma.ReactionUncheckedUpdateManyWithoutPostInput>
+}
+
+export type ReactionCreateManyTrackedEntityInput = {
+  id?: string
+  postId: string
+  promptConfigurationId: string
+  text: string
+  createdAt?: Date | string
+  updatedAt?: Date | string
+}
+
+export type ReactionUpdateWithoutTrackedEntityInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
   text?: Prisma.StringFieldUpdateOperationsInput | string
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
-  postReaction?: Prisma.PostReactionUpdateOneWithoutReactionNestedInput
-  trackedEntityReaction?: Prisma.TrackedEntityReactionUpdateOneWithoutReactionNestedInput
+  post?: Prisma.PostUpdateOneRequiredWithoutReactionsNestedInput
+  promptConfiguration?: Prisma.PromptConfigurationUpdateOneRequiredWithoutReactionsNestedInput
 }
 
-export type ReactionUncheckedUpdateWithoutReactionPromptConfigurationInput = {
+export type ReactionUncheckedUpdateWithoutTrackedEntityInput = {
+  id?: Prisma.StringFieldUpdateOperationsInput | string
+  postId?: Prisma.StringFieldUpdateOperationsInput | string
+  promptConfigurationId?: Prisma.StringFieldUpdateOperationsInput | string
+  text?: Prisma.StringFieldUpdateOperationsInput | string
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+}
+
+export type ReactionUncheckedUpdateManyWithoutTrackedEntityInput = {
+  id?: Prisma.StringFieldUpdateOperationsInput | string
+  postId?: Prisma.StringFieldUpdateOperationsInput | string
+  promptConfigurationId?: Prisma.StringFieldUpdateOperationsInput | string
+  text?: Prisma.StringFieldUpdateOperationsInput | string
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+}
+
+export type ReactionCreateManyPromptConfigurationInput = {
+  id?: string
+  trackedEntityId: string
+  postId: string
+  text: string
+  createdAt?: Date | string
+  updatedAt?: Date | string
+}
+
+export type ReactionUpdateWithoutPromptConfigurationInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
   text?: Prisma.StringFieldUpdateOperationsInput | string
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
-  postReaction?: Prisma.PostReactionUncheckedUpdateOneWithoutReactionNestedInput
-  trackedEntityReaction?: Prisma.TrackedEntityReactionUncheckedUpdateOneWithoutReactionNestedInput
+  trackedEntity?: Prisma.TrackedEntityUpdateOneRequiredWithoutReactionsNestedInput
+  post?: Prisma.PostUpdateOneRequiredWithoutReactionsNestedInput
+}
+
+export type ReactionUncheckedUpdateWithoutPromptConfigurationInput = {
+  id?: Prisma.StringFieldUpdateOperationsInput | string
+  trackedEntityId?: Prisma.StringFieldUpdateOperationsInput | string
+  postId?: Prisma.StringFieldUpdateOperationsInput | string
+  text?: Prisma.StringFieldUpdateOperationsInput | string
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+}
+
+export type ReactionUncheckedUpdateManyWithoutPromptConfigurationInput = {
+  id?: Prisma.StringFieldUpdateOperationsInput | string
+  trackedEntityId?: Prisma.StringFieldUpdateOperationsInput | string
+  postId?: Prisma.StringFieldUpdateOperationsInput | string
+  text?: Prisma.StringFieldUpdateOperationsInput | string
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+}
+
+export type ReactionCreateManyPostInput = {
+  id?: string
+  trackedEntityId: string
+  promptConfigurationId: string
+  text: string
+  createdAt?: Date | string
+  updatedAt?: Date | string
+}
+
+export type ReactionUpdateWithoutPostInput = {
+  id?: Prisma.StringFieldUpdateOperationsInput | string
+  text?: Prisma.StringFieldUpdateOperationsInput | string
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  trackedEntity?: Prisma.TrackedEntityUpdateOneRequiredWithoutReactionsNestedInput
+  promptConfiguration?: Prisma.PromptConfigurationUpdateOneRequiredWithoutReactionsNestedInput
+}
+
+export type ReactionUncheckedUpdateWithoutPostInput = {
+  id?: Prisma.StringFieldUpdateOperationsInput | string
+  trackedEntityId?: Prisma.StringFieldUpdateOperationsInput | string
+  promptConfigurationId?: Prisma.StringFieldUpdateOperationsInput | string
+  text?: Prisma.StringFieldUpdateOperationsInput | string
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+}
+
+export type ReactionUncheckedUpdateManyWithoutPostInput = {
+  id?: Prisma.StringFieldUpdateOperationsInput | string
+  trackedEntityId?: Prisma.StringFieldUpdateOperationsInput | string
+  promptConfigurationId?: Prisma.StringFieldUpdateOperationsInput | string
+  text?: Prisma.StringFieldUpdateOperationsInput | string
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
 }
 
 
 
 export type ReactionSelect<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetSelect<{
   id?: boolean
+  trackedEntityId?: boolean
+  postId?: boolean
+  promptConfigurationId?: boolean
   text?: boolean
   createdAt?: boolean
   updatedAt?: boolean
-  postReaction?: boolean | Prisma.Reaction$postReactionArgs<ExtArgs>
-  trackedEntityReaction?: boolean | Prisma.Reaction$trackedEntityReactionArgs<ExtArgs>
-  reactionPromptConfiguration?: boolean | Prisma.Reaction$reactionPromptConfigurationArgs<ExtArgs>
+  trackedEntity?: boolean | Prisma.TrackedEntityDefaultArgs<ExtArgs>
+  post?: boolean | Prisma.PostDefaultArgs<ExtArgs>
+  promptConfiguration?: boolean | Prisma.PromptConfigurationDefaultArgs<ExtArgs>
 }, ExtArgs["result"]["reaction"]>
 
 export type ReactionSelectCreateManyAndReturn<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetSelect<{
   id?: boolean
+  trackedEntityId?: boolean
+  postId?: boolean
+  promptConfigurationId?: boolean
   text?: boolean
   createdAt?: boolean
   updatedAt?: boolean
+  trackedEntity?: boolean | Prisma.TrackedEntityDefaultArgs<ExtArgs>
+  post?: boolean | Prisma.PostDefaultArgs<ExtArgs>
+  promptConfiguration?: boolean | Prisma.PromptConfigurationDefaultArgs<ExtArgs>
 }, ExtArgs["result"]["reaction"]>
 
 export type ReactionSelectUpdateManyAndReturn<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetSelect<{
   id?: boolean
+  trackedEntityId?: boolean
+  postId?: boolean
+  promptConfigurationId?: boolean
   text?: boolean
   createdAt?: boolean
   updatedAt?: boolean
+  trackedEntity?: boolean | Prisma.TrackedEntityDefaultArgs<ExtArgs>
+  post?: boolean | Prisma.PostDefaultArgs<ExtArgs>
+  promptConfiguration?: boolean | Prisma.PromptConfigurationDefaultArgs<ExtArgs>
 }, ExtArgs["result"]["reaction"]>
 
 export type ReactionSelectScalar = {
   id?: boolean
+  trackedEntityId?: boolean
+  postId?: boolean
+  promptConfigurationId?: boolean
   text?: boolean
   createdAt?: boolean
   updatedAt?: boolean
 }
 
-export type ReactionOmit<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetOmit<"id" | "text" | "createdAt" | "updatedAt", ExtArgs["result"]["reaction"]>
+export type ReactionOmit<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetOmit<"id" | "trackedEntityId" | "postId" | "promptConfigurationId" | "text" | "createdAt" | "updatedAt", ExtArgs["result"]["reaction"]>
 export type ReactionInclude<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
-  postReaction?: boolean | Prisma.Reaction$postReactionArgs<ExtArgs>
-  trackedEntityReaction?: boolean | Prisma.Reaction$trackedEntityReactionArgs<ExtArgs>
-  reactionPromptConfiguration?: boolean | Prisma.Reaction$reactionPromptConfigurationArgs<ExtArgs>
+  trackedEntity?: boolean | Prisma.TrackedEntityDefaultArgs<ExtArgs>
+  post?: boolean | Prisma.PostDefaultArgs<ExtArgs>
+  promptConfiguration?: boolean | Prisma.PromptConfigurationDefaultArgs<ExtArgs>
 }
-export type ReactionIncludeCreateManyAndReturn<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {}
-export type ReactionIncludeUpdateManyAndReturn<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {}
+export type ReactionIncludeCreateManyAndReturn<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  trackedEntity?: boolean | Prisma.TrackedEntityDefaultArgs<ExtArgs>
+  post?: boolean | Prisma.PostDefaultArgs<ExtArgs>
+  promptConfiguration?: boolean | Prisma.PromptConfigurationDefaultArgs<ExtArgs>
+}
+export type ReactionIncludeUpdateManyAndReturn<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  trackedEntity?: boolean | Prisma.TrackedEntityDefaultArgs<ExtArgs>
+  post?: boolean | Prisma.PostDefaultArgs<ExtArgs>
+  promptConfiguration?: boolean | Prisma.PromptConfigurationDefaultArgs<ExtArgs>
+}
 
 export type $ReactionPayload<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
   name: "Reaction"
   objects: {
-    postReaction: Prisma.$PostReactionPayload<ExtArgs> | null
-    trackedEntityReaction: Prisma.$TrackedEntityReactionPayload<ExtArgs> | null
-    reactionPromptConfiguration: Prisma.$ReactionPromptConfigurationPayload<ExtArgs> | null
+    trackedEntity: Prisma.$TrackedEntityPayload<ExtArgs>
+    post: Prisma.$PostPayload<ExtArgs>
+    promptConfiguration: Prisma.$PromptConfigurationPayload<ExtArgs>
   }
   scalars: runtime.Types.Extensions.GetPayloadResult<{
     id: string
+    trackedEntityId: string
+    postId: string
+    promptConfigurationId: string
     text: string
     createdAt: Date
     updatedAt: Date
@@ -955,9 +1221,9 @@ readonly fields: ReactionFieldRefs;
  */
 export interface Prisma__ReactionClient<T, Null = never, ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs, GlobalOmitOptions = {}> extends Prisma.PrismaPromise<T> {
   readonly [Symbol.toStringTag]: "PrismaPromise"
-  postReaction<T extends Prisma.Reaction$postReactionArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.Reaction$postReactionArgs<ExtArgs>>): Prisma.Prisma__PostReactionClient<runtime.Types.Result.GetResult<Prisma.$PostReactionPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
-  trackedEntityReaction<T extends Prisma.Reaction$trackedEntityReactionArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.Reaction$trackedEntityReactionArgs<ExtArgs>>): Prisma.Prisma__TrackedEntityReactionClient<runtime.Types.Result.GetResult<Prisma.$TrackedEntityReactionPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
-  reactionPromptConfiguration<T extends Prisma.Reaction$reactionPromptConfigurationArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.Reaction$reactionPromptConfigurationArgs<ExtArgs>>): Prisma.Prisma__ReactionPromptConfigurationClient<runtime.Types.Result.GetResult<Prisma.$ReactionPromptConfigurationPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
+  trackedEntity<T extends Prisma.TrackedEntityDefaultArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.TrackedEntityDefaultArgs<ExtArgs>>): Prisma.Prisma__TrackedEntityClient<runtime.Types.Result.GetResult<Prisma.$TrackedEntityPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | Null, Null, ExtArgs, GlobalOmitOptions>
+  post<T extends Prisma.PostDefaultArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.PostDefaultArgs<ExtArgs>>): Prisma.Prisma__PostClient<runtime.Types.Result.GetResult<Prisma.$PostPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | Null, Null, ExtArgs, GlobalOmitOptions>
+  promptConfiguration<T extends Prisma.PromptConfigurationDefaultArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.PromptConfigurationDefaultArgs<ExtArgs>>): Prisma.Prisma__PromptConfigurationClient<runtime.Types.Result.GetResult<Prisma.$PromptConfigurationPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | Null, Null, ExtArgs, GlobalOmitOptions>
   /**
    * Attaches callbacks for the resolution and/or rejection of the Promise.
    * @param onfulfilled The callback to execute when the Promise is resolved.
@@ -988,6 +1254,9 @@ export interface Prisma__ReactionClient<T, Null = never, ExtArgs extends runtime
  */
 export interface ReactionFieldRefs {
   readonly id: Prisma.FieldRef<"Reaction", 'String'>
+  readonly trackedEntityId: Prisma.FieldRef<"Reaction", 'String'>
+  readonly postId: Prisma.FieldRef<"Reaction", 'String'>
+  readonly promptConfigurationId: Prisma.FieldRef<"Reaction", 'String'>
   readonly text: Prisma.FieldRef<"Reaction", 'String'>
   readonly createdAt: Prisma.FieldRef<"Reaction", 'DateTime'>
   readonly updatedAt: Prisma.FieldRef<"Reaction", 'DateTime'>
@@ -1240,6 +1509,10 @@ export type ReactionCreateManyAndReturnArgs<ExtArgs extends runtime.Types.Extens
    */
   data: Prisma.ReactionCreateManyInput | Prisma.ReactionCreateManyInput[]
   skipDuplicates?: boolean
+  /**
+   * Choose, which related nodes to fetch as well
+   */
+  include?: Prisma.ReactionIncludeCreateManyAndReturn<ExtArgs> | null
 }
 
 /**
@@ -1310,6 +1583,10 @@ export type ReactionUpdateManyAndReturnArgs<ExtArgs extends runtime.Types.Extens
    * Limit how many Reactions to update.
    */
   limit?: number
+  /**
+   * Choose, which related nodes to fetch as well
+   */
+  include?: Prisma.ReactionIncludeUpdateManyAndReturn<ExtArgs> | null
 }
 
 /**
@@ -1376,63 +1653,6 @@ export type ReactionDeleteManyArgs<ExtArgs extends runtime.Types.Extensions.Inte
    * Limit how many Reactions to delete.
    */
   limit?: number
-}
-
-/**
- * Reaction.postReaction
- */
-export type Reaction$postReactionArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
-  /**
-   * Select specific fields to fetch from the PostReaction
-   */
-  select?: Prisma.PostReactionSelect<ExtArgs> | null
-  /**
-   * Omit specific fields from the PostReaction
-   */
-  omit?: Prisma.PostReactionOmit<ExtArgs> | null
-  /**
-   * Choose, which related nodes to fetch as well
-   */
-  include?: Prisma.PostReactionInclude<ExtArgs> | null
-  where?: Prisma.PostReactionWhereInput
-}
-
-/**
- * Reaction.trackedEntityReaction
- */
-export type Reaction$trackedEntityReactionArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
-  /**
-   * Select specific fields to fetch from the TrackedEntityReaction
-   */
-  select?: Prisma.TrackedEntityReactionSelect<ExtArgs> | null
-  /**
-   * Omit specific fields from the TrackedEntityReaction
-   */
-  omit?: Prisma.TrackedEntityReactionOmit<ExtArgs> | null
-  /**
-   * Choose, which related nodes to fetch as well
-   */
-  include?: Prisma.TrackedEntityReactionInclude<ExtArgs> | null
-  where?: Prisma.TrackedEntityReactionWhereInput
-}
-
-/**
- * Reaction.reactionPromptConfiguration
- */
-export type Reaction$reactionPromptConfigurationArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
-  /**
-   * Select specific fields to fetch from the ReactionPromptConfiguration
-   */
-  select?: Prisma.ReactionPromptConfigurationSelect<ExtArgs> | null
-  /**
-   * Omit specific fields from the ReactionPromptConfiguration
-   */
-  omit?: Prisma.ReactionPromptConfigurationOmit<ExtArgs> | null
-  /**
-   * Choose, which related nodes to fetch as well
-   */
-  include?: Prisma.ReactionPromptConfigurationInclude<ExtArgs> | null
-  where?: Prisma.ReactionPromptConfigurationWhereInput
 }
 
 /**

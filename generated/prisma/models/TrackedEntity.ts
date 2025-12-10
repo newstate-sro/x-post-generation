@@ -26,24 +26,30 @@ export type AggregateTrackedEntity = {
 
 export type TrackedEntityMinAggregateOutputType = {
   id: string | null
+  type: $Enums.TrackedEntityType | null
   name: string | null
   description: string | null
+  facebookPageUrl: string | null
   createdAt: Date | null
   updatedAt: Date | null
 }
 
 export type TrackedEntityMaxAggregateOutputType = {
   id: string | null
+  type: $Enums.TrackedEntityType | null
   name: string | null
   description: string | null
+  facebookPageUrl: string | null
   createdAt: Date | null
   updatedAt: Date | null
 }
 
 export type TrackedEntityCountAggregateOutputType = {
   id: number
+  type: number
   name: number
   description: number
+  facebookPageUrl: number
   createdAt: number
   updatedAt: number
   _all: number
@@ -52,24 +58,30 @@ export type TrackedEntityCountAggregateOutputType = {
 
 export type TrackedEntityMinAggregateInputType = {
   id?: true
+  type?: true
   name?: true
   description?: true
+  facebookPageUrl?: true
   createdAt?: true
   updatedAt?: true
 }
 
 export type TrackedEntityMaxAggregateInputType = {
   id?: true
+  type?: true
   name?: true
   description?: true
+  facebookPageUrl?: true
   createdAt?: true
   updatedAt?: true
 }
 
 export type TrackedEntityCountAggregateInputType = {
   id?: true
+  type?: true
   name?: true
   description?: true
+  facebookPageUrl?: true
   createdAt?: true
   updatedAt?: true
   _all?: true
@@ -149,8 +161,10 @@ export type TrackedEntityGroupByArgs<ExtArgs extends runtime.Types.Extensions.In
 
 export type TrackedEntityGroupByOutputType = {
   id: string
+  type: $Enums.TrackedEntityType
   name: string
   description: string
+  facebookPageUrl: string
   createdAt: Date
   updatedAt: Date
   _count: TrackedEntityCountAggregateOutputType | null
@@ -178,50 +192,52 @@ export type TrackedEntityWhereInput = {
   OR?: Prisma.TrackedEntityWhereInput[]
   NOT?: Prisma.TrackedEntityWhereInput | Prisma.TrackedEntityWhereInput[]
   id?: Prisma.StringFilter<"TrackedEntity"> | string
+  type?: Prisma.EnumTrackedEntityTypeFilter<"TrackedEntity"> | $Enums.TrackedEntityType
   name?: Prisma.StringFilter<"TrackedEntity"> | string
   description?: Prisma.StringFilter<"TrackedEntity"> | string
+  facebookPageUrl?: Prisma.StringFilter<"TrackedEntity"> | string
   createdAt?: Prisma.DateTimeFilter<"TrackedEntity"> | Date | string
   updatedAt?: Prisma.DateTimeFilter<"TrackedEntity"> | Date | string
-  trackedEntityPosts?: Prisma.TrackedEntityPostListRelationFilter
-  trackedEntityReactions?: Prisma.TrackedEntityReactionListRelationFilter
-  trackedEntityOwnTrackedEntity?: Prisma.XOR<Prisma.TrackedEntityOwnTrackedEntityNullableScalarRelationFilter, Prisma.TrackedEntityOwnTrackedEntityWhereInput> | null
-  trackedEntityOtherTrackedEntity?: Prisma.XOR<Prisma.TrackedEntityOtherTrackedEntityNullableScalarRelationFilter, Prisma.TrackedEntityOtherTrackedEntityWhereInput> | null
-  trackedEntityTrackedEntityConfiguration?: Prisma.XOR<Prisma.TrackedEntityTrackedEntityConfigurationNullableScalarRelationFilter, Prisma.TrackedEntityTrackedEntityConfigurationWhereInput> | null
+  posts?: Prisma.PostListRelationFilter
+  reactions?: Prisma.ReactionListRelationFilter
+  promptConfiguration?: Prisma.XOR<Prisma.PromptConfigurationNullableScalarRelationFilter, Prisma.PromptConfigurationWhereInput> | null
 }
 
 export type TrackedEntityOrderByWithRelationInput = {
   id?: Prisma.SortOrder
+  type?: Prisma.SortOrder
   name?: Prisma.SortOrder
   description?: Prisma.SortOrder
+  facebookPageUrl?: Prisma.SortOrder
   createdAt?: Prisma.SortOrder
   updatedAt?: Prisma.SortOrder
-  trackedEntityPosts?: Prisma.TrackedEntityPostOrderByRelationAggregateInput
-  trackedEntityReactions?: Prisma.TrackedEntityReactionOrderByRelationAggregateInput
-  trackedEntityOwnTrackedEntity?: Prisma.TrackedEntityOwnTrackedEntityOrderByWithRelationInput
-  trackedEntityOtherTrackedEntity?: Prisma.TrackedEntityOtherTrackedEntityOrderByWithRelationInput
-  trackedEntityTrackedEntityConfiguration?: Prisma.TrackedEntityTrackedEntityConfigurationOrderByWithRelationInput
+  posts?: Prisma.PostOrderByRelationAggregateInput
+  reactions?: Prisma.ReactionOrderByRelationAggregateInput
+  promptConfiguration?: Prisma.PromptConfigurationOrderByWithRelationInput
 }
 
 export type TrackedEntityWhereUniqueInput = Prisma.AtLeast<{
   id?: string
+  facebookPageUrl?: string
   AND?: Prisma.TrackedEntityWhereInput | Prisma.TrackedEntityWhereInput[]
   OR?: Prisma.TrackedEntityWhereInput[]
   NOT?: Prisma.TrackedEntityWhereInput | Prisma.TrackedEntityWhereInput[]
+  type?: Prisma.EnumTrackedEntityTypeFilter<"TrackedEntity"> | $Enums.TrackedEntityType
   name?: Prisma.StringFilter<"TrackedEntity"> | string
   description?: Prisma.StringFilter<"TrackedEntity"> | string
   createdAt?: Prisma.DateTimeFilter<"TrackedEntity"> | Date | string
   updatedAt?: Prisma.DateTimeFilter<"TrackedEntity"> | Date | string
-  trackedEntityPosts?: Prisma.TrackedEntityPostListRelationFilter
-  trackedEntityReactions?: Prisma.TrackedEntityReactionListRelationFilter
-  trackedEntityOwnTrackedEntity?: Prisma.XOR<Prisma.TrackedEntityOwnTrackedEntityNullableScalarRelationFilter, Prisma.TrackedEntityOwnTrackedEntityWhereInput> | null
-  trackedEntityOtherTrackedEntity?: Prisma.XOR<Prisma.TrackedEntityOtherTrackedEntityNullableScalarRelationFilter, Prisma.TrackedEntityOtherTrackedEntityWhereInput> | null
-  trackedEntityTrackedEntityConfiguration?: Prisma.XOR<Prisma.TrackedEntityTrackedEntityConfigurationNullableScalarRelationFilter, Prisma.TrackedEntityTrackedEntityConfigurationWhereInput> | null
-}, "id">
+  posts?: Prisma.PostListRelationFilter
+  reactions?: Prisma.ReactionListRelationFilter
+  promptConfiguration?: Prisma.XOR<Prisma.PromptConfigurationNullableScalarRelationFilter, Prisma.PromptConfigurationWhereInput> | null
+}, "id" | "facebookPageUrl">
 
 export type TrackedEntityOrderByWithAggregationInput = {
   id?: Prisma.SortOrder
+  type?: Prisma.SortOrder
   name?: Prisma.SortOrder
   description?: Prisma.SortOrder
+  facebookPageUrl?: Prisma.SortOrder
   createdAt?: Prisma.SortOrder
   updatedAt?: Prisma.SortOrder
   _count?: Prisma.TrackedEntityCountOrderByAggregateInput
@@ -234,108 +250,122 @@ export type TrackedEntityScalarWhereWithAggregatesInput = {
   OR?: Prisma.TrackedEntityScalarWhereWithAggregatesInput[]
   NOT?: Prisma.TrackedEntityScalarWhereWithAggregatesInput | Prisma.TrackedEntityScalarWhereWithAggregatesInput[]
   id?: Prisma.StringWithAggregatesFilter<"TrackedEntity"> | string
+  type?: Prisma.EnumTrackedEntityTypeWithAggregatesFilter<"TrackedEntity"> | $Enums.TrackedEntityType
   name?: Prisma.StringWithAggregatesFilter<"TrackedEntity"> | string
   description?: Prisma.StringWithAggregatesFilter<"TrackedEntity"> | string
+  facebookPageUrl?: Prisma.StringWithAggregatesFilter<"TrackedEntity"> | string
   createdAt?: Prisma.DateTimeWithAggregatesFilter<"TrackedEntity"> | Date | string
   updatedAt?: Prisma.DateTimeWithAggregatesFilter<"TrackedEntity"> | Date | string
 }
 
 export type TrackedEntityCreateInput = {
   id?: string
+  type: $Enums.TrackedEntityType
   name: string
   description: string
+  facebookPageUrl: string
   createdAt?: Date | string
   updatedAt?: Date | string
-  trackedEntityPosts?: Prisma.TrackedEntityPostCreateNestedManyWithoutTrackedEntityInput
-  trackedEntityReactions?: Prisma.TrackedEntityReactionCreateNestedManyWithoutTrackedEntityInput
-  trackedEntityOwnTrackedEntity?: Prisma.TrackedEntityOwnTrackedEntityCreateNestedOneWithoutTrackedEntityInput
-  trackedEntityOtherTrackedEntity?: Prisma.TrackedEntityOtherTrackedEntityCreateNestedOneWithoutTrackedEntityInput
-  trackedEntityTrackedEntityConfiguration?: Prisma.TrackedEntityTrackedEntityConfigurationCreateNestedOneWithoutTrackedEntityInput
+  posts?: Prisma.PostCreateNestedManyWithoutTrackedEntityInput
+  reactions?: Prisma.ReactionCreateNestedManyWithoutTrackedEntityInput
+  promptConfiguration?: Prisma.PromptConfigurationCreateNestedOneWithoutTrackedEntityInput
 }
 
 export type TrackedEntityUncheckedCreateInput = {
   id?: string
+  type: $Enums.TrackedEntityType
   name: string
   description: string
+  facebookPageUrl: string
   createdAt?: Date | string
   updatedAt?: Date | string
-  trackedEntityPosts?: Prisma.TrackedEntityPostUncheckedCreateNestedManyWithoutTrackedEntityInput
-  trackedEntityReactions?: Prisma.TrackedEntityReactionUncheckedCreateNestedManyWithoutTrackedEntityInput
-  trackedEntityOwnTrackedEntity?: Prisma.TrackedEntityOwnTrackedEntityUncheckedCreateNestedOneWithoutTrackedEntityInput
-  trackedEntityOtherTrackedEntity?: Prisma.TrackedEntityOtherTrackedEntityUncheckedCreateNestedOneWithoutTrackedEntityInput
-  trackedEntityTrackedEntityConfiguration?: Prisma.TrackedEntityTrackedEntityConfigurationUncheckedCreateNestedOneWithoutTrackedEntityInput
+  posts?: Prisma.PostUncheckedCreateNestedManyWithoutTrackedEntityInput
+  reactions?: Prisma.ReactionUncheckedCreateNestedManyWithoutTrackedEntityInput
+  promptConfiguration?: Prisma.PromptConfigurationUncheckedCreateNestedOneWithoutTrackedEntityInput
 }
 
 export type TrackedEntityUpdateInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
+  type?: Prisma.EnumTrackedEntityTypeFieldUpdateOperationsInput | $Enums.TrackedEntityType
   name?: Prisma.StringFieldUpdateOperationsInput | string
   description?: Prisma.StringFieldUpdateOperationsInput | string
+  facebookPageUrl?: Prisma.StringFieldUpdateOperationsInput | string
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
-  trackedEntityPosts?: Prisma.TrackedEntityPostUpdateManyWithoutTrackedEntityNestedInput
-  trackedEntityReactions?: Prisma.TrackedEntityReactionUpdateManyWithoutTrackedEntityNestedInput
-  trackedEntityOwnTrackedEntity?: Prisma.TrackedEntityOwnTrackedEntityUpdateOneWithoutTrackedEntityNestedInput
-  trackedEntityOtherTrackedEntity?: Prisma.TrackedEntityOtherTrackedEntityUpdateOneWithoutTrackedEntityNestedInput
-  trackedEntityTrackedEntityConfiguration?: Prisma.TrackedEntityTrackedEntityConfigurationUpdateOneWithoutTrackedEntityNestedInput
+  posts?: Prisma.PostUpdateManyWithoutTrackedEntityNestedInput
+  reactions?: Prisma.ReactionUpdateManyWithoutTrackedEntityNestedInput
+  promptConfiguration?: Prisma.PromptConfigurationUpdateOneWithoutTrackedEntityNestedInput
 }
 
 export type TrackedEntityUncheckedUpdateInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
+  type?: Prisma.EnumTrackedEntityTypeFieldUpdateOperationsInput | $Enums.TrackedEntityType
   name?: Prisma.StringFieldUpdateOperationsInput | string
   description?: Prisma.StringFieldUpdateOperationsInput | string
+  facebookPageUrl?: Prisma.StringFieldUpdateOperationsInput | string
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
-  trackedEntityPosts?: Prisma.TrackedEntityPostUncheckedUpdateManyWithoutTrackedEntityNestedInput
-  trackedEntityReactions?: Prisma.TrackedEntityReactionUncheckedUpdateManyWithoutTrackedEntityNestedInput
-  trackedEntityOwnTrackedEntity?: Prisma.TrackedEntityOwnTrackedEntityUncheckedUpdateOneWithoutTrackedEntityNestedInput
-  trackedEntityOtherTrackedEntity?: Prisma.TrackedEntityOtherTrackedEntityUncheckedUpdateOneWithoutTrackedEntityNestedInput
-  trackedEntityTrackedEntityConfiguration?: Prisma.TrackedEntityTrackedEntityConfigurationUncheckedUpdateOneWithoutTrackedEntityNestedInput
+  posts?: Prisma.PostUncheckedUpdateManyWithoutTrackedEntityNestedInput
+  reactions?: Prisma.ReactionUncheckedUpdateManyWithoutTrackedEntityNestedInput
+  promptConfiguration?: Prisma.PromptConfigurationUncheckedUpdateOneWithoutTrackedEntityNestedInput
 }
 
 export type TrackedEntityCreateManyInput = {
   id?: string
+  type: $Enums.TrackedEntityType
   name: string
   description: string
+  facebookPageUrl: string
   createdAt?: Date | string
   updatedAt?: Date | string
 }
 
 export type TrackedEntityUpdateManyMutationInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
+  type?: Prisma.EnumTrackedEntityTypeFieldUpdateOperationsInput | $Enums.TrackedEntityType
   name?: Prisma.StringFieldUpdateOperationsInput | string
   description?: Prisma.StringFieldUpdateOperationsInput | string
+  facebookPageUrl?: Prisma.StringFieldUpdateOperationsInput | string
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
 }
 
 export type TrackedEntityUncheckedUpdateManyInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
+  type?: Prisma.EnumTrackedEntityTypeFieldUpdateOperationsInput | $Enums.TrackedEntityType
   name?: Prisma.StringFieldUpdateOperationsInput | string
   description?: Prisma.StringFieldUpdateOperationsInput | string
+  facebookPageUrl?: Prisma.StringFieldUpdateOperationsInput | string
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
 }
 
 export type TrackedEntityCountOrderByAggregateInput = {
   id?: Prisma.SortOrder
+  type?: Prisma.SortOrder
   name?: Prisma.SortOrder
   description?: Prisma.SortOrder
+  facebookPageUrl?: Prisma.SortOrder
   createdAt?: Prisma.SortOrder
   updatedAt?: Prisma.SortOrder
 }
 
 export type TrackedEntityMaxOrderByAggregateInput = {
   id?: Prisma.SortOrder
+  type?: Prisma.SortOrder
   name?: Prisma.SortOrder
   description?: Prisma.SortOrder
+  facebookPageUrl?: Prisma.SortOrder
   createdAt?: Prisma.SortOrder
   updatedAt?: Prisma.SortOrder
 }
 
 export type TrackedEntityMinOrderByAggregateInput = {
   id?: Prisma.SortOrder
+  type?: Prisma.SortOrder
   name?: Prisma.SortOrder
   description?: Prisma.SortOrder
+  facebookPageUrl?: Prisma.SortOrder
   createdAt?: Prisma.SortOrder
   updatedAt?: Prisma.SortOrder
 }
@@ -345,394 +375,242 @@ export type TrackedEntityScalarRelationFilter = {
   isNot?: Prisma.TrackedEntityWhereInput
 }
 
-export type TrackedEntityCreateNestedOneWithoutTrackedEntityOwnTrackedEntityInput = {
-  create?: Prisma.XOR<Prisma.TrackedEntityCreateWithoutTrackedEntityOwnTrackedEntityInput, Prisma.TrackedEntityUncheckedCreateWithoutTrackedEntityOwnTrackedEntityInput>
-  connectOrCreate?: Prisma.TrackedEntityCreateOrConnectWithoutTrackedEntityOwnTrackedEntityInput
+export type EnumTrackedEntityTypeFieldUpdateOperationsInput = {
+  set?: $Enums.TrackedEntityType
+}
+
+export type TrackedEntityCreateNestedOneWithoutPromptConfigurationInput = {
+  create?: Prisma.XOR<Prisma.TrackedEntityCreateWithoutPromptConfigurationInput, Prisma.TrackedEntityUncheckedCreateWithoutPromptConfigurationInput>
+  connectOrCreate?: Prisma.TrackedEntityCreateOrConnectWithoutPromptConfigurationInput
   connect?: Prisma.TrackedEntityWhereUniqueInput
 }
 
-export type TrackedEntityUpdateOneRequiredWithoutTrackedEntityOwnTrackedEntityNestedInput = {
-  create?: Prisma.XOR<Prisma.TrackedEntityCreateWithoutTrackedEntityOwnTrackedEntityInput, Prisma.TrackedEntityUncheckedCreateWithoutTrackedEntityOwnTrackedEntityInput>
-  connectOrCreate?: Prisma.TrackedEntityCreateOrConnectWithoutTrackedEntityOwnTrackedEntityInput
-  upsert?: Prisma.TrackedEntityUpsertWithoutTrackedEntityOwnTrackedEntityInput
+export type TrackedEntityUpdateOneRequiredWithoutPromptConfigurationNestedInput = {
+  create?: Prisma.XOR<Prisma.TrackedEntityCreateWithoutPromptConfigurationInput, Prisma.TrackedEntityUncheckedCreateWithoutPromptConfigurationInput>
+  connectOrCreate?: Prisma.TrackedEntityCreateOrConnectWithoutPromptConfigurationInput
+  upsert?: Prisma.TrackedEntityUpsertWithoutPromptConfigurationInput
   connect?: Prisma.TrackedEntityWhereUniqueInput
-  update?: Prisma.XOR<Prisma.XOR<Prisma.TrackedEntityUpdateToOneWithWhereWithoutTrackedEntityOwnTrackedEntityInput, Prisma.TrackedEntityUpdateWithoutTrackedEntityOwnTrackedEntityInput>, Prisma.TrackedEntityUncheckedUpdateWithoutTrackedEntityOwnTrackedEntityInput>
+  update?: Prisma.XOR<Prisma.XOR<Prisma.TrackedEntityUpdateToOneWithWhereWithoutPromptConfigurationInput, Prisma.TrackedEntityUpdateWithoutPromptConfigurationInput>, Prisma.TrackedEntityUncheckedUpdateWithoutPromptConfigurationInput>
 }
 
-export type TrackedEntityCreateNestedOneWithoutTrackedEntityOtherTrackedEntityInput = {
-  create?: Prisma.XOR<Prisma.TrackedEntityCreateWithoutTrackedEntityOtherTrackedEntityInput, Prisma.TrackedEntityUncheckedCreateWithoutTrackedEntityOtherTrackedEntityInput>
-  connectOrCreate?: Prisma.TrackedEntityCreateOrConnectWithoutTrackedEntityOtherTrackedEntityInput
-  connect?: Prisma.TrackedEntityWhereUniqueInput
-}
-
-export type TrackedEntityUpdateOneRequiredWithoutTrackedEntityOtherTrackedEntityNestedInput = {
-  create?: Prisma.XOR<Prisma.TrackedEntityCreateWithoutTrackedEntityOtherTrackedEntityInput, Prisma.TrackedEntityUncheckedCreateWithoutTrackedEntityOtherTrackedEntityInput>
-  connectOrCreate?: Prisma.TrackedEntityCreateOrConnectWithoutTrackedEntityOtherTrackedEntityInput
-  upsert?: Prisma.TrackedEntityUpsertWithoutTrackedEntityOtherTrackedEntityInput
-  connect?: Prisma.TrackedEntityWhereUniqueInput
-  update?: Prisma.XOR<Prisma.XOR<Prisma.TrackedEntityUpdateToOneWithWhereWithoutTrackedEntityOtherTrackedEntityInput, Prisma.TrackedEntityUpdateWithoutTrackedEntityOtherTrackedEntityInput>, Prisma.TrackedEntityUncheckedUpdateWithoutTrackedEntityOtherTrackedEntityInput>
-}
-
-export type TrackedEntityCreateNestedOneWithoutTrackedEntityTrackedEntityConfigurationInput = {
-  create?: Prisma.XOR<Prisma.TrackedEntityCreateWithoutTrackedEntityTrackedEntityConfigurationInput, Prisma.TrackedEntityUncheckedCreateWithoutTrackedEntityTrackedEntityConfigurationInput>
-  connectOrCreate?: Prisma.TrackedEntityCreateOrConnectWithoutTrackedEntityTrackedEntityConfigurationInput
+export type TrackedEntityCreateNestedOneWithoutPostsInput = {
+  create?: Prisma.XOR<Prisma.TrackedEntityCreateWithoutPostsInput, Prisma.TrackedEntityUncheckedCreateWithoutPostsInput>
+  connectOrCreate?: Prisma.TrackedEntityCreateOrConnectWithoutPostsInput
   connect?: Prisma.TrackedEntityWhereUniqueInput
 }
 
-export type TrackedEntityUpdateOneRequiredWithoutTrackedEntityTrackedEntityConfigurationNestedInput = {
-  create?: Prisma.XOR<Prisma.TrackedEntityCreateWithoutTrackedEntityTrackedEntityConfigurationInput, Prisma.TrackedEntityUncheckedCreateWithoutTrackedEntityTrackedEntityConfigurationInput>
-  connectOrCreate?: Prisma.TrackedEntityCreateOrConnectWithoutTrackedEntityTrackedEntityConfigurationInput
-  upsert?: Prisma.TrackedEntityUpsertWithoutTrackedEntityTrackedEntityConfigurationInput
+export type TrackedEntityUpdateOneRequiredWithoutPostsNestedInput = {
+  create?: Prisma.XOR<Prisma.TrackedEntityCreateWithoutPostsInput, Prisma.TrackedEntityUncheckedCreateWithoutPostsInput>
+  connectOrCreate?: Prisma.TrackedEntityCreateOrConnectWithoutPostsInput
+  upsert?: Prisma.TrackedEntityUpsertWithoutPostsInput
   connect?: Prisma.TrackedEntityWhereUniqueInput
-  update?: Prisma.XOR<Prisma.XOR<Prisma.TrackedEntityUpdateToOneWithWhereWithoutTrackedEntityTrackedEntityConfigurationInput, Prisma.TrackedEntityUpdateWithoutTrackedEntityTrackedEntityConfigurationInput>, Prisma.TrackedEntityUncheckedUpdateWithoutTrackedEntityTrackedEntityConfigurationInput>
+  update?: Prisma.XOR<Prisma.XOR<Prisma.TrackedEntityUpdateToOneWithWhereWithoutPostsInput, Prisma.TrackedEntityUpdateWithoutPostsInput>, Prisma.TrackedEntityUncheckedUpdateWithoutPostsInput>
 }
 
-export type TrackedEntityCreateNestedOneWithoutTrackedEntityPostsInput = {
-  create?: Prisma.XOR<Prisma.TrackedEntityCreateWithoutTrackedEntityPostsInput, Prisma.TrackedEntityUncheckedCreateWithoutTrackedEntityPostsInput>
-  connectOrCreate?: Prisma.TrackedEntityCreateOrConnectWithoutTrackedEntityPostsInput
-  connect?: Prisma.TrackedEntityWhereUniqueInput
-}
-
-export type TrackedEntityUpdateOneRequiredWithoutTrackedEntityPostsNestedInput = {
-  create?: Prisma.XOR<Prisma.TrackedEntityCreateWithoutTrackedEntityPostsInput, Prisma.TrackedEntityUncheckedCreateWithoutTrackedEntityPostsInput>
-  connectOrCreate?: Prisma.TrackedEntityCreateOrConnectWithoutTrackedEntityPostsInput
-  upsert?: Prisma.TrackedEntityUpsertWithoutTrackedEntityPostsInput
-  connect?: Prisma.TrackedEntityWhereUniqueInput
-  update?: Prisma.XOR<Prisma.XOR<Prisma.TrackedEntityUpdateToOneWithWhereWithoutTrackedEntityPostsInput, Prisma.TrackedEntityUpdateWithoutTrackedEntityPostsInput>, Prisma.TrackedEntityUncheckedUpdateWithoutTrackedEntityPostsInput>
-}
-
-export type TrackedEntityCreateNestedOneWithoutTrackedEntityReactionsInput = {
-  create?: Prisma.XOR<Prisma.TrackedEntityCreateWithoutTrackedEntityReactionsInput, Prisma.TrackedEntityUncheckedCreateWithoutTrackedEntityReactionsInput>
-  connectOrCreate?: Prisma.TrackedEntityCreateOrConnectWithoutTrackedEntityReactionsInput
+export type TrackedEntityCreateNestedOneWithoutReactionsInput = {
+  create?: Prisma.XOR<Prisma.TrackedEntityCreateWithoutReactionsInput, Prisma.TrackedEntityUncheckedCreateWithoutReactionsInput>
+  connectOrCreate?: Prisma.TrackedEntityCreateOrConnectWithoutReactionsInput
   connect?: Prisma.TrackedEntityWhereUniqueInput
 }
 
-export type TrackedEntityUpdateOneRequiredWithoutTrackedEntityReactionsNestedInput = {
-  create?: Prisma.XOR<Prisma.TrackedEntityCreateWithoutTrackedEntityReactionsInput, Prisma.TrackedEntityUncheckedCreateWithoutTrackedEntityReactionsInput>
-  connectOrCreate?: Prisma.TrackedEntityCreateOrConnectWithoutTrackedEntityReactionsInput
-  upsert?: Prisma.TrackedEntityUpsertWithoutTrackedEntityReactionsInput
+export type TrackedEntityUpdateOneRequiredWithoutReactionsNestedInput = {
+  create?: Prisma.XOR<Prisma.TrackedEntityCreateWithoutReactionsInput, Prisma.TrackedEntityUncheckedCreateWithoutReactionsInput>
+  connectOrCreate?: Prisma.TrackedEntityCreateOrConnectWithoutReactionsInput
+  upsert?: Prisma.TrackedEntityUpsertWithoutReactionsInput
   connect?: Prisma.TrackedEntityWhereUniqueInput
-  update?: Prisma.XOR<Prisma.XOR<Prisma.TrackedEntityUpdateToOneWithWhereWithoutTrackedEntityReactionsInput, Prisma.TrackedEntityUpdateWithoutTrackedEntityReactionsInput>, Prisma.TrackedEntityUncheckedUpdateWithoutTrackedEntityReactionsInput>
+  update?: Prisma.XOR<Prisma.XOR<Prisma.TrackedEntityUpdateToOneWithWhereWithoutReactionsInput, Prisma.TrackedEntityUpdateWithoutReactionsInput>, Prisma.TrackedEntityUncheckedUpdateWithoutReactionsInput>
 }
 
-export type TrackedEntityCreateWithoutTrackedEntityOwnTrackedEntityInput = {
+export type TrackedEntityCreateWithoutPromptConfigurationInput = {
   id?: string
+  type: $Enums.TrackedEntityType
   name: string
   description: string
+  facebookPageUrl: string
   createdAt?: Date | string
   updatedAt?: Date | string
-  trackedEntityPosts?: Prisma.TrackedEntityPostCreateNestedManyWithoutTrackedEntityInput
-  trackedEntityReactions?: Prisma.TrackedEntityReactionCreateNestedManyWithoutTrackedEntityInput
-  trackedEntityOtherTrackedEntity?: Prisma.TrackedEntityOtherTrackedEntityCreateNestedOneWithoutTrackedEntityInput
-  trackedEntityTrackedEntityConfiguration?: Prisma.TrackedEntityTrackedEntityConfigurationCreateNestedOneWithoutTrackedEntityInput
+  posts?: Prisma.PostCreateNestedManyWithoutTrackedEntityInput
+  reactions?: Prisma.ReactionCreateNestedManyWithoutTrackedEntityInput
 }
 
-export type TrackedEntityUncheckedCreateWithoutTrackedEntityOwnTrackedEntityInput = {
+export type TrackedEntityUncheckedCreateWithoutPromptConfigurationInput = {
   id?: string
+  type: $Enums.TrackedEntityType
   name: string
   description: string
+  facebookPageUrl: string
   createdAt?: Date | string
   updatedAt?: Date | string
-  trackedEntityPosts?: Prisma.TrackedEntityPostUncheckedCreateNestedManyWithoutTrackedEntityInput
-  trackedEntityReactions?: Prisma.TrackedEntityReactionUncheckedCreateNestedManyWithoutTrackedEntityInput
-  trackedEntityOtherTrackedEntity?: Prisma.TrackedEntityOtherTrackedEntityUncheckedCreateNestedOneWithoutTrackedEntityInput
-  trackedEntityTrackedEntityConfiguration?: Prisma.TrackedEntityTrackedEntityConfigurationUncheckedCreateNestedOneWithoutTrackedEntityInput
+  posts?: Prisma.PostUncheckedCreateNestedManyWithoutTrackedEntityInput
+  reactions?: Prisma.ReactionUncheckedCreateNestedManyWithoutTrackedEntityInput
 }
 
-export type TrackedEntityCreateOrConnectWithoutTrackedEntityOwnTrackedEntityInput = {
+export type TrackedEntityCreateOrConnectWithoutPromptConfigurationInput = {
   where: Prisma.TrackedEntityWhereUniqueInput
-  create: Prisma.XOR<Prisma.TrackedEntityCreateWithoutTrackedEntityOwnTrackedEntityInput, Prisma.TrackedEntityUncheckedCreateWithoutTrackedEntityOwnTrackedEntityInput>
+  create: Prisma.XOR<Prisma.TrackedEntityCreateWithoutPromptConfigurationInput, Prisma.TrackedEntityUncheckedCreateWithoutPromptConfigurationInput>
 }
 
-export type TrackedEntityUpsertWithoutTrackedEntityOwnTrackedEntityInput = {
-  update: Prisma.XOR<Prisma.TrackedEntityUpdateWithoutTrackedEntityOwnTrackedEntityInput, Prisma.TrackedEntityUncheckedUpdateWithoutTrackedEntityOwnTrackedEntityInput>
-  create: Prisma.XOR<Prisma.TrackedEntityCreateWithoutTrackedEntityOwnTrackedEntityInput, Prisma.TrackedEntityUncheckedCreateWithoutTrackedEntityOwnTrackedEntityInput>
+export type TrackedEntityUpsertWithoutPromptConfigurationInput = {
+  update: Prisma.XOR<Prisma.TrackedEntityUpdateWithoutPromptConfigurationInput, Prisma.TrackedEntityUncheckedUpdateWithoutPromptConfigurationInput>
+  create: Prisma.XOR<Prisma.TrackedEntityCreateWithoutPromptConfigurationInput, Prisma.TrackedEntityUncheckedCreateWithoutPromptConfigurationInput>
   where?: Prisma.TrackedEntityWhereInput
 }
 
-export type TrackedEntityUpdateToOneWithWhereWithoutTrackedEntityOwnTrackedEntityInput = {
+export type TrackedEntityUpdateToOneWithWhereWithoutPromptConfigurationInput = {
   where?: Prisma.TrackedEntityWhereInput
-  data: Prisma.XOR<Prisma.TrackedEntityUpdateWithoutTrackedEntityOwnTrackedEntityInput, Prisma.TrackedEntityUncheckedUpdateWithoutTrackedEntityOwnTrackedEntityInput>
+  data: Prisma.XOR<Prisma.TrackedEntityUpdateWithoutPromptConfigurationInput, Prisma.TrackedEntityUncheckedUpdateWithoutPromptConfigurationInput>
 }
 
-export type TrackedEntityUpdateWithoutTrackedEntityOwnTrackedEntityInput = {
+export type TrackedEntityUpdateWithoutPromptConfigurationInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
+  type?: Prisma.EnumTrackedEntityTypeFieldUpdateOperationsInput | $Enums.TrackedEntityType
   name?: Prisma.StringFieldUpdateOperationsInput | string
   description?: Prisma.StringFieldUpdateOperationsInput | string
+  facebookPageUrl?: Prisma.StringFieldUpdateOperationsInput | string
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
-  trackedEntityPosts?: Prisma.TrackedEntityPostUpdateManyWithoutTrackedEntityNestedInput
-  trackedEntityReactions?: Prisma.TrackedEntityReactionUpdateManyWithoutTrackedEntityNestedInput
-  trackedEntityOtherTrackedEntity?: Prisma.TrackedEntityOtherTrackedEntityUpdateOneWithoutTrackedEntityNestedInput
-  trackedEntityTrackedEntityConfiguration?: Prisma.TrackedEntityTrackedEntityConfigurationUpdateOneWithoutTrackedEntityNestedInput
+  posts?: Prisma.PostUpdateManyWithoutTrackedEntityNestedInput
+  reactions?: Prisma.ReactionUpdateManyWithoutTrackedEntityNestedInput
 }
 
-export type TrackedEntityUncheckedUpdateWithoutTrackedEntityOwnTrackedEntityInput = {
+export type TrackedEntityUncheckedUpdateWithoutPromptConfigurationInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
+  type?: Prisma.EnumTrackedEntityTypeFieldUpdateOperationsInput | $Enums.TrackedEntityType
   name?: Prisma.StringFieldUpdateOperationsInput | string
   description?: Prisma.StringFieldUpdateOperationsInput | string
+  facebookPageUrl?: Prisma.StringFieldUpdateOperationsInput | string
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
-  trackedEntityPosts?: Prisma.TrackedEntityPostUncheckedUpdateManyWithoutTrackedEntityNestedInput
-  trackedEntityReactions?: Prisma.TrackedEntityReactionUncheckedUpdateManyWithoutTrackedEntityNestedInput
-  trackedEntityOtherTrackedEntity?: Prisma.TrackedEntityOtherTrackedEntityUncheckedUpdateOneWithoutTrackedEntityNestedInput
-  trackedEntityTrackedEntityConfiguration?: Prisma.TrackedEntityTrackedEntityConfigurationUncheckedUpdateOneWithoutTrackedEntityNestedInput
+  posts?: Prisma.PostUncheckedUpdateManyWithoutTrackedEntityNestedInput
+  reactions?: Prisma.ReactionUncheckedUpdateManyWithoutTrackedEntityNestedInput
 }
 
-export type TrackedEntityCreateWithoutTrackedEntityOtherTrackedEntityInput = {
+export type TrackedEntityCreateWithoutPostsInput = {
   id?: string
+  type: $Enums.TrackedEntityType
   name: string
   description: string
+  facebookPageUrl: string
   createdAt?: Date | string
   updatedAt?: Date | string
-  trackedEntityPosts?: Prisma.TrackedEntityPostCreateNestedManyWithoutTrackedEntityInput
-  trackedEntityReactions?: Prisma.TrackedEntityReactionCreateNestedManyWithoutTrackedEntityInput
-  trackedEntityOwnTrackedEntity?: Prisma.TrackedEntityOwnTrackedEntityCreateNestedOneWithoutTrackedEntityInput
-  trackedEntityTrackedEntityConfiguration?: Prisma.TrackedEntityTrackedEntityConfigurationCreateNestedOneWithoutTrackedEntityInput
+  reactions?: Prisma.ReactionCreateNestedManyWithoutTrackedEntityInput
+  promptConfiguration?: Prisma.PromptConfigurationCreateNestedOneWithoutTrackedEntityInput
 }
 
-export type TrackedEntityUncheckedCreateWithoutTrackedEntityOtherTrackedEntityInput = {
+export type TrackedEntityUncheckedCreateWithoutPostsInput = {
   id?: string
+  type: $Enums.TrackedEntityType
   name: string
   description: string
+  facebookPageUrl: string
   createdAt?: Date | string
   updatedAt?: Date | string
-  trackedEntityPosts?: Prisma.TrackedEntityPostUncheckedCreateNestedManyWithoutTrackedEntityInput
-  trackedEntityReactions?: Prisma.TrackedEntityReactionUncheckedCreateNestedManyWithoutTrackedEntityInput
-  trackedEntityOwnTrackedEntity?: Prisma.TrackedEntityOwnTrackedEntityUncheckedCreateNestedOneWithoutTrackedEntityInput
-  trackedEntityTrackedEntityConfiguration?: Prisma.TrackedEntityTrackedEntityConfigurationUncheckedCreateNestedOneWithoutTrackedEntityInput
+  reactions?: Prisma.ReactionUncheckedCreateNestedManyWithoutTrackedEntityInput
+  promptConfiguration?: Prisma.PromptConfigurationUncheckedCreateNestedOneWithoutTrackedEntityInput
 }
 
-export type TrackedEntityCreateOrConnectWithoutTrackedEntityOtherTrackedEntityInput = {
+export type TrackedEntityCreateOrConnectWithoutPostsInput = {
   where: Prisma.TrackedEntityWhereUniqueInput
-  create: Prisma.XOR<Prisma.TrackedEntityCreateWithoutTrackedEntityOtherTrackedEntityInput, Prisma.TrackedEntityUncheckedCreateWithoutTrackedEntityOtherTrackedEntityInput>
+  create: Prisma.XOR<Prisma.TrackedEntityCreateWithoutPostsInput, Prisma.TrackedEntityUncheckedCreateWithoutPostsInput>
 }
 
-export type TrackedEntityUpsertWithoutTrackedEntityOtherTrackedEntityInput = {
-  update: Prisma.XOR<Prisma.TrackedEntityUpdateWithoutTrackedEntityOtherTrackedEntityInput, Prisma.TrackedEntityUncheckedUpdateWithoutTrackedEntityOtherTrackedEntityInput>
-  create: Prisma.XOR<Prisma.TrackedEntityCreateWithoutTrackedEntityOtherTrackedEntityInput, Prisma.TrackedEntityUncheckedCreateWithoutTrackedEntityOtherTrackedEntityInput>
+export type TrackedEntityUpsertWithoutPostsInput = {
+  update: Prisma.XOR<Prisma.TrackedEntityUpdateWithoutPostsInput, Prisma.TrackedEntityUncheckedUpdateWithoutPostsInput>
+  create: Prisma.XOR<Prisma.TrackedEntityCreateWithoutPostsInput, Prisma.TrackedEntityUncheckedCreateWithoutPostsInput>
   where?: Prisma.TrackedEntityWhereInput
 }
 
-export type TrackedEntityUpdateToOneWithWhereWithoutTrackedEntityOtherTrackedEntityInput = {
+export type TrackedEntityUpdateToOneWithWhereWithoutPostsInput = {
   where?: Prisma.TrackedEntityWhereInput
-  data: Prisma.XOR<Prisma.TrackedEntityUpdateWithoutTrackedEntityOtherTrackedEntityInput, Prisma.TrackedEntityUncheckedUpdateWithoutTrackedEntityOtherTrackedEntityInput>
+  data: Prisma.XOR<Prisma.TrackedEntityUpdateWithoutPostsInput, Prisma.TrackedEntityUncheckedUpdateWithoutPostsInput>
 }
 
-export type TrackedEntityUpdateWithoutTrackedEntityOtherTrackedEntityInput = {
+export type TrackedEntityUpdateWithoutPostsInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
+  type?: Prisma.EnumTrackedEntityTypeFieldUpdateOperationsInput | $Enums.TrackedEntityType
   name?: Prisma.StringFieldUpdateOperationsInput | string
   description?: Prisma.StringFieldUpdateOperationsInput | string
+  facebookPageUrl?: Prisma.StringFieldUpdateOperationsInput | string
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
-  trackedEntityPosts?: Prisma.TrackedEntityPostUpdateManyWithoutTrackedEntityNestedInput
-  trackedEntityReactions?: Prisma.TrackedEntityReactionUpdateManyWithoutTrackedEntityNestedInput
-  trackedEntityOwnTrackedEntity?: Prisma.TrackedEntityOwnTrackedEntityUpdateOneWithoutTrackedEntityNestedInput
-  trackedEntityTrackedEntityConfiguration?: Prisma.TrackedEntityTrackedEntityConfigurationUpdateOneWithoutTrackedEntityNestedInput
+  reactions?: Prisma.ReactionUpdateManyWithoutTrackedEntityNestedInput
+  promptConfiguration?: Prisma.PromptConfigurationUpdateOneWithoutTrackedEntityNestedInput
 }
 
-export type TrackedEntityUncheckedUpdateWithoutTrackedEntityOtherTrackedEntityInput = {
+export type TrackedEntityUncheckedUpdateWithoutPostsInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
+  type?: Prisma.EnumTrackedEntityTypeFieldUpdateOperationsInput | $Enums.TrackedEntityType
   name?: Prisma.StringFieldUpdateOperationsInput | string
   description?: Prisma.StringFieldUpdateOperationsInput | string
+  facebookPageUrl?: Prisma.StringFieldUpdateOperationsInput | string
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
-  trackedEntityPosts?: Prisma.TrackedEntityPostUncheckedUpdateManyWithoutTrackedEntityNestedInput
-  trackedEntityReactions?: Prisma.TrackedEntityReactionUncheckedUpdateManyWithoutTrackedEntityNestedInput
-  trackedEntityOwnTrackedEntity?: Prisma.TrackedEntityOwnTrackedEntityUncheckedUpdateOneWithoutTrackedEntityNestedInput
-  trackedEntityTrackedEntityConfiguration?: Prisma.TrackedEntityTrackedEntityConfigurationUncheckedUpdateOneWithoutTrackedEntityNestedInput
+  reactions?: Prisma.ReactionUncheckedUpdateManyWithoutTrackedEntityNestedInput
+  promptConfiguration?: Prisma.PromptConfigurationUncheckedUpdateOneWithoutTrackedEntityNestedInput
 }
 
-export type TrackedEntityCreateWithoutTrackedEntityTrackedEntityConfigurationInput = {
+export type TrackedEntityCreateWithoutReactionsInput = {
   id?: string
+  type: $Enums.TrackedEntityType
   name: string
   description: string
+  facebookPageUrl: string
   createdAt?: Date | string
   updatedAt?: Date | string
-  trackedEntityPosts?: Prisma.TrackedEntityPostCreateNestedManyWithoutTrackedEntityInput
-  trackedEntityReactions?: Prisma.TrackedEntityReactionCreateNestedManyWithoutTrackedEntityInput
-  trackedEntityOwnTrackedEntity?: Prisma.TrackedEntityOwnTrackedEntityCreateNestedOneWithoutTrackedEntityInput
-  trackedEntityOtherTrackedEntity?: Prisma.TrackedEntityOtherTrackedEntityCreateNestedOneWithoutTrackedEntityInput
+  posts?: Prisma.PostCreateNestedManyWithoutTrackedEntityInput
+  promptConfiguration?: Prisma.PromptConfigurationCreateNestedOneWithoutTrackedEntityInput
 }
 
-export type TrackedEntityUncheckedCreateWithoutTrackedEntityTrackedEntityConfigurationInput = {
+export type TrackedEntityUncheckedCreateWithoutReactionsInput = {
   id?: string
+  type: $Enums.TrackedEntityType
   name: string
   description: string
+  facebookPageUrl: string
   createdAt?: Date | string
   updatedAt?: Date | string
-  trackedEntityPosts?: Prisma.TrackedEntityPostUncheckedCreateNestedManyWithoutTrackedEntityInput
-  trackedEntityReactions?: Prisma.TrackedEntityReactionUncheckedCreateNestedManyWithoutTrackedEntityInput
-  trackedEntityOwnTrackedEntity?: Prisma.TrackedEntityOwnTrackedEntityUncheckedCreateNestedOneWithoutTrackedEntityInput
-  trackedEntityOtherTrackedEntity?: Prisma.TrackedEntityOtherTrackedEntityUncheckedCreateNestedOneWithoutTrackedEntityInput
+  posts?: Prisma.PostUncheckedCreateNestedManyWithoutTrackedEntityInput
+  promptConfiguration?: Prisma.PromptConfigurationUncheckedCreateNestedOneWithoutTrackedEntityInput
 }
 
-export type TrackedEntityCreateOrConnectWithoutTrackedEntityTrackedEntityConfigurationInput = {
+export type TrackedEntityCreateOrConnectWithoutReactionsInput = {
   where: Prisma.TrackedEntityWhereUniqueInput
-  create: Prisma.XOR<Prisma.TrackedEntityCreateWithoutTrackedEntityTrackedEntityConfigurationInput, Prisma.TrackedEntityUncheckedCreateWithoutTrackedEntityTrackedEntityConfigurationInput>
+  create: Prisma.XOR<Prisma.TrackedEntityCreateWithoutReactionsInput, Prisma.TrackedEntityUncheckedCreateWithoutReactionsInput>
 }
 
-export type TrackedEntityUpsertWithoutTrackedEntityTrackedEntityConfigurationInput = {
-  update: Prisma.XOR<Prisma.TrackedEntityUpdateWithoutTrackedEntityTrackedEntityConfigurationInput, Prisma.TrackedEntityUncheckedUpdateWithoutTrackedEntityTrackedEntityConfigurationInput>
-  create: Prisma.XOR<Prisma.TrackedEntityCreateWithoutTrackedEntityTrackedEntityConfigurationInput, Prisma.TrackedEntityUncheckedCreateWithoutTrackedEntityTrackedEntityConfigurationInput>
+export type TrackedEntityUpsertWithoutReactionsInput = {
+  update: Prisma.XOR<Prisma.TrackedEntityUpdateWithoutReactionsInput, Prisma.TrackedEntityUncheckedUpdateWithoutReactionsInput>
+  create: Prisma.XOR<Prisma.TrackedEntityCreateWithoutReactionsInput, Prisma.TrackedEntityUncheckedCreateWithoutReactionsInput>
   where?: Prisma.TrackedEntityWhereInput
 }
 
-export type TrackedEntityUpdateToOneWithWhereWithoutTrackedEntityTrackedEntityConfigurationInput = {
+export type TrackedEntityUpdateToOneWithWhereWithoutReactionsInput = {
   where?: Prisma.TrackedEntityWhereInput
-  data: Prisma.XOR<Prisma.TrackedEntityUpdateWithoutTrackedEntityTrackedEntityConfigurationInput, Prisma.TrackedEntityUncheckedUpdateWithoutTrackedEntityTrackedEntityConfigurationInput>
+  data: Prisma.XOR<Prisma.TrackedEntityUpdateWithoutReactionsInput, Prisma.TrackedEntityUncheckedUpdateWithoutReactionsInput>
 }
 
-export type TrackedEntityUpdateWithoutTrackedEntityTrackedEntityConfigurationInput = {
+export type TrackedEntityUpdateWithoutReactionsInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
+  type?: Prisma.EnumTrackedEntityTypeFieldUpdateOperationsInput | $Enums.TrackedEntityType
   name?: Prisma.StringFieldUpdateOperationsInput | string
   description?: Prisma.StringFieldUpdateOperationsInput | string
+  facebookPageUrl?: Prisma.StringFieldUpdateOperationsInput | string
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
-  trackedEntityPosts?: Prisma.TrackedEntityPostUpdateManyWithoutTrackedEntityNestedInput
-  trackedEntityReactions?: Prisma.TrackedEntityReactionUpdateManyWithoutTrackedEntityNestedInput
-  trackedEntityOwnTrackedEntity?: Prisma.TrackedEntityOwnTrackedEntityUpdateOneWithoutTrackedEntityNestedInput
-  trackedEntityOtherTrackedEntity?: Prisma.TrackedEntityOtherTrackedEntityUpdateOneWithoutTrackedEntityNestedInput
+  posts?: Prisma.PostUpdateManyWithoutTrackedEntityNestedInput
+  promptConfiguration?: Prisma.PromptConfigurationUpdateOneWithoutTrackedEntityNestedInput
 }
 
-export type TrackedEntityUncheckedUpdateWithoutTrackedEntityTrackedEntityConfigurationInput = {
+export type TrackedEntityUncheckedUpdateWithoutReactionsInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
+  type?: Prisma.EnumTrackedEntityTypeFieldUpdateOperationsInput | $Enums.TrackedEntityType
   name?: Prisma.StringFieldUpdateOperationsInput | string
   description?: Prisma.StringFieldUpdateOperationsInput | string
+  facebookPageUrl?: Prisma.StringFieldUpdateOperationsInput | string
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
-  trackedEntityPosts?: Prisma.TrackedEntityPostUncheckedUpdateManyWithoutTrackedEntityNestedInput
-  trackedEntityReactions?: Prisma.TrackedEntityReactionUncheckedUpdateManyWithoutTrackedEntityNestedInput
-  trackedEntityOwnTrackedEntity?: Prisma.TrackedEntityOwnTrackedEntityUncheckedUpdateOneWithoutTrackedEntityNestedInput
-  trackedEntityOtherTrackedEntity?: Prisma.TrackedEntityOtherTrackedEntityUncheckedUpdateOneWithoutTrackedEntityNestedInput
-}
-
-export type TrackedEntityCreateWithoutTrackedEntityPostsInput = {
-  id?: string
-  name: string
-  description: string
-  createdAt?: Date | string
-  updatedAt?: Date | string
-  trackedEntityReactions?: Prisma.TrackedEntityReactionCreateNestedManyWithoutTrackedEntityInput
-  trackedEntityOwnTrackedEntity?: Prisma.TrackedEntityOwnTrackedEntityCreateNestedOneWithoutTrackedEntityInput
-  trackedEntityOtherTrackedEntity?: Prisma.TrackedEntityOtherTrackedEntityCreateNestedOneWithoutTrackedEntityInput
-  trackedEntityTrackedEntityConfiguration?: Prisma.TrackedEntityTrackedEntityConfigurationCreateNestedOneWithoutTrackedEntityInput
-}
-
-export type TrackedEntityUncheckedCreateWithoutTrackedEntityPostsInput = {
-  id?: string
-  name: string
-  description: string
-  createdAt?: Date | string
-  updatedAt?: Date | string
-  trackedEntityReactions?: Prisma.TrackedEntityReactionUncheckedCreateNestedManyWithoutTrackedEntityInput
-  trackedEntityOwnTrackedEntity?: Prisma.TrackedEntityOwnTrackedEntityUncheckedCreateNestedOneWithoutTrackedEntityInput
-  trackedEntityOtherTrackedEntity?: Prisma.TrackedEntityOtherTrackedEntityUncheckedCreateNestedOneWithoutTrackedEntityInput
-  trackedEntityTrackedEntityConfiguration?: Prisma.TrackedEntityTrackedEntityConfigurationUncheckedCreateNestedOneWithoutTrackedEntityInput
-}
-
-export type TrackedEntityCreateOrConnectWithoutTrackedEntityPostsInput = {
-  where: Prisma.TrackedEntityWhereUniqueInput
-  create: Prisma.XOR<Prisma.TrackedEntityCreateWithoutTrackedEntityPostsInput, Prisma.TrackedEntityUncheckedCreateWithoutTrackedEntityPostsInput>
-}
-
-export type TrackedEntityUpsertWithoutTrackedEntityPostsInput = {
-  update: Prisma.XOR<Prisma.TrackedEntityUpdateWithoutTrackedEntityPostsInput, Prisma.TrackedEntityUncheckedUpdateWithoutTrackedEntityPostsInput>
-  create: Prisma.XOR<Prisma.TrackedEntityCreateWithoutTrackedEntityPostsInput, Prisma.TrackedEntityUncheckedCreateWithoutTrackedEntityPostsInput>
-  where?: Prisma.TrackedEntityWhereInput
-}
-
-export type TrackedEntityUpdateToOneWithWhereWithoutTrackedEntityPostsInput = {
-  where?: Prisma.TrackedEntityWhereInput
-  data: Prisma.XOR<Prisma.TrackedEntityUpdateWithoutTrackedEntityPostsInput, Prisma.TrackedEntityUncheckedUpdateWithoutTrackedEntityPostsInput>
-}
-
-export type TrackedEntityUpdateWithoutTrackedEntityPostsInput = {
-  id?: Prisma.StringFieldUpdateOperationsInput | string
-  name?: Prisma.StringFieldUpdateOperationsInput | string
-  description?: Prisma.StringFieldUpdateOperationsInput | string
-  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
-  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
-  trackedEntityReactions?: Prisma.TrackedEntityReactionUpdateManyWithoutTrackedEntityNestedInput
-  trackedEntityOwnTrackedEntity?: Prisma.TrackedEntityOwnTrackedEntityUpdateOneWithoutTrackedEntityNestedInput
-  trackedEntityOtherTrackedEntity?: Prisma.TrackedEntityOtherTrackedEntityUpdateOneWithoutTrackedEntityNestedInput
-  trackedEntityTrackedEntityConfiguration?: Prisma.TrackedEntityTrackedEntityConfigurationUpdateOneWithoutTrackedEntityNestedInput
-}
-
-export type TrackedEntityUncheckedUpdateWithoutTrackedEntityPostsInput = {
-  id?: Prisma.StringFieldUpdateOperationsInput | string
-  name?: Prisma.StringFieldUpdateOperationsInput | string
-  description?: Prisma.StringFieldUpdateOperationsInput | string
-  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
-  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
-  trackedEntityReactions?: Prisma.TrackedEntityReactionUncheckedUpdateManyWithoutTrackedEntityNestedInput
-  trackedEntityOwnTrackedEntity?: Prisma.TrackedEntityOwnTrackedEntityUncheckedUpdateOneWithoutTrackedEntityNestedInput
-  trackedEntityOtherTrackedEntity?: Prisma.TrackedEntityOtherTrackedEntityUncheckedUpdateOneWithoutTrackedEntityNestedInput
-  trackedEntityTrackedEntityConfiguration?: Prisma.TrackedEntityTrackedEntityConfigurationUncheckedUpdateOneWithoutTrackedEntityNestedInput
-}
-
-export type TrackedEntityCreateWithoutTrackedEntityReactionsInput = {
-  id?: string
-  name: string
-  description: string
-  createdAt?: Date | string
-  updatedAt?: Date | string
-  trackedEntityPosts?: Prisma.TrackedEntityPostCreateNestedManyWithoutTrackedEntityInput
-  trackedEntityOwnTrackedEntity?: Prisma.TrackedEntityOwnTrackedEntityCreateNestedOneWithoutTrackedEntityInput
-  trackedEntityOtherTrackedEntity?: Prisma.TrackedEntityOtherTrackedEntityCreateNestedOneWithoutTrackedEntityInput
-  trackedEntityTrackedEntityConfiguration?: Prisma.TrackedEntityTrackedEntityConfigurationCreateNestedOneWithoutTrackedEntityInput
-}
-
-export type TrackedEntityUncheckedCreateWithoutTrackedEntityReactionsInput = {
-  id?: string
-  name: string
-  description: string
-  createdAt?: Date | string
-  updatedAt?: Date | string
-  trackedEntityPosts?: Prisma.TrackedEntityPostUncheckedCreateNestedManyWithoutTrackedEntityInput
-  trackedEntityOwnTrackedEntity?: Prisma.TrackedEntityOwnTrackedEntityUncheckedCreateNestedOneWithoutTrackedEntityInput
-  trackedEntityOtherTrackedEntity?: Prisma.TrackedEntityOtherTrackedEntityUncheckedCreateNestedOneWithoutTrackedEntityInput
-  trackedEntityTrackedEntityConfiguration?: Prisma.TrackedEntityTrackedEntityConfigurationUncheckedCreateNestedOneWithoutTrackedEntityInput
-}
-
-export type TrackedEntityCreateOrConnectWithoutTrackedEntityReactionsInput = {
-  where: Prisma.TrackedEntityWhereUniqueInput
-  create: Prisma.XOR<Prisma.TrackedEntityCreateWithoutTrackedEntityReactionsInput, Prisma.TrackedEntityUncheckedCreateWithoutTrackedEntityReactionsInput>
-}
-
-export type TrackedEntityUpsertWithoutTrackedEntityReactionsInput = {
-  update: Prisma.XOR<Prisma.TrackedEntityUpdateWithoutTrackedEntityReactionsInput, Prisma.TrackedEntityUncheckedUpdateWithoutTrackedEntityReactionsInput>
-  create: Prisma.XOR<Prisma.TrackedEntityCreateWithoutTrackedEntityReactionsInput, Prisma.TrackedEntityUncheckedCreateWithoutTrackedEntityReactionsInput>
-  where?: Prisma.TrackedEntityWhereInput
-}
-
-export type TrackedEntityUpdateToOneWithWhereWithoutTrackedEntityReactionsInput = {
-  where?: Prisma.TrackedEntityWhereInput
-  data: Prisma.XOR<Prisma.TrackedEntityUpdateWithoutTrackedEntityReactionsInput, Prisma.TrackedEntityUncheckedUpdateWithoutTrackedEntityReactionsInput>
-}
-
-export type TrackedEntityUpdateWithoutTrackedEntityReactionsInput = {
-  id?: Prisma.StringFieldUpdateOperationsInput | string
-  name?: Prisma.StringFieldUpdateOperationsInput | string
-  description?: Prisma.StringFieldUpdateOperationsInput | string
-  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
-  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
-  trackedEntityPosts?: Prisma.TrackedEntityPostUpdateManyWithoutTrackedEntityNestedInput
-  trackedEntityOwnTrackedEntity?: Prisma.TrackedEntityOwnTrackedEntityUpdateOneWithoutTrackedEntityNestedInput
-  trackedEntityOtherTrackedEntity?: Prisma.TrackedEntityOtherTrackedEntityUpdateOneWithoutTrackedEntityNestedInput
-  trackedEntityTrackedEntityConfiguration?: Prisma.TrackedEntityTrackedEntityConfigurationUpdateOneWithoutTrackedEntityNestedInput
-}
-
-export type TrackedEntityUncheckedUpdateWithoutTrackedEntityReactionsInput = {
-  id?: Prisma.StringFieldUpdateOperationsInput | string
-  name?: Prisma.StringFieldUpdateOperationsInput | string
-  description?: Prisma.StringFieldUpdateOperationsInput | string
-  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
-  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
-  trackedEntityPosts?: Prisma.TrackedEntityPostUncheckedUpdateManyWithoutTrackedEntityNestedInput
-  trackedEntityOwnTrackedEntity?: Prisma.TrackedEntityOwnTrackedEntityUncheckedUpdateOneWithoutTrackedEntityNestedInput
-  trackedEntityOtherTrackedEntity?: Prisma.TrackedEntityOtherTrackedEntityUncheckedUpdateOneWithoutTrackedEntityNestedInput
-  trackedEntityTrackedEntityConfiguration?: Prisma.TrackedEntityTrackedEntityConfigurationUncheckedUpdateOneWithoutTrackedEntityNestedInput
+  posts?: Prisma.PostUncheckedUpdateManyWithoutTrackedEntityNestedInput
+  promptConfiguration?: Prisma.PromptConfigurationUncheckedUpdateOneWithoutTrackedEntityNestedInput
 }
 
 
@@ -741,13 +619,13 @@ export type TrackedEntityUncheckedUpdateWithoutTrackedEntityReactionsInput = {
  */
 
 export type TrackedEntityCountOutputType = {
-  trackedEntityPosts: number
-  trackedEntityReactions: number
+  posts: number
+  reactions: number
 }
 
 export type TrackedEntityCountOutputTypeSelect<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
-  trackedEntityPosts?: boolean | TrackedEntityCountOutputTypeCountTrackedEntityPostsArgs
-  trackedEntityReactions?: boolean | TrackedEntityCountOutputTypeCountTrackedEntityReactionsArgs
+  posts?: boolean | TrackedEntityCountOutputTypeCountPostsArgs
+  reactions?: boolean | TrackedEntityCountOutputTypeCountReactionsArgs
 }
 
 /**
@@ -763,63 +641,67 @@ export type TrackedEntityCountOutputTypeDefaultArgs<ExtArgs extends runtime.Type
 /**
  * TrackedEntityCountOutputType without action
  */
-export type TrackedEntityCountOutputTypeCountTrackedEntityPostsArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
-  where?: Prisma.TrackedEntityPostWhereInput
+export type TrackedEntityCountOutputTypeCountPostsArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  where?: Prisma.PostWhereInput
 }
 
 /**
  * TrackedEntityCountOutputType without action
  */
-export type TrackedEntityCountOutputTypeCountTrackedEntityReactionsArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
-  where?: Prisma.TrackedEntityReactionWhereInput
+export type TrackedEntityCountOutputTypeCountReactionsArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  where?: Prisma.ReactionWhereInput
 }
 
 
 export type TrackedEntitySelect<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetSelect<{
   id?: boolean
+  type?: boolean
   name?: boolean
   description?: boolean
+  facebookPageUrl?: boolean
   createdAt?: boolean
   updatedAt?: boolean
-  trackedEntityPosts?: boolean | Prisma.TrackedEntity$trackedEntityPostsArgs<ExtArgs>
-  trackedEntityReactions?: boolean | Prisma.TrackedEntity$trackedEntityReactionsArgs<ExtArgs>
-  trackedEntityOwnTrackedEntity?: boolean | Prisma.TrackedEntity$trackedEntityOwnTrackedEntityArgs<ExtArgs>
-  trackedEntityOtherTrackedEntity?: boolean | Prisma.TrackedEntity$trackedEntityOtherTrackedEntityArgs<ExtArgs>
-  trackedEntityTrackedEntityConfiguration?: boolean | Prisma.TrackedEntity$trackedEntityTrackedEntityConfigurationArgs<ExtArgs>
+  posts?: boolean | Prisma.TrackedEntity$postsArgs<ExtArgs>
+  reactions?: boolean | Prisma.TrackedEntity$reactionsArgs<ExtArgs>
+  promptConfiguration?: boolean | Prisma.TrackedEntity$promptConfigurationArgs<ExtArgs>
   _count?: boolean | Prisma.TrackedEntityCountOutputTypeDefaultArgs<ExtArgs>
 }, ExtArgs["result"]["trackedEntity"]>
 
 export type TrackedEntitySelectCreateManyAndReturn<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetSelect<{
   id?: boolean
+  type?: boolean
   name?: boolean
   description?: boolean
+  facebookPageUrl?: boolean
   createdAt?: boolean
   updatedAt?: boolean
 }, ExtArgs["result"]["trackedEntity"]>
 
 export type TrackedEntitySelectUpdateManyAndReturn<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetSelect<{
   id?: boolean
+  type?: boolean
   name?: boolean
   description?: boolean
+  facebookPageUrl?: boolean
   createdAt?: boolean
   updatedAt?: boolean
 }, ExtArgs["result"]["trackedEntity"]>
 
 export type TrackedEntitySelectScalar = {
   id?: boolean
+  type?: boolean
   name?: boolean
   description?: boolean
+  facebookPageUrl?: boolean
   createdAt?: boolean
   updatedAt?: boolean
 }
 
-export type TrackedEntityOmit<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetOmit<"id" | "name" | "description" | "createdAt" | "updatedAt", ExtArgs["result"]["trackedEntity"]>
+export type TrackedEntityOmit<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetOmit<"id" | "type" | "name" | "description" | "facebookPageUrl" | "createdAt" | "updatedAt", ExtArgs["result"]["trackedEntity"]>
 export type TrackedEntityInclude<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
-  trackedEntityPosts?: boolean | Prisma.TrackedEntity$trackedEntityPostsArgs<ExtArgs>
-  trackedEntityReactions?: boolean | Prisma.TrackedEntity$trackedEntityReactionsArgs<ExtArgs>
-  trackedEntityOwnTrackedEntity?: boolean | Prisma.TrackedEntity$trackedEntityOwnTrackedEntityArgs<ExtArgs>
-  trackedEntityOtherTrackedEntity?: boolean | Prisma.TrackedEntity$trackedEntityOtherTrackedEntityArgs<ExtArgs>
-  trackedEntityTrackedEntityConfiguration?: boolean | Prisma.TrackedEntity$trackedEntityTrackedEntityConfigurationArgs<ExtArgs>
+  posts?: boolean | Prisma.TrackedEntity$postsArgs<ExtArgs>
+  reactions?: boolean | Prisma.TrackedEntity$reactionsArgs<ExtArgs>
+  promptConfiguration?: boolean | Prisma.TrackedEntity$promptConfigurationArgs<ExtArgs>
   _count?: boolean | Prisma.TrackedEntityCountOutputTypeDefaultArgs<ExtArgs>
 }
 export type TrackedEntityIncludeCreateManyAndReturn<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {}
@@ -828,16 +710,16 @@ export type TrackedEntityIncludeUpdateManyAndReturn<ExtArgs extends runtime.Type
 export type $TrackedEntityPayload<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
   name: "TrackedEntity"
   objects: {
-    trackedEntityPosts: Prisma.$TrackedEntityPostPayload<ExtArgs>[]
-    trackedEntityReactions: Prisma.$TrackedEntityReactionPayload<ExtArgs>[]
-    trackedEntityOwnTrackedEntity: Prisma.$TrackedEntityOwnTrackedEntityPayload<ExtArgs> | null
-    trackedEntityOtherTrackedEntity: Prisma.$TrackedEntityOtherTrackedEntityPayload<ExtArgs> | null
-    trackedEntityTrackedEntityConfiguration: Prisma.$TrackedEntityTrackedEntityConfigurationPayload<ExtArgs> | null
+    posts: Prisma.$PostPayload<ExtArgs>[]
+    reactions: Prisma.$ReactionPayload<ExtArgs>[]
+    promptConfiguration: Prisma.$PromptConfigurationPayload<ExtArgs> | null
   }
   scalars: runtime.Types.Extensions.GetPayloadResult<{
     id: string
+    type: $Enums.TrackedEntityType
     name: string
     description: string
+    facebookPageUrl: string
     createdAt: Date
     updatedAt: Date
   }, ExtArgs["result"]["trackedEntity"]>
@@ -1234,11 +1116,9 @@ readonly fields: TrackedEntityFieldRefs;
  */
 export interface Prisma__TrackedEntityClient<T, Null = never, ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs, GlobalOmitOptions = {}> extends Prisma.PrismaPromise<T> {
   readonly [Symbol.toStringTag]: "PrismaPromise"
-  trackedEntityPosts<T extends Prisma.TrackedEntity$trackedEntityPostsArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.TrackedEntity$trackedEntityPostsArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$TrackedEntityPostPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
-  trackedEntityReactions<T extends Prisma.TrackedEntity$trackedEntityReactionsArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.TrackedEntity$trackedEntityReactionsArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$TrackedEntityReactionPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
-  trackedEntityOwnTrackedEntity<T extends Prisma.TrackedEntity$trackedEntityOwnTrackedEntityArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.TrackedEntity$trackedEntityOwnTrackedEntityArgs<ExtArgs>>): Prisma.Prisma__TrackedEntityOwnTrackedEntityClient<runtime.Types.Result.GetResult<Prisma.$TrackedEntityOwnTrackedEntityPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
-  trackedEntityOtherTrackedEntity<T extends Prisma.TrackedEntity$trackedEntityOtherTrackedEntityArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.TrackedEntity$trackedEntityOtherTrackedEntityArgs<ExtArgs>>): Prisma.Prisma__TrackedEntityOtherTrackedEntityClient<runtime.Types.Result.GetResult<Prisma.$TrackedEntityOtherTrackedEntityPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
-  trackedEntityTrackedEntityConfiguration<T extends Prisma.TrackedEntity$trackedEntityTrackedEntityConfigurationArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.TrackedEntity$trackedEntityTrackedEntityConfigurationArgs<ExtArgs>>): Prisma.Prisma__TrackedEntityTrackedEntityConfigurationClient<runtime.Types.Result.GetResult<Prisma.$TrackedEntityTrackedEntityConfigurationPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
+  posts<T extends Prisma.TrackedEntity$postsArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.TrackedEntity$postsArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$PostPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
+  reactions<T extends Prisma.TrackedEntity$reactionsArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.TrackedEntity$reactionsArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$ReactionPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
+  promptConfiguration<T extends Prisma.TrackedEntity$promptConfigurationArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.TrackedEntity$promptConfigurationArgs<ExtArgs>>): Prisma.Prisma__PromptConfigurationClient<runtime.Types.Result.GetResult<Prisma.$PromptConfigurationPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
   /**
    * Attaches callbacks for the resolution and/or rejection of the Promise.
    * @param onfulfilled The callback to execute when the Promise is resolved.
@@ -1269,8 +1149,10 @@ export interface Prisma__TrackedEntityClient<T, Null = never, ExtArgs extends ru
  */
 export interface TrackedEntityFieldRefs {
   readonly id: Prisma.FieldRef<"TrackedEntity", 'String'>
+  readonly type: Prisma.FieldRef<"TrackedEntity", 'TrackedEntityType'>
   readonly name: Prisma.FieldRef<"TrackedEntity", 'String'>
   readonly description: Prisma.FieldRef<"TrackedEntity", 'String'>
+  readonly facebookPageUrl: Prisma.FieldRef<"TrackedEntity", 'String'>
   readonly createdAt: Prisma.FieldRef<"TrackedEntity", 'DateTime'>
   readonly updatedAt: Prisma.FieldRef<"TrackedEntity", 'DateTime'>
 }
@@ -1661,108 +1543,70 @@ export type TrackedEntityDeleteManyArgs<ExtArgs extends runtime.Types.Extensions
 }
 
 /**
- * TrackedEntity.trackedEntityPosts
+ * TrackedEntity.posts
  */
-export type TrackedEntity$trackedEntityPostsArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+export type TrackedEntity$postsArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
   /**
-   * Select specific fields to fetch from the TrackedEntityPost
+   * Select specific fields to fetch from the Post
    */
-  select?: Prisma.TrackedEntityPostSelect<ExtArgs> | null
+  select?: Prisma.PostSelect<ExtArgs> | null
   /**
-   * Omit specific fields from the TrackedEntityPost
+   * Omit specific fields from the Post
    */
-  omit?: Prisma.TrackedEntityPostOmit<ExtArgs> | null
+  omit?: Prisma.PostOmit<ExtArgs> | null
   /**
    * Choose, which related nodes to fetch as well
    */
-  include?: Prisma.TrackedEntityPostInclude<ExtArgs> | null
-  where?: Prisma.TrackedEntityPostWhereInput
-  orderBy?: Prisma.TrackedEntityPostOrderByWithRelationInput | Prisma.TrackedEntityPostOrderByWithRelationInput[]
-  cursor?: Prisma.TrackedEntityPostWhereUniqueInput
+  include?: Prisma.PostInclude<ExtArgs> | null
+  where?: Prisma.PostWhereInput
+  orderBy?: Prisma.PostOrderByWithRelationInput | Prisma.PostOrderByWithRelationInput[]
+  cursor?: Prisma.PostWhereUniqueInput
   take?: number
   skip?: number
-  distinct?: Prisma.TrackedEntityPostScalarFieldEnum | Prisma.TrackedEntityPostScalarFieldEnum[]
+  distinct?: Prisma.PostScalarFieldEnum | Prisma.PostScalarFieldEnum[]
 }
 
 /**
- * TrackedEntity.trackedEntityReactions
+ * TrackedEntity.reactions
  */
-export type TrackedEntity$trackedEntityReactionsArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+export type TrackedEntity$reactionsArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
   /**
-   * Select specific fields to fetch from the TrackedEntityReaction
+   * Select specific fields to fetch from the Reaction
    */
-  select?: Prisma.TrackedEntityReactionSelect<ExtArgs> | null
+  select?: Prisma.ReactionSelect<ExtArgs> | null
   /**
-   * Omit specific fields from the TrackedEntityReaction
+   * Omit specific fields from the Reaction
    */
-  omit?: Prisma.TrackedEntityReactionOmit<ExtArgs> | null
+  omit?: Prisma.ReactionOmit<ExtArgs> | null
   /**
    * Choose, which related nodes to fetch as well
    */
-  include?: Prisma.TrackedEntityReactionInclude<ExtArgs> | null
-  where?: Prisma.TrackedEntityReactionWhereInput
-  orderBy?: Prisma.TrackedEntityReactionOrderByWithRelationInput | Prisma.TrackedEntityReactionOrderByWithRelationInput[]
-  cursor?: Prisma.TrackedEntityReactionWhereUniqueInput
+  include?: Prisma.ReactionInclude<ExtArgs> | null
+  where?: Prisma.ReactionWhereInput
+  orderBy?: Prisma.ReactionOrderByWithRelationInput | Prisma.ReactionOrderByWithRelationInput[]
+  cursor?: Prisma.ReactionWhereUniqueInput
   take?: number
   skip?: number
-  distinct?: Prisma.TrackedEntityReactionScalarFieldEnum | Prisma.TrackedEntityReactionScalarFieldEnum[]
+  distinct?: Prisma.ReactionScalarFieldEnum | Prisma.ReactionScalarFieldEnum[]
 }
 
 /**
- * TrackedEntity.trackedEntityOwnTrackedEntity
+ * TrackedEntity.promptConfiguration
  */
-export type TrackedEntity$trackedEntityOwnTrackedEntityArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+export type TrackedEntity$promptConfigurationArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
   /**
-   * Select specific fields to fetch from the TrackedEntityOwnTrackedEntity
+   * Select specific fields to fetch from the PromptConfiguration
    */
-  select?: Prisma.TrackedEntityOwnTrackedEntitySelect<ExtArgs> | null
+  select?: Prisma.PromptConfigurationSelect<ExtArgs> | null
   /**
-   * Omit specific fields from the TrackedEntityOwnTrackedEntity
+   * Omit specific fields from the PromptConfiguration
    */
-  omit?: Prisma.TrackedEntityOwnTrackedEntityOmit<ExtArgs> | null
+  omit?: Prisma.PromptConfigurationOmit<ExtArgs> | null
   /**
    * Choose, which related nodes to fetch as well
    */
-  include?: Prisma.TrackedEntityOwnTrackedEntityInclude<ExtArgs> | null
-  where?: Prisma.TrackedEntityOwnTrackedEntityWhereInput
-}
-
-/**
- * TrackedEntity.trackedEntityOtherTrackedEntity
- */
-export type TrackedEntity$trackedEntityOtherTrackedEntityArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
-  /**
-   * Select specific fields to fetch from the TrackedEntityOtherTrackedEntity
-   */
-  select?: Prisma.TrackedEntityOtherTrackedEntitySelect<ExtArgs> | null
-  /**
-   * Omit specific fields from the TrackedEntityOtherTrackedEntity
-   */
-  omit?: Prisma.TrackedEntityOtherTrackedEntityOmit<ExtArgs> | null
-  /**
-   * Choose, which related nodes to fetch as well
-   */
-  include?: Prisma.TrackedEntityOtherTrackedEntityInclude<ExtArgs> | null
-  where?: Prisma.TrackedEntityOtherTrackedEntityWhereInput
-}
-
-/**
- * TrackedEntity.trackedEntityTrackedEntityConfiguration
- */
-export type TrackedEntity$trackedEntityTrackedEntityConfigurationArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
-  /**
-   * Select specific fields to fetch from the TrackedEntityTrackedEntityConfiguration
-   */
-  select?: Prisma.TrackedEntityTrackedEntityConfigurationSelect<ExtArgs> | null
-  /**
-   * Omit specific fields from the TrackedEntityTrackedEntityConfiguration
-   */
-  omit?: Prisma.TrackedEntityTrackedEntityConfigurationOmit<ExtArgs> | null
-  /**
-   * Choose, which related nodes to fetch as well
-   */
-  include?: Prisma.TrackedEntityTrackedEntityConfigurationInclude<ExtArgs> | null
-  where?: Prisma.TrackedEntityTrackedEntityConfigurationWhereInput
+  include?: Prisma.PromptConfigurationInclude<ExtArgs> | null
+  where?: Prisma.PromptConfigurationWhereInput
 }
 
 /**
