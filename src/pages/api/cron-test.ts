@@ -1,5 +1,4 @@
 import { NextApiRequest, NextApiResponse } from 'next'
-import { NextResponse } from 'next/server'
 
 export default async function handler(req: NextApiRequest, res: NextApiResponse) {
   const { method, headers } = req
@@ -11,7 +10,7 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse)
 
   if (method === 'GET') {
     const currentTime = new Date()
-    return NextResponse.json({
+    return res.status(200).json({
       message: 'Hello, world from cron test!',
       currentTimeISO: currentTime.toISOString(),
       currentTimeUTC: currentTime.toUTCString(),
