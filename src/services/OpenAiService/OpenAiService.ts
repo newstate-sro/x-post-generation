@@ -9,8 +9,10 @@ export class OpenAiService {
       throw new Error('OPENAI_API_KEY not configured')
     }
     this.llm = new ChatOpenAI({
-      modelName: 'gpt-4o',
+      modelName: 'gpt-4.1',
       openAIApiKey: process.env.OPENAI_API_KEY,
+      maxCompletionTokens: -1,
+      maxTokens: -1,
     })
   }
 
